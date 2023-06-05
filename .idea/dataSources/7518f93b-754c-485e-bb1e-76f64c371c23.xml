@@ -3,7 +3,7 @@
   <database-model serializer="dbm" dbms="POSTGRES" family-id="POSTGRES" format-version="4.48">
     <root id="1">
       <DateStyle>ymd</DateStyle>
-      <IntrospectionStateNumber>3094</IntrospectionStateNumber>
+      <IntrospectionStateNumber>3107</IntrospectionStateNumber>
       <ServerVersion>15.3</ServerVersion>
       <StartupTime>1685976521</StartupTime>
       <TimeZones>true ACDT
@@ -802,7 +802,7 @@ false Zulu
 13183||10|C|G
 13183||-9223372036854775808|U|G
 13183||10|U|G</Grants>
-      <IntrospectionStateNumber>3094</IntrospectionStateNumber>
+      <IntrospectionStateNumber>3107</IntrospectionStateNumber>
       <ObjectId>5</ObjectId>
       <OwnerName>postgres</OwnerName>
     </database>
@@ -4234,7 +4234,7 @@ false Zulu
     <schema id="263" parent="2" name="public">
       <Comment>standard public schema</Comment>
       <Current>1</Current>
-      <IntrospectionStateNumber>3094</IntrospectionStateNumber>
+      <IntrospectionStateNumber>3107</IntrospectionStateNumber>
       <ObjectId>2200</ObjectId>
       <StateNumber>518</StateNumber>
       <OwnerName>pg_database_owner</OwnerName>
@@ -4244,5 +4244,604 @@ false Zulu
       <StateNumber>3040</StateNumber>
       <OwnerName>postgres</OwnerName>
     </schema>
+    <table id="265" parent="263" name="asso_etudiante">
+      <ObjectId>38574</ObjectId>
+      <StateNumber>3096</StateNumber>
+      <AccessMethodId>2</AccessMethodId>
+      <OwnerName>postgres</OwnerName>
+    </table>
+    <table id="266" parent="263" name="billet">
+      <ObjectId>38594</ObjectId>
+      <StateNumber>3099</StateNumber>
+      <AccessMethodId>2</AccessMethodId>
+      <OwnerName>postgres</OwnerName>
+    </table>
+    <table id="267" parent="263" name="evenement">
+      <ObjectId>38584</ObjectId>
+      <StateNumber>3097</StateNumber>
+      <AccessMethodId>2</AccessMethodId>
+      <OwnerName>postgres</OwnerName>
+    </table>
+    <table id="268" parent="263" name="faculte">
+      <ObjectId>38649</ObjectId>
+      <StateNumber>3104</StateNumber>
+      <AccessMethodId>2</AccessMethodId>
+      <OwnerName>postgres</OwnerName>
+    </table>
+    <table id="269" parent="263" name="invite">
+      <ObjectId>38599</ObjectId>
+      <StateNumber>3099</StateNumber>
+      <AccessMethodId>2</AccessMethodId>
+      <OwnerName>postgres</OwnerName>
+    </table>
+    <table id="270" parent="263" name="possede">
+      <ObjectId>38634</ObjectId>
+      <StateNumber>3103</StateNumber>
+      <AccessMethodId>2</AccessMethodId>
+      <OwnerName>postgres</OwnerName>
+    </table>
+    <table id="271" parent="263" name="privilege">
+      <ObjectId>38614</ObjectId>
+      <StateNumber>3103</StateNumber>
+      <AccessMethodId>2</AccessMethodId>
+      <OwnerName>postgres</OwnerName>
+    </table>
+    <table id="272" parent="263" name="statut">
+      <ObjectId>38609</ObjectId>
+      <StateNumber>3103</StateNumber>
+      <AccessMethodId>2</AccessMethodId>
+      <OwnerName>postgres</OwnerName>
+    </table>
+    <table id="273" parent="263" name="universite">
+      <ObjectId>38569</ObjectId>
+      <StateNumber>3096</StateNumber>
+      <AccessMethodId>2</AccessMethodId>
+      <OwnerName>postgres</OwnerName>
+    </table>
+    <table id="274" parent="263" name="usager">
+      <ObjectId>38659</ObjectId>
+      <StateNumber>3105</StateNumber>
+      <AccessMethodId>2</AccessMethodId>
+      <OwnerName>postgres</OwnerName>
+    </table>
+    <table id="275" parent="263" name="vend">
+      <ObjectId>38619</ObjectId>
+      <StateNumber>3102</StateNumber>
+      <AccessMethodId>2</AccessMethodId>
+      <OwnerName>postgres</OwnerName>
+    </table>
+    <column id="276" parent="265" name="asso_etudianteid">
+      <DasType>integer|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+      <StateNumber>3096</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="277" parent="265" name="_asso_etudiante__nom">
+      <DasType>integer|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+      <StateNumber>3096</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="278" parent="265" name="universiteid">
+      <DasType>integer|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>3</Position>
+      <StateNumber>3096</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <foreign-key id="279" parent="265" name="asso_etudiante_universiteid_fkey">
+      <ColNames>universiteid</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>38579</ObjectId>
+      <RefColNames>universiteid</RefColNames>
+      <RefColPositions>1</RefColPositions>
+      <StateNumber>3096</StateNumber>
+      <RefTableId>38569</RefTableId>
+      <RefTableName>universite</RefTableName>
+      <RefTableKind>table</RefTableKind>
+    </foreign-key>
+    <index id="280" parent="265" name="asso_etudiante_pkey">
+      <ColNames>asso_etudianteid</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>38577</ObjectId>
+      <Primary>1</Primary>
+      <StateNumber>3096</StateNumber>
+      <Unique>1</Unique>
+      <AccessMethodId>403</AccessMethodId>
+    </index>
+    <key id="281" parent="265" name="asso_etudiante_pkey">
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>38578</ObjectId>
+      <Primary>1</Primary>
+      <StateNumber>3096</StateNumber>
+      <UnderlyingIndexId>38577</UnderlyingIndexId>
+    </key>
+    <column id="282" parent="266" name="billetid">
+      <DasType>integer|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+      <StateNumber>3098</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="283" parent="266" name="billet_nom">
+      <DasType>integer|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+      <StateNumber>3098</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <index id="284" parent="266" name="billet_pkey">
+      <ColNames>billetid</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>38597</ObjectId>
+      <Primary>1</Primary>
+      <StateNumber>3098</StateNumber>
+      <Unique>1</Unique>
+      <AccessMethodId>403</AccessMethodId>
+    </index>
+    <key id="285" parent="266" name="billet_pkey">
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>38598</ObjectId>
+      <Primary>1</Primary>
+      <StateNumber>3098</StateNumber>
+      <UnderlyingIndexId>38597</UnderlyingIndexId>
+    </key>
+    <column id="286" parent="267" name="evenementid">
+      <DasType>integer|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+      <StateNumber>3097</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="287" parent="267" name="evenement_nom">
+      <DasType>integer|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+      <StateNumber>3097</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="288" parent="267" name="evenement_date">
+      <DasType>integer|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>3</Position>
+      <StateNumber>3097</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="289" parent="267" name="evenement__debut">
+      <DasType>integer|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>4</Position>
+      <StateNumber>3097</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="290" parent="267" name="evenement_fin">
+      <DasType>integer|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>5</Position>
+      <StateNumber>3097</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="291" parent="267" name="asso_etudianteid">
+      <DasType>integer|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>6</Position>
+      <StateNumber>3097</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <foreign-key id="292" parent="267" name="evenement_asso_etudianteid_fkey">
+      <ColNames>asso_etudianteid</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>38589</ObjectId>
+      <RefColNames>asso_etudianteid</RefColNames>
+      <RefColPositions>1</RefColPositions>
+      <StateNumber>3097</StateNumber>
+      <RefTableId>38574</RefTableId>
+      <RefTableName>asso_etudiante</RefTableName>
+      <RefTableKind>table</RefTableKind>
+    </foreign-key>
+    <index id="293" parent="267" name="evenement_pkey">
+      <ColNames>evenementid</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>38587</ObjectId>
+      <Primary>1</Primary>
+      <StateNumber>3097</StateNumber>
+      <Unique>1</Unique>
+      <AccessMethodId>403</AccessMethodId>
+    </index>
+    <key id="294" parent="267" name="evenement_pkey">
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>38588</ObjectId>
+      <Primary>1</Primary>
+      <StateNumber>3097</StateNumber>
+      <UnderlyingIndexId>38587</UnderlyingIndexId>
+    </key>
+    <column id="295" parent="268" name="faculteid">
+      <DasType>integer|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+      <StateNumber>3104</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="296" parent="268" name="faculte_nom">
+      <DasType>integer|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+      <StateNumber>3104</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="297" parent="268" name="universiteid">
+      <DasType>integer|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>3</Position>
+      <StateNumber>3104</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <foreign-key id="298" parent="268" name="faculte_universiteid_fkey">
+      <ColNames>universiteid</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>38654</ObjectId>
+      <RefColNames>universiteid</RefColNames>
+      <RefColPositions>1</RefColPositions>
+      <StateNumber>3104</StateNumber>
+      <RefTableId>38569</RefTableId>
+      <RefTableName>universite</RefTableName>
+      <RefTableKind>table</RefTableKind>
+    </foreign-key>
+    <index id="299" parent="268" name="faculte_pkey">
+      <ColNames>faculteid</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>38652</ObjectId>
+      <Primary>1</Primary>
+      <StateNumber>3104</StateNumber>
+      <Unique>1</Unique>
+      <AccessMethodId>403</AccessMethodId>
+    </index>
+    <key id="300" parent="268" name="faculte_pkey">
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>38653</ObjectId>
+      <Primary>1</Primary>
+      <StateNumber>3104</StateNumber>
+      <UnderlyingIndexId>38652</UnderlyingIndexId>
+    </key>
+    <column id="301" parent="269" name="inviteid">
+      <DasType>integer|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+      <StateNumber>3099</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="302" parent="269" name="invite_nom">
+      <DasType>integer|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+      <StateNumber>3099</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="303" parent="269" name="billetid">
+      <DasType>integer|0s</DasType>
+      <Position>3</Position>
+      <StateNumber>3099</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <foreign-key id="304" parent="269" name="invite_billetid_fkey">
+      <ColNames>billetid</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>38604</ObjectId>
+      <RefColNames>billetid</RefColNames>
+      <RefColPositions>1</RefColPositions>
+      <StateNumber>3099</StateNumber>
+      <RefTableId>38594</RefTableId>
+      <RefTableName>billet</RefTableName>
+      <RefTableKind>table</RefTableKind>
+    </foreign-key>
+    <index id="305" parent="269" name="invite_pkey">
+      <ColNames>inviteid</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>38602</ObjectId>
+      <Primary>1</Primary>
+      <StateNumber>3099</StateNumber>
+      <Unique>1</Unique>
+      <AccessMethodId>403</AccessMethodId>
+    </index>
+    <key id="306" parent="269" name="invite_pkey">
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>38603</ObjectId>
+      <Primary>1</Primary>
+      <StateNumber>3099</StateNumber>
+      <UnderlyingIndexId>38602</UnderlyingIndexId>
+    </key>
+    <column id="307" parent="270" name="statutid">
+      <DasType>integer|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+      <StateNumber>3103</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="308" parent="270" name="privilegeid">
+      <DasType>integer|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+      <StateNumber>3103</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <foreign-key id="309" parent="270" name="possede_statutid_fkey">
+      <ColNames>statutid</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>38639</ObjectId>
+      <RefColNames>statutid</RefColNames>
+      <RefColPositions>1</RefColPositions>
+      <StateNumber>3103</StateNumber>
+      <RefTableId>38609</RefTableId>
+      <RefTableName>statut</RefTableName>
+      <RefTableKind>table</RefTableKind>
+    </foreign-key>
+    <foreign-key id="310" parent="270" name="possede_privilegeid_fkey">
+      <ColNames>privilegeid</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>38644</ObjectId>
+      <RefColNames>privilegeid</RefColNames>
+      <RefColPositions>1</RefColPositions>
+      <StateNumber>3103</StateNumber>
+      <RefTableId>38614</RefTableId>
+      <RefTableName>privilege</RefTableName>
+      <RefTableKind>table</RefTableKind>
+    </foreign-key>
+    <index id="311" parent="270" name="possede_pkey">
+      <ColNames>statutid
+privilegeid</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>38637</ObjectId>
+      <Primary>1</Primary>
+      <StateNumber>3103</StateNumber>
+      <Unique>1</Unique>
+      <AccessMethodId>403</AccessMethodId>
+    </index>
+    <key id="312" parent="270" name="possede_pkey">
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>38638</ObjectId>
+      <Primary>1</Primary>
+      <StateNumber>3103</StateNumber>
+      <UnderlyingIndexId>38637</UnderlyingIndexId>
+    </key>
+    <column id="313" parent="271" name="privilegeid">
+      <DasType>integer|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+      <StateNumber>3101</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="314" parent="271" name="_privilege__description">
+      <DasType>integer|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+      <StateNumber>3101</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <index id="315" parent="271" name="privilege_pkey">
+      <ColNames>privilegeid</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>38617</ObjectId>
+      <Primary>1</Primary>
+      <StateNumber>3101</StateNumber>
+      <Unique>1</Unique>
+      <AccessMethodId>403</AccessMethodId>
+    </index>
+    <key id="316" parent="271" name="privilege_pkey">
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>38618</ObjectId>
+      <Primary>1</Primary>
+      <StateNumber>3101</StateNumber>
+      <UnderlyingIndexId>38617</UnderlyingIndexId>
+    </key>
+    <column id="317" parent="272" name="statutid">
+      <DasType>integer|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+      <StateNumber>3100</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="318" parent="272" name="statut_nom">
+      <DasType>integer|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+      <StateNumber>3100</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <index id="319" parent="272" name="statut_pkey">
+      <ColNames>statutid</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>38612</ObjectId>
+      <Primary>1</Primary>
+      <StateNumber>3100</StateNumber>
+      <Unique>1</Unique>
+      <AccessMethodId>403</AccessMethodId>
+    </index>
+    <key id="320" parent="272" name="statut_pkey">
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>38613</ObjectId>
+      <Primary>1</Primary>
+      <StateNumber>3100</StateNumber>
+      <UnderlyingIndexId>38612</UnderlyingIndexId>
+    </key>
+    <column id="321" parent="273" name="universiteid">
+      <DasType>integer|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+      <StateNumber>3095</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="322" parent="273" name="universite_nom">
+      <DasType>integer|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+      <StateNumber>3095</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <index id="323" parent="273" name="universite_pkey">
+      <ColNames>universiteid</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>38572</ObjectId>
+      <Primary>1</Primary>
+      <StateNumber>3095</StateNumber>
+      <Unique>1</Unique>
+      <AccessMethodId>403</AccessMethodId>
+    </index>
+    <key id="324" parent="273" name="universite_pkey">
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>38573</ObjectId>
+      <Primary>1</Primary>
+      <StateNumber>3095</StateNumber>
+      <UnderlyingIndexId>38572</UnderlyingIndexId>
+    </key>
+    <column id="325" parent="274" name="usagerid">
+      <DasType>integer|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+      <StateNumber>3105</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="326" parent="274" name="usager_nom">
+      <DasType>integer|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+      <StateNumber>3105</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="327" parent="274" name="usager_prenom">
+      <DasType>integer|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>3</Position>
+      <StateNumber>3105</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="328" parent="274" name="usager_photo">
+      <DasType>integer|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>4</Position>
+      <StateNumber>3105</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="329" parent="274" name="billietid">
+      <DasType>integer|0s</DasType>
+      <Position>5</Position>
+      <StateNumber>3105</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="330" parent="274" name="inviteid">
+      <DasType>integer|0s</DasType>
+      <Position>6</Position>
+      <StateNumber>3105</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="331" parent="274" name="faculteid">
+      <DasType>integer|0s</DasType>
+      <Position>7</Position>
+      <StateNumber>3105</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <foreign-key id="332" parent="274" name="usager_billietid_fkey">
+      <ColNames>billietid</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>38664</ObjectId>
+      <RefColNames>billetid</RefColNames>
+      <RefColPositions>1</RefColPositions>
+      <StateNumber>3105</StateNumber>
+      <RefTableId>38594</RefTableId>
+      <RefTableName>billet</RefTableName>
+      <RefTableKind>table</RefTableKind>
+    </foreign-key>
+    <foreign-key id="333" parent="274" name="usager_inviteid_fkey">
+      <ColNames>inviteid</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>38669</ObjectId>
+      <RefColNames>inviteid</RefColNames>
+      <RefColPositions>1</RefColPositions>
+      <StateNumber>3105</StateNumber>
+      <RefTableId>38599</RefTableId>
+      <RefTableName>invite</RefTableName>
+      <RefTableKind>table</RefTableKind>
+    </foreign-key>
+    <foreign-key id="334" parent="274" name="usager_faculteid_fkey">
+      <ColNames>faculteid</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>38674</ObjectId>
+      <RefColNames>faculteid</RefColNames>
+      <RefColPositions>1</RefColPositions>
+      <StateNumber>3105</StateNumber>
+      <RefTableId>38649</RefTableId>
+      <RefTableName>faculte</RefTableName>
+      <RefTableKind>table</RefTableKind>
+    </foreign-key>
+    <index id="335" parent="274" name="usager_pkey">
+      <ColNames>usagerid</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>38662</ObjectId>
+      <Primary>1</Primary>
+      <StateNumber>3105</StateNumber>
+      <Unique>1</Unique>
+      <AccessMethodId>403</AccessMethodId>
+    </index>
+    <key id="336" parent="274" name="usager_pkey">
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>38663</ObjectId>
+      <Primary>1</Primary>
+      <StateNumber>3105</StateNumber>
+      <UnderlyingIndexId>38662</UnderlyingIndexId>
+    </key>
+    <column id="337" parent="275" name="evenementid">
+      <DasType>integer|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+      <StateNumber>3102</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="338" parent="275" name="billetid">
+      <DasType>integer|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+      <StateNumber>3102</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <foreign-key id="339" parent="275" name="vend_evenementid_fkey">
+      <ColNames>evenementid</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>38624</ObjectId>
+      <RefColNames>evenementid</RefColNames>
+      <RefColPositions>1</RefColPositions>
+      <StateNumber>3102</StateNumber>
+      <RefTableId>38584</RefTableId>
+      <RefTableName>evenement</RefTableName>
+      <RefTableKind>table</RefTableKind>
+    </foreign-key>
+    <foreign-key id="340" parent="275" name="vend_billetid_fkey">
+      <ColNames>billetid</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>38629</ObjectId>
+      <RefColNames>billetid</RefColNames>
+      <RefColPositions>1</RefColPositions>
+      <StateNumber>3102</StateNumber>
+      <RefTableId>38594</RefTableId>
+      <RefTableName>billet</RefTableName>
+      <RefTableKind>table</RefTableKind>
+    </foreign-key>
+    <index id="341" parent="275" name="vend_pkey">
+      <ColNames>evenementid
+billetid</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>38622</ObjectId>
+      <Primary>1</Primary>
+      <StateNumber>3102</StateNumber>
+      <Unique>1</Unique>
+      <AccessMethodId>403</AccessMethodId>
+    </index>
+    <key id="342" parent="275" name="vend_pkey">
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>38623</ObjectId>
+      <Primary>1</Primary>
+      <StateNumber>3102</StateNumber>
+      <UnderlyingIndexId>38622</UnderlyingIndexId>
+    </key>
   </database-model>
 </dataSource>
