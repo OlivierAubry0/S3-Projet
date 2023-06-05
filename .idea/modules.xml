@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/service.iml" filepath="$PROJECT_DIR$/.idea/modules/service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/service.main.iml" filepath="$PROJECT_DIR$/.idea/modules/service.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/service.native-test.iml" filepath="$PROJECT_DIR$/.idea/modules/service.native-test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/service.quarkus-generated-sources.iml" filepath="$PROJECT_DIR$/.idea/modules/service.quarkus-generated-sources.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/service.quarkus-test-generated-sources.iml" filepath="$PROJECT_DIR$/.idea/modules/service.quarkus-test-generated-sources.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/service.test.iml" filepath="$PROJECT_DIR$/.idea/modules/service.test.iml" />
+    </modules>
+  </component>
+</project>

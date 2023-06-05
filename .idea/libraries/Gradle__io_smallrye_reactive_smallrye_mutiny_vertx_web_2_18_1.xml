@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: io.smallrye.reactive:smallrye-mutiny-vertx-web:2.18.1" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="io.smallrye.reactive" artifactId="smallrye-mutiny-vertx-web" version="2.18.1" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.smallrye.reactive/smallrye-mutiny-vertx-web/2.18.1/e99a5b6bbd9312fca26b525fd8dce193dfc95290/smallrye-mutiny-vertx-web-2.18.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.smallrye.reactive/smallrye-mutiny-vertx-web/2.18.1/5c4d846e647b483240c196f3a3ce1c78e21855c0/smallrye-mutiny-vertx-web-2.18.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

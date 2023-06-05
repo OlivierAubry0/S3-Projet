@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: io.quarkus:quarkus-smallrye-openapi:2.7.3.Final" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="io.quarkus" artifactId="quarkus-smallrye-openapi" version="2.7.3.Final" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.quarkus/quarkus-smallrye-openapi/2.7.3.Final/1d7b54aa25a5ac294a33ed67cc485b5dad7e91e/quarkus-smallrye-openapi-2.7.3.Final.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.quarkus/quarkus-smallrye-openapi/2.7.3.Final/b2a41b2e79795b195e6b49b4072aaf5e19f2654e/quarkus-smallrye-openapi-2.7.3.Final-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

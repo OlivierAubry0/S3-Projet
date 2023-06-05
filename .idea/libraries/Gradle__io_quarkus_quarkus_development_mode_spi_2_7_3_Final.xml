@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: io.quarkus:quarkus-development-mode-spi:2.7.3.Final" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="io.quarkus" artifactId="quarkus-development-mode-spi" version="2.7.3.Final" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.quarkus/quarkus-development-mode-spi/2.7.3.Final/b49bfa0c876eb39849cf32581f44263574f24b87/quarkus-development-mode-spi-2.7.3.Final.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.quarkus/quarkus-development-mode-spi/2.7.3.Final/f786c7544525d7b0c659a6aa79e3099382b98c94/quarkus-development-mode-spi-2.7.3.Final-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
