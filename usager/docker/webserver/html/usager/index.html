@@ -81,10 +81,17 @@
         }
 
         function logout() {
-         //   let logoutURL = "http://localhost:8080//realms/usager/protocol/openid-connect/logout"
-         //   window.location.href = logoutURL;
+            let logoutURL = "http://localhost:8180//realms/usager/protocol/openid-connect/logout"
+            window.location.href = logoutURL;
         }
 
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "250px";
+        }
+
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+        }
 
     </script>
 
@@ -193,18 +200,8 @@
     <a href="#">Services</a>
     <a href="#">Clients</a>
     <a href="#">Contact</a>
+    <a href="#" onclick="logout()">Déconnection</a>
 </div>
-
-<script>
-    function openNav() {
-        document.getElementById("mySidenav").style.width = "250px";
-    }
-
-    function closeNav() {
-        document.getElementById("mySidenav").style.width = "0";
-    }
-
-</script>
 
 <span style="font-size:30px; cursor:pointer; position: absolute; top: 0; left: 0.5%;" onclick="openNav()">&#9776; UNIVENT</span>
 
