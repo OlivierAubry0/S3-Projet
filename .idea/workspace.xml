@@ -6,6 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="72deba85-9ca0-4a47-be77-f89dff0e225c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/docker/webserver/html/usager/admin_event_creator.html" beforeDir="false" afterPath="$PROJECT_DIR$/usager/docker/webserver/html/usager/admin_event_creator.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/usager/docker/webserver/html/usager/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/usager/docker/webserver/html/usager/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/usager/service/.gradle/7.4/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/.gradle/7.4/checksums/checksums.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/usager/service/.gradle/7.4/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/.gradle/7.4/executionHistory/executionHistory.bin" afterDir="false" />
@@ -87,6 +88,9 @@
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\olivi\git\S3-Projet\usager\docker\postgres" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\ycast\Desktop\Genie_Info\SESSION3\PROJET\Git\S3-Projet\usager\docker\webserver\html\usager" />
     </key>
   </component>
   <component name="RunManager" selected="Quarkus.service.main">
