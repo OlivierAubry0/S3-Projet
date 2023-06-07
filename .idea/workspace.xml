@@ -12,52 +12,9 @@
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/service.main/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/service.main/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usager/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/usager/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usager/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/usager/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usager/docker/.env-default" beforeDir="false" afterPath="$PROJECT_DIR$/usager/docker/.env-default" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usager/docker/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/usager/docker/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usager/docker/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/usager/docker/docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usager/docker/keycloak/data/backend.json" beforeDir="false" afterPath="$PROJECT_DIR$/usager/docker/keycloak/data/backend.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usager/docker/keycloak/data/frontend.json" beforeDir="false" afterPath="$PROJECT_DIR$/usager/docker/keycloak/data/frontend.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usager/docker/keycloak/data/setdata.sh" beforeDir="false" afterPath="$PROJECT_DIR$/usager/docker/keycloak/data/setdata.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usager/docker/keycloak/data/users.json" beforeDir="false" afterPath="$PROJECT_DIR$/usager/docker/keycloak/data/users.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usager/docker/keycloak/startup-scripts/init.sh" beforeDir="false" afterPath="$PROJECT_DIR$/usager/docker/keycloak/startup-scripts/init.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usager/docker/postgres/database.sql" beforeDir="false" afterPath="$PROJECT_DIR$/usager/docker/postgres/database.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usager/docker/postgres/init.sql" beforeDir="false" afterPath="$PROJECT_DIR$/usager/docker/postgres/init.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usager/docker/webserver/html/backend-not-found.html" beforeDir="false" afterPath="$PROJECT_DIR$/usager/docker/webserver/html/backend-not-found.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usager/docker/webserver/html/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/usager/docker/webserver/html/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usager/docker/webserver/html/logout.html" beforeDir="false" afterPath="$PROJECT_DIR$/usager/docker/webserver/html/logout.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usager/docker/webserver/html/usager/admin_event_creator.html" beforeDir="false" afterPath="$PROJECT_DIR$/usager/docker/webserver/html/usager/admin_event_creator.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usager/docker/webserver/html/usager/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/usager/docker/webserver/html/usager/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usager/docker/webserver/nginx.conf" beforeDir="false" afterPath="$PROJECT_DIR$/usager/docker/webserver/nginx.conf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usager/service/.gradle/7.4/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/.gradle/7.4/checksums/checksums.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usager/service/.gradle/7.4/checksums/md5-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/.gradle/7.4/checksums/md5-checksums.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usager/service/.gradle/7.4/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/.gradle/7.4/checksums/sha1-checksums.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usager/service/.gradle/7.4/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/.gradle/7.4/executionHistory/executionHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usager/service/.gradle/7.4/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/.gradle/7.4/executionHistory/executionHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usager/service/.gradle/7.4/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/.gradle/7.4/fileHashes/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usager/service/.gradle/7.4/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/.gradle/7.4/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usager/service/.gradle/7.4/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/.gradle/7.4/fileHashes/resourceHashesCache.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usager/service/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usager/service/.gradle/buildOutputCleanup/cache.properties" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/.gradle/buildOutputCleanup/cache.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usager/service/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usager/service/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/.gradle/file-system.probe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usager/service/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usager/service/build/resources/main/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/build/resources/main/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usager/service/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usager/service/gradle.properties" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/gradle.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usager/service/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usager/service/gradlew" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/gradlew" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usager/service/gradlew.bat" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/gradlew.bat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usager/service/settings.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/settings.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usager/service/src/main/java/ca/usherbrooke/gegi/server/business/Person.java" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/src/main/java/ca/usherbrooke/gegi/server/business/Person.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usager/service/src/main/java/ca/usherbrooke/gegi/server/business/Roles.java" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/src/main/java/ca/usherbrooke/gegi/server/business/Roles.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usager/service/src/main/java/ca/usherbrooke/gegi/server/service/RoleService.java" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/src/main/java/ca/usherbrooke/gegi/server/service/RoleService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usager/service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usager/service/src/main/resources/ca/usherbrooke/fgen/api/persistence/MessageMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/src/main/resources/ca/usherbrooke/fgen/api/persistence/MessageMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usager/service/test" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/test" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/service/build/service-dev.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/service/build/tmp/quarkusDev/quarkus-app-model.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/service/build/tmp/quarkusDev/quarkus-app-test-model.dat" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -217,7 +174,7 @@
       <workItem from="1686152363441" duration="274000" />
       <workItem from="1686152996520" duration="74000" />
       <workItem from="1686154709612" duration="624000" />
-      <workItem from="1686155364828" duration="8400000" />
+      <workItem from="1686155364828" duration="12547000" />
     </task>
     <servers />
   </component>
