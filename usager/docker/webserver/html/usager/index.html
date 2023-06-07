@@ -3,6 +3,28 @@
 <meta http-equiv="Content-type" content="text/html; charset=UTF-8">
 
 <html>
+<script>
+    function displayUserInfo() {
+        var token = keycloak.tokenParsed;
+        var name = token.name;
+
+        var userInfoList = document.createElement('ul');
+        var nameItem = document.createElement('li');
+        var rolesItem = document.createElement('li');
+
+        nameItem.textContent = 'Nom : \n' + name;
+        rolesItem.textContent =  'Role: Etudiant';
+
+        userInfoList.appendChild(nameItem);
+        userInfoList.appendChild(rolesItem);
+
+        var userInfoDiv = document.getElementById('user-info');
+        userInfoDiv.innerHTML = ''; // Supprime tout contenu existant
+        userInfoDiv.appendChild(userInfoList);
+    }
+
+</script>
+
 
 <head>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
@@ -19,11 +41,26 @@
                 "confidential-port": 0
             });
             keycloak.init({onLoad: 'login-required'}).then(function (authenticated) {
-                alert(authenticated ? 'authenticated' : 'not authenticated');
+                //alert(authenticated ? 'authenticated' : 'not authenticated');
+                if (authenticated) {
+                    var roles = keycloak.tokenParsed.realm_access.roles;
+
+                    if (roles.includes('enseignant')) {
+                        window.location.href = 'admin_event_creator.html';
+                        return;
+                    }
+                } else {
+                    alert('Not authenticated');
+                }
+
 
             }).catch(function () {
                 alert('failed to initialize');
-            });
+            }).finally(function () {
+            displayUserInfo(); // Call the function to display user info
+        });
+
+
         }
 
         function requestStudent() {
@@ -87,10 +124,12 @@
 
         function openNav() {
             document.getElementById("mySidenav").style.width = "250px";
+            document.getElementById("user-info").classList.add("fade-in");
         }
 
         function closeNav() {
             document.getElementById("mySidenav").style.width = "0";
+            document.getElementById("user-info").classList.remove("fade-in");
         }
 
     </script>
@@ -106,15 +145,20 @@
             align-items: center;
             justify-content: flex-end;
         }
+
     </style>
 
 </head>
 
-<body onload="initKeycloak()">
+<body onload="initKeycloak()" onload="initKeycloak()">
 
 <div id="title">
     <span></span>
 </div>
+
+
+
+
 
 <style>
 
@@ -146,7 +190,8 @@
     }
 
     body {
-        font-family: "Lato", sans-serif;
+        font-family: "Lato", sans-serif ;
+        color: #f1f1f1;
     }
 
     .sidenav {
@@ -191,16 +236,36 @@
         .sidenav a {font-size: 18px;}
     }
 
+    @keyframes fade-in {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+    .sidenav b{
+        /* Other styles for the user-info division */
+        animation-name: fade-in;
+        animation-duration: 1s;
+        animation-delay: 1s;
+        animation-fill-mode: forwards;
+        opacity: 0;
+    }
+
 
 </style>
 
 <div id="mySidenav" class="sidenav">
+    <b id="user-info"></b>
+    <a href="#" onclick="logout()">Déconnexion</a>
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
     <a href="#">About</a>
     <a href="#">Services</a>
     <a href="#">Clients</a>
     <a href="#">Contact</a>
-    <a href="#" onclick="logout()">Déconnection</a>
+
+
 </div>
 
 <span style="font-size:30px; cursor:pointer; position: absolute; top: 0; left: 0.5%;" onclick="openNav()">&#9776; UNIVENT</span>
