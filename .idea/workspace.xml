@@ -5,19 +5,59 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="72deba85-9ca0-4a47-be77-f89dff0e225c" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/usager/docker/webserver/html/usager/createEvent.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/7518f93b-754c-485e-bb1e-76f64c371c23.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/7518f93b-754c-485e-bb1e-76f64c371c23/storage_v2/_src_/database/postgres.edMnLQ.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/7518f93b-754c-485e-bb1e-76f64c371c23/storage_v2/_src_/database/postgres.edMnLQ/schema/information_schema.FNRwLQ.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/7518f93b-754c-485e-bb1e-76f64c371c23/storage_v2/_src_/database/postgres.edMnLQ/schema/pg_catalog.0S1ZNQ.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/7518f93b-754c-485e-bb1e-76f64c371c23/storage_v2/_src_/database/postgres.edMnLQ/schema/public.abK9xQ.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/service.main/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/service.main/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/usager/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/usager/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/docker/.env-default" beforeDir="false" afterPath="$PROJECT_DIR$/usager/docker/.env-default" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/docker/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/usager/docker/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/docker/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/usager/docker/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/docker/keycloak/data/backend.json" beforeDir="false" afterPath="$PROJECT_DIR$/usager/docker/keycloak/data/backend.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/docker/keycloak/data/frontend.json" beforeDir="false" afterPath="$PROJECT_DIR$/usager/docker/keycloak/data/frontend.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/docker/keycloak/data/setdata.sh" beforeDir="false" afterPath="$PROJECT_DIR$/usager/docker/keycloak/data/setdata.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/docker/keycloak/data/users.json" beforeDir="false" afterPath="$PROJECT_DIR$/usager/docker/keycloak/data/users.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/docker/keycloak/startup-scripts/init.sh" beforeDir="false" afterPath="$PROJECT_DIR$/usager/docker/keycloak/startup-scripts/init.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/docker/postgres/database.sql" beforeDir="false" afterPath="$PROJECT_DIR$/usager/docker/postgres/database.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/docker/postgres/init.sql" beforeDir="false" afterPath="$PROJECT_DIR$/usager/docker/postgres/init.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/docker/webserver/html/backend-not-found.html" beforeDir="false" afterPath="$PROJECT_DIR$/usager/docker/webserver/html/backend-not-found.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/docker/webserver/html/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/usager/docker/webserver/html/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/docker/webserver/html/logout.html" beforeDir="false" afterPath="$PROJECT_DIR$/usager/docker/webserver/html/logout.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/usager/docker/webserver/html/usager/admin_event_creator.html" beforeDir="false" afterPath="$PROJECT_DIR$/usager/docker/webserver/html/usager/admin_event_creator.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/usager/docker/webserver/html/usager/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/usager/docker/webserver/html/usager/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usager/service/build/service-dev.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/usager/service/build/tmp/quarkusDev/quarkus-app-model.dat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/usager/service/build/tmp/quarkusDev/quarkus-app-test-model.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/docker/webserver/nginx.conf" beforeDir="false" afterPath="$PROJECT_DIR$/usager/docker/webserver/nginx.conf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/service/.gradle/7.4/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/.gradle/7.4/checksums/checksums.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/service/.gradle/7.4/checksums/md5-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/.gradle/7.4/checksums/md5-checksums.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/service/.gradle/7.4/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/.gradle/7.4/checksums/sha1-checksums.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/service/.gradle/7.4/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/.gradle/7.4/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/service/.gradle/7.4/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/.gradle/7.4/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/service/.gradle/7.4/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/.gradle/7.4/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/service/.gradle/7.4/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/.gradle/7.4/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/service/.gradle/7.4/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/.gradle/7.4/fileHashes/resourceHashesCache.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/service/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/service/.gradle/buildOutputCleanup/cache.properties" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/.gradle/buildOutputCleanup/cache.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/service/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/service/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/.gradle/file-system.probe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/service/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/service/build/resources/main/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/build/resources/main/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/service/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/service/gradle.properties" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/gradle.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/service/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/service/gradlew" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/gradlew" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/service/gradlew.bat" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/gradlew.bat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/service/settings.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/settings.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/service/src/main/java/ca/usherbrooke/gegi/server/business/Person.java" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/src/main/java/ca/usherbrooke/gegi/server/business/Person.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/service/src/main/java/ca/usherbrooke/gegi/server/business/Roles.java" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/src/main/java/ca/usherbrooke/gegi/server/business/Roles.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/service/src/main/java/ca/usherbrooke/gegi/server/service/RoleService.java" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/src/main/java/ca/usherbrooke/gegi/server/service/RoleService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/service/src/main/resources/ca/usherbrooke/fgen/api/persistence/MessageMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/src/main/resources/ca/usherbrooke/fgen/api/persistence/MessageMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/service/test" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/test" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,7 +74,12 @@
       <state>
         <projects_view>
           <tree_state>
-            <expand />
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="service" type="f1a62948:ProjectNode" />
+              </path>
+            </expand>
             <select />
           </tree_state>
         </projects_view>
@@ -64,21 +109,23 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
     "DefaultHtmlFileTemplate": "HTML File",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "yorman",
     "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/Users/ycast/Desktop/Genie_Info/SESSION3/PROJET/Git/S3-Projet",
+    "last_opened_file_path": "C:/Users/Enes/OneDrive - USherbrooke/Session 3/Cours_Projet/messages",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
+    "project.structure.last.edited": "SDKs",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "reference.settingsdialog.IDE.editor.colors.General",
     "vue.rearranger.settings.migration": "true"
   },
   "keyToStringList": {
@@ -95,6 +142,7 @@
       <recent name="C:\Users\olivi\git\S3-Projet\usager\docker\postgres" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Enes\OneDrive - USherbrooke\Documents\GitHub\S3-Projet\usager\docker\webserver\html\usager" />
       <recent name="C:\Users\ycast\Desktop\Genie_Info\SESSION3\PROJET\Git\S3-Projet\usager\docker\webserver\html\usager" />
     </key>
   </component>
@@ -107,27 +155,6 @@
     </configuration>
     <configuration name="service.main" type="QuarkusRunConfigurationType" factoryName="Quarkus">
       <module name="service.main" />
-      <QsGradleRunConfiguration>
-        <ExternalSystemSettings>
-          <option name="executionName" />
-          <option name="externalProjectPath" value="$PROJECT_DIR$/usager/service" />
-          <option name="externalSystemIdString" value="GRADLE" />
-          <option name="scriptParameters" value="" />
-          <option name="taskDescriptions">
-            <list />
-          </option>
-          <option name="taskNames">
-            <list>
-              <option value="quarkusDev" />
-            </list>
-          </option>
-          <option name="vmOptions" value="" />
-        </ExternalSystemSettings>
-        <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
-        <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-        <DebugAllEnabled>false</DebugAllEnabled>
-        <ForceTestExec>false</ForceTestExec>
-      </QsGradleRunConfiguration>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -196,5 +223,8 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
 </project>
