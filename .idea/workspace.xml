@@ -5,11 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="72deba85-9ca0-4a47-be77-f89dff0e225c" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/modules/service.main.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/service.native-test.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/service.quarkus-generated-sources.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/service.quarkus-test-generated-sources.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/service.test.iml" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/usager/docker/webserver/html/usager/assets/admin_event_creator.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/7518f93b-754c-485e-bb1e-76f64c371c23.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/7518f93b-754c-485e-bb1e-76f64c371c23/storage_v2/_src_/database/postgres.edMnLQ.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/7518f93b-754c-485e-bb1e-76f64c371c23/storage_v2/_src_/database/postgres.edMnLQ/schema/information_schema.FNRwLQ.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/7518f93b-754c-485e-bb1e-76f64c371c23/storage_v2/_src_/database/postgres.edMnLQ/schema/pg_catalog.0S1ZNQ.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/7518f93b-754c-485e-bb1e-76f64c371c23/storage_v2/_src_/database/postgres.edMnLQ/schema/public.abK9xQ.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/docker/webserver/html/usager/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/usager/docker/webserver/html/usager/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/service/build/service-dev.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/service/build/tmp/quarkusDev/quarkus-app-model.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/service/build/tmp/quarkusDev/quarkus-app-test-model.dat" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,6 +40,13 @@
       </state>
     </system>
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -40,35 +54,41 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="2QqHTehyPAUCt157AFu0Makfkn2" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/nscak/OneDrive - USherbrooke/Documents/GitHub&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "yorman",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "C:/Users/ycast/Desktop/Genie_Info/SESSION3/PROJET/Git/S3-Projet",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;postgresql&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "postgresql"
     ],
-    &quot;RunConfigurationTargetLRU&quot;: [
-      &quot;7518f93b-754c-485e-bb1e-76f64c371c23&quot;
+    "RunConfigurationTargetLRU": [
+      "7518f93b-754c-485e-bb1e-76f64c371c23"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\olivi\git\S3-Projet\usager\docker\postgres" />
@@ -163,6 +183,10 @@
       <workItem from="1686074204962" duration="245000" />
       <workItem from="1686074468981" duration="1774000" />
       <workItem from="1686076984107" duration="86000" />
+      <workItem from="1686152363441" duration="274000" />
+      <workItem from="1686152996520" duration="74000" />
+      <workItem from="1686154709612" duration="624000" />
+      <workItem from="1686155364828" duration="2224000" />
     </task>
     <servers />
   </component>
