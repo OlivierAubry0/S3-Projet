@@ -5,25 +5,47 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="72deba85-9ca0-4a47-be77-f89dff0e225c" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/7518f93b-754c-485e-bb1e-76f64c371c23.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/7518f93b-754c-485e-bb1e-76f64c371c23.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/service.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/service.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/usager/docker/webserver/html/usager/assets/admin_event_creator.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/7518f93b-754c-485e-bb1e-76f64c371c23.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/7518f93b-754c-485e-bb1e-76f64c371c23/storage_v2/_src_/database/postgres.edMnLQ.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/7518f93b-754c-485e-bb1e-76f64c371c23/storage_v2/_src_/database/postgres.edMnLQ/schema/information_schema.FNRwLQ.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/7518f93b-754c-485e-bb1e-76f64c371c23/storage_v2/_src_/database/postgres.edMnLQ/schema/pg_catalog.0S1ZNQ.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/7518f93b-754c-485e-bb1e-76f64c371c23/storage_v2/_src_/database/postgres.edMnLQ/schema/public.abK9xQ.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usager/service/.gradle/7.4/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/.gradle/7.4/checksums/checksums.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usager/service/.gradle/7.4/dependencies-accessors/dependencies-accessors.lock" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/.gradle/7.4/dependencies-accessors/dependencies-accessors.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usager/service/.gradle/7.4/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/.gradle/7.4/executionHistory/executionHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usager/service/.gradle/7.4/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/.gradle/7.4/fileHashes/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usager/service/.gradle/7.4/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/.gradle/7.4/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usager/service/.gradle/7.4/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/.gradle/7.4/fileHashes/resourceHashesCache.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usager/service/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usager/service/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/.gradle/file-system.probe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usager/service/build/classes/java/main/ca/usherbrooke/gegi/server/service/RoleService.class" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/build/classes/java/main/ca/usherbrooke/gegi/server/service/RoleService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usager/service/build/service-dev.jar" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/build/service-dev.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usager/service/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/docker/webserver/html/usager/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/usager/docker/webserver/html/usager/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/service/build/service-dev.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/service/build/tmp/quarkusDev/quarkus-app-model.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/service/build/tmp/quarkusDev/quarkus-app-test-model.dat" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$/usager/service">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view>
+          <tree_state>
+            <expand />
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -32,16 +54,22 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="2QqHTehyPAUCt157AFu0Makfkn2" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/olivi/git/S3-Projet",
+    "git-widget-placeholder": "yorman",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "C:/Users/ycast/Desktop/Genie_Info/SESSION3/PROJET/Git/S3-Projet",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -154,6 +182,11 @@
       <updated>1686074203933</updated>
       <workItem from="1686074204962" duration="245000" />
       <workItem from="1686074468981" duration="1774000" />
+      <workItem from="1686076984107" duration="86000" />
+      <workItem from="1686152363441" duration="274000" />
+      <workItem from="1686152996520" duration="74000" />
+      <workItem from="1686154709612" duration="624000" />
+      <workItem from="1686155364828" duration="2224000" />
     </task>
     <servers />
   </component>
