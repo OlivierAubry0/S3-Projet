@@ -53,7 +53,7 @@
             alert("Event created!");
             window.location.href = 'admin_event_creator.html'; // Replace with the path to your main menu HTML file
           } else {
-            alert("Failed to create event. Please try again.");
+            alert(xhr.status);
           }
         }
       };
