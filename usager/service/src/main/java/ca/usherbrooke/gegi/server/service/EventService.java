@@ -16,17 +16,14 @@ public class EventService {
     EventMapper eventMapper;
 
     @POST
-    @Path("/api/events")
-    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-    public Response createEvent(@FormParam("ename") String eventName,
-                                @FormParam("edate") Date eventDate,
-                                @FormParam("estart") Time eventStart,
-                                @FormParam("eend") Time eventEnd,
-                                @FormParam("studentAssociationId") int studentAssociationId) {
+    @Path("/{edate}/{estart}/{eend}/{studentAssociationId}")
+    public Response createEvent(@PathParam("edate") Date eventDate,
+                                @PathParam("estart") Time eventStart,
+                                @PathParam("eend") Time eventEnd,
+                                @PathParam("studentAssociationId") int studentAssociationId,
+                                @FormParam("ename") String eventName) {
         Event event = new Event(eventName, eventDate, eventStart, eventEnd, studentAssociationId);
         eventMapper.insertEvent(event);
         return Response.status(Response.Status.CREATED).entity(event).build();
     }
 }
-
-

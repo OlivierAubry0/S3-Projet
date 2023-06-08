@@ -37,6 +37,7 @@
       background-color: #45a049;
     }
   </style>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script>
     function submitEvent() {
       var eventName = document.getElementById('name').value;
@@ -44,47 +45,45 @@
       var eventEnd = document.getElementById('end').value;
       var eventDate = document.getElementById('date').value;
 
-      var xhr = new XMLHttpRequest();
-      xhr.open('POST', '/api/events/', true);
-      xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-      xhr.onreadystatechange = function() {
-        if (xhr.readyState === XMLHttpRequest.DONE) {
-          if (xhr.status === 201) {
-            alert("Event created!");
-            window.location.href = 'admin_event_creator.html'; // Replace with the path to your main menu HTML file
-          } else {
-            alert(xhr.status);
-          }
-        }
-      };
-
       var params = 'ename=' + encodeURIComponent(eventName) +
               '&estart=' + encodeURIComponent(eventStart) +
               '&eend=' + encodeURIComponent(eventEnd) +
               '&edate=' + encodeURIComponent(eventDate) +
               '&studentAssociationId=123'; // Replace with the appropriate student association ID
 
-      xhr.send(params);
+      axios.post('/api/events/', params, {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
+      })
+              .then(function(response) {
+                if (response.status === 201) {
+                  alert("Event created!");
+                  window.location.href = 'admin_event_creator.html'; // Replace with the path to your main menu HTML file
+                } else {
+                  alert(response.status);
+                }
+              })
+              .catch(function(error) {
+                console.error(error);
+              });
     }
   </script>
 </head>
 <body>
-
 <h2>Create New Event</h2>
-
 <div class="event-form">
   <form>
     <label for="name">Event Name:</label><br>
     <input type="text" id="name" name="name"><br>
     <label for="start">Start Time:</label><br>
-    <input type="time" id="start" name="start"><br>
+    <input type="text" id="start" name="start"><br>
     <label for="end">End Time:</label><br>
-    <input type="time" id="end" name="end"><br>
+    <input type="text" id="end" name="end"><br>
     <label for="date">Event Date:</label><br>
-    <input type="date" id="date" name="date"><br>
+    <input type="text" id="date" name="date"><br>
     <button type="button" onclick="submitEvent()">Submit</button>
   </form>
 </div>
-
 </body>
 </html>
