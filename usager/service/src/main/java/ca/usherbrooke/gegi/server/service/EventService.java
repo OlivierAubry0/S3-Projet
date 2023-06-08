@@ -9,24 +9,21 @@ import javax.inject.Inject;
 import java.sql.Date;
 import java.sql.Time;
 
-@Path("/api")
+@Path("/api/events")
 @Produces({"application/json"})
 public class EventService {
     @Inject
     EventMapper eventMapper;
 
     @POST
-    @Path("/events")
-    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-    public Response createEvent(@FormParam("ename") String eventName,
-                                @FormParam("edate") Date eventDate,
-                                @FormParam("estart") Time eventStart,
-                                @FormParam("eend") Time eventEnd,
-                                @FormParam("studentAssociationId") int studentAssociationId) {
+    @Path("/{edate}/{estart}/{eend}/{studentAssociationId}")
+    public Response createEvent(@PathParam("edate") Date eventDate,
+                                @PathParam("estart") Time eventStart,
+                                @PathParam("eend") Time eventEnd,
+                                @PathParam("studentAssociationId") int studentAssociationId,
+                                @FormParam("ename") String eventName) {
         Event event = new Event(eventName, eventDate, eventStart, eventEnd, studentAssociationId);
         eventMapper.insertEvent(event);
         return Response.status(Response.Status.CREATED).entity(event).build();
     }
 }
-
-

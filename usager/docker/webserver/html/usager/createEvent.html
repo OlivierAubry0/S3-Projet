@@ -37,26 +37,63 @@
       background-color: #45a049;
     }
   </style>
-  <script>
+
+
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="http://localhost:8180/js/keycloak.js"></script>
+<body onload="initKeycloak()">
+<script>
+
+    function displayUserInfo() {
+      var token = keycloak.tokenParsed;
+      var name = token.name;
+
+      var userInfoList = document.createElement('ul');
+      var nameItem = document.createElement('li');
+      var rolesItem = document.createElement('li');
+
+      nameItem.textContent = 'Nom : \n' + name;
+      rolesItem.textContent =  'Role: Admin';
+
+      userInfoList.appendChild(nameItem);
+      userInfoList.appendChild(rolesItem);
+
+      var userInfoDiv = document.getElementById('user-info');
+      userInfoDiv.innerHTML = ''; // Supprime tout contenu existant
+      userInfoDiv.appendChild(userInfoList);
+    }
+
+
+    var keycloak;
+
+    function initKeycloak() {
+      keycloak = new Keycloak({
+        "realm": "usager",
+        "auth-server-url": "http://localhost:8180/",
+        "ssl-required": "external",
+        "clientId": "frontend",
+        "public-client": true,
+        "confidential-port": 0
+      });
+      keycloak.init({ onLoad: 'login-required' })
+              .success(function (authenticated) {
+                if (authenticated) {
+                  alert('authenticated');
+                  displayUserInfo();
+                } else {
+                  alert('not authenticated');
+                }
+              })
+              .error(function () {
+                alert('failed to initialize');
+              });
+    }
+
     function submitEvent() {
       var eventName = document.getElementById('name').value;
       var eventStart = document.getElementById('start').value;
       var eventEnd = document.getElementById('end').value;
       var eventDate = document.getElementById('date').value;
-
-      var xhr = new XMLHttpRequest();
-      xhr.open('POST', '/api/events', true);
-      xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-      xhr.onreadystatechange = function() {
-        if (xhr.readyState === XMLHttpRequest.DONE) {
-          if (xhr.status === 201) {
-            alert("Event created!");
-            window.location.href = 'admin_event_creator.html'; // Replace with the path to your main menu HTML file
-          } else {
-            alert("Failed to create event. Please try again.");
-          }
-        }
-      };
 
       var params = 'ename=' + encodeURIComponent(eventName) +
               '&estart=' + encodeURIComponent(eventStart) +
@@ -64,27 +101,40 @@
               '&edate=' + encodeURIComponent(eventDate) +
               '&studentAssociationId=123'; // Replace with the appropriate student association ID
 
-      xhr.send(params);
+      axios.post('http://localhost:8888/api/events/', params, {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'Authorization': 'Bearer ' + keycloak.token // Replace keycloak.token with your actual bearer token
+        }
+      })
+              .then(function (response) {
+                if (response.status === 201) {
+                  alert("Event created!");
+                  window.location.href = 'admin_event_creator.html'; // Replace with the path to your main menu HTML file
+                } else {
+                  alert(response.status);
+                }
+              })
+              .catch(function (error) {
+                console.error(error);
+              });
     }
   </script>
 </head>
-<body>
 
 <h2>Create New Event</h2>
-
 <div class="event-form">
   <form>
     <label for="name">Event Name:</label><br>
     <input type="text" id="name" name="name"><br>
     <label for="start">Start Time:</label><br>
-    <input type="time" id="start" name="start"><br>
+    <input type="text" id="start" name="start"><br>
     <label for="end">End Time:</label><br>
-    <input type="time" id="end" name="end"><br>
+    <input type="text" id="end" name="end"><br>
     <label for="date">Event Date:</label><br>
-    <input type="date" id="date" name="date"><br>
+    <input type="text" id="date" name="date"><br>
     <button type="button" onclick="submitEvent()">Submit</button>
   </form>
 </div>
-
 </body>
 </html>
