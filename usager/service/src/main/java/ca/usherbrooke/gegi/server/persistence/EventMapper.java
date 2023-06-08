@@ -1,5 +1,6 @@
-package ca.usherbrooke.gegi.server.admin;
+package ca.usherbrooke.gegi.server.persistence;
 
+import ca.usherbrooke.gegi.server.admin.Event;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Insert;
 
