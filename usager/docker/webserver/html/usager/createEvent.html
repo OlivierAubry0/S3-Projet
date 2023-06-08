@@ -45,7 +45,7 @@
       var eventDate = document.getElementById('date').value;
 
       var xhr = new XMLHttpRequest();
-      xhr.open('POST', '/api/events', true);
+      xhr.open('POST', '/api/events/', true);
       xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
       xhr.onreadystatechange = function() {
         if (xhr.readyState === XMLHttpRequest.DONE) {

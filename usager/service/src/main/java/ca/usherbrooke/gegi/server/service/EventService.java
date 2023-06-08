@@ -9,14 +9,14 @@ import javax.inject.Inject;
 import java.sql.Date;
 import java.sql.Time;
 
-@Path("/api")
+@Path("/api/events")
 @Produces({"application/json"})
 public class EventService {
     @Inject
     EventMapper eventMapper;
 
     @POST
-    @Path("/events")
+    @Path("/api/events")
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     public Response createEvent(@FormParam("ename") String eventName,
                                 @FormParam("edate") Date eventDate,
