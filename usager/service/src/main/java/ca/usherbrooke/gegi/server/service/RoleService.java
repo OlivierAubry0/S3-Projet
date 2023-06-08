@@ -1,6 +1,6 @@
 package ca.usherbrooke.gegi.server.service;
 
-import ca.usherbrooke.gegi.server.business.Person;
+import ca.usherbrooke.gegi.server.admin.Person;
 import java.util.List;
 import java.util.Map;
 import javax.annotation.security.PermitAll;
