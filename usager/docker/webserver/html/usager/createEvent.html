@@ -38,7 +38,27 @@
     }
   </style>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="http://localhost:8180/js/keycloak.js"></script>
   <script>
+    var keycloak;
+
+    function initKeycloak() {
+      keycloak = new Keycloak({
+        "realm": "usager",
+        "auth-server-url": "http://localhost:8180/",
+        "ssl-required": "external",
+        "clientId": "frontend",
+        "public-client": true,
+        "confidential-port": 0
+      });
+      keycloak.init({onLoad: 'login-required'}).then(function (authenticated) {
+        alert(authenticated ? 'authenticated' : 'not authenticated');
+        displayUserInfo(); // Call the function to display user info
+      }).catch(function () {
+        alert('failed to initialize');
+      });
+    }
+
     function submitEvent() {
       var eventName = document.getElementById('name').value;
       var eventStart = document.getElementById('start').value;
@@ -53,10 +73,11 @@
 
       axios.post('/api/events/', params, {
         headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'Authorization': 'Bearer ' + keycloak.token // Replace keycloak.token with your actual bearer token
         }
       })
-              .then(function(response) {
+              .then(function (response) {
                 if (response.status === 201) {
                   alert("Event created!");
                   window.location.href = 'admin_event_creator.html'; // Replace with the path to your main menu HTML file
@@ -64,13 +85,13 @@
                   alert(response.status);
                 }
               })
-              .catch(function(error) {
+              .catch(function (error) {
                 console.error(error);
               });
     }
   </script>
 </head>
-<body>
+<body onload="initKeycloak()">
 <h2>Create New Event</h2>
 <div class="event-form">
   <form>
