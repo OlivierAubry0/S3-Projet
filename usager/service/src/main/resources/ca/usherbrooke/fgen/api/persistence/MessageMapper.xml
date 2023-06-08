@@ -9,6 +9,7 @@
         (evenementid, evenement_nom, evenement_date, evenement__debut, evenement_fin, asso_etudianteid)
         VALUES
             (#{eventId}, #{eventName}, #{eventDate}, #{eventStart}, #{eventEnd}, #{studentAssociationId})
+
     </insert>
 
 </mapper>
