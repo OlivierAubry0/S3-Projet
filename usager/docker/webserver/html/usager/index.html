@@ -1,4 +1,31 @@
+
+<meta charset="UTF-8">
+<meta http-equiv="Content-type" content="text/html; charset=UTF-8">
+
 <html>
+<script>
+    function displayUserInfo() {
+        var token = keycloak.tokenParsed;
+        var name = token.name;
+
+        var userInfoList = document.createElement('ul');
+        var nameItem = document.createElement('li');
+        var rolesItem = document.createElement('li');
+
+        nameItem.textContent = 'Nom : \n' + name;
+        rolesItem.textContent =  'Role: Etudiant';
+
+        userInfoList.appendChild(nameItem);
+        userInfoList.appendChild(rolesItem);
+
+        var userInfoDiv = document.getElementById('user-info');
+        userInfoDiv.innerHTML = ''; // Supprime tout contenu existant
+        userInfoDiv.appendChild(userInfoList);
+    }
+
+</script>
+
+
 <head>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="http://localhost:8180/js/keycloak.js"></script>
@@ -14,13 +41,27 @@
                 "confidential-port": 0
             });
             keycloak.init({onLoad: 'login-required'}).then(function (authenticated) {
-                alert(authenticated ? 'authenticated' : 'not authenticated');
+                //alert(authenticated ? 'authenticated' : 'not authenticated');
+                if (authenticated) {
+                    var roles = keycloak.tokenParsed.realm_access.roles;
+
+                    if (roles.includes('enseignant')) {
+                        window.location.href = 'admin_event_creator.html';
+                        return;
+                    }
+                } else {
+                    alert('Not authenticated');
+                }
+
 
             }).catch(function () {
                 alert('failed to initialize');
-            });
-        }
+            }).finally(function () {
+            displayUserInfo(); // Call the function to display user info
+        });
 
+
+        }
 
         function requestStudent() {
             const div = document.getElementById('title');
@@ -77,18 +118,153 @@
         }
 
         function logout() {
-         //   let logoutURL = "http://localhost:8080//realms/usager/protocol/openid-connect/logout"
-         //   window.location.href = logoutURL;
+            let logoutURL = "http://localhost:8180//realms/usager/protocol/openid-connect/logout"
+            window.location.href = logoutURL;
         }
 
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "250px";
+            document.getElementById("user-info").classList.add("fade-in");
+        }
+
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+            document.getElementById("user-info").classList.remove("fade-in");
+        }
 
     </script>
+
+    <style>
+        body {
+            background-color: #268018 ;
+            font-family: "Lato", sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+        }
+    </style>
+
 </head>
-<body onload="initKeycloak()">
-<button onclick="requestStudent()">Étudiant?</button>
-<button onclick="requestTeacher()">Enseignant?</button>
+
+<body onload="initKeycloak()" >
+
 <div id="title">
     <span></span>
 </div>
+
+
+
+
+
+<style>
+
+    .large-button {
+        display: inline-block;
+        padding: 100px 100px;
+        max-height: 100px;
+        max-width: 100px;
+        background-color: #f1f1f1;
+        color: #268018;
+        border: none;
+        text-align: center;
+        text-decoration: none;
+        cursor: pointer;
+        position: absolute;
+        z-index: 2;
+        border-radius: 10%;
+    }
+
+    .large-button span {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 25px;
+        font-weight: bold;
+
+    }
+
+    .large-button:hover span {
+        transform: translate(-50%, -50%) scale(1.2);
+    }
+
+    body {
+        font-family: "Lato", sans-serif ;
+        color: #f1f1f1;
+    }
+
+    .sidenav {
+        height: 100%;
+        width: 0;
+        position: fixed;
+        z-index: 3;
+        top: 0;
+        left: 0;
+        background-color: #0B4F00;
+        overflow-x: hidden;
+        transition: 0.5s;
+        padding-top: 60px;
+    }
+
+    .sidenav a {
+        padding: 8px 8px 8px 32px;
+        text-decoration: none;
+        font-size: 25px;
+        color: #5BFF5E;
+        display: block;
+        transition: 0.3s;
+        z-index: 3;
+    }
+
+    .sidenav a:hover {
+        color: #f1f1f1;
+        z-index: 3;
+    }
+
+    .sidenav .closebtn {
+        position: absolute;
+        top: 0;
+        right: 25px;
+        font-size: 36px;
+        margin-left: 50px;
+        z-index: 3;
+    }
+
+    @media screen and (max-height: 450px) {
+        .sidenav {padding-top: 15px;}
+        .sidenav a {font-size: 18px;}
+    }
+
+
+</style>
+
+<div id="mySidenav" class="sidenav">
+    <b id="user-info"></b>
+    <a href="#" onclick="logout()">Déconnexion</a>
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <a href="#">About</a>
+    <a href="#">Services</a>
+    <a href="#">Clients</a>
+    <a href="#">Contact</a>
+
+
+</div>
+
+<div style="position: absolute; top: 0; right: 0; width: 300px; height: 90px;">
+    <img src="assets/UdeS.png" alt="logo_UdS" style="width: 100%; height: 100%;">
+</div>
+
+<span style="font-size: 40px; font-weight: bold; cursor: pointer; position: absolute; top: 0; left: 0.5%; color: #FFFFFF;" onclick="openNav()">&#9776; UNIVENT</span>
+
+<button class="large-button" style="top: 15%; left: 10%;"><span>Droit</span></button>
+<button class="large-button" style="top: 15%; left: 30%;"><span>École de gestion</span></button>
+<button class="large-button" style="top: 15%; left: 50%;"><span>Éducation</span></button>
+<button class="large-button" style="top: 15%; left: 70%;"><span>Génie</span></button>
+
+<button class="large-button" style="top: 50%; left: 10%;"><span>Lettres et <br> sciences humaine</span></button>
+<button class="large-button" style="top: 50%; left: 30%;"><span>Médecine et <br >sciences de la santé</span></button>
+<button class="large-button" style="top: 50%; left: 50%;"><span>Sciences</span></button>
+<button class="large-button" style="top: 50%; left: 70%;"><span>Sciences de <br> l'activité physique</span></button>
+
 </body>
 </html>

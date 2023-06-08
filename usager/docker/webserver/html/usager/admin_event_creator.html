@@ -1,0 +1,234 @@
+
+<meta charset="UTF-8">
+<meta http-equiv="Content-type" content="text/html; charset=UTF-8">
+
+<html>
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="http://localhost:8180/js/keycloak.js"></script>
+  <script>
+    var keycloak;
+
+    function initKeycloak() {
+      keycloak = new Keycloak({
+        "realm": "usager",
+        "auth-server-url": "http://localhost:8180/",
+        "ssl-required": "external",
+        "clientId": "frontend",
+        "public-client": true,
+        "confidential-port": 0
+      });
+      keycloak.init({onLoad: 'login-required'}).then(function (authenticated) {
+        alert(authenticated ? 'authenticated' : 'not authenticated');
+
+      }).catch(function () {
+        alert('failed to initialize');
+      }).finally(function () {
+        displayUserInfo(); // Call the function to display user info
+      });
+
+
+    }
+
+    function logout() {
+      let logoutURL = "http://localhost:8180//realms/usager/protocol/openid-connect/logout"
+      window.location.href = logoutURL;
+    }
+
+    function openNav() {
+      document.getElementById("mySidenav").style.width = "250px";
+    }
+
+    function closeNav() {
+      document.getElementById("mySidenav").style.width = "0";
+    }
+
+
+    function displayUserInfo() {
+      var token = keycloak.tokenParsed;
+      var name = token.name;
+
+      var userInfoList = document.createElement('ul');
+      var nameItem = document.createElement('li');
+      var rolesItem = document.createElement('li');
+
+      nameItem.textContent = 'Nom : \n' + name;
+      rolesItem.textContent =  'Role: Admin';
+
+      userInfoList.appendChild(nameItem);
+      userInfoList.appendChild(rolesItem);
+
+      var userInfoDiv = document.getElementById('user-info');
+      userInfoDiv.innerHTML = ''; // Supprime tout contenu existant
+      userInfoDiv.appendChild(userInfoList);
+    }
+  </script>
+
+  <style>
+    body {
+      background-color: #268018;
+      font-family: "Lato", sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+    }
+
+    @keyframes fade-in {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+    .sidenav b{
+      /* Other styles for the user-info division */
+      animation-name: fade-in;
+      animation-duration: 1s;
+      animation-delay: 1s;
+      animation-fill-mode: forwards;
+      opacity: 0;
+      color: #f1f1f1;
+    }
+  </style>
+
+</head>
+
+<body onload="initKeycloak()">
+
+<div id="title">
+  <span></span>
+</div>
+
+<style>
+
+  .large-button {
+    display: inline-block;
+    padding: 100px 100px;
+    max-height: 100px;
+    max-width: 100px;
+    background-color: #f1f1f1;
+    color: #268018;
+    border: none;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    position: absolute;
+    z-index: 2;
+    border-radius: 10%;
+  }
+
+  .large-button span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+  .large-button:hover span {
+    transform: translate(-50%, -50%) scale(1.2);
+  }
+
+  body {
+    font-family: "Lato", sans-serif;
+  }
+
+  .sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 3;
+    top: 0;
+    left: 0;
+    background-color: #0B4F00;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+  }
+
+  .sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #5BFF5E;
+    display: block;
+    transition: 0.3s;
+    z-index: 3;
+  }
+
+  .sidenav a:hover {
+    color: #f1f1f1;
+    z-index: 3;
+  }
+
+  .sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+    z-index: 3;
+  }
+
+  @media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+  }
+
+  .image-container {
+    position: relative;
+    right: 15%;
+    bottom: 20%;
+  }
+
+  .image-container img {
+    max-height: 100%;
+    max-width: 100%;
+    border-radius: 1%;
+  }
+
+  .text-overlay {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 50px;
+    text-align: center;
+  }
+
+</style>
+
+<div id="mySidenav" class="sidenav">
+  <b id="user-info"></b>
+  <a href="#" onclick="logout()">Déconnexion</a>
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  <a href="#">About</a>
+  <a href="#">Services</a>
+  <a href="#">Clients</a>
+  <a href="#">Contact</a>
+
+
+</div>
+
+<span style="font-size: 40px; font-weight: bold; cursor: pointer; position: absolute; top: 0; left: 0.5%; color: #FFFFFF;" onclick="openNav()">&#9776; UNIVENT</span>
+
+<div style="position: absolute; top: 0; right: 0; width: 300px; height: 90px;">
+  <img src="assets/UdeS.png" alt="logo_UdS" style="width: 100%; height: 100%;">
+</div>
+
+<div class="image-container">
+  <img src="assets/concert.jpg" alt="event_image">
+  <div class="text-overlay">Génie</div>
+</div>
+
+<button class="large-button" style="top: 50%; left: 16.6%;" onclick="window.location.href='createEvent.html'"><span>Crée un évenement</span></button>
+<button class="large-button" style="top: 50%; left: 35%;"><span>Évenements programmées</span></button>
+<button class="large-button" style="top: 50%; left: 53.5%;"><span>Définir les membres du comité</span></button>
+<button class="large-button" style="top: 50%; left: 71.7%;"><span>Vue étudiante</span></button>
+
+</body>
+</html>
