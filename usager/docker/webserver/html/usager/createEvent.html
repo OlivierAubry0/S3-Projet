@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Create New Event</title>
+  <style>
+    body {
+      font-family: "Lato", sans-serif;
+    }
+    .event-form {
+      width: 500px;
+      margin: 0 auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+    .event-form input[type=text], .event-form input[type=date], .event-form input[type=time] {
+      width: 100%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+    .event-form button[type=button] {
+      width: 100%;
+      background-color: #4CAF50;
+      color: white;
+      padding: 14px 20px;
+      margin: 8px 0;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .event-form button[type=button]:hover {
+      background-color: #45a049;
+    }
+  </style>
+  <script>
+    function submitEvent() {
+      var eventName = document.getElementById('name').value;
+      var eventStart = document.getElementById('start').value;
+      var eventEnd = document.getElementById('end').value;
+      var eventDate = document.getElementById('date').value;
+
+      var xhr = new XMLHttpRequest();
+      xhr.open('POST', '/api/events', true);
+      xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+          if (xhr.status === 201) {
+            alert("Event created!");
+            window.location.href = 'admin_event_creator.html'; // Replace with the path to your main menu HTML file
+          } else {
+            alert(xhr.status);
+          }
+        }
+      };
+
+      var params = 'ename=' + encodeURIComponent(eventName) +
+              '&estart=' + encodeURIComponent(eventStart) +
+              '&eend=' + encodeURIComponent(eventEnd) +
+              '&edate=' + encodeURIComponent(eventDate) +
+              '&studentAssociationId=123'; // Replace with the appropriate student association ID
+
+      xhr.send(params);
+    }
+  </script>
+</head>
+<body>
+
+<h2>Create New Event</h2>
+
+<div class="event-form">
+  <form>
+    <label for="name">Event Name:</label><br>
+    <input type="text" id="name" name="name"><br>
+    <label for="start">Start Time:</label><br>
+    <input type="time" id="start" name="start"><br>
+    <label for="end">End Time:</label><br>
+    <input type="time" id="end" name="end"><br>
+    <label for="date">Event Date:</label><br>
+    <input type="date" id="date" name="date"><br>
+    <button type="button" onclick="submitEvent()">Submit</button>
+  </form>
+</div>
+
+</body>
+</html>

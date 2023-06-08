@@ -11,7 +11,7 @@ CREATE TABLE UNIVERSITE
 
 CREATE TABLE ASSO_ETUDIANTE
 (
-    Asso_EtudianteID INT NOT NULL,
+    Asso_EtudianteID varchar(50) NOT NULL,
     _Asso_Etudiante__Nom INT NOT NULL,
     UniversiteID INT NOT NULL,
     PRIMARY KEY (Asso_EtudianteID),
@@ -20,12 +20,12 @@ CREATE TABLE ASSO_ETUDIANTE
 
 CREATE TABLE EVENEMENT
 (
-    EvenementID INT NOT NULL,
-    Evenement_Nom INT NOT NULL,
-    Evenement_Date INT NOT NULL,
-    Evenement__Debut INT NOT NULL,
-    Evenement_Fin INT NOT NULL,
-    Asso_EtudianteID INT NOT NULL,
+    EvenementID varchar(50) NOT NULL,
+    Evenement_Nom varchar(50) NOT NULL,
+    Evenement_Date varchar(50) NOT NULL,
+    Evenement__Debut varchar(50) NOT NULL,
+    Evenement_Fin varchar(50) NOT NULL,
+    Asso_EtudianteID varchar(50) NOT NULL,
     PRIMARY KEY (EvenementID),
     FOREIGN KEY (Asso_EtudianteID) REFERENCES ASSO_ETUDIANTE(Asso_EtudianteID)
 );
@@ -62,7 +62,7 @@ CREATE TABLE PRIVILEGE
 
 CREATE TABLE VEND
 (
-    EvenementID INT NOT NULL,
+    EvenementID varchar(50) NOT NULL,
     BilletID INT NOT NULL,
     PRIMARY KEY (EvenementID, BilletID),
     FOREIGN KEY (EvenementID) REFERENCES EVENEMENT(EvenementID),
@@ -104,7 +104,7 @@ CREATE TABLE USAGER
 
 CREATE TABLE ASSO_ETUDIANTE_FACULTE
 (
-    Asso_EtudanteID INT NOT NULL,
+    Asso_EtudanteID varchar(50) NOT NULL,
     FaculteID INT NOT NULL,
     PRIMARY KEY (Asso_EtudanteID, FaculteID),
     FOREIGN KEY (Asso_EtudanteID) REFERENCES ASSO_ETUDIANTE(Asso_EtudianteID),
@@ -121,4 +121,3 @@ CREATE TABLE USAGER_STATUT
 );
 
 
-INSERT
