@@ -4,8 +4,11 @@
     <modules>
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
       <module fileurl="file://$PROJECT_DIR$/.idea/S3-Projet.iml" filepath="$PROJECT_DIR$/.idea/S3-Projet.iml" />
 =======
+=======
+>>>>>>> parent of adb3bea (Added SQL drafts & triggers)
 =======
 >>>>>>> parent of adb3bea (Added SQL drafts & triggers)
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/service.iml" filepath="$PROJECT_DIR$/.idea/modules/service.iml" />
@@ -15,6 +18,9 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/service.quarkus-test-generated-sources.iml" filepath="$PROJECT_DIR$/.idea/modules/service.quarkus-test-generated-sources.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/service.test.iml" filepath="$PROJECT_DIR$/.idea/modules/service.test.iml" />
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> parent of adb3bea (Added SQL drafts & triggers)
+=======
 >>>>>>> parent of adb3bea (Added SQL drafts & triggers)
 =======
 >>>>>>> parent of adb3bea (Added SQL drafts & triggers)

@@ -6,6 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="72deba85-9ca0-4a47-be77-f89dff0e225c" name="Changes" comment="">
 <<<<<<< HEAD
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/usager/docker/webserver/html/usager/createEvent.html" beforeDir="false" afterPath="$PROJECT_DIR$/usager/docker/webserver/html/usager/createEvent.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/usager/docker/webserver/nginx.conf" beforeDir="false" afterPath="$PROJECT_DIR$/usager/docker/webserver/nginx.conf" afterDir="false" />
@@ -14,6 +15,8 @@
       <change beforePath="$PROJECT_DIR$/usager/service/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/usager/service/build/service-dev.jar" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/build/service-dev.jar" afterDir="false" />
 =======
+=======
+>>>>>>> parent of adb3bea (Added SQL drafts & triggers)
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/7518f93b-754c-485e-bb1e-76f64c371c23.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/7518f93b-754c-485e-bb1e-76f64c371c23.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/modules/service.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/service.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
@@ -28,6 +31,9 @@
       <change beforePath="$PROJECT_DIR$/usager/service/build/classes/java/main/ca/usherbrooke/gegi/server/service/RoleService.class" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/build/classes/java/main/ca/usherbrooke/gegi/server/service/RoleService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/usager/service/build/service-dev.jar" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/build/service-dev.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/usager/service/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
+<<<<<<< HEAD
+>>>>>>> parent of adb3bea (Added SQL drafts & triggers)
+=======
 >>>>>>> parent of adb3bea (Added SQL drafts & triggers)
     </list>
     <list id="369c521e-6498-4c34-9420-4a88351b04df" name="Changes by newto" comment="" />
@@ -37,6 +43,7 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+<<<<<<< HEAD
 <<<<<<< HEAD
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$/usager/service">
@@ -68,6 +75,8 @@
       </list>
     </option>
   </component>
+=======
+>>>>>>> parent of adb3bea (Added SQL drafts & triggers)
 =======
 >>>>>>> parent of adb3bea (Added SQL drafts & triggers)
   <component name="Git.Settings">
@@ -241,12 +250,15 @@
       <workItem from="1686074204962" duration="245000" />
       <workItem from="1686074468981" duration="1774000" />
 <<<<<<< HEAD
+<<<<<<< HEAD
       <workItem from="1686076984107" duration="86000" />
       <workItem from="1686152363441" duration="274000" />
       <workItem from="1686152996520" duration="74000" />
       <workItem from="1686154709612" duration="624000" />
       <workItem from="1686155364828" duration="12547000" />
       <workItem from="1686253483728" duration="4797000" />
+=======
+>>>>>>> parent of adb3bea (Added SQL drafts & triggers)
 =======
 >>>>>>> parent of adb3bea (Added SQL drafts & triggers)
     </task>

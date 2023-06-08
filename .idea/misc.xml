@@ -2,11 +2,15 @@
 <project version="4">
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="FrameworkDetectionExcludesConfiguration">
     <file type="web" url="file://$PROJECT_DIR$/usager/service" />
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_20" project-jdk-name="11" project-jdk-type="JavaSDK">
+=======
+  <component name="ProjectRootManager" version="2" project-jdk-name="17" project-jdk-type="JavaSDK">
+>>>>>>> parent of adb3bea (Added SQL drafts & triggers)
 =======
   <component name="ProjectRootManager" version="2" project-jdk-name="17" project-jdk-type="JavaSDK">
 >>>>>>> parent of adb3bea (Added SQL drafts & triggers)
