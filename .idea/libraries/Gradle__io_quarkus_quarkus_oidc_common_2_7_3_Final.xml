@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: io.quarkus:quarkus-oidc-common:2.7.3.Final" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="io.quarkus" artifactId="quarkus-oidc-common" version="2.7.3.Final" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.quarkus/quarkus-oidc-common/2.7.3.Final/26f7ab83df6f6eb3b487c07e5d57354568a31562/quarkus-oidc-common-2.7.3.Final.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.quarkus/quarkus-oidc-common/2.7.3.Final/95164438bd6e27c6cb6d2d8366682b88e3d42af7/quarkus-oidc-common-2.7.3.Final-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
