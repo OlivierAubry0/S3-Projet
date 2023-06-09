@@ -1,5 +1,7 @@
 DROP SCHEMA IF EXISTS BASE_DE_DONNE CASCADE;
 CREATE SCHEMA BASE_DE_DONNE;
+ALTER SCHEMA BASE_DE_DONNE OWNER TO postgres;
+
 SET search_path = BASE_DE_DONNE, pg_catalog;
 
 CREATE TABLE UNIVERSITE
@@ -12,7 +14,7 @@ CREATE TABLE UNIVERSITE
 
 CREATE TABLE ASSO_ETUDIANTE
 (
-    Asso_EtudianteID INT NOT NULL,
+    Asso_EtudianteID VARCHAR(50) NOT NULL,
     _Asso_Etudiante__Nom VARCHAR(100) NOT NULL,
     UniversiteID INT NOT NULL,
     PRIMARY KEY (Asso_EtudianteID),
@@ -22,12 +24,12 @@ CREATE TABLE ASSO_ETUDIANTE
 
 CREATE TABLE EVENEMENT
 (
-    EvenementID INT NOT NULL,
+    EvenementID VARCHAR(50) NOT NULL,
     Evenement_Nom VARCHAR(50) NOT NULL,
-    Evenement_Debut timestamp NOT NULL,
-    Evenement_Fin timestamp NOT NULL,
-    Asso_EtudianteID INT NOT NULL,
-    Nombre_Places INT NOT NULL,
+    Evenement_Debut VARCHAR(50) NOT NULL,
+    Evenement_Fin VARCHAR(50) NOT NULL,
+    Asso_EtudianteID VARCHAR(50) NOT NULL,
+    Nombre_Places VARCHAR(50) NOT NULL,
     Allow_Guests BOOLEAN NOT NULL,
     Description VARCHAR(100),
     PRIMARY KEY (EvenementID),
@@ -75,7 +77,7 @@ CREATE TABLE USAGER_POSSEDE_PRIVILEGE
 
 CREATE TABLE RESERVATION
 (
-    EvenementID INT NOT NULL,
+    EvenementID VARCHAR(50) NOT NULL,
     UsagerID INT NOT NULL,
     Telephone_Invite INT ,
     Nom_Invite VARCHAR(100),
@@ -85,7 +87,7 @@ CREATE TABLE RESERVATION
 
 CREATE TABLE FACULTE_POSSEDE_ASSO
 (
-    Asso_EtudanteID INT NOT NULL,
+    Asso_EtudanteID VARCHAR(50) NOT NULL,
     FaculteID INT NOT NULL,
     PRIMARY KEY (Asso_EtudanteID, FaculteID),
     FOREIGN KEY (Asso_EtudanteID) REFERENCES ASSO_ETUDIANTE(Asso_EtudianteID),
@@ -108,12 +110,14 @@ BEGIN
       AND (NEW.Evenement_Debut, NEW.Evenement_Fin) OVERLAPS (Evenement_Debut, Evenement_Fin);
 
     IF evenement_count > 0 THEN
-        RAISE EXCEPTION 'Le meme evenement a deja ete cree! :(';
+        RAISE EXCEPTION 'Le même événement a déjà été créé! :(';
     END IF;
 
     RETURN NEW;
 END;
 $$ LANGUAGE plpgsql;
+
+
 
 CREATE TRIGGER check_duplicate_evenement
     BEFORE INSERT ON Evenement

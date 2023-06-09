@@ -39,10 +39,9 @@
   </style>
 
 
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-<script src="http://localhost:8180/js/keycloak.js"></script>
-<body onload="initKeycloak()">
-<script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="http://localhost:8180/js/keycloak.js"></script>
+  <script>
 
     function displayUserInfo() {
       var token = keycloak.tokenParsed;
@@ -90,24 +89,33 @@
     }
 
     function submitEvent() {
+      var eventId = document.getElementById('id').value;
       var eventName = document.getElementById('name').value;
       var eventStart = document.getElementById('start').value;
       var eventEnd = document.getElementById('end').value;
       var eventDate = document.getElementById('date').value;
+      var eventPlaces = document.getElementById('places').value;
+      var allowGuests = document.getElementById('allow-guests').checked;
+      var eventDescription = document.getElementById('description').value;
 
-      var params = 'ename=' + encodeURIComponent(eventName) +
-              '&estart=' + encodeURIComponent(eventStart) +
-              '&eend=' + encodeURIComponent(eventEnd) +
-              '&edate=' + encodeURIComponent(eventDate) +
-              '&studentAssociationId=123'; // Replace with the appropriate student association ID
+      var event = {
+        eventId: eventId,
+        eventName: eventName,
+        eventStart: eventStart,
+        eventEnd: eventEnd,
+        eventDate: eventDate,
+        eventPlaces: eventPlaces,
+        allowGuests: allowGuests,
+        description: eventDescription
+      };
 
-      axios.post('http://localhost:8888/api/events/', params, {
+      axios.post('http://localhost:8888/api/events', event, {
         headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
+          'Content-Type': 'application/json',
           'Authorization': 'Bearer ' + keycloak.token // Replace keycloak.token with your actual bearer token
         }
       })
-              .then(function (response) {
+              .then(function(response) {
                 if (response.status === 201) {
                   alert("Event created!");
                   window.location.href = 'admin_event_creator.html'; // Replace with the path to your main menu HTML file
@@ -115,16 +123,20 @@
                   alert(response.status);
                 }
               })
-              .catch(function (error) {
+              .catch(function(error) {
                 console.error(error);
               });
     }
+
   </script>
 </head>
 
+<body onload="initKeycloak()">
 <h2>Create New Event</h2>
 <div class="event-form">
   <form>
+    <label for="id">Event Id:</label><br>
+    <input type="text" id="id" name="eventId"><br>
     <label for="name">Event Name:</label><br>
     <input type="text" id="name" name="name"><br>
     <label for="start">Start Time:</label><br>
@@ -133,6 +145,12 @@
     <input type="text" id="end" name="end"><br>
     <label for="date">Event Date:</label><br>
     <input type="text" id="date" name="date"><br>
+    <label for="places">Number of Places:</label><br>
+    <input type="text" id="places" name="places"><br>
+    <label for="allow-guests">Allow Guests:</label>
+    <input type="checkbox" id="allow-guests" name="allow-guests"><br>
+    <label for="description">Description:</label><br>
+    <input type="text" id="description" name="description"><br>
     <button type="button" onclick="submitEvent()">Submit</button>
   </form>
 </div>

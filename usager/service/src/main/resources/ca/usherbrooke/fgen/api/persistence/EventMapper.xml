@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ca.usherbrooke.gegi.server.persistence.EventMapper">
+
+    <insert id="insertEvent" parameterType="ca.usherbrooke.gegi.server.admin.Event">
+        INSERT INTO EVENEMENT
+        (EvenementID, Evenement_Nom, Evenement_Date, Evenement_Debut, Evenement_Fin, Asso_EtudianteID, Nombre_Places, Allow_Guests, Description)
+        VALUES
+            (#{eventId}, #{eventName}, #{eventDate}, #{eventStart}, #{eventEnd}, #{studentAssociationId}, #{eventPlaces}, #{allowGuests}, #{eventDescription})
+    </insert>
+
+</mapper>
