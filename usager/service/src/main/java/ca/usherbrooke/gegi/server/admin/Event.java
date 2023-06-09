@@ -30,11 +30,11 @@ public class Event {
         this.eventDescription = description;
     }
 
-    public String getEventId() {
+    public String getEventID() {
         return eventId;
     }
 
-    public void setEventId(String eventId) {
+    public void setEventID(String eventId) {
         this.eventId = eventId;
     }
 
@@ -54,35 +54,35 @@ public class Event {
         this.eventDate = eventDate;
     }
 
-    public String getEventStart() {
+    public String getEventDebut() {
         return eventStart;
     }
 
-    public void setEventStart(String eventStart) {
+    public void setEventDebut(String eventStart) {
         this.eventStart = eventStart;
     }
 
-    public String getEventEnd() {
+    public String getEventFin() {
         return eventEnd;
     }
 
-    public void setEventEnd(String eventEnd) {
+    public void setEventFin(String eventEnd) {
         this.eventEnd = eventEnd;
     }
 
-    public String getStudentAssociationId() {
+    public String getassoEtudianteID() {
         return studentAssociationId;
     }
 
-    public void setStudentAssociationId(String studentAssociationId) {
+    public void setassoEtudianteID(String studentAssociationId) {
         this.studentAssociationId = studentAssociationId;
     }
 
-    public String getEventPlaces() {
+    public String getNombrePlaces() {
         return eventPlaces;
     }
 
-    public void setEventPlaces(String eventPlaces) {
+    public void setNombresPlaces(String eventPlaces) {
         this.eventPlaces = eventPlaces;
     }
 
@@ -94,11 +94,11 @@ public class Event {
         this.allowGuests = allowGuests;
     }
 
-    public String getEventDescription() {
+    public String getDescription() {
         return eventDescription;
     }
 
-    public void setEventDescription(String eventDescription) {
+    public void setDescription(String eventDescription) {
         this.eventDescription = eventDescription;
     }
 }
