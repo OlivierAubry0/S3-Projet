@@ -1,6 +1,22 @@
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+
 DROP SCHEMA IF EXISTS BASE_DE_DONNE CASCADE;
 CREATE SCHEMA BASE_DE_DONNE;
 ALTER SCHEMA BASE_DE_DONNE OWNER TO postgres;
+
+SET default_tablespace = '';
+
+SET default_table_access_method = heap;
 
 SET search_path = BASE_DE_DONNE, pg_catalog;
 
@@ -22,7 +38,7 @@ CREATE TABLE ASSO_ETUDIANTE
 );
 
 
-CREATE TABLE evenement
+CREATE TABLE EVENEMENT
 (
     EvenementID VARCHAR(50) NOT NULL,
     Evenement_Nom VARCHAR(50) NOT NULL,
