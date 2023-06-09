@@ -5,7 +5,7 @@
 <mapper namespace="ca.usherbrooke.gegi.server.persistence.EventMapper">
 
     <insert id="insertEvent" parameterType="ca.usherbrooke.gegi.server.admin.Event">
-        INSERT INTO EVENEMENT
+        INSERT INTO BASE_DE_DONNE.EVENEMENT
         (EvenementID, Evenement_Nom, Evenement_Date, Evenement_Debut, Evenement_Fin, Asso_EtudianteID, Nombre_Places, Allow_Guests, Description)
         VALUES
             (#{eventId}, #{eventName}, #{eventDate}, #{eventStart}, #{eventEnd}, #{studentAssociationId}, #{eventPlaces}, #{allowGuests}, #{eventDescription})

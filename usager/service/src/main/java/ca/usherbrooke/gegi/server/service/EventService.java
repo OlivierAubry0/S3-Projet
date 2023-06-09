@@ -8,8 +8,7 @@ import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.sql.Date;
-import java.sql.Time;
+import java.util.UUID;
 
 @Path("/api/events")
 public class EventService {
@@ -22,10 +21,10 @@ public class EventService {
 
     @POST
     public Response createEvent(Event event) {
+// Generate a UUID and set it as the eventId
+        event.setEventID(UUID.randomUUID().toString());
+
         eventMapper.insertEvent(event);
         return Response.status(Response.Status.CREATED).entity(event).build();
     }
 }
-
-
-
