@@ -63,6 +63,21 @@
       userInfoDiv.innerHTML = ''; // Supprime tout contenu existant
       userInfoDiv.appendChild(userInfoList);
     }
+
+
+    function getEvents() {
+      axios.get('http://localhost:8888/api/events')
+              .then(function (response) {
+                console.log(response.data);
+                var eventInfoDiv = document.getElementById('event-info');
+                eventInfoDiv.innerHTML = JSON.stringify(response.data); // Convert events to string and set it as the div content
+              })
+              .catch(function (error) {
+                console.error(error);
+              });
+    }
+
+
   </script>
 
   <style>
@@ -210,8 +225,6 @@
   <a href="#">Services</a>
   <a href="#">Clients</a>
   <a href="#">Contact</a>
-
-
 </div>
 
 <span style="font-size: 40px; font-weight: bold; cursor: pointer; position: absolute; top: 0; left: 0.5%; color: #FFFFFF;" onclick="openNav()">&#9776; UNIVENT</span>
@@ -226,9 +239,12 @@
 </div>
 
 <button class="large-button" style="top: 50%; left: 16.6%;" onclick="window.location.href='createEvent.html'"><span>Crée un évenement</span></button>
-<button class="large-button" style="top: 50%; left: 35%;"><span>Évenements programmées</span></button>
+<button class="large-button" style="top: 50%; left: 35%;" onclick="getEvents()"><span>Événements programmés</span></button>
 <button class="large-button" style="top: 50%; left: 53.5%;"><span>Définir les membres du comité</span></button>
 <button class="large-button" style="top: 50%; left: 71.7%;"><span>Vue étudiante</span></button>
+
+<div id="event-info" style="position: absolute; top: 90%;"></div>
+
 
 </body>
 </html>

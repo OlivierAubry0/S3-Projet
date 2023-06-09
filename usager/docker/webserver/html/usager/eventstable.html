@@ -1,0 +1,106 @@
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <title>View All Events</title>
+
+    <style>
+
+        .event {
+
+            border: 1px solid #ccc;
+
+            padding: 10px;
+
+            margin-bottom: 10px;
+
+            border-radius: 4px;
+
+        }
+
+    </style>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <script>
+
+        function getEvents() {
+
+            axios.get('http://localhost:8888/api/events', {
+
+                headers: {
+
+                    'Content-Type': 'application/json',
+
+                    'Authorization': 'Bearer ' + keycloak.token // Replace keycloak.token with your actual bearer token
+
+                }
+
+            })
+
+                .then(function(response) {
+
+                    var events = response.data;
+
+                    var eventsContainer = document.getElementById('events');
+
+                    events.forEach(function(event) {
+
+                        var eventDiv = document.createElement('div');
+
+                        eventDiv.className = 'event';
+
+                        eventDiv.innerHTML =
+
+                            `<p>ID: ${event.evenementID}</p>
+
+            <p>Name: ${event.evenementNom}</p>
+
+            <p>Date: ${event.evenementDate}</p>
+
+            <p>Start: ${event.evenementDebut}</p>
+
+            <p>End: ${event.evenementFin}</p>
+
+            <p>Association ID: ${event.assoEtudianteID}</p>
+
+            <p>Number of Places: ${event.nombrePlaces}</p>
+
+            <p>Allow Guests: ${event.allowGuests}</p>
+
+            <p>Description: ${event.description}</p>`;
+
+                        eventsContainer.appendChild(eventDiv);
+
+                    });
+
+                })
+
+                .catch(function(error) {
+
+                    console.error(error);
+
+                });
+
+        }
+
+    </script>
+
+</head>
+
+<body onload="getEvents()">
+
+<h2>View All Events</h2>
+
+<div id="events">
+
+    <!-- Events will be displayed here -->
+
+</div>
+
+</body>
+
+</html>
