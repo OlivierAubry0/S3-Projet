@@ -4,86 +4,86 @@ import java.sql.Date;
 import java.sql.Time;
 
 public class Event {
-    private String eventId;
-    private String eventName;
-    private String eventDate;
-    private String eventStart;
-    private String eventEnd;
-    private String studentAssociationId;
-    private String eventPlaces;
+    private String evenementID;
+    private String evenementNom;
+    private String evenementDate;
+    private String evenementDebut;
+    private String evenementFin;
+    private String assoEtudianteID;
+    private String nombrePlaces;
     private boolean allowGuests;
-    private String eventDescription;
+    private String description;
 
     public Event() {
         // Default constructor
     }
 
     public Event(String eventId, String eventName, String eventDate, String eventStart, String eventEnd, String studentAssociationId, String nombrePlaces, boolean allowGuests, String description) {
-        this.eventId = eventId;
-        this.eventName = eventName;
-        this.eventDate = eventDate;
-        this.eventStart = eventStart;
-        this.eventEnd = eventEnd;
-        this.studentAssociationId = studentAssociationId;
-        this.eventPlaces = nombrePlaces;
+        this.evenementID = eventId;
+        this.evenementNom = eventName;
+        this.evenementDate = eventDate;
+        this.evenementDebut = eventStart;
+        this.evenementFin = eventEnd;
+        this.assoEtudianteID = studentAssociationId;
+        this.nombrePlaces = nombrePlaces;
         this.allowGuests = allowGuests;
-        this.eventDescription = description;
+        this.description = description;
     }
 
-    public String getEventID() {
-        return eventId;
+    public String getEvenementID() {
+        return evenementID;
     }
 
-    public void setEventID(String eventId) {
-        this.eventId = eventId;
+    public void setEvenementID(String evenementID) {
+        this.evenementID = evenementID;
     }
 
-    public String getEventName() {
-        return eventName;
+    public String getEvenementNom() {
+        return evenementNom;
     }
 
-    public void setEventName(String eventName) {
-        this.eventName = eventName;
+    public void setEvenementNom(String evenementNom) {
+        this.evenementNom = evenementNom;
     }
 
-    public String getEventDate() {
-        return eventDate;
+    public String getEvenementDate() {
+        return evenementDate;
     }
 
-    public void setEventDate(String eventDate) {
-        this.eventDate = eventDate;
+    public void setEvenementDate(String evenementDate) {
+        this.evenementDate = evenementDate;
     }
 
-    public String getEventDebut() {
-        return eventStart;
+    public String getEvenementDebut() {
+        return evenementDebut;
     }
 
-    public void setEventDebut(String eventStart) {
-        this.eventStart = eventStart;
+    public void setEvenementDebut(String evenementDebut) {
+        this.evenementDebut = evenementDebut;
     }
 
-    public String getEventFin() {
-        return eventEnd;
+    public String getEvenementFin() {
+        return evenementFin;
     }
 
-    public void setEventFin(String eventEnd) {
-        this.eventEnd = eventEnd;
+    public void setEvenementFin(String evenementFin) {
+        this.evenementFin = evenementFin;
     }
 
-    public String getassoEtudianteID() {
-        return studentAssociationId;
+    public String getAssoEtudianteID() {
+        return assoEtudianteID;
     }
 
-    public void setassoEtudianteID(String studentAssociationId) {
-        this.studentAssociationId = studentAssociationId;
+    public void setAssoEtudianteID(String assoEtudianteID) {
+        this.assoEtudianteID = assoEtudianteID;
     }
 
     public String getNombrePlaces() {
-        return eventPlaces;
+        return nombrePlaces;
     }
 
-    public void setNombresPlaces(String eventPlaces) {
-        this.eventPlaces = eventPlaces;
+    public void setNombrePlaces(String nombrePlaces) {
+        this.nombrePlaces = nombrePlaces;
     }
 
     public boolean isAllowGuests() {
@@ -95,10 +95,11 @@ public class Event {
     }
 
     public String getDescription() {
-        return eventDescription;
+        return description;
     }
 
-    public void setDescription(String eventDescription) {
-        this.eventDescription = eventDescription;
+    public void setDescription(String description) {
+        this.description = description;
     }
+
 }

@@ -84,24 +84,26 @@
     }
 
     function submitEvent() {
-      var eventId = document.getElementById('id').value;
-      var eventName = document.getElementById('name').value;
-      var eventStart = document.getElementById('start').value;
-      var eventEnd = document.getElementById('end').value;
-      var eventDate = document.getElementById('date').value;
-      var eventPlaces = document.getElementById('places').value;
+      var evenementID = document.getElementById('id').value;
+      var evenementNom = document.getElementById('name').value;
+      var evenementDate = document.getElementById('date').value;
+      var evenementDebut = document.getElementById('start').value;
+      var evenementFin = document.getElementById('end').value;
+      var assoEtudianteID = document.getElementById('assoID').value;
+      var nombrePlaces = document.getElementById('places').value;
       var allowGuests = document.getElementById('allow-guests').checked;
-      var eventDescription = document.getElementById('description').value;
+      var description = document.getElementById('description').value;
 
       var event = {
-        eventId: eventId,
-        eventName: eventName,
-        eventStart: eventStart,
-        eventEnd: eventEnd,
-        eventDate: eventDate,
-        eventPlaces: eventPlaces,
+        evenementID: evenementID,
+        evenementNom: evenementNom,
+        evenementDate: evenementDate,
+        evenementDebut: evenementDebut,
+        evenementFin: evenementFin,
+        assoEtudianteID: assoEtudianteID,
+        nombrePlaces: nombrePlaces,
         allowGuests: allowGuests,
-        description: eventDescription
+        description: description
       };
 
       axios.post('http://localhost:8888/api/events', event, {
@@ -163,6 +165,13 @@
       <option value="2023-06-09">2023-06-09</option>
       <option value="2023-06-20">2023-06-20</option>
       <option value="2023-06-20">2023-06-20</option>
+    </select><br>
+
+    <label for="assoID">association Etudiante ID:</label><br>
+    <select id="assoID" name="assoId">
+      <option value="123">123</option>
+      <option value="321">321</option>
+      <option value="456">456</option>
     </select><br>
 
     <label for="places">Number of Places:</label><br>

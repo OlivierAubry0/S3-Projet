@@ -22,7 +22,7 @@ public class EventService {
     @POST
     public Response createEvent(Event event) {
 // Generate a UUID and set it as the eventId
-        event.setEventID(UUID.randomUUID().toString());
+        event.setEvenementID(UUID.randomUUID().toString());
 
         eventMapper.insertEvent(event);
         return Response.status(Response.Status.CREATED).entity(event).build();
