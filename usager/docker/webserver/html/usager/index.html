@@ -23,10 +23,9 @@
         userInfoDiv.appendChild(userInfoList);
     }
 
-        // JavaScript function to handle scrolling when the button is clicked
     function scrollToHeight() {
-        var scrollHeight = 1350; // Adjust the desired scroll height here
-        var duration = 2000; // Adjust the duration of the glide animation (in milliseconds)
+        var scrollHeight = 1380; // Adjust the desired scroll height here
+        var duration = 1000; // Adjust the duration of the glide animation (in milliseconds)
 
         var start = null;
         var initialY = window.pageYOffset;
@@ -50,7 +49,6 @@
 
         window.requestAnimationFrame(step);
     }
-
 
 </script>
 
@@ -194,7 +192,7 @@
         text-decoration: none;
         cursor: pointer;
         position: absolute;
-        z-index: 2;
+        z-index: 4;
         border-radius: 10%;
         box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
     }
@@ -213,6 +211,35 @@
         transform: translate(-50%, -50%) scale(1.2);
     }
 
+    .large-button2 {
+        display: inline-block;
+        padding: 50px 150px;
+        max-height: 50px;
+        max-width: 150px;
+        background-color: #268018;
+        color: white;
+        border: none;
+        text-align: center;
+        text-decoration: none;
+        cursor: pointer;
+        position: absolute;
+        z-index: 3;
+        box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    }
+
+    .large-button2 text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 25px;
+        font-weight: bold;
+    }
+
+    .large-button2:hover text {
+        transform: translate(-50%, -50%) scale(1.2);
+    }
+
     body {
         background-color: #268018;
         font-family: "Lato", sans-serif;
@@ -220,8 +247,9 @@
         display: flex;
         align-items: center;
         justify-content: flex-end;
-        margin-bottom: 200px; /* Add margin at the bottom */
+        margin-bottom: 150px; /* Add margin at the bottom */
     }
+
     .sidenav {
         height: 100%;
         width: 0;
@@ -264,24 +292,42 @@
         .sidenav a {font-size: 18px;}
     }
 
-    #scrollButton {
+    #Bob {
         position: absolute;
-        padding: 10px 20px;
-        font-size: 16px;
+        top: 1410px;
+        left: 240px;
+        font-size: 30px;
+        height: 80px;
+        width: 1200px; /* Set a fixed width */
     }
 
-    #textZone {
+    #Facultes {
         position: absolute;
-        top: 1350px;
-        left: 50%;
-        transform: translateX(-50%);
-        text-align: center;
+        top: 780px;
+        left: 680px;
         font-size: 30px;
-        width: 100%;
         height: 100px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        font-weight: bolder;
+    }
+
+    #whiteZone {
+        position: absolute;
+        top: 70px;
+        left: 0px;
+        right: 0px;
+        height: 655px;
+        background-color: white;
+        text-align: center;
+        padding: 10px;
+        z-index: 0;
+    }
+
+    #whiteZone p {
+        position: absolute;
+        top: 100px;
+        margin: 0;
+        font-size: 75px;
+        color: black;
     }
 
 </style>
@@ -297,28 +343,31 @@
 
 </div>
 
-<div style="position: absolute; top: 0; right: 0; width: 300px; height: 90px;">
+<div style="position: absolute; top: 0px; right: 0px; width: 300px; height: 85px;">
     <img src="assets/UdeS.png" alt="logo_UdS" style="width: 100%; height: 100%;">
 </div>
 
 <span style="font-size: 40px; font-weight: bold; cursor: pointer; position: absolute; top: 0; left: 0.5%; color: #FFFFFF;" onclick="openNav()">&#9776; UNIVENT</span>
 
-<button id="scrollButton" style="top: 300px; left: 150px;" onclick="scrollToHeight()">Reserve ton billet!</button>
-
-<button class="large-button" style="top: 810px; left: 150px;"><span>Droit</span></button>
-<button class="large-button" style="top: 810px; left: 450px;"><span>École de gestion</span></button>
-<button class="large-button" style="top: 810px; left: 750px;"><span>Éducation</span></button>
-<button class="large-button" style="top: 810px; left: 1050px;"><span>Génie</span></button>
-
-<button class="large-button" style="top: 1110px; left: 150px;"><span>Lettres et <br> sciences humaine</span></button>
-<button class="large-button" style="top: 1110px; left: 450px;"><span>Médecine et <br >sciences de la santé</span></button>
-<button class="large-button" style="top: 1110px; left: 750px;"><span>Sciences</span></button>
-<button class="large-button" style="top: 1110px; left: 1050px;"><span>Sciences de <br> l'activité physique</span></button>
-
-<div id="textZone">
-    Après une soirée bien arrosée, Bob ne prend pas le volant. Fais comme Bob!
+<div id="whiteZone">
+    <p>Bienvenue sur Univent, votre service de billeterie pour les événements officiels de l'Université de Sherbrooke.</p>
 </div>
 
+<button class="large-button2" style="top: 580px; left: 600px;" onclick="scrollToHeight()"><text>RESERVE TON BILLET!</text></button>
+
+<div id="Facultes">FACULTÉS</div>
+
+<button class="large-button" style="top: 840px; left: 205px;"><span>Droit</span></button>
+<button class="large-button" style="top: 840px; left: 505px;"><span>École de gestion</span></button>
+<button class="large-button" style="top: 840px; left: 805px;"><span>Éducation</span></button>
+<button class="large-button" style="top: 840px; left: 1105px;"><span>Génie</span></button>
+
+<button class="large-button" style="top: 1140px; left: 205px;"><span>Lettres et <br> sciences humaine</span></button>
+<button class="large-button" style="top: 1140px; left: 505px;"><span>Médecine et <br >sciences de la santé</span></button>
+<button class="large-button" style="top: 1140px; left: 805px;"><span>Sciences</span></button>
+<button class="large-button" style="top: 1140px; left: 1105px;"><span>Sciences de <br> l'activité physique</span></button>
+
+<div id="Bob">Après une soirée bien arrosée, Bob ne prend pas le volant. Fais comme Bob!</div>
 
 </body>
 </html>
