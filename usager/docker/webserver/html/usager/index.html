@@ -23,6 +23,35 @@
         userInfoDiv.appendChild(userInfoList);
     }
 
+        // JavaScript function to handle scrolling when the button is clicked
+    function scrollToHeight() {
+        var scrollHeight = 1350; // Adjust the desired scroll height here
+        var duration = 2000; // Adjust the duration of the glide animation (in milliseconds)
+
+        var start = null;
+        var initialY = window.pageYOffset;
+
+        function step(timestamp) {
+            if (!start) start = timestamp;
+            var progress = timestamp - start;
+            var scrollY = initialY + easeInOutQuad(progress, 0, scrollHeight - initialY, duration);
+            window.scrollTo(0, scrollY);
+            if (progress < duration) {
+                window.requestAnimationFrame(step);
+            }
+        }
+
+        function easeInOutQuad(t, b, c, d) {
+            t /= d / 2;
+            if (t < 1) return c / 2 * t * t + b;
+            t--;
+            return -c / 2 * (t * (t - 2) - 1) + b;
+        }
+
+        window.requestAnimationFrame(step);
+    }
+
+
 </script>
 
 
@@ -151,10 +180,6 @@
     <span></span>
 </div>
 
-
-
-
-
 <style>
 
     .large-button {
@@ -171,6 +196,7 @@
         position: absolute;
         z-index: 2;
         border-radius: 10%;
+        box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
     }
 
     .large-button span {
@@ -188,10 +214,14 @@
     }
 
     body {
-        font-family: "Lato", sans-serif ;
+        background-color: #268018;
+        font-family: "Lato", sans-serif;
         color: #f1f1f1;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        margin-bottom: 200px; /* Add margin at the bottom */
     }
-
     .sidenav {
         height: 100%;
         width: 0;
@@ -234,6 +264,25 @@
         .sidenav a {font-size: 18px;}
     }
 
+    #scrollButton {
+        position: absolute;
+        padding: 10px 20px;
+        font-size: 16px;
+    }
+
+    #textZone {
+        position: absolute;
+        top: 1350px;
+        left: 50%;
+        transform: translateX(-50%);
+        text-align: center;
+        font-size: 30px;
+        width: 100%;
+        height: 100px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 
 </style>
 
@@ -246,7 +295,6 @@
     <a href="#">Clients</a>
     <a href="#">Contact</a>
 
-
 </div>
 
 <div style="position: absolute; top: 0; right: 0; width: 300px; height: 90px;">
@@ -255,15 +303,22 @@
 
 <span style="font-size: 40px; font-weight: bold; cursor: pointer; position: absolute; top: 0; left: 0.5%; color: #FFFFFF;" onclick="openNav()">&#9776; UNIVENT</span>
 
-<button class="large-button" style="top: 15%; left: 10%;"><span>Droit</span></button>
-<button class="large-button" style="top: 15%; left: 30%;"><span>École de gestion</span></button>
-<button class="large-button" style="top: 15%; left: 50%;"><span>Éducation</span></button>
-<button class="large-button" style="top: 15%; left: 70%;"><span>Génie</span></button>
+<button id="scrollButton" style="top: 300px; left: 150px;" onclick="scrollToHeight()">Reserve ton billet!</button>
 
-<button class="large-button" style="top: 50%; left: 10%;"><span>Lettres et <br> sciences humaine</span></button>
-<button class="large-button" style="top: 50%; left: 30%;"><span>Médecine et <br >sciences de la santé</span></button>
-<button class="large-button" style="top: 50%; left: 50%;"><span>Sciences</span></button>
-<button class="large-button" style="top: 50%; left: 70%;"><span>Sciences de <br> l'activité physique</span></button>
+<button class="large-button" style="top: 810px; left: 150px;"><span>Droit</span></button>
+<button class="large-button" style="top: 810px; left: 450px;"><span>École de gestion</span></button>
+<button class="large-button" style="top: 810px; left: 750px;"><span>Éducation</span></button>
+<button class="large-button" style="top: 810px; left: 1050px;"><span>Génie</span></button>
+
+<button class="large-button" style="top: 1110px; left: 150px;"><span>Lettres et <br> sciences humaine</span></button>
+<button class="large-button" style="top: 1110px; left: 450px;"><span>Médecine et <br >sciences de la santé</span></button>
+<button class="large-button" style="top: 1110px; left: 750px;"><span>Sciences</span></button>
+<button class="large-button" style="top: 1110px; left: 1050px;"><span>Sciences de <br> l'activité physique</span></button>
+
+<div id="textZone">
+    Après une soirée bien arrosée, Bob ne prend pas le volant. Fais comme Bob!
+</div>
+
 
 </body>
 </html>
