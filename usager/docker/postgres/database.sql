@@ -52,6 +52,12 @@ CREATE TABLE EVENEMENT
     PRIMARY KEY (EvenementID)
 );
 
+CREATE TABLE images (
+                        id VARCHAR(50) PRIMARY KEY,
+                        data oid not null ,
+                        created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
 CREATE TABLE PRIVILEGE
 (
     PrivilegeID INT NOT NULL,

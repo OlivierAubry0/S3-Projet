@@ -125,6 +125,31 @@
               });
     }
 
+    function submitImage() {
+      var imageInput = document.getElementById('imageInput');
+      var file = imageInput.files[0];
+
+      var reader = new FileReader();
+
+      reader.onload = function(event) {
+        var arrayBuffer = event.target.result;
+
+        var blob = new Blob([arrayBuffer], { type: file.type });
+
+        var formData = new FormData();
+        formData.append('image', blob);
+
+        axios.post('http://localhost:8888/api/events/uploadImage', formData)
+                .then(function(response) {
+                  console.log('Image uploaded successfully.');
+                })
+                .catch(function(error) {
+                  console.error('Error uploading image:', error);
+                });
+      };
+
+      reader.readAsArrayBuffer(file);
+    }
 
   </script>
 </head>
@@ -193,6 +218,9 @@
     </select><br>
 
     <button type="button" onclick="submitEvent()">Submit</button>
+
+    <input type="file" id="imageInput" accept="image/*">
+    <button type="button" onclick="submitImage()">Submit Image</button>
   </form>
 </div>
 </body>
