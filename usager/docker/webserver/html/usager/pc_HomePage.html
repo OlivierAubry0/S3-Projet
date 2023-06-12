@@ -1,0 +1,373 @@
+
+<meta charset="UTF-8">
+<meta http-equiv="Content-type" content="text/html; charset=UTF-8">
+
+<html>
+<script>
+  function displayUserInfo() {
+    var token = keycloak.tokenParsed;
+    var name = token.name;
+
+    var userInfoList = document.createElement('ul');
+    var nameItem = document.createElement('li');
+    var rolesItem = document.createElement('li');
+
+    nameItem.textContent = 'Nom : \n' + name;
+    rolesItem.textContent =  'Role: Etudiant';
+
+    userInfoList.appendChild(nameItem);
+    userInfoList.appendChild(rolesItem);
+
+    var userInfoDiv = document.getElementById('user-info');
+    userInfoDiv.innerHTML = ''; // Supprime tout contenu existant
+    userInfoDiv.appendChild(userInfoList);
+  }
+
+  function scrollToHeight() {
+    var scrollHeight = 1380; // Adjust the desired scroll height here
+    var duration = 1000; // Adjust the duration of the glide animation (in milliseconds)
+
+    var start = null;
+    var initialY = window.pageYOffset;
+
+    function step(timestamp) {
+      if (!start) start = timestamp;
+      var progress = timestamp - start;
+      var scrollY = initialY + easeInOutQuad(progress, 0, scrollHeight - initialY, duration);
+      window.scrollTo(0, scrollY);
+      if (progress < duration) {
+        window.requestAnimationFrame(step);
+      }
+    }
+
+    function easeInOutQuad(t, b, c, d) {
+      t /= d / 2;
+      if (t < 1) return c / 2 * t * t + b;
+      t--;
+      return -c / 2 * (t * (t - 2) - 1) + b;
+    }
+
+    window.requestAnimationFrame(step);
+  }
+
+</script>
+
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="http://localhost:8180/js/keycloak.js"></script>
+  <script>
+    var keycloak;
+
+    function initKeycloak() {
+      keycloak = new Keycloak({
+        "realm": "usager",
+        "auth-server-url": "http://localhost:8180/",
+        "ssl-required": "external",
+        "clientId": "frontend",
+        "public-client": true,
+        "confidential-port": 0
+      });
+      keycloak.init({onLoad: 'login-required'}).then(function (authenticated) {
+        //alert(authenticated ? 'authenticated' : 'not authenticated');
+        if (authenticated) {
+          var roles = keycloak.tokenParsed.realm_access.roles;
+
+          if (roles.includes('enseignant')) {
+            window.location.href = 'admin_event_creator.html';
+            return;
+          }
+        } else {
+          alert('Not authenticated');
+        }
+
+      }).catch(function () {
+        alert('failed to initialize');
+      }).finally(function () {
+        displayUserInfo(); // Call the function to display user info
+      });
+
+
+    }
+
+    function requestStudent() {
+      const div = document.getElementById('title');
+      const span = div.firstElementChild;
+      axios.get("http://localhost:8888/api/student", {
+        headers: {
+          'Authorization': 'Bearer ' + keycloak.token
+        }
+      })
+              .then(function (response) {
+                console.log("Response: ", response.status);
+                span.innerHTML = '<br> <strong>' + response.data.cip + '</strong> </br>' +
+                        '<br> <strong>' + response.data.last_name + '</strong> </br>' +
+                        '<br> <strong>' + response.data.first_name + '</strong> </br>' +
+                        '<br> <strong>' + response.data.email + '</strong> </br>' +
+                        '<br> <strong>' + response.data.roles + '</strong> </br>'
+              })
+              .catch(function (error) {
+                console.log('refreshing');
+                keycloak.updateToken(5).then(function () {
+                  console.log('Token refreshed');
+                }).catch(function () {
+                  console.log('Failed to refresh token');
+                })
+              });
+      span.innerHTML = '<br> <strong>' + "Vous n'avez pas le role d'étudiant" + '</strong> </br>'
+    }
+
+    function requestTeacher() {
+      const div = document.getElementById('title');
+      const span = div.firstElementChild;
+      axios.get("http://localhost:8888/api/teacher", {
+        headers: {
+          'Authorization': 'Bearer ' + keycloak.token
+        }
+      })
+              .then(function (response) {
+                console.log("Response: ", response.status);
+                span.innerHTML = '<br> <strong>' + response.data.cip + '</strong> </br>' +
+                        '<br> <strong>' + response.data.last_name + '</strong> </br>' +
+                        '<br> <strong>' + response.data.first_name + '</strong> </br>' +
+                        '<br> <strong>' + response.data.email + '</strong> </br>' +
+                        '<br> <strong>' + response.data.roles + '</strong> </br>'
+              })
+              .catch(function (error) {
+                console.log('refreshing');
+                keycloak.updateToken(5).then(function () {
+                  console.log('Token refreshed');
+                }).catch(function () {
+                  console.log('Failed to refresh token');
+                })
+              });
+      span.innerHTML = '<br> <strong>' + "Vous n'avez pas le role d'enseignant" + '</strong> </br>'
+    }
+
+    function logout() {
+      let logoutURL = "http://localhost:8180//realms/usager/protocol/openid-connect/logout"
+      window.location.href = logoutURL;
+    }
+
+    function openNav() {
+      document.getElementById("mySidenav").style.width = "250px";
+      document.getElementById("user-info").classList.add("fade-in");
+    }
+
+    function closeNav() {
+      document.getElementById("mySidenav").style.width = "0";
+      document.getElementById("user-info").classList.remove("fade-in");
+    }
+
+  </script>
+
+  <style>
+    body {
+      background-color: #268018 ;
+      font-family: "Lato", sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+    }
+  </style>
+
+</head>
+
+<body onload="initKeycloak()" >
+
+<div id="title">
+  <span></span>
+</div>
+
+<style>
+
+  .large-button {
+    display: inline-block;
+    padding: 100px 100px;
+    max-height: 100px;
+    max-width: 100px;
+    background-color: #f1f1f1;
+    color: #268018;
+    border: none;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    position: absolute;
+    z-index: 4;
+    border-radius: 10%;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+  }
+
+  .large-button span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 25px;
+    font-weight: bold;
+
+  }
+
+  .large-button:hover span {
+    transform: translate(-50%, -50%) scale(1.2);
+  }
+
+  .large-button2 {
+    display: inline-block;
+    padding: 50px 150px;
+    max-height: 50px;
+    max-width: 150px;
+    background-color: #268018;
+    color: white;
+    border: none;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    position: absolute;
+    z-index: 3;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+  }
+
+  .large-button2 text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 25px;
+    font-weight: bold;
+  }
+
+  .large-button2:hover text {
+    transform: translate(-50%, -50%) scale(1.2);
+  }
+
+  body {
+    background-color: #268018;
+    font-family: "Lato", sans-serif;
+    color: #f1f1f1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-bottom: 150px; /* Add margin at the bottom */
+  }
+
+  .sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 3;
+    top: 0;
+    left: 0;
+    background-color: #0B4F00;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+  }
+
+  .sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #5BFF5E;
+    display: block;
+    transition: 0.3s;
+    z-index: 3;
+  }
+
+  .sidenav a:hover {
+    color: #f1f1f1;
+    z-index: 3;
+  }
+
+  .sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+    z-index: 3;
+  }
+
+  @media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+  }
+
+  #Bob {
+    position: absolute;
+    top: 1410px;
+    left: 240px;
+    font-size: 30px;
+    height: 80px;
+    width: 1200px; /* Set a fixed width */
+  }
+
+  #Facultes {
+    position: absolute;
+    top: 780px;
+    left: 680px;
+    font-size: 30px;
+    height: 100px;
+    font-weight: bolder;
+  }
+
+  #whiteZone {
+    position: absolute;
+    top: 70px;
+    left: 0px;
+    right: 0px;
+    height: 655px;
+    background-color: white;
+    text-align: center;
+    padding: 10px;
+    z-index: 0;
+  }
+
+  #whiteZone p {
+    position: absolute;
+    top: 100px;
+    margin: 0;
+    font-size: 75px;
+    color: black;
+  }
+
+</style>
+
+<div id="mySidenav" class="sidenav">
+  <b id="user-info"></b>
+  <a href="#" onclick="logout()">Déconnexion</a>
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  <a href="#">About</a>
+  <a href="#">Services</a>
+  <a href="#">Clients</a>
+  <a href="#">Contact</a>
+</div>
+
+<div style="position: absolute; top: 0px; right: 0px; width: 300px; height: 85px;">
+  <img src="assets/UdeS.png" alt="logo_UdS" style="width: 100%; height: 100%;">
+</div>
+
+<span style="font-size: 40px; font-weight: bold; cursor: pointer; position: absolute; top: 0; left: 0.5%; color: #FFFFFF;" onclick="openNav()">&#9776; UNIVENT</span>
+
+<div id="whiteZone">
+  <p>Bienvenue sur Univent, votre service de billeterie pour les événements officiels de l'Université de Sherbrooke.</p>
+</div>
+
+<button class="large-button2" style="top: 580px; left: 600px;" onclick="scrollToHeight()"><text>RESERVE TON BILLET!</text></button>
+
+<div id="Facultes">FACULTÉS</div>
+
+<button class="large-button" style="top: 840px; left: 205px;"><span>Droit</span></button>
+<button class="large-button" style="top: 840px; left: 505px;"><span>École de gestion</span></button>
+<button class="large-button" style="top: 840px; left: 805px;"><span>Éducation</span></button>
+<button class="large-button" style="top: 840px; left: 1105px;"><span>Génie</span></button>
+
+<button class="large-button" style="top: 1140px; left: 205px;"><span>Lettres et <br> sciences humaine</span></button>
+<button class="large-button" style="top: 1140px; left: 505px;"><span>Médecine et <br >sciences de la santé</span></button>
+<button class="large-button" style="top: 1140px; left: 805px;"><span>Sciences</span></button>
+<button class="large-button" style="top: 1140px; left: 1105px;"><span>Sciences de <br> l'activité physique</span></button>
+
+<div id="Bob">Après une soirée bien arrosée, Bob ne prend pas le volant. Fais comme Bob!</div>
+
+</body>
+</html>
