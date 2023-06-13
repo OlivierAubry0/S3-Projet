@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Barcode Scanner</title>
+</head>
+<body>
+<h1>Barcode Scanner</h1>
+
+<div id="qr-reader" style="width: 600px"></div>
+
+<script src="https://unpkg.com/html5-qrcode"></script>
+<script>
+
+  function onScanSuccess(decodedText, decodedResult) {
+    console.log(`Code scanned = ${decodedText}`, decodedResult);
+  }
+  var html5QrcodeScanner = new Html5QrcodeScanner(
+          "qr-reader", { fps: 10, qrbox: 250 });
+  html5QrcodeScanner.render(onScanSuccess);
+
+</script>
+</body>
+</html>
