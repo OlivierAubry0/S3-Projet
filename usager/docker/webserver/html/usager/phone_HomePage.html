@@ -2,9 +2,87 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>PhoneHomePage</title>
+  <style>
+    body {
+    background-color: #f1f1f1;
+    font-family: "Lato", sans-serif;
+    color: #0B4F00;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-bottom: 150px; /* Add margin at the bottom */
+    }
+
+    .sidenav {
+      height: 100%;
+      width: 0;
+      position: fixed;
+      z-index: 3;
+      top: 0;
+      left: 0;
+      background-color: #0B4F00;
+      overflow-x: hidden;
+      transition: 0.5s;
+      padding-top: 60px;
+    }
+
+    .sidenav a {
+      padding: 8px 8px 8px 32px;
+      text-decoration: none;
+      font-size: 120px;
+      color: #5BFF5E;
+      display: block;
+      transition: 0.3s;
+      z-index: 3;
+    }
+
+    .sidenav a:hover {
+      color: #0B4F00;
+      z-index: 3;
+    }
+
+    .sidenav .closebtn {
+      position: absolute;
+      top: 0;
+      right: 25px;
+      font-size: 120px;
+      margin-left: 50px;
+      z-index: 3;
+    }
+
+    @media screen and (max-height: 450px) {
+      .sidenav {padding-top: 15px;}
+      .sidenav a {font-size: 120px;}
+    }
+
+  </style>
+  <script>
+    function openNav() {
+      document.getElementById("mySidenav").style.width = "100%";
+      document.getElementById("user-info").classList.add("fade-in");
+    }
+
+    function closeNav() {
+      document.getElementById("mySidenav").style.width = "0";
+      document.getElementById("user-info").classList.remove("fade-in");
+    }
+  </script>
+
 </head>
 <body>
+
+<div id="mySidenav" class="sidenav">
+  <b id="user-info"></b>
+  <a href="#" onclick="logout()">Déconnexion</a>
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  <a href="#" onclick="window.location.href='camera.html'">Scanner</a>
+  <a href="#">Services</a>
+  <a href="#">Clients</a>
+  <a href="#">Contact</a>
+</div>
+
+<span style="font-size: 120px; font-weight: bold; cursor: pointer; position: absolute; top: 0; left: 0.5%; align-self: center; color: #0B4F00;" onclick="openNav()">&#9776; UNIVENT</span>
 
 </body>
 </html>

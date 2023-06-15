@@ -45,11 +45,8 @@ public class EventService {
         String imageId = UUID.randomUUID().toString();
         // Insert the image into the database using the mapper
         imageMapper.insertImage(imageId, imageData);
-
         return Response.status(Response.Status.CREATED).entity("Image uploaded successfully.").build();
     }
-
-
 
 
     @GET

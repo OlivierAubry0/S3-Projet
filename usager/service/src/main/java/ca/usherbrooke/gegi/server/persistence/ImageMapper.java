@@ -4,9 +4,7 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-import java.io.InputStream;
 import java.sql.Blob;
-import java.util.UUID;
 
 @Mapper
 public interface ImageMapper {
