@@ -1,8 +1,10 @@
 package ca.usherbrooke.gegi.server.service;
 
 import ca.usherbrooke.gegi.server.admin.Event;
+import ca.usherbrooke.gegi.server.admin.Reservation;
 import ca.usherbrooke.gegi.server.persistence.EventMapper;
 import ca.usherbrooke.gegi.server.persistence.ImageMapper;
+import ca.usherbrooke.gegi.server.persistence.ReservationMapper;
 import org.apache.commons.io.IOUtils;
 import org.eclipse.microprofile.jwt.JsonWebToken;
 import org.jboss.logging.annotations.Param;
@@ -48,7 +50,6 @@ public class EventService {
 
         return Response.status(Response.Status.CREATED).entity("Image uploaded successfully.").build();
     }
-
 
 
 
