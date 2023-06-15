@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: jakarta.interceptor:jakarta.interceptor-api:1.2.5" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="jakarta.interceptor" artifactId="jakarta.interceptor-api" version="1.2.5" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/jakarta.interceptor/jakarta.interceptor-api/1.2.5/20cbde692c555692ca835fb6ecb4a8c95acbe6e0/jakarta.interceptor-api-1.2.5.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/jakarta.interceptor/jakarta.interceptor-api/1.2.5/9b0d6ac838c09558a36040cdc256f07daaf23ac7/jakarta.interceptor-api-1.2.5-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

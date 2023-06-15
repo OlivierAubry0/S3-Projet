@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: io.smallrye:smallrye-open-api-core:2.1.20" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="io.smallrye" artifactId="smallrye-open-api-core" version="2.1.20" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.smallrye/smallrye-open-api-core/2.1.20/20ea5b1d0d8c2785a06cd7cad72473129d8916fb/smallrye-open-api-core-2.1.20.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.smallrye/smallrye-open-api-core/2.1.20/1a8822e682f02dbc5845398676ace671792980c7/smallrye-open-api-core-2.1.20-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
