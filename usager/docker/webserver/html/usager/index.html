@@ -17,6 +17,24 @@
         // Load default HTML file for other operating systems
         window.location.href = "pc_HomePage.html";
     }
+
+    function initKeycloak() {
+        keycloak = new Keycloak({
+            "realm": "usager",
+            "auth-server-url": "http://localhost:8180/",
+            "ssl-required": "external",
+            "clientId": "frontend",
+            "public-client": true,
+            "confidential-port": 0
+        });
+        keycloak.init({onLoad: 'login-required'}).then(function (authenticated) {
+            alert(authenticated ? 'authenticated' : 'not authenticated');
+
+        }).catch(function () {
+            alert('failed to initialize');
+        }).finally(function () {
+            displayUserInfo(); // Call the function to display user info
+        });
 </script>
 </body>
 </html>
