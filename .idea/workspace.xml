@@ -4,12 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="18f47205-16b8-42ba-aa57-ad2218c66b6d" name="Changes" comment="">
+    <list default="true" id="72deba85-9ca0-4a47-be77-f89dff0e225c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/docker/keycloak/startup-scripts/init.sh" beforeDir="false" afterPath="$PROJECT_DIR$/usager/docker/keycloak/startup-scripts/init.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/usager/docker/webserver/html/usager/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/usager/docker/webserver/html/usager/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/usager/docker/webserver/html/usager/pc_HomePage.html" beforeDir="false" afterPath="$PROJECT_DIR$/usager/docker/webserver/html/usager/pc_HomePage.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usager/service/build/service-dev.jar" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/build/service-dev.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/service/.gradle/7.4/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/.gradle/7.4/checksums/checksums.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/service/.gradle/7.4/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/.gradle/7.4/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/service/.gradle/7.4/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/.gradle/7.4/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/service/.gradle/7.4/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/.gradle/7.4/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/service/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/service/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/.gradle/file-system.probe" afterDir="false" />
     </list>
+    <list id="369c521e-6498-4c34-9420-4a88351b04df" name="Changes by newto" comment="" />
+    <list id="132ce79e-c3a8-42e5-aa9e-005f3e61ba33" name="Changes by ycast" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -20,13 +28,38 @@
       <ProjectState />
     </projectState>
   </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="service" type="f1a62948:ProjectNode" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectId" id="2RIjPSMiU5sqAiSYpwbODcxoNry" />
+  <component name="ProjectId" id="2QqHTehyPAUCt157AFu0Makfkn2" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
@@ -36,32 +69,63 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;11&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/olivi/git/S3-Projet/usager/docker&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;yorman__XOXOX&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/olivi/git/S3-Projet/usager/service&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;project.scopes&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;configurable.group.editor&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;postgresql&quot;
+    ],
+    &quot;RunConfigurationTargetLRU&quot;: [
+      &quot;7518f93b-754c-485e-bb1e-76f64c371c23&quot;,
+      &quot;2b510b42-62b2-49d6-bae7-341fe52a21de&quot;
+    ]
   }
 }</component>
-  <component name="RunManager">
-    <configuration default="true" type="JetRunConfigurationType">
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\olivi\git\S3-Projet\usager\docker\postgres" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Enes\OneDrive - USherbrooke\Documents\GitHub\S3-Projet\usager\docker\webserver\html\usager" />
+      <recent name="C:\Users\ycast\Desktop\Genie_Info\SESSION3\PROJET\Git\S3-Projet\usager\docker\webserver\html\usager" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Quarkus.usager.service.main">
+    <configuration name="database.sql" type="DatabaseScript" editBeforeRun="true" temporary="true" nameIsGenerated="true">
+      <script-file value="$PROJECT_DIR$/usager/docker/postgres/database.sql" />
+      <script-mode>FILE</script-mode>
+      <data-source id="2b510b42-62b2-49d6-bae7-341fe52a21de" />
+      <method v="2" />
     </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <option name="filePath" />
+    <configuration name="init.sql" type="DatabaseScript" editBeforeRun="true" temporary="true" nameIsGenerated="true">
+      <script-file value="$PROJECT_DIR$/usager/docker/postgres/init.sql" />
+      <script-mode>FILE</script-mode>
+      <data-source id="7518f93b-754c-485e-bb1e-76f64c371c23" />
+      <method v="2" />
+    </configuration>
+    <configuration name="pc_HomePage.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/service/usager/docker/webserver/html/usager/pc_HomePage.html" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
+    <configuration name="service.main" type="QuarkusRunConfigurationType" factoryName="Quarkus">
+      <module name="service.main" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -93,20 +157,96 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="init.sh" type="ShConfigurationType" temporary="true">
+      <option name="SCRIPT_TEXT" value="" />
+      <option name="INDEPENDENT_SCRIPT_PATH" value="true" />
+      <option name="SCRIPT_PATH" value="$PROJECT_DIR$/usager/docker/keycloak/startup-scripts/init.sh" />
+      <option name="SCRIPT_OPTIONS" value="" />
+      <option name="INDEPENDENT_SCRIPT_WORKING_DIRECTORY" value="true" />
+      <option name="SCRIPT_WORKING_DIRECTORY" value="$PROJECT_DIR$/usager/docker/keycloak/startup-scripts" />
+      <option name="INDEPENDENT_INTERPRETER_PATH" value="true" />
+      <option name="INTERPRETER_PATH" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="EXECUTE_IN_TERMINAL" value="true" />
+      <option name="EXECUTE_SCRIPT_FILE" value="true" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="setdata.sh" type="ShConfigurationType" temporary="true">
+      <option name="SCRIPT_TEXT" value="" />
+      <option name="INDEPENDENT_SCRIPT_PATH" value="true" />
+      <option name="SCRIPT_PATH" value="$PROJECT_DIR$/usager/docker/keycloak/data/setdata.sh" />
+      <option name="SCRIPT_OPTIONS" value="" />
+      <option name="INDEPENDENT_SCRIPT_WORKING_DIRECTORY" value="true" />
+      <option name="SCRIPT_WORKING_DIRECTORY" value="$PROJECT_DIR$/usager/docker/keycloak/data" />
+      <option name="INDEPENDENT_INTERPRETER_PATH" value="true" />
+      <option name="INTERPRETER_PATH" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="EXECUTE_IN_TERMINAL" value="true" />
+      <option name="EXECUTE_SCRIPT_FILE" value="true" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Database Script.database.sql" />
+      <item itemvalue="Database Script.init.sql" />
+      <item itemvalue="JavaScript Debug.pc_HomePage.html" />
+      <item itemvalue="Quarkus.usager.service.main" />
+      <item itemvalue="Quarkus.service.main" />
+      <item itemvalue="Shell Script.init.sh" />
+      <item itemvalue="Shell Script.setdata.sh" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JavaScript Debug.pc_HomePage.html" />
+        <item itemvalue="Shell Script.setdata.sh" />
+        <item itemvalue="Shell Script.init.sh" />
+        <item itemvalue="Database Script.database.sql" />
+        <item itemvalue="Database Script.init.sql" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="18f47205-16b8-42ba-aa57-ad2218c66b6d" name="Changes" comment="" />
-      <created>1686944469090</created>
+      <changelist id="72deba85-9ca0-4a47-be77-f89dff0e225c" name="Changes" comment="" />
+      <created>1686074203933</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1686944469090</updated>
-      <workItem from="1686944470187" duration="1012000" />
+      <updated>1686074203933</updated>
+      <workItem from="1686074204962" duration="245000" />
+      <workItem from="1686074468981" duration="1774000" />
+      <workItem from="1686076984107" duration="86000" />
+      <workItem from="1686152363441" duration="274000" />
+      <workItem from="1686152996520" duration="74000" />
+      <workItem from="1686154709612" duration="624000" />
+      <workItem from="1686155364828" duration="12547000" />
+      <workItem from="1686253483728" duration="5881000" />
+      <workItem from="1686277672313" duration="3464000" />
+      <workItem from="1686281440487" duration="12893000" />
+      <workItem from="1686314765340" duration="2258000" />
+      <workItem from="1687013369134" duration="59000" />
+      <workItem from="1687013436430" duration="1836000" />
+      <workItem from="1687015302805" duration="183000" />
+      <workItem from="1687015500386" duration="875000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
 </project>
