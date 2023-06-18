@@ -78,11 +78,11 @@ CREATE TABLE FACULTE
 
 CREATE TABLE USAGER
 (
-    UsagerID INT NOT NULL,
+    UsagerID VARCHAR(100) NOT NULL,
     Usager_Nom VARCHAR(100) NOT NULL,
     Usager_Prenom VARCHAR(100) NOT NULL,
-    Usager_Photo VARCHAR(100) NOT NULL,
-    CodeQR INT NOT NULL,
+    Usager_Photo VARCHAR(100),
+    CodeQR INT,
     FaculteID INT NOT NULL,
     PRIMARY KEY (UsagerID),
     FOREIGN KEY (FaculteID) REFERENCES FACULTE(FaculteID)

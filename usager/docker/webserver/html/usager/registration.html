@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Registration</title>
+</head>
+<body>
+<h1>Registration</h1>
+<p>Choose your faculty:</p>
+<form id="registrationForm">
+    <input type="radio" name="faculty" value="Faculte A" required> Faculte A<br>
+    <input type="radio" name="faculty" value="Faculte B" required> Faculte B<br>
+    <br>
+    <input type="submit" value="Submit">
+</form>
+
+<script>
+    document.getElementById("registrationForm").addEventListener("submit", function(event) {
+        event.preventDefault(); // Prevent form submission
+
+        var selectedFaculty = document.querySelector('input[name="faculty"]:checked');
+        if (selectedFaculty) {
+            var chosenFaculty = selectedFaculty.value;
+            sessionStorage.setItem("faculty", chosenFaculty); // Store chosen faculty in session storage
+            window.location.href = "index.html"; // Redirect back to the main HTML page
+        } else {
+            alert("Please select a faculty.");
+        }
+    });
+</script>
+</body>
+</html>
