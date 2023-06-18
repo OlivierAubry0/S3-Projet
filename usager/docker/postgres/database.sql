@@ -99,10 +99,10 @@ CREATE TABLE USAGER_POSSEDE_PRIVILEGE
 
 CREATE TABLE RESERVATION
 (
-    EvenementID VARCHAR(50) ,
+    EvenementID VARCHAR(50),
     UsagerID VARCHAR(50) ,
-    Telephone_Invite VARCHAR(50) ,
-    Nom_Invite VARCHAR(50) 
+    Telephone_Invite VARCHAR(50),
+    Nom_Invite VARCHAR(50)
    -- FOREIGN KEY (EvenementID) REFERENCES EVENEMENT(EvenementID),
    -- FOREIGN KEY (UsagerID) REFERENCES USAGER(UsagerID)
 );

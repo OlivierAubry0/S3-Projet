@@ -58,4 +58,5 @@ public class EventService {
     public List<Event> getAllEvents() {
         return eventMapper.getAllEvents();
     }
+
 }
