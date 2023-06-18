@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ca.usherbrooke.gegi.server.persistence.FacultyMapper">
+    <select id="getFacultiesByUniversity" parameterType="int" resultType="ca.usherbrooke.gegi.server.business.Faculte">
+        SELECT * FROM FACULTE WHERE UniversiteID = #{universiteID}
+    </select>
+</mapper>

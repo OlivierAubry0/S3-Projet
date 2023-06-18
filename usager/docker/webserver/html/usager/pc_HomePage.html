@@ -72,7 +72,7 @@
         //alert(authenticated ? 'authenticated' : 'not authenticated');
         if (authenticated) {
           var roles = keycloak.tokenParsed.realm_access.roles;
-
+          checkUserExists();
           if (roles.includes('enseignant')) {
             window.location.href = 'admin_event_creator.html';
             return;
@@ -86,6 +86,76 @@
       }).finally(function () {
         displayUserInfo(); // Call the function to display user info
       });
+    }
+
+    function checkUserExists() {
+      axios.get('http://localhost:8888/api/users/check' + keycloak.tokenParsed.sub, {
+        headers: {
+          'Authorization': 'Bearer ' + keycloak.token
+        }
+      })
+              .then(function(response) {
+                // The user exists, so you can continue with your existing logic.
+                // For example, if you want to display the user's information:
+                displayUserInfo();
+              })
+              .catch(function(error) {
+                // The user does not exist, so you need to redirect to the registration page.
+                window.location.href = 'registration.html'; // Replace with the path to your registration HTML file
+              });
+    }
+    function requestStudent() {
+      const div = document.getElementById('title');
+      const span = div.firstElementChild;
+      axios.get("http://localhost:8888/api/student", {
+        headers: {
+          'Authorization': 'Bearer ' + keycloak.token
+        }
+      })
+              .then(function (response) {
+                console.log("Response: ", response.status);
+                span.innerHTML = '<br> <strong>' + response.data.cip + '</strong> </br>' +
+                        '<br> <strong>' + response.data.last_name + '</strong> </br>' +
+                        '<br> <strong>' + response.data.first_name + '</strong> </br>' +
+                        '<br> <strong>' + response.data.email + '</strong> </br>' +
+                        '<br> <strong>' + response.data.roles + '</strong> </br>'
+              })
+              .catch(function (error) {
+                console.log('refreshing');
+                keycloak.updateToken(5).then(function () {
+                  console.log('Token refreshed');
+                }).catch(function () {
+                  console.log('Failed to refresh token');
+                })
+              });
+      span.innerHTML = '<br> <strong>' + "Vous n'avez pas le role d'étudiant" + '</strong> </br>'
+    }
+
+    function requestTeacher() {
+      const div = document.getElementById('title');
+      const span = div.firstElementChild;
+      axios.get("http://localhost:8888/api/teacher", {
+        headers: {
+          'Authorization': 'Bearer ' + keycloak.token
+        }
+      })
+              .then(function (response) {
+                console.log("Response: ", response.status);
+                span.innerHTML = '<br> <strong>' + response.data.cip + '</strong> </br>' +
+                        '<br> <strong>' + response.data.last_name + '</strong> </br>' +
+                        '<br> <strong>' + response.data.first_name + '</strong> </br>' +
+                        '<br> <strong>' + response.data.email + '</strong> </br>' +
+                        '<br> <strong>' + response.data.roles + '</strong> </br>'
+              })
+              .catch(function (error) {
+                console.log('refreshing');
+                keycloak.updateToken(5).then(function () {
+                  console.log('Token refreshed');
+                }).catch(function () {
+                  console.log('Failed to refresh token');
+                })
+              });
+      span.innerHTML = '<br> <strong>' + "Vous n'avez pas le role d'enseignant" + '</strong> </br>'
     }
 
     function logout() {

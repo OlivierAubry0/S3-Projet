@@ -1,31 +1,82 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Registration</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f7f7f7;
+            font-family: Arial, sans-serif;
+        }
+        form {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+        }
+        select {
+            width: 100%;
+            height: 40px;
+            margin: 10px 0;
+            padding: 0 10px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+    </style>
 </head>
 <body>
-<h1>Registration</h1>
-<p>Choose your faculty:</p>
-<form id="registrationForm">
-    <input type="radio" name="faculty" value="Faculte A" required> Faculte A<br>
-    <input type="radio" name="faculty" value="Faculte B" required> Faculte B<br>
-    <br>
-    <input type="submit" value="Submit">
+
+<form>
+    <label for="university">Choose a university:</label>
+    <select id="university" onchange="updateFaculties()">
+    </select>
+
+    <label for="faculty">Choose a faculty:</label>
+    <select id="faculty">
+    </select>
+    <button type="button" onclick="window.location.href='pc_HomePage.html'">Go Back</button>
+
 </form>
 
 <script>
-    document.getElementById("registrationForm").addEventListener("submit", function(event) {
-        event.preventDefault(); // Prevent form submission
-
-        var selectedFaculty = document.querySelector('input[name="faculty"]:checked');
-        if (selectedFaculty) {
-            var chosenFaculty = selectedFaculty.value;
-            sessionStorage.setItem("faculty", chosenFaculty); // Store chosen faculty in session storage
-            window.location.href = "index.html"; // Redirect back to the main HTML page
-        } else {
-            alert("Please select a faculty.");
-        }
+    document.addEventListener('DOMContentLoaded', function(){
+        updateUniversities();
     });
+
+    async function updateUniversities() {
+        const response = await fetch('/api/universities');
+        const universities = await response.json();
+
+        const selectElement = document.getElementById('university');
+
+        for (const university of universities) {
+            const option = document.createElement('option');
+            option.value = university.universiteID;
+            option.text = university.universite_Nom;
+            selectElement.add(option);
+        }
+    }
+
+    async function updateFaculties() {
+        const universityId = document.getElementById('university').value;
+
+        const response = await fetch('/api/universities/' + universityId + '/faculties');
+        const faculties = await response.json();
+
+        const selectElement = document.getElementById('faculty');
+
+        // Clear previous options
+        selectElement.options.length = 0;
+
+        for (const faculty of faculties) {
+            const option = document.createElement('option');
+            option.value = faculty.faculteID;
+            option.text = faculty.faculte_Nom;
+            selectElement.add(option);
+        }
+    }
 </script>
 </body>
 </html>

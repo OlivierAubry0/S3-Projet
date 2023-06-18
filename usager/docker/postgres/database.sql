@@ -90,7 +90,7 @@ CREATE TABLE USAGER
 
 CREATE TABLE USAGER_POSSEDE_PRIVILEGE
 (
-    UsagerID INT NOT NULL,
+    UsagerID varchar(100) NOT NULL,
     PrivilegeID INT,
     PRIMARY KEY (UsagerID, PrivilegeID),
     FOREIGN KEY (UsagerID) REFERENCES USAGER(UsagerID),
@@ -100,7 +100,7 @@ CREATE TABLE USAGER_POSSEDE_PRIVILEGE
 CREATE TABLE RESERVATION
 (
     EvenementID VARCHAR(50) NOT NULL,
-    UsagerID INT NOT NULL,
+    UsagerID varchar(100) NOT NULL,
     Telephone_Invite INT ,
     Nom_Invite VARCHAR(100),
     FOREIGN KEY (EvenementID) REFERENCES EVENEMENT(EvenementID),
@@ -123,6 +123,11 @@ INSERT INTO UNIVERSITE (UniversiteID, Universite_Nom)
 VALUES (1, 'Université A'),
        (2, 'Université B'),
        (3, 'Université C');
+
+INSERT INTO FACULTE (FaculteID, Faculte_Nom, UniversiteID)
+VALUES (4028, 'Faculte de Genie', 1),
+       (4038, 'Ecole de gestion', 1),
+       (2332, 'Faculte de Genie', 2);
 
 INSERT INTO ASSO_ETUDIANTE (Asso_EtudianteID, _Asso_Etudiante__Nom, UniversiteID)
 VALUES (1, 'Association 1', 1),
