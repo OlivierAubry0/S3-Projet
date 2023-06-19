@@ -98,7 +98,7 @@
 
     function submitReservation() {
       var tokenData = keycloak.tokenParsed
-      var EvenementID = document.getElementById('EvenementID').value;
+      var EvenementID = localStorage.getItem('EvenementID');
       var UsagerID = tokenData.preferred_username;
       var Telephone_Invite = document.getElementById('Telephone_Invite').value;
       var Nom_Invite = document.getElementById('Nom_Invite').value;
@@ -136,15 +136,10 @@
 <h2>Obtenir un billet</h2>
 <div class="event-form">
   <form>
-    <input type="text" id="EvenementID" placeholder="EvenementID">
     <input type="checkbox" id="checkbox" onclick="toggleSubMenuGuests()">
-    <label for="checkbox">J'invite quelqu'un!</label>
+    <label for="checkbox">J'invite quelqu'un!            (Optionnel)</label>
     <div id="sous-menu" style="display: none;">
-      <select id="Nom_Invite" name="Nom_Invite">
-        <option value="ceciestuncinqahuit">ceciestuncinqahuit</option>
-        <option value="ceciestunquatreasept">ceciestunquatreasept</option>
-        <option value="afterdansunbar">afterdansunbar</option>
-      </select><br>
+      <input type="text" id="Nom_Invite" placeholder="Nom de invite">
       <input type="text" id="Telephone_Invite" placeholder="Numero de telephone">
     </div>
     <button type="button" onclick="submitReservation()">Reserver</button>

@@ -58,4 +58,11 @@ public class EventService {
     public List<Event> getAllEvents() {
         return eventMapper.getAllEvents();
     }
+
+    @GET
+    @Path("/events4genie")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Event> getEventsGenie() {
+        return eventMapper.getEventsGenie();
+    }
 }
