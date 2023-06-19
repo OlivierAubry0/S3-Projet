@@ -21,4 +21,13 @@ public class Reservation {
     public void setEvenementID(String EvenementID) {
         this.EvenementID = EvenementID;
     }
+    public void setUsagerID(String UsagerID) {
+        this.UsagerID = UsagerID;
+    }
+    public void setTelephone_Invite(String Telephone_Invite) {
+        this.Telephone_Invite = Telephone_Invite;
+    }
+    public void setNom_Invite(String Nom_Invite) {
+        this.Nom_Invite = Nom_Invite;
+    }
 }
