@@ -15,4 +15,10 @@
         SELECT * FROM BASE_DE_DONNE.evenement_programmes
     </select>
 
+    <insert id="insertReservation" parameterType="ca.usherbrooke.gegi.server.admin.Event">
+        INSERT INTO BASE_DE_DONNE.RESERVATION
+            (EvenementID, UsagerID, Telephone_Invite, Nom_Invite)
+        VALUES
+            (#{EvenementID}, #{UsagerID}, #{Telephone_Invite}, #{Nom_Invite})
+    </insert>
 </mapper>
