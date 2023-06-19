@@ -1,5 +1,5 @@
 CREATE VIEW evenement_programmes AS
-    SELECT Allow_Guests, Description, EvenementID
+    SELECT Allow_Guests, Description, EvenementID, Asso_EtudianteID
 FROM EVENEMENT;
 
 
@@ -11,6 +11,7 @@ FROM reservation;
 CREATE VIEW les_benevoles AS
     SELECT UsagerID, privilegeid
 FROM usager_possede_privilege;
+
 
 
 ----------------------comment appeler la vue ? ---------------------------------------------

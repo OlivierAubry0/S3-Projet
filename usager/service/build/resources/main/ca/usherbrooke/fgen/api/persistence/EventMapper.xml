@@ -12,11 +12,11 @@
     </insert>
 
     <select id="getAllEvents" resultType="ca.usherbrooke.gegi.server.admin.Event">
-        SELECT * FROM BASE_DE_DONNE.EVENEMENT
+        SELECT * FROM BASE_DE_DONNE.evenement_programmes
     </select>
 
     <select id="getEventsGenie" resultType="ca.usherbrooke.gegi.server.admin.Event">
-        SELECT * FROM BASE_DE_DONNE.EVENEMENT WHERE Asso_EtudianteID = 'AGEG'
+        SELECT * FROM BASE_DE_DONNE.evenement_programmes WHERE Asso_EtudianteID = 'AGEG'
     </select>
 
 </mapper>
