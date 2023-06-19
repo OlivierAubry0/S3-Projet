@@ -7,6 +7,6 @@ import org.apache.ibatis.annotations.Select;
 import java.util.List;
 @Mapper
 public interface UniversityMapper {
-    @Select("SELECT * FROM BASE_DE_DONNE.UNIVERSITE")
-    List<University> getAllUniversities();
+    @Select("SELECT Universite_Nom FROM BASE_DE_DONNE.UNIVERSITE")
+    List<String> getAllUniversitiesNames();
 }

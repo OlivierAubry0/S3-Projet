@@ -7,8 +7,8 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-color: #f7f7f7;
             font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
         }
         form {
             background-color: #ffffff;
@@ -16,7 +16,7 @@
             border-radius: 8px;
             box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
         }
-        select {
+        select, button {
             width: 100%;
             height: 40px;
             margin: 10px 0;
@@ -25,58 +25,93 @@
             border: 1px solid #ccc;
         }
     </style>
+    <!-- Include Axios -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 <body>
 
 <form>
-    <label for="university">Choose a university:</label>
-    <select id="university" onchange="updateFaculties()">
+    <label for="university-select">Choose a university:</label>
+    <select id="university-select">
+        <option value="">Select a university</option>
     </select>
 
-    <label for="faculty">Choose a faculty:</label>
-    <select id="faculty">
+    <label for="faculty-select">Choose a faculty:</label>
+    <select id="faculty-select">
+        <option value="">Select a faculty</option>
     </select>
-    <button type="button" onclick="window.location.href='pc_HomePage.html'">Go Back</button>
 
+    <button type="button" onclick="submitAndGoBack()">Submit</button>
 </form>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function(){
-        updateUniversities();
+    document.addEventListener('DOMContentLoaded', function() {
+        axios.get("http://localhost:8888/api/universities")
+            .then(function (response) {
+                const universityNames = response.data;
+                const selectElement = document.getElementById('university-select');
+
+                for (const name of universityNames) {
+                    const option = document.createElement('option');
+                    option.value = name;
+                    option.text = name;
+                    selectElement.appendChild(option);
+                }
+            })
+            .catch(function (error) {
+                console.error(error);
+            });
     });
 
-    async function updateUniversities() {
-        const response = await fetch('/api/universities');
-        const universities = await response.json();
+    document.getElementById('university-select').addEventListener('change', function() {
+        const selectedUniversity = this.value;
 
-        const selectElement = document.getElementById('university');
+        // Clear previous faculty options
+        const facultySelect = document.getElementById('faculty-select');
+        facultySelect.options.length = 0;
+        facultySelect.options[0] = new Option('Select a faculty', '');
 
-        for (const university of universities) {
-            const option = document.createElement('option');
-            option.value = university.universiteID;
-            option.text = university.universite_Nom;
-            selectElement.add(option);
-        }
-    }
+        axios.get("http://localhost:8888/api/universities/" + encodeURIComponent(selectedUniversity) + '/faculties')
+            .then(function (response) {
+                const facultyNames = response.data;
 
-    async function updateFaculties() {
-        const universityId = document.getElementById('university').value;
+                for (const name of facultyNames) {
+                    const option = document.createElement('option');
+                    option.value = name;
+                    option.text = name;
+                    facultySelect.appendChild(option);
+                }
+            })
+            .catch(function (error) {
+                console.error(error);
+            });
+    });
 
-        const response = await fetch('/api/universities/' + universityId + '/faculties');
-        const faculties = await response.json();
 
-        const selectElement = document.getElementById('faculty');
+    function submitAndGoBack() {
+        const university = document.getElementById('university-select').value;
+        const faculty = document.getElementById('faculty-select').value;
 
-        // Clear previous options
-        selectElement.options.length = 0;
+        /*
+        Here you can call a function that sends a POST request to your server
+        to update the database with the selected university and faculty.
 
-        for (const faculty of faculties) {
-            const option = document.createElement('option');
-            option.value = faculty.faculteID;
-            option.text = faculty.faculte_Nom;
-            selectElement.add(option);
-        }
+        Example:
+        axios.post('/api/submit', { university, faculty })
+            .then(function (response) {
+                // handle success
+                console.log(response);
+            })
+            .catch(function (error) {
+                // handle error
+                console.error(error);
+            });
+        */
+
+        // After the submission, you can go back to the previous page
+        window.history.back();
     }
 </script>
+
 </body>
 </html>

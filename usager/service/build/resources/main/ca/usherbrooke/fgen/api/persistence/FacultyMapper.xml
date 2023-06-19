@@ -3,6 +3,6 @@
 
 <mapper namespace="ca.usherbrooke.gegi.server.persistence.FacultyMapper">
     <select id="getFacultiesByUniversity" parameterType="int" resultType="ca.usherbrooke.gegi.server.business.Faculte">
-        SELECT * FROM FACULTE WHERE UniversiteID = #{universiteID}
+        SELECT Faculte_Nom FROM BASE_DE_DONNE.FACULTE WHERE UniversiteID = #{universiteID}
     </select>
 </mapper>

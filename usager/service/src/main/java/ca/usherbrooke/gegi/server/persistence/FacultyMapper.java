@@ -7,6 +7,6 @@ import org.apache.ibatis.annotations.Select;
 import java.util.List;
 @Mapper
 public interface FacultyMapper {
-    @Select("SELECT * FROM BASE_DE_DONNE.FACULTE WHERE UniversiteID = #{universiteID}")
-    List<Faculty> getFacultiesByUniversity(int universiteID);
+    @Select("SELECT Faculte_Nom FROM BASE_DE_DONNE.FACULTE WHERE UniversiteID = #{universiteID}")
+    List<String> getFacultiesByUniversity(int universiteID);
 }
