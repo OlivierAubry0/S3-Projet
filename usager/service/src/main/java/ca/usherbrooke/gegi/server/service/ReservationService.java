@@ -9,7 +9,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 import java.util.UUID;
 
-@Path("/api/reservations")
+@Path("/api/events")
 public class ReservationService {
 
     @Inject
@@ -20,8 +20,9 @@ public class ReservationService {
 
     @POST
     public Response createReservation(Reservation reservation) {
-        // Generate a UUID and set it as the UsagerID
+        // Generate a UUID and set it as the eventId
         reservation.setEvenementID(UUID.randomUUID().toString());
+
         reservationMapper.insertReservation(reservation);
         return Response.status(Response.Status.CREATED).entity(reservation).build();
     }

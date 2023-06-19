@@ -97,25 +97,20 @@
     }
 
     function submitReservation() {
-      /*var tokenData = keycloak.tokenParsed
+      var tokenData = keycloak.tokenParsed
       var EvenementID = tokenData.username;
       var UsagerID = tokenData.username;
       var Telephone_Invite = tokenData.username;
-      var Nom_Invite = tokenData.username;*/
-      var tokenData = keycloak.tokenParsed;
-      var EvenementID = document.getElementById('id').value;
-      var UsagerID = tokenData.preferred_username;
-      var Telephone_Invite = document.getElementById('numero').value;
-      var Nom_Invite = document.getElementById('nom_invit').value;
+      var Nom_Invite = tokenData.username;
 
       var reservation = {
         EvenementID: EvenementID,
         UsagerID: UsagerID,
         Telephone_Invite: Telephone_Invite,
-        Nom_Invite: Nom_Invite
+        Nom_Invite: Nom_Invite,
       };
 
-      axios.post('http://localhost:8888/api/reservations', reservation, {
+      axios.post('http://localhost:8888/api/events', reservation, {
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer ' + keycloak.token // Replace keycloak.token with your actual bearer token
@@ -123,7 +118,7 @@
       })
               .then(function(response) {
                 if (response.status === 201) {
-                  alert("Reservation effectuée avec succès!");
+                  alert("Reservation faite !");
                   window.location.href = 'pc_HomePage.html'; // Replace with the path to your main menu HTML file
                 } else {
                   alert(response.status);
@@ -141,21 +136,12 @@
 <h2>Obtenir un billet</h2>
 <div class="event-form">
   <form>
-    <label for="id">Event Id:</label><br>
-    <select id="id" name="eventId">
-      <option value="1001">1001</option>
-      <option value="1002">1002</option>
-      <option value="1003">1003</option>
-    </select><br>
+
     <input type="checkbox" id="checkbox" onclick="toggleSubMenuGuests()">
     <label for="checkbox">J'invite quelqu'un!</label>
     <div id="sous-menu" style="display: none;">
-      <select id="nom_invit" name="nom_invite">
-        <option value="ceciestuncinqahuit">ceciestuncinqahuit</option>
-        <option value="ceciestunquatreasept">ceciestunquatreasept</option>
-        <option value="afterdansunbar">afterdansunbar</option>
-      </select><br>
-      <input type="text" id="numero" placeholder="Numero de telephone">
+      <input type="text" placeholder="Nom Invite">
+      <input type="text" placeholder="Numero de telephone">
     </div>
     <button type="button" onclick="submitReservation()">Reserver</button>
 
