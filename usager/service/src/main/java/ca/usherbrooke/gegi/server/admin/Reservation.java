@@ -1,10 +1,10 @@
 package ca.usherbrooke.gegi.server.admin;
 
 public class Reservation {
-    private String EvenementID;
-    private String UsagerID;
-    private String Telephone_Invite;
-    private String Nom_Invite;
+    public String EvenementID;
+    public String UsagerID;
+    public String Telephone_Invite;
+    public String Nom_Invite;
 
 
     public Reservation() {
