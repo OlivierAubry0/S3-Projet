@@ -11,8 +11,8 @@ public class Reservation {
         // Default constructor
     }
 
-    public Reservation(String EventId, String UsagerID, String Telephone_Invite, String Nom_Invite) {
-        this.EvenementID = EventId;
+    public Reservation(String EvenementID, String UsagerID, String Telephone_Invite, String Nom_Invite) {
+        this.EvenementID = EvenementID;
         this.UsagerID = UsagerID;
         this.Telephone_Invite = Telephone_Invite;
         this.Nom_Invite = Nom_Invite;

@@ -9,7 +9,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 import java.util.UUID;
 
-@Path("/api/events")
+@Path("/api/reservations")
 public class ReservationService {
 
     @Inject

@@ -98,10 +98,10 @@
 
     function submitReservation() {
       var tokenData = keycloak.tokenParsed
-      var EvenementID = tokenData.username;
-      var UsagerID = tokenData.username;
-      var Telephone_Invite = tokenData.username;
-      var Nom_Invite = tokenData.username;
+      var EvenementID = document.getElementById('EvenementID').value;
+      var UsagerID = tokenData.preferred_username;
+      var Telephone_Invite = document.getElementById('Telephone_Invite').value;
+      var Nom_Invite = document.getElementById('Nom_Invite').value;
 
       var reservation = {
         EvenementID: EvenementID,
@@ -110,7 +110,7 @@
         Nom_Invite: Nom_Invite,
       };
 
-      axios.post('http://localhost:8888/api/events', reservation, {
+      axios.post('http://localhost:8888/api/reservations', reservation, {
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer ' + keycloak.token // Replace keycloak.token with your actual bearer token
@@ -136,12 +136,16 @@
 <h2>Obtenir un billet</h2>
 <div class="event-form">
   <form>
-
+    <input type="text" id="EvenementID" placeholder="EvenementID">
     <input type="checkbox" id="checkbox" onclick="toggleSubMenuGuests()">
     <label for="checkbox">J'invite quelqu'un!</label>
     <div id="sous-menu" style="display: none;">
-      <input type="text" placeholder="Nom Invite">
-      <input type="text" placeholder="Numero de telephone">
+      <select id="Nom_Invite" name="Nom_Invite">
+        <option value="ceciestuncinqahuit">ceciestuncinqahuit</option>
+        <option value="ceciestunquatreasept">ceciestunquatreasept</option>
+        <option value="afterdansunbar">afterdansunbar</option>
+      </select><br>
+      <input type="text" id="Telephone_Invite" placeholder="Numero de telephone">
     </div>
     <button type="button" onclick="submitReservation()">Reserver</button>
 
