@@ -98,8 +98,7 @@
 
     function submitReservation() {
       var tokenData = keycloak.tokenParsed;
-
-      var EvenementID = 'ffa7fa81-f68d-45f4-a1b3-97fadc0ffb89';
+      var Checkbox = document.getElementById('checkbox');
       var EvenementID = localStorage.getItem('EvenementID');
       var UsagerID = tokenData.preferred_username;
       var Telephone_Invite = document.getElementById('Telephone_Invite').value;
@@ -113,6 +112,11 @@
         Nom_Invite: Nom_Invite,
         Enregistration_Invite: Enregistration_Invite
       };
+
+      if (Checkbox.checked && (Telephone_Invite === '' || Nom_Invite === '')) {
+        alert("Veuillez remplir tous les champs obligatoires.");
+        return;
+      }
 
       axios.post('http://localhost:8888/api/reservations', reservation, {
         headers: {

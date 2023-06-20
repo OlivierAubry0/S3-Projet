@@ -101,8 +101,8 @@ CREATE TABLE RESERVATION
 (
     EvenementID VARCHAR(50),
     UsagerID VARCHAR(50),
-    Telephone_Invite VARCHAR(11) ,
-    Nom_Invite VARCHAR(50),
+    Telephone_Invite VARCHAR(11) NULL,
+    Nom_Invite VARCHAR(50) NULL,
     Enregistration_Invite BOOLEAN,
     PRIMARY KEY (EvenementID, UsagerID),
    FOREIGN KEY (EvenementID) REFERENCES EVENEMENT(EvenementID)

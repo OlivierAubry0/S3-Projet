@@ -88,7 +88,7 @@ END IF;
 RETURN NEW;
 END;
 $$ LANGUAGE plpgsql;
-DROP TRIGGER IF EXISTS check_duplicate_invite ON BASE_DE_DONNE.RESERVATION;;
+DROP TRIGGER IF EXISTS check_duplicate_invite ON BASE_DE_DONNE.RESERVATION;
 CREATE TRIGGER check_duplicate_invite
     AFTER INSERT ON BASE_DE_DONNE.RESERVATION
     FOR EACH ROW
@@ -118,7 +118,7 @@ CREATE TRIGGER check_double_registration
     BEFORE INSERT ON reservation
     FOR EACH ROW
     EXECUTE FUNCTION prevent_double_registration();
-
+/* le trigger suivant est maintenant inutile 
 ----------------------Creation de la fonction qui verifie si les données de l'invité sont completes---------------------------------
 CREATE OR REPLACE FUNCTION verify_guests_infos()
     RETURNS TRIGGER
@@ -132,9 +132,9 @@ END IF;
 RETURN NEW;
 END;
 $$ LANGUAGE plpgsql;
-
+DROP TRIGGER IF EXISTS check_guest_infos ON BASE_DE_DONNE.RESERVATION;
 CREATE TRIGGER check_guest_infos
-    BEFORE INSERT ON RESERVATION
+    BEFORE INSERT ON BASE_DE_DONNE.RESERVATION
     FOR EACH ROW
     EXECUTE FUNCTION verify_guests_infos();
-
+*/

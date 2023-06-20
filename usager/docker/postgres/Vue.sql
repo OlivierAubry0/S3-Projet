@@ -1,16 +1,16 @@
 CREATE VIEW evenement_programmes AS
-    SELECT Allow_Guests, Description, EvenementID, Asso_EtudianteID
-FROM EVENEMENT;
+    SELECT *
+FROM base_de_donne.evenement;
 
 
 CREATE VIEW places_reserves AS
-    SELECT EvenementID, UsagerID, Telephone_Invite,Nom_Invite
-FROM reservation;
+    SELECT EvenementID, UsagerID, Telephone_Invite,Nom_Invite, Enregistration_Invite
+FROM base_de_donne.reservation;
 
 
 CREATE VIEW les_benevoles AS
     SELECT UsagerID, privilegeid
-FROM usager_possede_privilege;
+FROM base_de_donne.usager_possede_privilege;
 
 
 
