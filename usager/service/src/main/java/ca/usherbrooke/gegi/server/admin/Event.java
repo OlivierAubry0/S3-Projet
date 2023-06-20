@@ -10,7 +10,8 @@ public class Event {
     private String evenementDebut;
     private String evenementFin;
     private String assoEtudianteID;
-    private String nombrePlaces;
+    private int nombrePlaces;
+    //private String nombrePlaces;
     private boolean Allow_Guests;
     private String description;
 
@@ -18,7 +19,7 @@ public class Event {
         // Default constructor
     }
 
-    public Event(String eventId, String eventName, String eventDate, String eventStart, String eventEnd, String studentAssociationId, String nombrePlaces, boolean Allow_Guests, String description) {
+    public Event(String eventId, String eventName, String eventDate, String eventStart, String eventEnd, String studentAssociationId, /*String*/ int nombrePlaces, boolean Allow_Guests, String description) {
         this.evenementID = eventId;
         this.evenementNom = eventName;
         this.evenementDate = eventDate;
@@ -77,15 +78,21 @@ public class Event {
     public void setAssoEtudianteID(String assoEtudianteID) {
         this.assoEtudianteID = assoEtudianteID;
     }
-
+/*
     public String getNombrePlaces() {
         return nombrePlaces;
     }
 
     public void setNombrePlaces(String nombrePlaces) {
         this.nombrePlaces = nombrePlaces;
+    }*/
+    public int getNombrePlaces() {
+        return nombrePlaces;
     }
 
+    public void setNombrePlaces(int nombrePlaces) {
+        this.nombrePlaces = nombrePlaces;
+    }
     public boolean isAllowGuests() {
         return Allow_Guests;
     }

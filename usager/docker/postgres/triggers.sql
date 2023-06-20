@@ -24,7 +24,7 @@ $$ LANGUAGE plpgsql;
 CREATE TRIGGER check_duplicate_evenement
     BEFORE INSERT ON Evenement
     FOR EACH ROW
-    EXECUTE FUNCTION prevent_duplicate_evenement();
+    EXECUTE FUNCTION prevent_duplicate_evenement();*/
 -----------------------Creation de la fonction qui regarde si le nombre de places est atteint--------------------------------------------
 CREATE OR REPLACE FUNCTION prevent_nb_place()
     RETURNS TRIGGER
@@ -41,12 +41,12 @@ end if;
 RETURN NEW;
 END;
 $$ LANGUAGE plpgsql;
-
+DROP TRIGGER IF EXISTS check_prevent_nb_place ON BASE_DE_DONNE.RESERVATION;
 CREATE TRIGGER check_prevent_nb_place
     BEFORE INSERT ON RESERVATION
     FOR EACH ROW
     EXECUTE FUNCTION prevent_nb_place();
-*/
+
 ----------------------Creation de la fonction qui verifie si les invités sont acceptés---------------------------------
 CREATE OR REPLACE FUNCTION accept_guests()
     RETURNS TRIGGER
@@ -79,13 +79,15 @@ INTO invite_count
 FROM BASE_DE_DONNE.RESERVATION
 WHERE Telephone_Invite = NEW.Telephone_Invite AND EvenementID = NEW.EvenementID;
 
-IF invite_count >= 2 THEN
-    --RAISE EXCEPTION ':)' ;
-    UPDATE BASE_DE_DONNE.RESERVATION
-    SET Enregistration_Invite = true
-    WHERE Telephone_Invite = NEW.Telephone_Invite AND EvenementID = NEW.EvenementID;
-END IF;
-RETURN NEW;
+    IF invite_count = 2 THEN
+        --RAISE EXCEPTION ':)' ;
+        UPDATE BASE_DE_DONNE.RESERVATION
+        SET Enregistration_Invite = true
+        WHERE Telephone_Invite = NEW.Telephone_Invite AND EvenementID = NEW.EvenementID;
+    ELSIF invite_count > 2 THEN
+        RAISE EXCEPTION 'Cette personne a deje ete invitee ! :)' ;
+    END IF;
+    RETURN NEW;
 END;
 $$ LANGUAGE plpgsql;
 DROP TRIGGER IF EXISTS check_duplicate_invite ON BASE_DE_DONNE.RESERVATION;
@@ -118,7 +120,7 @@ CREATE TRIGGER check_double_registration
     BEFORE INSERT ON reservation
     FOR EACH ROW
     EXECUTE FUNCTION prevent_double_registration();
-/* le trigger suivant est maintenant inutile 
+/* le trigger suivant est maintenant inutile
 ----------------------Creation de la fonction qui verifie si les données de l'invité sont completes---------------------------------
 CREATE OR REPLACE FUNCTION verify_guests_infos()
     RETURNS TRIGGER

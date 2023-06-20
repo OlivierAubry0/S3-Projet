@@ -46,7 +46,8 @@ CREATE TABLE EVENEMENT
     Evenement_Debut  VARCHAR(50),
     Evenement_Fin    VARCHAR(50),
     Asso_EtudianteID VARCHAR(50),
-    Nombre_Places    VARCHAR(50),
+    Nombre_Places INT,
+    --Nombre_Places    VARCHAR(50),
     Allow_Guests     BOOLEAN,
     Description      VARCHAR(100),
     PRIMARY KEY (EvenementID)
