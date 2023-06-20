@@ -6,8 +6,8 @@
 
     <insert id="insertReservation" parameterType="ca.usherbrooke.gegi.server.admin.Reservation">
         INSERT INTO BASE_DE_DONNE.RESERVATION
-        (EvenementID, UsagerID, Telephone_Invite, Nom_Invite)
+        (EvenementID, UsagerID, Telephone_Invite, Nom_Invite,Enregistration_Invite)
         VALUES
-            (#{EvenementID}, #{UsagerID}, #{Telephone_Invite}, #{Nom_Invite})
+            (#{EvenementID}, #{UsagerID}, #{Telephone_Invite}, #{Nom_Invite},#{Enregistration_Invite})
     </insert>
 </mapper>

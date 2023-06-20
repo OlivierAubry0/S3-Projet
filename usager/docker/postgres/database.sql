@@ -103,6 +103,7 @@ CREATE TABLE RESERVATION
     UsagerID VARCHAR(50),
     Telephone_Invite VARCHAR(11) ,
     Nom_Invite VARCHAR(50),
+    Enregistration_Invite BOOLEAN,
     PRIMARY KEY (EvenementID, UsagerID),
    FOREIGN KEY (EvenementID) REFERENCES EVENEMENT(EvenementID)
    -- FOREIGN KEY (UsagerID) REFERENCES USAGER(UsagerID)
@@ -129,3 +130,4 @@ INSERT INTO ASSO_ETUDIANTE (Asso_EtudianteID, _Asso_Etudiante__Nom, UniversiteID
 VALUES (1, 'Association 1', 1),
        (2, 'Association 2', 2),
        (3, 'Association 3', 3);
+

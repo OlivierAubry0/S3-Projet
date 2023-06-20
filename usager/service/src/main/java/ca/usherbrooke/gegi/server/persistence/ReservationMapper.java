@@ -11,7 +11,7 @@ import java.util.List;
 public interface ReservationMapper {
 
 
-    @Insert("INSERT INTO BASE_DE_DONNE.RESERVATION (EvenementID,UsagerID,Telephone_Invite,Nom_Invite) VALUES(#{EvenementID}, #{UsagerID}, #{Telephone_Invite}, #{Nom_Invite})")
+    @Insert("INSERT INTO BASE_DE_DONNE.RESERVATION (EvenementID,UsagerID,Telephone_Invite,Nom_Invite,Enregistration_Invite) VALUES(#{EvenementID}, #{UsagerID}, #{Telephone_Invite}, #{Nom_Invite}, #{Enregistration_Invite})")
     void insertReservation(Reservation reservation);
 
 }

@@ -6,16 +6,19 @@ public class Reservation {
     public String Telephone_Invite;
     public String Nom_Invite;
 
+    public boolean Enregistration_Invite;
+
 
     public Reservation() {
         // Default constructor
     }
 
-    public Reservation(String EvenementID, String UsagerID, String Telephone_Invite, String Nom_Invite) {
+    public Reservation(String EvenementID, String UsagerID, String Telephone_Invite, String Nom_Invite, boolean Enregistration_Invite) {
         this.EvenementID = EvenementID;
         this.UsagerID = UsagerID;
         this.Telephone_Invite = Telephone_Invite;
         this.Nom_Invite = Nom_Invite;
+        this.Enregistration_Invite = Enregistration_Invite;
     }
 
     public void setEvenementID(String EvenementID) {
@@ -29,5 +32,8 @@ public class Reservation {
     }
     public void setNom_Invite(String Nom_Invite) {
         this.Nom_Invite = Nom_Invite;
+    }
+    public void setEnregistration_Invite(boolean Enregistration_Invite) {
+        this.Enregistration_Invite = Enregistration_Invite;
     }
 }

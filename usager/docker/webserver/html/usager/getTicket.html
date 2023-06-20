@@ -97,17 +97,21 @@
     }
 
     function submitReservation() {
-      var tokenData = keycloak.tokenParsed
+      var tokenData = keycloak.tokenParsed;
+
+      var EvenementID = 'ffa7fa81-f68d-45f4-a1b3-97fadc0ffb89';
       var EvenementID = localStorage.getItem('EvenementID');
       var UsagerID = tokenData.preferred_username;
       var Telephone_Invite = document.getElementById('Telephone_Invite').value;
       var Nom_Invite = document.getElementById('Nom_Invite').value;
+      var Enregistration_Invite = false;
 
       var reservation = {
         EvenementID: EvenementID,
         UsagerID: UsagerID,
         Telephone_Invite: Telephone_Invite,
         Nom_Invite: Nom_Invite,
+        Enregistration_Invite: Enregistration_Invite
       };
 
       axios.post('http://localhost:8888/api/reservations', reservation, {
