@@ -7,7 +7,9 @@ public class Person {
     public String last_name;
     public String first_name;
     public String email;
-    public List roles;
+    public List<String> roles;
+
+    public int faculteID;
 
     public String toString() {
         return "Person{cip='" + this.cip + "', last_name='" + this.last_name + "', first_name='" + this.first_name + "', email='" + this.email + "', roles=" + this.roles + "}";

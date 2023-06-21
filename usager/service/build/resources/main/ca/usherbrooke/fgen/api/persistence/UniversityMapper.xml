@@ -3,6 +3,6 @@
 
 <mapper namespace="ca.usherbrooke.gegi.server.persistence.UniversityMapper">
     <select id="getAllUniversities" resultType="ca.usherbrooke.gegi.server.business.Universite">
-        SELECT Universite_Nom FROM BASE_DE_DONNE.UNIVERSITE
+        SELECT * FROM BASE_DE_DONNE.UNIVERSITE
     </select>
 </mapper>

@@ -82,6 +82,7 @@ CREATE TABLE USAGER
     Usager_Nom VARCHAR(100) NOT NULL,
     Usager_Prenom VARCHAR(100) NOT NULL,
     Usager_Photo VARCHAR(100),
+    Usager_Role VARCHAR(100),
     CodeQR INT,
     FaculteID INT NOT NULL,
     PRIMARY KEY (UsagerID),
@@ -120,16 +121,16 @@ CREATE TABLE FACULTE_POSSEDE_ASSO
 
 -----------------------------------
 INSERT INTO UNIVERSITE (UniversiteID, Universite_Nom)
-VALUES (1, 'Université A'),
-       (2, 'Université B'),
-       (3, 'Université C');
+VALUES (1, 'Université de Sherbrooke'),
+       (2, 'Université Laval');
 
 INSERT INTO FACULTE (FaculteID, Faculte_Nom, UniversiteID)
 VALUES (4028, 'Faculte de Genie', 1),
        (4038, 'Ecole de gestion', 1),
-       (2332, 'Faculte de Genie', 2);
+       (4039, 'Faculte de musique', 1),
+       (2222, 'Campus de genie', 2),
+       (2332, 'Campus de sante', 2);
 
 INSERT INTO ASSO_ETUDIANTE (Asso_EtudianteID, _Asso_Etudiante__Nom, UniversiteID)
 VALUES (1, 'Association 1', 1),
-       (2, 'Association 2', 2),
-       (3, 'Association 3', 3);
+       (2, 'Association 2', 2);

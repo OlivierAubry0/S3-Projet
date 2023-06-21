@@ -8,5 +8,5 @@ import java.util.List;
 @Mapper
 public interface FacultyMapper {
     @Select("SELECT Faculte_Nom FROM BASE_DE_DONNE.FACULTE WHERE UniversiteID = #{universiteID}")
-    List<String> getFacultiesByUniversity(int universiteID);
+    List<Faculty> getFacultiesByUniversity(int universiteID);
 }

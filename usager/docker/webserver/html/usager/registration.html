@@ -25,10 +25,12 @@
             border: 1px solid #ccc;
         }
     </style>
-    <!-- Include Axios -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="http://localhost:8180/js/keycloak.js"></script>
+
 </head>
-<body>
+<body onload="initKeycloak()">
+
 
 <form>
     <label for="university-select">Choose a university:</label>
@@ -45,40 +47,79 @@
 </form>
 
 <script>
+
+    var keycloak;
+
+    function initKeycloak() {
+        keycloak = new Keycloak({
+            "realm": "usager",
+            "auth-server-url": "http://localhost:8180/",
+            "ssl-required": "external",
+            "clientId": "frontend",
+            "public-client": true,
+            "confidential-port": 0
+        });
+        keycloak.init({onLoad: 'login-required'}).then(function (authenticated) {
+            alert(authenticated ? 'authenticated' : 'not authenticated');
+
+        }).catch(function () {
+            alert('failed to initialize');
+        }).finally(function () {
+            displayUserInfo(); // Call the function to display user info
+        });
+
+
+    }
+
     document.addEventListener('DOMContentLoaded', function() {
         axios.get("http://localhost:8888/api/universities")
             .then(function (response) {
-                const universityNames = response.data;
+                console.log(response.data);
+
+
+                const universities = response.data;
                 const selectElement = document.getElementById('university-select');
 
-                for (const name of universityNames) {
+                for (const uni of universities) {
                     const option = document.createElement('option');
-                    option.value = name;
-                    option.text = name;
+                    option.value = uni.universiteID + '|' + uni.universite_Nom; // Store ID and name
+                    option.text = uni.universite_Nom;
                     selectElement.appendChild(option);
                 }
             })
             .catch(function (error) {
                 console.error(error);
             });
+        document.getElementById('faculty-select').disabled = true;
     });
 
+
     document.getElementById('university-select').addEventListener('change', function() {
-        const selectedUniversity = this.value;
+        // Extract the ID
+        const selectedUniversity = this.value.split('|')[0];
 
         // Clear previous faculty options
         const facultySelect = document.getElementById('faculty-select');
         facultySelect.options.length = 0;
         facultySelect.options[0] = new Option('Select a faculty', '');
 
+        // Disable faculty select if no university selected
+        if (!selectedUniversity) {
+            facultySelect.disabled = true;
+            return;
+        }
+
+        // Enable faculty select if a university is selected
+        facultySelect.disabled = false;
+
         axios.get("http://localhost:8888/api/universities/" + encodeURIComponent(selectedUniversity) + '/faculties')
             .then(function (response) {
-                const facultyNames = response.data;
+                const faculties = response.data;
 
-                for (const name of facultyNames) {
+                for (const fac of faculties) {
                     const option = document.createElement('option');
-                    option.value = name;
-                    option.text = name;
+                    option.value = fac.faculteID +'|' + fac.faculte_Nom;
+                    option.text = fac.faculte_Nom;
                     facultySelect.appendChild(option);
                 }
             })
@@ -88,29 +129,37 @@
     });
 
 
+
     function submitAndGoBack() {
-        const university = document.getElementById('university-select').value;
-        const faculty = document.getElementById('faculty-select').value;
+        const faculty = document.getElementById('faculty-select').value.split('|')[0];
 
-        /*
-        Here you can call a function that sends a POST request to your server
-        to update the database with the selected university and faculty.
+        // Extract the user information from the Keycloak token
+        var userInfo = JSON.parse(window.atob(keycloak.token.split('.')[1]));
 
-        Example:
-        axios.post('/api/submit', { university, faculty })
-            .then(function (response) {
-                // handle success
+        const userData = {
+            cip: userInfo.username,
+            last_name: userInfo.lastName,
+            first_name: userInfo.firstName,
+            roles: userInfo.realmRoles,
+            FaculteID: faculty,
+        };
+
+        axios.post('http://localhost:8888/api/users/add', userData, {
+            headers: {
+                'Authorization': 'Bearer ' + keycloak.token,  // Include the Keycloak token in the request headers
+            },
+        })
+            .then(function(response) {
                 console.log(response);
             })
-            .catch(function (error) {
-                // handle error
+            .catch(function(error) {
                 console.error(error);
             });
-        */
 
-        // After the submission, you can go back to the previous page
         window.history.back();
     }
+
+
 </script>
 
 </body>

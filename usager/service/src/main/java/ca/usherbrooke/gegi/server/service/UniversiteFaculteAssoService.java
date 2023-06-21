@@ -22,13 +22,13 @@ public class UniversiteFaculteAssoService {
 
     @GET
     @Path("/universities")
-    public List<String> getAllUniversitiesNames() {
+    public List<University> getAllUniversitiesNames() {
         return universiteMapper.getAllUniversitiesNames();
     }
 
     @GET
     @Path("/universities/{universiteID}/faculties")
-    public List<String> getFacultiesByUniversity(@PathParam("universiteID") int universiteID) {
+    public List<Faculty> getFacultiesByUniversity(@PathParam("universiteID") int universiteID) {
         return faculteMapper.getFacultiesByUniversity(universiteID);
     }
 }
