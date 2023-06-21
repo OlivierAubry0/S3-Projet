@@ -138,16 +138,16 @@
         var tokenData = keycloak.tokenParsed;
         var role = tokenData.realm_access.roles[1];
         var UsagerID = tokenData.preferred_username;
-        var lastName = tokenData.name.last_name;
-        var firstName = tokenData.name.first_name;
+        var lastName = tokenData.family_name;
+        var firstName = tokenData.given_name;
 
 
 
         // construct the user data
         const userData = {
             cip: UsagerID,
-            last_name: UsagerID,
-            first_name: UsagerID,
+            last_name: lastName,
+            first_name: firstName,
             roles: role,
             faculteID: facultyID,
         };

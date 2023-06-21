@@ -89,7 +89,7 @@
     }
 
     function checkUserExists() {
-      axios.get('http://localhost:8888/api/users/check' + keycloak.tokenParsed.sub, {
+      axios.get('http://localhost:8888/api/users/check', keycloak.tokenParsed.preferred_username, {
         headers: {
           'Authorization': 'Bearer ' + keycloak.token
         }

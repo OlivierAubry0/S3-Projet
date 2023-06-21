@@ -17,13 +17,13 @@ public class UserService {
     @Inject
     UserMapper userMapper;
 
-    @POST
+    @GET
     @Path("/check")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response checkUser(Person user) {
-        Person existingUser = null;
-        if (existingUser== null){
+    public Response checkUser(String user) {
+        Person existingUser = userMapper.selectUserByUsagerID(user);
+        if (existingUser == null){
             return Response.status(Response.Status.NOT_FOUND).build();
         }
         else return Response.ok().build();

@@ -134,3 +134,6 @@ VALUES (4028, 'Faculte de Genie', 1),
 INSERT INTO ASSO_ETUDIANTE (Asso_EtudianteID, _Asso_Etudiante__Nom, UniversiteID)
 VALUES (1, 'Association 1', 1),
        (2, 'Association 2', 2);
+
+DELETE FROM USAGER
+WHERE UsagerID = 'cake0801';
