@@ -89,11 +89,13 @@
     }
 
     function checkUserExists() {
-      axios.get('http://localhost:8888/api/users/check', keycloak.tokenParsed.preferred_username, {
+      axios.get(`http://localhost:8888/api/users/check/${keycloak.tokenParsed.preferred_username}`, {
         headers: {
           'Authorization': 'Bearer ' + keycloak.token
         }
       })
+
+
               .then(function(response) {
                 // The user exists, so you can continue with your existing logic.
                 // For example, if you want to display the user's information:

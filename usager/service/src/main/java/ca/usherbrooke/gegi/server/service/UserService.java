@@ -18,16 +18,16 @@ public class UserService {
     UserMapper userMapper;
 
     @GET
-    @Path("/check")
-    @Consumes(MediaType.APPLICATION_JSON)
+    @Path("/check/{username}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response checkUser(String user) {
+    public Response checkUser(@PathParam("username") String user) {
         Person existingUser = userMapper.selectUserByUsagerID(user);
         if (existingUser == null){
             return Response.status(Response.Status.NOT_FOUND).build();
         }
         else return Response.ok().build();
     }
+
     @POST
     @Path("/add")
     @Consumes(MediaType.APPLICATION_JSON)
