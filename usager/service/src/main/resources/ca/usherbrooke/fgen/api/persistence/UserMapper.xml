@@ -12,7 +12,7 @@
         INSERT INTO BASE_DE_DONNE.USAGER
         (UsagerID, Usager_Nom, Usager_Prenom, Usager_Role, FaculteID)
         VALUES
-            (#{UsagerID}, #{Usager_Nom}, #{Usager_Prenom}, #{Usager_Role},  #{FaculteID})
+            (#{cip}, #{last_name}, #{first_name}, #{roles},  #{faculteID})
     </insert>
 
 </mapper>

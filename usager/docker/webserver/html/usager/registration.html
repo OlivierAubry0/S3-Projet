@@ -131,26 +131,34 @@
 
 
     function submitAndGoBack() {
-        const faculty = document.getElementById('faculty-select').value.split('|')[0];
 
-        // Extract the user information from the Keycloak token
-        var userInfo = JSON.parse(window.atob(keycloak.token.split('.')[1]));
+        const facultyValue = document.getElementById('faculty-select').value;
+        const [facultyID, facultyName] = facultyValue.split('|');
 
+        var tokenData = keycloak.tokenParsed;
+        var role = tokenData.realm_access.roles[1];
+        var UsagerID = tokenData.preferred_username;
+        var lastName = tokenData.name.last_name;
+        var firstName = tokenData.name.first_name;
+
+
+
+        // construct the user data
         const userData = {
-            cip: userInfo.username,
-            last_name: userInfo.lastName,
-            first_name: userInfo.firstName,
-            roles: userInfo.realmRoles,
-            FaculteID: faculty,
+            cip: UsagerID,
+            last_name: UsagerID,
+            first_name: UsagerID,
+            roles: role,
+            faculteID: facultyID,
         };
 
         axios.post('http://localhost:8888/api/users/add', userData, {
             headers: {
-                'Authorization': 'Bearer ' + keycloak.token,  // Include the Keycloak token in the request headers
+                'Authorization': 'Bearer ' + keycloak.token,
             },
         })
             .then(function(response) {
-                console.log(response);
+                console.log('user created');
             })
             .catch(function(error) {
                 console.error(error);
@@ -158,6 +166,7 @@
 
         window.history.back();
     }
+
 
 
 </script>

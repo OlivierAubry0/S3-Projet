@@ -21,7 +21,7 @@ public class UserService {
     @Path("/check")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response checkUser(User user) {
+    public Response checkUser(Person user) {
         Person existingUser = null;
         if (existingUser== null){
             return Response.status(Response.Status.NOT_FOUND).build();
@@ -30,7 +30,8 @@ public class UserService {
     }
     @POST
     @Path("/add")
-    public Response addUser(User user){
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response addUser(Person user){
         userMapper.insertUser(user);
         return Response.status(Response.Status.CREATED).entity(user).build();
     }

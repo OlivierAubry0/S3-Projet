@@ -7,7 +7,7 @@ public class Person {
     public String last_name;
     public String first_name;
     public String email;
-    public List<String> roles;
+    public String roles;
 
     public int faculteID;
 
