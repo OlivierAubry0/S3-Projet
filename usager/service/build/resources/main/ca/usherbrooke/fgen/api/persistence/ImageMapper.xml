@@ -1,13 +1,17 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="ca.usherbrooke.gegi.server.persistence.ImageMapper">
 
-    <insert id="insertImage" parameterType="java.util.UUID, java.io.InputStream">
-        INSERT INTO images (id, data)
+    <insert id="insertImage" parameterType="ca.usherbrooke.gegi.server.admin.Image">
+        INSERT INTO BASE_DE_DONNE.images (filename)
         VALUES
-            (#{imageId}, #{imageData})
+            (#{filename})
     </insert>
 
+    <select id="getAllImageNames" resultType="java.lang.String">
+        SELECT filename
+        FROM BASE_DE_DONNE.images
+    </select>
 </mapper>

@@ -53,10 +53,12 @@ CREATE TABLE EVENEMENT
 );
 
 CREATE TABLE images (
-                        id VARCHAR(50) PRIMARY KEY,
-                        data oid not null ,
-                        created_at TIMESTAMPTZ DEFAULT NOW()
+                        id SERIAL PRIMARY KEY,
+                        filename VARCHAR(255) NOT NULL,
+                        base64Data TEXT
 );
+
+
 
 CREATE TABLE PRIVILEGE
 (

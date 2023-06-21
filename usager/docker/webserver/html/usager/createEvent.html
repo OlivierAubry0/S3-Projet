@@ -4,15 +4,22 @@
   <title>Create New Event</title>
   <style>
     body {
+      background-color: #268018 ;
       font-family: "Lato", sans-serif;
+      align-items: center;
+      justify-content: flex-end;
+      color: white;
+
     }
     .event-form {
-      width: 500px;
-      margin: 0 auto;
+      position: absolute;
       padding: 20px;
       border: 1px solid #ccc;
       border-radius: 4px;
       box-sizing: border-box;
+      top: 10%;
+      width: 90%;
+      margin: 5%;
     }
     .event-form select, .event-form button[type=button] {
       width: 100%;
@@ -69,33 +76,30 @@
         "public-client": true,
         "confidential-port": 0
       });
-      keycloak.init({ onLoad: 'login-required' })
-              .success(function (authenticated) {
-                if (authenticated) {
-                  alert('authenticated');
-                  displayUserInfo();
-                } else {
-                  alert('not authenticated');
-                }
-              })
-              .error(function () {
-                alert('failed to initialize');
-              });
+      keycloak.init({onLoad: 'login-required'}).then(function(authenticated) {
+        if (authenticated) {
+          console.log('Authenticated');
+        } else {
+          console.log('Not authenticated');
+        }
+      }).catch(function() {
+        console.log('Failed to initialize');
+      }).finally(function() {
+        displayUserInfo(); // Call the function to display user info
+      });
     }
 
     function submitEvent() {
-      var evenementID = document.getElementById('id').value;
       var evenementNom = document.getElementById('name').value;
       var evenementDate = document.getElementById('date').value;
       var evenementDebut = document.getElementById('start').value;
       var evenementFin = document.getElementById('end').value;
-      var assoEtudianteID = document.getElementById('assoID').value;
+      var assoEtudianteID = keycloak.tokenParsed.name;
       var nombrePlaces = document.getElementById('places').value;
       var allowGuests = document.getElementById('allow-guests').checked;
       var description = document.getElementById('description').value;
 
       var event = {
-        evenementID: evenementID,
         evenementNom: evenementNom,
         evenementDate: evenementDate,
         evenementDebut: evenementDebut,
@@ -134,10 +138,8 @@
       reader.onload = function(event) {
         var arrayBuffer = event.target.result;
 
-        var blob = new Blob([arrayBuffer], { type: file.type });
-
         var formData = new FormData();
-        formData.append('image', blob);
+        formData.append('image', file);
 
         axios.post('http://localhost:8888/api/events/uploadImage', formData)
                 .then(function(response) {
@@ -147,75 +149,37 @@
                   console.error('Error uploading image:', error);
                 });
       };
-
-      reader.readAsArrayBuffer(file);
+      reader.readAsDataURL(file);
     }
 
   </script>
 </head>
 
 <body onload="initKeycloak()">
-<h2>Create New Event</h2>
+<h2 style="text-align: center">Create New Event</h2>
+
 <div class="event-form">
   <form>
-    <label for="id">Event Id:</label><br>
-    <select id="id" name="eventId">
-      <option value="1001">1001</option>
-      <option value="1002">1002</option>
-      <option value="1003">1003</option>
-    </select><br>
-
     <label for="name">Event Name:</label><br>
-    <select id="name" name="name">
-      <option value="5a8">5a8</option>
-      <option value="4a7">4a7</option>
-      <option value="after">after</option>
-    </select><br>
+    <input type="text" id="name" name="name"><br>
 
     <label for="start">Start Time:</label><br>
-    <select id="start" name="start">
-      <option value="4">4</option>
-      <option value="5">5</option>
-      <option value="9">9</option>
-    </select><br>
+    <input type="text" id="start" name="start"><br>
 
     <label for="end">End Time:</label><br>
-    <select id="end" name="end">
-      <option value="7">7</option>
-      <option value="8">8</option>
-      <option value="0000">0000</option>
-    </select><br>
+    <input type="text" id="end" name="end"><br>
 
     <label for="date">Event Date:</label><br>
-    <select id="date" name="date">
-      <option value="2023-06-09">2023-06-09</option>
-      <option value="2023-06-20">2023-06-20</option>
-      <option value="2023-06-20">2023-06-20</option>
-    </select><br>
-
-    <label for="assoID">association Etudiante ID:</label><br>
-    <select id="assoID" name="assoId">
-      <option value="123">ageg</option>
-      <option value="321">camus</option>
-      <option value="456">amus</option>
-    </select><br>
+    <input type="date" id="date" name="date"><br>
 
     <label for="places">Number of Places:</label><br>
-    <select id="places" name="places">
-      <option value="200">200</option>
-      <option value="300">300</option>
-      <option value="400">400</option>
-    </select><br>
+    <input type="text" id="places" name="places"><br>
 
     <label for="allow-guests">Allow Guests:</label>
     <input type="checkbox" id="allow-guests" name="allow-guests"><br>
 
     <label for="description">Description:</label><br>
-    <select id="description" name="description">
-      <option value="ceciestuncinqahuit">ceciestuncinqahuit</option>
-      <option value="ceciestunquatreasept">ceciestunquatreasept</option>
-      <option value="afterdansunbar">afterdansunbar</option>
-    </select><br>
+    <input type="text" id="description" name="description"><br>
 
     <button type="button" onclick="submitEvent()">Submit</button>
 
@@ -223,5 +187,7 @@
     <button type="button" onclick="submitImage()">Submit Image</button>
   </form>
 </div>
+
+
 </body>
 </html>

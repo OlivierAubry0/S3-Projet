@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Image Gallery</title>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="http://localhost:8180/js/keycloak.js"></script>
+</head>
+
+<body onload="initKeycloak()" >
+<body>
+
+<!-- Image Upload Form -->
+<form>
+  <label for="image">Select an image:</label>
+  <input type="file" id="image" accept="image/*">
+  <br>
+  <button type="button" onclick="uploadImage()">Upload Image</button>
+</form>
+
+<script>
+  function uploadImage() {
+    const fileInput = document.getElementById('image');
+    const file = fileInput.files[0];
+
+    const formData = new FormData();
+    formData.append('image', file);
+
+    axios.post('http://localhost:8888/api/images', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    })
+            .then(response => {
+              console.log('Image uploaded successfully:', response.data);
+              // Perform any desired actions after successful upload
+            })
+            .catch(error => {
+              console.error('Error uploading image:', error);
+              // Handle the error appropriately
+            });
+  }
+</script>
+
+
+  <!-- List of Images -->
+  <h2>List of Images</h2>
+  <ul id="imageList"></ul>
+
+
+<script>
+  var keycloak;
+
+  function initKeycloak() {
+    keycloak = new Keycloak({
+      "realm": "usager",
+      "auth-server-url": "http://localhost:8180/",
+      "ssl-required": "external",
+      "clientId": "frontend",
+      "public-client": true,
+      "confidential-port": 0
+    });
+    keycloak.init({onLoad: 'login-required'}).then(function(authenticated) {
+      if (authenticated) {
+        console.log('Authenticated');
+      } else {
+        console.log('Not authenticated');
+      }
+    }).catch(function() {
+      console.log('Failed to initialize');
+    }).finally(function() {
+      displayUserInfo(); // Call the function to display user info
+    });
+
+  }
+  // Function to retrieve list of images
+  function getImages() {
+    axios.get('http://localhost:8888/api/images', {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+            .then(response => {
+              const imageList = document.getElementById('imageList');
+              const images = response.data;
+              images.forEach(image => {
+                const listItem = document.createElement('li');
+                const imageElement = document.createElement('img');
+                imageElement.src = image.path;
+                imageElement.alt = 'Image';
+                imageElement.style.width = '200px';
+                listItem.appendChild(imageElement);
+                imageList.appendChild(listItem);
+              });
+            })
+            .catch(error => {
+              console.error('Error retrieving images:', error);
+            });
+  }
+
+  // Call getImages function to populate the image list
+  getImages();
+  </script>
+</body>
+
+
+</html>

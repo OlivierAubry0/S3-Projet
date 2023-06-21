@@ -5,13 +5,13 @@
     <title>PhoneHomePage</title>
   <style>
     body {
-    background-color: #f1f1f1;
+    background-color: white;
     font-family: "Lato", sans-serif;
     color: #0B4F00;
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    margin-bottom: 150px; /* Add margin at the bottom */
+    margin-bottom: 5%
     }
 
     .sidenav {
@@ -56,8 +56,169 @@
       .sidenav a {font-size: 120px;}
     }
 
+    #homeText {
+      position: absolute;
+      top: 8%;
+      left: 0px;
+      right: 0px;
+      height: 20%;
+      background-color: white;
+      text-align: center;
+      padding: 2%;
+      z-index: 0;
+    }
+
+    #homeText p {
+      position: absolute;
+      top: 8%;
+      margin: 0;
+      font-size: 75px;
+      color: black;
+    }
+
+    #blackLine1, #blackLine2 {
+      position: absolute;
+      left: 0px;
+      right: 0px;
+      height: 0.5%;
+      background-color: #0B4F00;
+      z-index: 1;
+    }
+
+
+    #Facultes {
+      position: absolute;
+      top: 32%;
+      width: 100%;
+      font-size: 70px;
+      height: 5%;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    #genie, #EDG, #education, #droit, #LSH, #sciences, #SLP, #MSS {
+      height: 12%;
+      width: 40%;
+      background-color: #f1f1f1;
+      color: #268018;
+      text-align: center;
+      text-size-adjust: auto;
+      font-size: 65px;
+      position: absolute;
+      z-index: 1;
+      border-radius: 10%;
+      box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+      transition: background-color 0.2s, box-shadow 0.2s;
+    }
+
+    #genie:active, #EDG:active, #education:active, #droit:active, #LSH:active, #sciences:active, #SLP:active, #MSS:active {
+      background-color: #268018;
+      box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.2), 0 2px 10px 0 rgba(0, 0, 0, 0.19);
+      color: #f1f1f1;
+
+    }
+
   </style>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="http://localhost:8180/js/keycloak.js"></script>
   <script>
+
+    var keycloak;
+
+    function initKeycloak() {
+      keycloak = new Keycloak({
+        "realm": "usager",
+        "auth-server-url": "http://localhost:8180/",
+        "ssl-required": "external",
+        "clientId": "frontend",
+        "public-client": true,
+        "confidential-port": 0
+      });
+      keycloak.init({onLoad: 'login-required'}).then(function (authenticated) {
+        //alert(authenticated ? 'authenticated' : 'not authenticated');
+        if (authenticated) {
+          var roles = keycloak.tokenParsed.realm_access.roles;
+
+          if (roles.includes('enseignant')) {
+            window.location.href = 'admin_event_creator.html';
+            return;
+          }
+        } else {
+          alert('Not authenticated');
+        }
+
+      }).catch(function () {
+        alert('failed to initialize');
+      }).finally(function () {
+        displayUserInfo(); // Call the function to display user info
+      });
+
+
+    }
+
+    function requestStudent() {
+      const div = document.getElementById('title');
+      const span = div.firstElementChild;
+      axios.get("http://localhost:8888/api/student", {
+        headers: {
+          'Authorization': 'Bearer ' + keycloak.token
+        }
+      })
+              .then(function (response) {
+                console.log("Response: ", response.status);
+                span.innerHTML = '<br> <strong>' + response.data.cip + '</strong> </br>' +
+                        '<br> <strong>' + response.data.last_name + '</strong> </br>' +
+                        '<br> <strong>' + response.data.first_name + '</strong> </br>' +
+                        '<br> <strong>' + response.data.email + '</strong> </br>' +
+                        '<br> <strong>' + response.data.roles + '</strong> </br>'
+              })
+              .catch(function (error) {
+                console.log('refreshing');
+                keycloak.updateToken(5).then(function () {
+                  console.log('Token refreshed');
+                }).catch(function () {
+                  console.log('Failed to refresh token');
+                })
+              });
+      span.innerHTML = '<br> <strong>' + "Vous n'avez pas le role d'étudiant" + '</strong> </br>'
+    }
+
+    function requestTeacher() {
+      const div = document.getElementById('title');
+      const span = div.firstElementChild;
+      axios.get("http://localhost:8888/api/teacher", {
+        headers: {
+          'Authorization': 'Bearer ' + keycloak.token
+        }
+      })
+              .then(function (response) {
+                console.log("Response: ", response.status);
+                span.innerHTML = '<br> <strong>' + response.data.cip + '</strong> </br>' +
+                        '<br> <strong>' + response.data.last_name + '</strong> </br>' +
+                        '<br> <strong>' + response.data.first_name + '</strong> </br>' +
+                        '<br> <strong>' + response.data.email + '</strong> </br>' +
+                        '<br> <strong>' + response.data.roles + '</strong> </br>'
+              })
+              .catch(function (error) {
+                console.log('refreshing');
+                keycloak.updateToken(5).then(function () {
+                  console.log('Token refreshed');
+                }).catch(function () {
+                  console.log('Failed to refresh token');
+                })
+              });
+      span.innerHTML = '<br> <strong>' + "Vous n'avez pas le role d'enseignant" + '</strong> </br>'
+    }
+
+    function logout() {
+      let logoutURL = "http://localhost:8180//realms/usager/protocol/openid-connect/logout"
+      window.location.href = logoutURL;
+    }
+
     function openNav() {
       document.getElementById("mySidenav").style.width = "100%";
       document.getElementById("user-info").classList.add("fade-in");
@@ -67,22 +228,66 @@
       document.getElementById("mySidenav").style.width = "0";
       document.getElementById("user-info").classList.remove("fade-in");
     }
+
+    function displayUserInfo() {
+      var token = keycloak.tokenParsed;
+      var name = token.name;
+
+      var userInfoList = document.createElement('ul');
+      var nameItem = document.createElement('li');
+      var rolesItem = document.createElement('li');
+
+      nameItem.textContent = 'Nom : \n' + name;
+      rolesItem.textContent =  'Role: Etudiant';
+
+      userInfoList.appendChild(nameItem);
+      userInfoList.appendChild(rolesItem);
+
+      var userInfoDiv = document.getElementById('user-info');
+      userInfoDiv.innerHTML = ''; // Supprime tout contenu existant
+      userInfoDiv.appendChild(userInfoList);
+    }
   </script>
 
 </head>
+<body onload="initKeycloak()" >
 <body>
-
 <div id="mySidenav" class="sidenav">
-  <b id="user-info"></b>
   <a href="#" onclick="logout()">Déconnexion</a>
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
   <a href="#" onclick="window.location.href='camera.html'">Scanner</a>
   <a href="#">Services</a>
   <a href="#">Clients</a>
   <a href="#">Contact</a>
+  <b id="user-info" style="color: #5BFF5E"></b>
 </div>
 
 <span style="font-size: 120px; font-weight: bold; cursor: pointer; position: absolute; top: 0; left: 0.5%; align-self: center; color: #0B4F00;" onclick="openNav()">&#9776; UNIVENT</span>
 
+<div style="top: 8%" id="blackLine1">
+</div>
+
+<div id="homeText">
+  <p>Bienvenue sur Univent, votre service de billeterie pour les événements officiels de l'Université de Sherbrooke.</p>
+</div>
+
+<div style="top: 30%" id="blackLine2">
+</div>
+
+<div id="Facultes">FACULTÉS</div>
+
+<div id="genie" style="left: 5%; top: 40%" onclick="window.location.href ='eventstable.html'">Génie</div>
+<div id="EDG" style="left: 55%; top: 40%;">École de gestion</div>
+
+<div id="education" style="left: 5%; top: 55%">Éducation</div>
+<div id="droit" style="left: 55%; top: 55%">Droit</div>
+
+<div id="LSH" style="left: 5%; top: 70%">Lettres et <br> sciences humaines</div>
+<div id="sciences" style="left: 55%; top: 70%">Sciences</div>
+
+<div id="SLP" style="left: 5%; top: 85%">Sciences de <br> l'activité physique</div>
+<div id="MSS" style="left: 55%; top: 85%">Médecine et <br> sciences de la santé</div>
+
 </body>
+
 </html>
