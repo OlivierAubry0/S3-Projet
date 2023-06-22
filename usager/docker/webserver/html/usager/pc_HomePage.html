@@ -78,6 +78,10 @@
             window.location.href = 'admin_event_creator.html';
             return;
           }
+          else if (roles.includes('coordonnateur-pédagogique')) {
+            window.location.href = 'master_manager.html';
+            return;
+          }
         } else {
           alert('Not authenticated');
         }
