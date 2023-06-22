@@ -28,14 +28,7 @@ CREATE TABLE UNIVERSITE
 );
 
 
-CREATE TABLE ASSO_ETUDIANTE
-(
-    Asso_EtudianteID VARCHAR(50) NOT NULL,
-    _Asso_Etudiante__Nom VARCHAR(100) NOT NULL,
-    UniversiteID INT NOT NULL,
-    PRIMARY KEY (Asso_EtudianteID),
-    FOREIGN KEY (UniversiteID) REFERENCES UNIVERSITE(UniversiteID)
-);
+
 
 
 CREATE TABLE EVENEMENT
@@ -75,6 +68,15 @@ CREATE TABLE FACULTE
     UniversiteID INT NOT NULL,
     PRIMARY KEY (FaculteID),
     FOREIGN KEY (UniversiteID) REFERENCES UNIVERSITE(UniversiteID)
+);
+
+CREATE TABLE ASSO_ETUDIANTE
+(
+    Asso_EtudianteID VARCHAR(50) NOT NULL,
+    Asso_Etudiante_Nom VARCHAR(100) NOT NULL,
+    FaculteID INT ,
+    PRIMARY KEY (Asso_EtudianteID),
+    FOREIGN KEY (FaculteID) REFERENCES FACULTE(FaculteID)
 );
 
 CREATE TABLE USAGER
@@ -127,7 +129,12 @@ VALUES (1, 'Université A'),
        (2, 'Université B'),
        (3, 'Université C');
 
-INSERT INTO ASSO_ETUDIANTE (Asso_EtudianteID, _Asso_Etudiante__Nom, UniversiteID)
+INSERT INTO FACULTE (FaculteID, Faculte_Nom, UniversiteID)
+VALUES (1, 'Université A',1),
+       (2, 'Université B',1),
+       (3, 'Université C',1);
+
+INSERT INTO ASSO_ETUDIANTE (Asso_EtudianteID, Asso_Etudiante_Nom, FaculteID)
 VALUES (1, 'Association 1', 1),
        (2, 'Association 2', 2),
        (3, 'Association 3', 3);

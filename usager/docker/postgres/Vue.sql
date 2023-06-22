@@ -12,7 +12,9 @@ CREATE VIEW les_benevoles AS
     SELECT UsagerID, privilegeid
 FROM base_de_donne.usager_possede_privilege;
 
-
+CREATE VIEW les_associations AS
+SELECT Asso_EtudianteID, Asso_Etudiante_Nom, FaculteID
+FROM ASSO_ETUDIANTE
 
 ----------------------comment appeler la vue ? ---------------------------------------------
 --SELECT * FROM evenement_programmes;--
