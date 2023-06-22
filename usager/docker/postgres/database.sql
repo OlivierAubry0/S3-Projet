@@ -49,16 +49,9 @@ CREATE TABLE EVENEMENT
     Nombre_Places    VARCHAR(50),
     Allow_Guests     BOOLEAN,
     Description      VARCHAR(100),
+    filename        VARCHAR(255),
     PRIMARY KEY (EvenementID)
 );
-
-CREATE TABLE images (
-                        id SERIAL PRIMARY KEY,
-                        filename VARCHAR(255) NOT NULL,
-                        base64Data TEXT
-);
-
-
 
 CREATE TABLE PRIVILEGE
 (

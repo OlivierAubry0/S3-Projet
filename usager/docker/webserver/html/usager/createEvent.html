@@ -107,18 +107,30 @@
         assoEtudianteID: assoEtudianteID,
         nombrePlaces: nombrePlaces,
         allowGuests: allowGuests,
-        description: description
+        description: description,
+        filename: '',
       };
 
-      axios.post('http://localhost:8888/api/events', event, {
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer ' + keycloak.token // Replace keycloak.token with your actual bearer token
-        }
-      })
+      const fileInput = document.getElementById('imageInput');
+      const file = fileInput.files[0];
+      const imageName = file.name;
+
+      event.filename = imageName;
+
+      const formData = new FormData();
+      formData.append('eventData', JSON.stringify(event)); // Convert event object to JSON and append it to the form data
+      formData.append('image', file, imageName); // Append the image file with the given name
+
+      axios
+              .post('http://localhost:8888/api/events', formData, {
+                headers: {
+                  'Content-Type': 'multipart/form-data',
+                  Authorization: 'Bearer ' + keycloak.token // Replace keycloak.token with your actual bearer token
+                }
+              })
               .then(function(response) {
                 if (response.status === 201) {
-                  alert("Event created!");
+                  alert('Event created!');
                   window.location.href = 'admin_event_creator.html'; // Replace with the path to your main menu HTML file
                 } else {
                   alert(response.status);
@@ -129,28 +141,6 @@
               });
     }
 
-    function submitImage() {
-      var imageInput = document.getElementById('imageInput');
-      var file = imageInput.files[0];
-
-      var reader = new FileReader();
-
-      reader.onload = function(event) {
-        var arrayBuffer = event.target.result;
-
-        var formData = new FormData();
-        formData.append('image', file);
-
-        axios.post('http://localhost:8888/api/events/uploadImage', formData)
-                .then(function(response) {
-                  console.log('Image uploaded successfully.');
-                })
-                .catch(function(error) {
-                  console.error('Error uploading image:', error);
-                });
-      };
-      reader.readAsDataURL(file);
-    }
 
   </script>
 </head>
@@ -181,13 +171,12 @@
     <label for="description">Description:</label><br>
     <input type="text" id="description" name="description"><br>
 
-    <button type="button" onclick="submitEvent()">Submit</button>
+    <label for="imageInput">Image:</label><br>
+    <input type="file" id="imageInput" accept="image/*"><br>
 
-    <input type="file" id="imageInput" accept="image/*">
-    <button type="button" onclick="submitImage()">Submit Image</button>
+    <button type="button" onclick="submitEvent()">Submit</button>
   </form>
 </div>
-
 
 </body>
 </html>

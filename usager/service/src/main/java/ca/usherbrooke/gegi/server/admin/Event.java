@@ -1,8 +1,5 @@
 package ca.usherbrooke.gegi.server.admin;
 
-import java.sql.Date;
-import java.sql.Time;
-
 public class Event {
     private String evenementID;
     private String evenementNom;
@@ -13,12 +10,13 @@ public class Event {
     private String nombrePlaces;
     private boolean allowGuests;
     private String description;
+    private String filename;
 
     public Event() {
         // Default constructor
     }
 
-    public Event(String eventId, String eventName, String eventDate, String eventStart, String eventEnd, String studentAssociationId, String nombrePlaces, boolean allowGuests, String description) {
+    public Event(String eventId, String eventName, String eventDate, String eventStart, String eventEnd, String studentAssociationId, String nombrePlaces, boolean allowGuests, String description, String filename) {
         this.evenementID = eventId;
         this.evenementNom = eventName;
         this.evenementDate = eventDate;
@@ -28,6 +26,7 @@ public class Event {
         this.nombrePlaces = nombrePlaces;
         this.allowGuests = allowGuests;
         this.description = description;
+        this.filename = filename;
     }
 
     public String getEvenementID() {
@@ -102,4 +101,11 @@ public class Event {
         this.description = description;
     }
 
+    public String getFilename() {
+        return filename;
+    }
+
+    public void setFilename(String filename) {
+        this.filename = filename;
+    }
 }
