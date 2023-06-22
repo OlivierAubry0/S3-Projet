@@ -10,15 +10,16 @@ public class Event {
     private String evenementDebut;
     private String evenementFin;
     private String assoEtudianteID;
-    private String nombrePlaces;
-    private boolean allowGuests;
+    private int nombrePlaces;
+    //private String nombrePlaces;
+    private boolean Allow_Guests;
     private String description;
 
     public Event() {
         // Default constructor
     }
 
-    public Event(String eventId, String eventName, String eventDate, String eventStart, String eventEnd, String studentAssociationId, String nombrePlaces, boolean allowGuests, String description) {
+    public Event(String eventId, String eventName, String eventDate, String eventStart, String eventEnd, String studentAssociationId, /*String*/ int nombrePlaces, boolean Allow_Guests, String description) {
         this.evenementID = eventId;
         this.evenementNom = eventName;
         this.evenementDate = eventDate;
@@ -26,7 +27,7 @@ public class Event {
         this.evenementFin = eventEnd;
         this.assoEtudianteID = studentAssociationId;
         this.nombrePlaces = nombrePlaces;
-        this.allowGuests = allowGuests;
+        this.Allow_Guests = Allow_Guests;
         this.description = description;
     }
 
@@ -77,21 +78,27 @@ public class Event {
     public void setAssoEtudianteID(String assoEtudianteID) {
         this.assoEtudianteID = assoEtudianteID;
     }
-
+/*
     public String getNombrePlaces() {
         return nombrePlaces;
     }
 
     public void setNombrePlaces(String nombrePlaces) {
         this.nombrePlaces = nombrePlaces;
+    }*/
+    public int getNombrePlaces() {
+        return nombrePlaces;
     }
 
+    public void setNombrePlaces(int nombrePlaces) {
+        this.nombrePlaces = nombrePlaces;
+    }
     public boolean isAllowGuests() {
-        return allowGuests;
+        return Allow_Guests;
     }
 
-    public void setAllowGuests(boolean allowGuests) {
-        this.allowGuests = allowGuests;
+    public void setAllowGuests(boolean Allow_Guests) {
+        this.Allow_Guests = Allow_Guests;
     }
 
     public String getDescription() {

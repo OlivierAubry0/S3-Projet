@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: org.jboss.resteasy:resteasy-core-spi:4.7.5.Final" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="org.jboss.resteasy" artifactId="resteasy-core-spi" version="4.7.5.Final" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jboss.resteasy/resteasy-core-spi/4.7.5.Final/25abe903af976e9a42aa56b015c209d8e455017e/resteasy-core-spi-4.7.5.Final.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jboss.resteasy/resteasy-core-spi/4.7.5.Final/40a97917ee758fa55ddf9c0a14fa29b873391b45/resteasy-core-spi-4.7.5.Final-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

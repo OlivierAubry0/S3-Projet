@@ -28,14 +28,7 @@ CREATE TABLE UNIVERSITE
 );
 
 
-CREATE TABLE ASSO_ETUDIANTE
-(
-    Asso_EtudianteID VARCHAR(50) NOT NULL,
-    _Asso_Etudiante__Nom VARCHAR(100) NOT NULL,
-    UniversiteID INT NOT NULL,
-    PRIMARY KEY (Asso_EtudianteID),
-    FOREIGN KEY (UniversiteID) REFERENCES UNIVERSITE(UniversiteID)
-);
+
 
 
 CREATE TABLE EVENEMENT
@@ -46,7 +39,8 @@ CREATE TABLE EVENEMENT
     Evenement_Debut  VARCHAR(50),
     Evenement_Fin    VARCHAR(50),
     Asso_EtudianteID VARCHAR(50),
-    Nombre_Places    VARCHAR(50),
+    Nombre_Places INT,
+    --Nombre_Places    VARCHAR(50),
     Allow_Guests     BOOLEAN,
     Description      VARCHAR(100),
     PRIMARY KEY (EvenementID)
@@ -76,6 +70,15 @@ CREATE TABLE FACULTE
     FOREIGN KEY (UniversiteID) REFERENCES UNIVERSITE(UniversiteID)
 );
 
+CREATE TABLE ASSO_ETUDIANTE
+(
+    Asso_EtudianteID VARCHAR(50) NOT NULL,
+    Asso_Etudiante_Nom VARCHAR(100) NOT NULL,
+    FaculteID INT ,
+    PRIMARY KEY (Asso_EtudianteID),
+    FOREIGN KEY (FaculteID) REFERENCES FACULTE(FaculteID)
+);
+
 CREATE TABLE USAGER
 (
     UsagerID VARCHAR(100) NOT NULL,
@@ -100,12 +103,14 @@ CREATE TABLE USAGER_POSSEDE_PRIVILEGE
 
 CREATE TABLE RESERVATION
 (
-    EvenementID VARCHAR(50) NOT NULL,
-    UsagerID varchar(100) NOT NULL,
-    Telephone_Invite INT ,
-    Nom_Invite VARCHAR(100),
-    FOREIGN KEY (EvenementID) REFERENCES EVENEMENT(EvenementID),
-    FOREIGN KEY (UsagerID) REFERENCES USAGER(UsagerID)
+    EvenementID VARCHAR(50),
+    UsagerID VARCHAR(50),
+    Telephone_Invite VARCHAR(11) NULL,
+    Nom_Invite VARCHAR(50) NULL,
+    Enregistration_Invite BOOLEAN,
+    PRIMARY KEY (EvenementID, UsagerID),
+   FOREIGN KEY (EvenementID) REFERENCES EVENEMENT(EvenementID)
+   -- FOREIGN KEY (UsagerID) REFERENCES USAGER(UsagerID)
 );
 
 CREATE TABLE FACULTE_POSSEDE_ASSO
@@ -131,9 +136,13 @@ VALUES (4028, 'Faculte de Genie', 1),
        (2222, 'Campus de genie', 2),
        (2332, 'Campus de sante', 2);
 
-INSERT INTO ASSO_ETUDIANTE (Asso_EtudianteID, _Asso_Etudiante__Nom, UniversiteID)
-VALUES (1, 'Association 1', 1),
-       (2, 'Association 2', 2);
+INSERT INTO FACULTE (FaculteID, Faculte_Nom, UniversiteID)
+VALUES (1, 'Université A',1),
+       (2, 'Université B',1),
+       (3, 'Université C',1);
 
-DELETE FROM USAGER
-WHERE UsagerID = 'cake0801';
+INSERT INTO ASSO_ETUDIANTE (Asso_EtudianteID, Asso_Etudiante_Nom, FaculteID)
+VALUES (1, 'Association 1', 1),
+       (2, 'Association 2', 2),
+       (3, 'Association 3', 3);
+
