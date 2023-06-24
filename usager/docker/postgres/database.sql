@@ -134,8 +134,4 @@ VALUES (1, 'Université A',1),
        (2, 'Université B',1),
        (3, 'Université C',1);
 
-INSERT INTO ASSO_ETUDIANTE (Asso_EtudianteID, Asso_Etudiante_Nom, FaculteID)
-VALUES (1, 'Association 1', 1),
-       (2, 'Association 2', 2),
-       (3, 'Association 3', 3);
 
