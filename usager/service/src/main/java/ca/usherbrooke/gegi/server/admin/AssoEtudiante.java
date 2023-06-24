@@ -5,14 +5,19 @@ public class AssoEtudiante {
     public String Asso_Etudiante_Nom;
     public int FaculteID;
 
+    public String Faculte_Nom;
+    public String UsagerID;
+
     public AssoEtudiante() {
         // Default constructor
     }
 
-    public AssoEtudiante(String Asso_EtudianteID, String Asso_Etudiante_Nom, int FaculteID){
+    public AssoEtudiante(String Asso_EtudianteID, String Asso_Etudiante_Nom, int FaculteID, String Faculte_Nom, String UsagerID){
         this.Asso_EtudianteID = Asso_EtudianteID;
         this.Asso_Etudiante_Nom = Asso_Etudiante_Nom;
         this.FaculteID = FaculteID;
+        this.Faculte_Nom = Faculte_Nom;
+        this.UsagerID = UsagerID;
     }
 
     public void setAssoEtudianteID(String Asso_EtudianteID) {

@@ -88,11 +88,13 @@
       var Asso_EtudianteID = document.getElementById('Asso_EtudianteID').value;
       var Asso_Etudiante_Nom = document.getElementById('Asso_Etudiante_Nom').value;
       var FaculteID = document.getElementById('FaculteID').value;
+      var UsagerID = document.getElementById('UsagerID').value;
 
       var asso = {
         Asso_EtudianteID: Asso_EtudianteID,
         Asso_Etudiante_Nom: Asso_Etudiante_Nom,
-        FaculteID: FaculteID
+        FaculteID: FaculteID,
+        UsagerID: UsagerID
       };
 
       axios.post('http://localhost:8888/api/Asso', asso, {
@@ -152,6 +154,8 @@
       <option value="1001">1001</option>
       <option value="1002">1002</option>
       <option value="1003">1003</option>
+      <option value="1004">1004</option>
+
     </select><br>
 
     <label for="Asso_Etudiante_Nom">AssoEtudiante Name:</label><br>
@@ -159,13 +163,23 @@
       <option value="ageg">ageg</option>
       <option value="amus">amus</option>
       <option value="flsh">flsh</option>
+      <option value="vamudes">vamudes</option>
+
     </select><br>
 
     <label for="FaculteID">AssoEtudiante Fac:</label><br>
     <select id="FaculteID" name="FaculteID">
-      <option value="1">1</option>
-      <option value="2">2</option>
-      <option value="3">3</option>
+      <option value="1">SCIENCE</option>
+      <option value="1">Medecine</option>
+      <option value="1">Droit</option>
+
+    </select><br>
+
+    <label for="UsagerID">AssoEtudiante admin:</label><br>
+    <select id="UsagerID" name="UsagerID">
+      <option value="admin1">admin1</option>
+      <option value="admin2">admin2</option>
+      <option value="admin3">admin3</option>
     </select><br>
 
     <button type="button" onclick="submitAsso()">Submit</button>

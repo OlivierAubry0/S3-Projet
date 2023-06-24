@@ -6,9 +6,9 @@
 
     <insert id="insertAsso" parameterType="ca.usherbrooke.gegi.server.admin.AssoEtudiante">
         INSERT INTO BASE_DE_DONNE.ASSO_ETUDIANTE
-            (Asso_EtudianteID, Asso_Etudiante_Nom, FaculteID)
+            (Asso_EtudianteID, Asso_Etudiante_Nom, FaculteID, UsagerID)
         VALUES
-            (#{Asso_EtudianteID}, #{Asso_Etudiante_Nom}, #{FaculteID})
+            (#{Asso_EtudianteID}, #{Asso_Etudiante_Nom}, #{FaculteID}, #{UsagerID})
     </insert>
 
     <select id="getAllAsso" resultType="ca.usherbrooke.gegi.server.admin.AssoEtudiante">

@@ -4,25 +4,34 @@
   <title>View All Asso</title>
   <style>
     .large-button {
-      display: inline-block;
       background-color: #f1f1f1;
       color: #268018;
       border: none;
-      text-align: center;
+      text-align: left;
       text-decoration: none;
       cursor: pointer;
-      position: absolute;
-      z-index: 4;
-      border-radius: 10%;
+      border-radius: 10px;
+      padding: 10px;
+      margin-bottom: 10px;
       box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
     }
-    .event-form button[type=button] {
+    .large-button p {
+      margin: 0;
+    }
+    .filter-container {
+      margin-bottom: 10px;
+    }
+    .filter-container input[type="text"] {
+      padding: 5px;
+    }
+    .filter-container button[type="button"] {
+      padding: 5px 10px;
       background-color: #4CAF50;
-      color: #4CAF50;
+      color: white;
       border: none;
       cursor: pointer;
     }
-    .event-form button[type=button]:hover {
+    .filter-container button[type="button"]:hover {
       background-color: #45a049;
     }
   </style>
@@ -39,11 +48,12 @@
                 var assoContainer = document.getElementById('associations');
                 assos.forEach(function(asso) {
                   var assoButton = document.createElement('button');
-                  assoButton.className = 'asso';
+                  assoButton.className = 'large-button';
                   assoButton.innerHTML =
-                          `<p>ID: ${asso.AssoEtudianteID}</p>
-                            <p>Name: ${asso.AssoEtudianteNom}</p>
-                            <p>Faculte ID: ${asso.FaculteID}</p>`;
+                          `<p><strong>ID:</strong> ${asso.Asso_EtudianteID}</p>
+              <p><strong>Nom:</strong> ${asso.Asso_Etudiante_Nom}</p>
+              <p><strong>Faculte:</strong> ${asso.Faculte_Nom}</p>
+              <p><strong>Administrateur:</strong> ${asso.UsagerID}</p>`;
                   assoContainer.appendChild(assoButton);
                 });
               })
@@ -51,12 +61,29 @@
                 console.error(error);
               });
     }
+
+    function filterAsso() {
+      var input = document.getElementById('assoFilter').value.toLowerCase();
+      var assos = document.getElementsByClassName('large-button');
+      for (var i = 0; i < assos.length; i++) {
+        var assoName = assos[i].getElementsByTagName('p')[1].textContent.toLowerCase();
+        if (assoName.includes(input) || input === "") {
+          assos[i].style.display = 'block';
+        } else {
+          assos[i].style.display = 'none';
+        }
+      }
+    }
   </script>
 </head>
 <body onload="getAsso()">
 <h2>View All Asso</h2>
-<div class="large-button" id="associations">
-  <!-- Events will be displayed here -->
+<div class="filter-container">
+  <input type="text" id="assoFilter" placeholder="Filter by name">
+  <button type="button" onclick="filterAsso()">Filter</button>
+</div>
+<div id="associations">
+  <!-- Associations will be displayed here -->
 </div>
 </body>
 </html>
