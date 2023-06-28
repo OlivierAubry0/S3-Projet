@@ -16,3 +16,4 @@ public interface AssoMapper {
     @Select("SELECT * FROM BASE_DE_DONNE.les_associations")
     List<AssoEtudiante> getAllAsso();
 }
+

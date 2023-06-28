@@ -107,12 +107,13 @@
                 if (response.status === 201) {
                   alert("Association created!");
                   window.location.href = 'master_manager.html'; // Replace with the path to your main menu HTML file
-                } else {
+                }else {
                   alert(response.status);
                 }
               })
               .catch(function(error) {
                 console.error(error);
+                alert("Assurez vous que l'ID n'est pas deja utilise et que l'admin existe !");
               });
     }
 
