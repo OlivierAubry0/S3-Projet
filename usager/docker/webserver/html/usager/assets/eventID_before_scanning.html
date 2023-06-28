@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Entrez ID de l'event</title>
+    <style>
+        body {
+            font-family: "Lato", sans-serif;
+        }
+        .event-form {
+            width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .event-form select, .event-form button[type=button] {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .event-form button[type=button] {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .event-form button[type=button]:hover {
+            background-color: #45a049;
+        }
+    </style>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="http://localhost:8180/js/keycloak.js"></script>
+    <script>
+
+        function displayUserInfo() {
+            var token = keycloak.tokenParsed;
+            var name = token.name;
+
+            var userInfoList = document.createElement('ul');
+            var nameItem = document.createElement('li');
+            var rolesItem = document.createElement('li');
+
+            nameItem.textContent = 'Nom : \n' + name;
+            rolesItem.textContent =  'Role: Student';
+
+            userInfoList.appendChild(nameItem);
+            userInfoList.appendChild(rolesItem);
+
+            var userInfoDiv = document.getElementById('user-info');
+            userInfoDiv.innerHTML = ''; // Remove any existing content
+            userInfoDiv.appendChild(userInfoList);
+        }
+
+
+        var keycloak;
+        var accessToken
+
+        function initKeycloak() {
+            keycloak = new Keycloak({
+                "realm": "usager",
+                "auth-server-url": "http://localhost:8180/",
+                "ssl-required": "external",
+                "clientId": "frontend",
+                "public-client": true,
+                "confidential-port": 0
+            });
+            keycloak.init({ onLoad: 'login-required' })
+                .success(function (authenticated) {
+                    if (authenticated) {
+                        accessToken = keycloak.token;
+                        alert('authenticated');
+                        displayUserInfo();
+                    } else {
+                        alert('not authenticated');
+                    }
+                })
+                .error(function () {
+                    alert('failed to initialize');
+                });
+        }
+
+
+        function submitEventID() {
+            var EvenementID = document.getElementById('EvenementID').value;
+
+            var enter_eventID = {
+                EvenementID: EvenementID
+            };
+
+            axios.post('http://localhost:8888/api/scanning', enter_eventID, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + keycloak.token // Replace keycloak.token with your actual bearer token
+                }
+            })
+                .then(function(response) {
+                    if (response.status === 201) {
+                        alert("Evenement trouvé !");
+                        localStorage.setItem('EvenementID', enter_eventID.EvenementID);
+                        window.location.href = 'camera.html'; // Replace with the path to your main menu HTML file
+                    } else {
+                        alert(response.status);
+                    }
+                })
+                .catch(function(error) {
+                    console.error(error);
+                });
+        }
+
+
+    </script>
+</head>
+
+<body onload="initKeycloak()">
+<h2>Entrer ID de l'evenement</h2>
+<div class="event-form">
+    <form>
+
+        <input type="text" id="EvenementID" placeholder="Id de l'evenement">
+        <button type="button" onclick="submitEventID()">Suivant</button>
+
+    </form>
+</div>
+</body>
+</html>

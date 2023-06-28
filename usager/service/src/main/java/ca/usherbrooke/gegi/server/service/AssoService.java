@@ -20,7 +20,6 @@ public class AssoService {
 
     @Inject
     AssoMapper assomapper;
-
     @POST
     public Response createAsso(AssoEtudiante asso) {
         // Generate a UUID and set it as the eventId
