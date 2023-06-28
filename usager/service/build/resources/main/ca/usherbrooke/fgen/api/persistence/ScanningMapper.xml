@@ -5,7 +5,7 @@
 <mapper namespace="ca.usherbrooke.gegi.server.persistence.ScanningMapper">
 
     <select id="checkEventExistence" resultType="ca.usherbrooke.gegi.server.admin.Scanning">
-        SELECT COUNT(*) FROM BASE_DE_DONNE.evenement_programmes WHERE EvenementID = #{evenementID}
+        SELECT COUNT(*) FROM BASE_DE_DONNE.evenement_programmes WHERE EvenementID = #{EvenementID}
     </select>
 
 </mapper>

@@ -1,11 +1,13 @@
+package ca.usherbrooke.gegi.server.admin;
+
 public class Scanning {
-    public String evenementID;
+    public String EvenementID;
 
     public String getEvenementID() {
-        return evenementID;
+        return EvenementID;
     }
 
-    public void setEvenementID(String evenementID) {
-        this.evenementID = evenementID;
+    public void setEvenementID(String EvenementID) {
+        this.EvenementID = EvenementID;
     }
 }

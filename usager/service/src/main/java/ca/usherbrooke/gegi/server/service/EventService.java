@@ -2,9 +2,11 @@ package ca.usherbrooke.gegi.server.service;
 
 import ca.usherbrooke.gegi.server.admin.Event;
 import ca.usherbrooke.gegi.server.admin.Reservation;
+import ca.usherbrooke.gegi.server.admin.Scanning;
 import ca.usherbrooke.gegi.server.persistence.EventMapper;
 import ca.usherbrooke.gegi.server.persistence.ImageMapper;
 import ca.usherbrooke.gegi.server.persistence.ReservationMapper;
+import ca.usherbrooke.gegi.server.persistence.ScanningMapper;
 import org.apache.commons.io.IOUtils;
 import org.eclipse.microprofile.jwt.JsonWebToken;
 import org.jboss.logging.annotations.Param;
@@ -58,6 +60,8 @@ public class EventService {
     public List<Event> getAllEvents() {
         return eventMapper.getAllEvents();
     }
+    @Inject
+    ScanningMapper scanningMapper;
 
     @GET
     @Path("/events4genie")
@@ -65,4 +69,5 @@ public class EventService {
     public List<Event> getEventsGenie() {
         return eventMapper.getEventsGenie();
     }
+
 }
