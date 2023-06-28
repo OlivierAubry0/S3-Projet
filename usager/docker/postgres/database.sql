@@ -128,9 +128,16 @@ VALUES (1, 'Université A'),
        (3, 'Université C');
 
 INSERT INTO FACULTE (FaculteID, Faculte_Nom, UniversiteID)
+<<<<<<< HEAD
 VALUES (1, 'Science',1),
        (2, 'Medecine',1),
        (3, 'Droit',1);
+=======
+VALUES (1, 'Université A',1),
+       (2, 'Université B',1),
+       (3, 'Université C',1);
+
+>>>>>>> 9fdfad0b643f84951cec86ff39e0a9468af9b5ab
 
 INSERT INTO USAGER (UsagerID, Usager_Nom, Usager_Prenom, Usager_Photo, CodeQR, FaculteID)
 VALUES  ('admin1', 'nomadmin', 'prenomadmin', 'photoadmin', 0102, 1);

@@ -50,10 +50,16 @@
                   var assoButton = document.createElement('button');
                   assoButton.className = 'large-button';
                   assoButton.innerHTML =
+<<<<<<< HEAD
                           `<p><strong>ID:</strong> ${asso.Asso_EtudianteID}</p>
               <p><strong>Nom:</strong> ${asso.Asso_Etudiante_Nom}</p>
               <p><strong>Faculte:</strong> ${asso.Faculte_Nom}</p>
               <p><strong>Administrateur:</strong> ${asso.UsagerID}</p>`;
+=======
+                          `<p>ID: ${asso.Asso_EtudianteID}</p>
+                            <p>Name: ${asso.Asso_Etudiante_Nom}</p>
+                            <p>Faculte ID: ${asso.FaculteID}</p>`;
+>>>>>>> 9fdfad0b643f84951cec86ff39e0a9468af9b5ab
                   assoContainer.appendChild(assoButton);
                 });
               })
