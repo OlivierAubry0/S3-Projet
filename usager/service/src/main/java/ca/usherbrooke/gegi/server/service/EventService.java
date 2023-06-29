@@ -1,9 +1,13 @@
 package ca.usherbrooke.gegi.server.service;
 
 import ca.usherbrooke.gegi.server.admin.Event;
+import ca.usherbrooke.gegi.server.admin.Reservation;
+import ca.usherbrooke.gegi.server.admin.Scanning;
 import ca.usherbrooke.gegi.server.persistence.EventMapper;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.eclipse.microprofile.config.inject.ConfigProperty;
+import ca.usherbrooke.gegi.server.persistence.ImageMapper;
+import ca.usherbrooke.gegi.server.persistence.ReservationMapper;
+import ca.usherbrooke.gegi.server.persistence.ScanningMapper;
+import org.apache.commons.io.IOUtils;
 import org.eclipse.microprofile.jwt.JsonWebToken;
 import org.jboss.resteasy.plugins.providers.multipart.InputPart;
 import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataInput;
@@ -94,5 +98,6 @@ public class EventService {
     public List<Event> getEventsGenie() {
         return eventMapper.getEventsGenie();
     }
+
 }
 

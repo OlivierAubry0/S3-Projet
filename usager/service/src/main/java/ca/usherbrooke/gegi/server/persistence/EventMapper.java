@@ -1,7 +1,11 @@
 package ca.usherbrooke.gegi.server.persistence;
 
 import ca.usherbrooke.gegi.server.admin.Event;
-import org.apache.ibatis.annotations.*;
+import ca.usherbrooke.gegi.server.admin.Scanning;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
@@ -31,5 +35,6 @@ public interface EventMapper {
 
     @Select("SELECT * FROM BASE_DE_DONNE.evenement_programmes WHERE Asso_EtudianteID = 'AGEG'")
     List<Event> getEventsGenie();
+
 }
 
