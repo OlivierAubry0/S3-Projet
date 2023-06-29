@@ -60,8 +60,6 @@ public class EventService {
     public List<Event> getAllEvents() {
         return eventMapper.getAllEvents();
     }
-    @Inject
-    ScanningMapper scanningMapper;
 
     @GET
     @Path("/events4genie")

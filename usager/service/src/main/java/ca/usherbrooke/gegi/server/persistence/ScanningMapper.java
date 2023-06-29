@@ -9,6 +9,6 @@ import java.util.List;
 
 @Mapper
 public interface ScanningMapper {
-    @Select("SELECT COUNT(*) FROM BASE_DE_DONNE.evenement_programmes WHERE EvenementID = #{evenementID}")
-    List<Scanning> checkEventExistence(@Param("evenementID") String evenementID);
+    @Select("SELECT COUNT(*) FROM BASE_DE_DONNE.evenement_programmes WHERE EvenementID = #{EvenementID}")
+    int checkEventExistence(@Param("EvenementID") String EvenementID);
 }

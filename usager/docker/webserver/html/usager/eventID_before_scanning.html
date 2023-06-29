@@ -89,11 +89,7 @@
         function submitEventID() {
             var EvenementID = document.getElementById('EvenementID').value;
 
-            var enter_eventID = {
-                EvenementID: EvenementID
-            };
-
-            axios.post('http://localhost:8888/api/scanning', enter_eventID, {
+            axios.get('http://localhost:8888/api/scanning?EvenementID=' + encodeURIComponent(EvenementID), {
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': 'Bearer ' + keycloak.token // Replace keycloak.token with your actual bearer token
@@ -102,17 +98,16 @@
                 .then(function(response) {
                     if (response.status === 201) {
                         alert("Evenement trouvé !");
-                        localStorage.setItem('EvenementID', enter_eventID.EvenementID);
+                        localStorage.setItem('EvenementID', EvenementID);
                         window.location.href = 'camera.html'; // Replace with the path to your main menu HTML file
                     } else {
-                        alert(response.status);
+                        alert(response.status + ' evenement inexistant');
                     }
                 })
                 .catch(function(error) {
                     console.error(error);
                 });
         }
-
 
     </script>
 </head>
