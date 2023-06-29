@@ -17,12 +17,54 @@
     }
     .large-button p {
       margin: 0;
+      font-size: 16px;
+    }
+    .pop-up-container {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      z-index: 9999;
+    }
+    .pop-up-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0.8);
+      background-color: #f1f1f1;
+      color: #268018;
+      padding: 100px;
+      border-radius: 10px;
+      transition: transform 0.3s ease;
+    }
+    .pop-up-content.show {
+      transform: translate(-50%, -50%) scale(1);
+    }
+    .pop-up-content p {
+      margin: 10px 0;
+      font-size: 18px;
+    }
+    .pop-up-content button {
+      margin-top: 20px;
+      padding: 8px 16px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
     }
     .filter-container {
       margin-bottom: 10px;
     }
     .filter-container input[type="text"] {
-      padding: 5px;
+      padding: 15px;
     }
     .filter-container button[type="button"] {
       padding: 5px 10px;
@@ -37,6 +79,28 @@
   </style>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script>
+    function showAssoDetails(asso) {
+      var popUpContainer = document.getElementById('popUpContainer');
+      var popUpContent = document.getElementById('popUpContent');
+      var closeButton = document.createElement('button');
+      closeButton.textContent = 'Retour';
+      closeButton.addEventListener('click', function() {
+        popUpContainer.style.display = 'none';
+      });
+
+      popUpContent.innerHTML =
+              `<p><strong>ID:</strong> ${asso.Asso_EtudianteID}</p>
+         <p><strong>Nom:</strong> ${asso.Asso_Etudiante_Nom}</p>
+         <p><strong>Faculte:</strong> ${asso.Faculte_Nom}</p>
+         <p><strong>Administrateur:</strong> ${asso.UsagerID}</p>`;
+
+      popUpContent.appendChild(closeButton);
+      popUpContainer.style.display = 'flex';
+      setTimeout(function() {
+        popUpContent.classList.add('show');
+      }, 100);
+    }
+
     function getAsso() {
       axios.get('http://localhost:8888/api/Asso/getAsso', {
         headers: {
@@ -51,9 +115,13 @@
                   assoButton.className = 'large-button';
                   assoButton.innerHTML =
                           `<p><strong>ID:</strong> ${asso.Asso_EtudianteID}</p>
-              <p><strong>Nom:</strong> ${asso.Asso_Etudiante_Nom}</p>
-              <p><strong>Faculte:</strong> ${asso.Faculte_Nom}</p>
-              <p><strong>Administrateur:</strong> ${asso.UsagerID}</p>`;
+               <p><strong>Nom:</strong> ${asso.Asso_Etudiante_Nom}</p>
+               <p><strong>Faculte:</strong> ${asso.Faculte_Nom}</p>
+               <p><strong>Administrateur:</strong> ${asso.UsagerID}</p>`;
+
+                  assoButton.addEventListener('click', function() {
+                    showAssoDetails(asso);
+                  });
 
                   assoContainer.appendChild(assoButton);
                 });
@@ -85,6 +153,11 @@
 </div>
 <div id="associations">
   <!-- Associations will be displayed here -->
+</div>
+<div id="popUpContainer" class="pop-up-container">
+  <div id="popUpContent" class="pop-up-content">
+    <!-- Association details will be displayed here -->
+  </div>
 </div>
 </body>
 </html>
