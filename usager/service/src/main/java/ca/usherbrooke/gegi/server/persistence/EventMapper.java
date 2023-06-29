@@ -26,10 +26,10 @@ public interface EventMapper {
     })
     List<Event> getAllEvents();
 
-    @Select("SELECT * FROM BASE_DE_DONNE.evenement_programmes")
+    @Select("SELECT * FROM evenement_programmes")
     List<Event> getAllEventsProg();
 
-    @Select("SELECT * FROM BASE_DE_DONNE.evenement_programmes WHERE Asso_EtudianteID = 'AGEG'")
+    @Select("SELECT * FROM evenement_programmes WHERE Asso_EtudianteID = 'AGEG'")
     List<Event> getEventsGenie();
 
 }
