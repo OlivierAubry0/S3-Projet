@@ -2,6 +2,40 @@
 <html>
 <head>
   <title>Barcode Scanner</title>
+  <style>
+    body {
+      font-family: "Lato", sans-serif;
+    }
+    .event-form {
+      width: 500px;
+      margin: 0 auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+    .event-form select, .event-form button[type=button] {
+      width: 100%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+    .event-form button[type=button] {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    .event-form button[type=button]:hover {
+      background-color: #45a049;
+    }
+  </style>
+
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="http://localhost:8180/js/keycloak.js"></script>
 </head>
 <body>
 <h1>Barcode Scanner</h1>
@@ -10,7 +44,6 @@
 
 <script src="https://unpkg.com/html5-qrcode"></script>
 <script>
-
   function onScanSuccess(decodedText, decodedResult) {
     console.log(`Code scanned = ${decodedText}`, decodedResult);
   }
@@ -18,6 +51,109 @@
           "qr-reader", { fps: 10, qrbox: 250 });
   html5QrcodeScanner.render(onScanSuccess);
 
+  function displayUserInfo() {
+    var token = keycloak.tokenParsed;
+    var name = token.name;
+
+    var userInfoList = document.createElement('ul');
+    var nameItem = document.createElement('li');
+    var rolesItem = document.createElement('li');
+
+    nameItem.textContent = 'Nom : \n' + name;
+    rolesItem.textContent =  'Role: Student';
+
+    userInfoList.appendChild(nameItem);
+    userInfoList.appendChild(rolesItem);
+
+    var userInfoDiv = document.getElementById('user-info');
+    userInfoDiv.innerHTML = ''; // Remove any existing content
+    userInfoDiv.appendChild(userInfoList);
+  }
+
+
+  var keycloak;
+  var accessToken
+
+  function initKeycloak() {
+    keycloak = new Keycloak({
+      "realm": "usager",
+      "auth-server-url": "http://localhost:8180/",
+      "ssl-required": "external",
+      "clientId": "frontend",
+      "public-client": true,
+      "confidential-port": 0
+    });
+    keycloak.init({ onLoad: 'login-required' })
+            .success(function (authenticated) {
+              if (authenticated) {
+                accessToken = keycloak.token;
+                alert('authenticated');
+                displayUserInfo();
+              } else {
+                alert('not authenticated');
+              }
+            })
+            .error(function () {
+              alert('failed to initialize');
+            });
+  }
+
+
+  function CheckIfReserved() {
+    var EvenementID = localStorage.getItem('EvenementID');
+    var UsagerID = document.getElementById('UsagerID').value;
+
+    var reservationCheck = {
+      EvenementID: EvenementID,
+      UsagerID: UsagerID
+    };
+
+    var url = 'http://localhost:8888/api/scanning/checkUserReservation?EvenementID=' + encodeURIComponent(EvenementID) + '&UsagerID=' + encodeURIComponent(UsagerID);
+    axios.post(url, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+            .then(function(response) {
+              if (response.status === 201) {
+                var reservations = response.data;
+                if (reservations.length > 0) {
+                  var usersContainer = document.getElementById('users');
+                  usersContainer.innerHTML = ''; // Remove any existing content
+                  reservations.forEach(function (reservation) {
+                    var userButton = document.createElement('button');
+                    userButton.className = 'event';
+                    userButton.addEventListener('click', function () {
+                      localStorage.setItem('EvenementID', reservation.UsagerID);
+                      window.location.href = 'getTicket.html';
+                    });
+                    userButton.innerHTML =
+                            `<p>ID: ${reservation.UsagerID}</p>
+                        <p>Telephone de l'invité: ${reservation.Telephone_Invite}</p>
+                        <p>Nom de l'invité: ${reservation.Nom_Invite}</p>
+                        <p>Invité est-il validé? : ${reservation.Enregistration_Invite}</p>`;
+                    usersContainer.appendChild(userButton);
+                  });
+                } else {
+                  alert("Aucune réservation trouvée !");
+                }
+              } else {
+                alert(response.status);
+              }
+            })
+            .catch(function(error) {
+              console.error(error);
+            });
+  }
 </script>
+<div class="event-form">
+  <form>
+    <input type="text" id="UsagerID" placeholder="cip etudiant">
+    <button type="button" onclick="CheckIfReserved()">Suivant</button>
+  </form>
+</div>
+<div class="large-button" id="users">
+  <!-- Les événements seront affichés ici sous forme de boutons -->
+</div>
 </body>
 </html>

@@ -4,8 +4,13 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="ca.usherbrooke.gegi.server.persistence.ScanningMapper">
 
-    <select id="checkEventExistence" resultType="ca.usherbrooke.gegi.server.admin.Scanning">
+    <select id="checkEventExistence" resultType="int">
         SELECT COUNT(*) FROM BASE_DE_DONNE.evenement_programmes WHERE EvenementID = #{EvenementID}
     </select>
 
+    <select id="CheckUserReservation" resultType="ca.usherbrooke.gegi.server.admin.CheckIfUserReserved">
+        SELECT UsagerID, Telephone_Invite,Nom_Invite, Enregistration_Invite
+        FROM BASE_DE_DONNE.places_reserves
+        WHERE EvenementID = #{EvenementID} AND UsagerID = #{UsagerID}
+    </select>
 </mapper>
