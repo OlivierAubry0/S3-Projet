@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: io.smallrye:smallrye-jwt-common:3.3.3" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="io.smallrye" artifactId="smallrye-jwt-common" version="3.3.3" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.smallrye/smallrye-jwt-common/3.3.3/6c8880021fe357b30a5eab6d33a08cd86a66c4b3/smallrye-jwt-common-3.3.3.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.smallrye/smallrye-jwt-common/3.3.3/d2be208ea74ba17518f2fa3d34e743192a6ac2c8/smallrye-jwt-common-3.3.3-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

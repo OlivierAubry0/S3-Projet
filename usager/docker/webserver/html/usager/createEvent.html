@@ -93,25 +93,6 @@
   <script src="http://localhost:8180/js/keycloak.js"></script>
   <script>
 
-    function displayUserInfo() {
-      var token = keycloak.tokenParsed;
-      var name = token.name;
-
-      var userInfoList = document.createElement('ul');
-      var nameItem = document.createElement('li');
-      var rolesItem = document.createElement('li');
-
-      nameItem.textContent = 'Nom : \n' + name;
-      rolesItem.textContent =  'Role: Admin';
-
-      userInfoList.appendChild(nameItem);
-      userInfoList.appendChild(rolesItem);
-
-      var userInfoDiv = document.getElementById('user-info');
-      userInfoDiv.innerHTML = ''; // Remove any existing content
-      userInfoDiv.appendChild(userInfoList);
-    }
-
 
     var keycloak;
 

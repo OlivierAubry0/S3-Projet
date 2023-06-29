@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>View All Asso</title>
+  <style>
+    .large-button {
+      display: inline-block;
+      background-color: #f1f1f1;
+      color: #268018;
+      border: none;
+      text-align: center;
+      text-decoration: none;
+      cursor: pointer;
+      position: absolute;
+      z-index: 4;
+      border-radius: 10%;
+      box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    }
+    .event-form button[type=button] {
+      background-color: #4CAF50;
+      color: #4CAF50;
+      border: none;
+      cursor: pointer;
+    }
+    .event-form button[type=button]:hover {
+      background-color: #45a049;
+    }
+  </style>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script>
+    function getAsso() {
+      axios.get('http://localhost:8888/api/Asso/getAsso', {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+              .then(function(response) {
+                var assos = response.data;
+                var assoContainer = document.getElementById('associations');
+                assos.forEach(function(asso) {
+                  var assoButton = document.createElement('button');
+                  assoButton.className = 'asso';
+                  assoButton.innerHTML =
+                          `<p>ID: ${asso.AssoEtudianteID}</p>
+                            <p>Name: ${asso.AssoEtudianteNom}</p>
+                            <p>Faculte ID: ${asso.FaculteID}</p>`;
+                  assoContainer.appendChild(assoButton);
+                });
+              })
+              .catch(function(error) {
+                console.error(error);
+              });
+    }
+  </script>
+</head>
+<body onload="getAsso()">
+<h2>View All Asso</h2>
+<div class="large-button" id="associations">
+  <!-- Events will be displayed here -->
+</div>
+</body>
+</html>

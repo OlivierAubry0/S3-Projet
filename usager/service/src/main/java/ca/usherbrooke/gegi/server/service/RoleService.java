@@ -34,7 +34,7 @@ public class RoleService {
         p.email = (String)this.jwt.getClaim("email");
         Map realmAccess = (Map)this.jwt.getClaim("realm_access");
         if (realmAccess != null && realmAccess.containsKey("roles")) {
-            p.roles = (List)realmAccess.get("roles");
+            p.roles = (String) realmAccess.get("roles");
         }
 
         System.out.println(p);
@@ -52,7 +52,7 @@ public class RoleService {
         p.email = (String)this.jwt.getClaim("email");
         Map realmAccess = (Map)this.jwt.getClaim("realm_access");
         if (realmAccess != null && realmAccess.containsKey("roles")) {
-            p.roles = (List)realmAccess.get("roles");
+            p.roles = (String) realmAccess.get("roles");
         }
 
         System.out.println(p);
@@ -70,7 +70,7 @@ public class RoleService {
         p.email = (String)this.jwt.getClaim("email");
         Map realmAccess = (Map)this.jwt.getClaim("realm_access");
         if (realmAccess != null && realmAccess.containsKey("roles")) {
-            p.roles = (List)realmAccess.get("roles");
+            p.roles = (String) realmAccess.get("roles");
         }
 
         System.out.println(p);

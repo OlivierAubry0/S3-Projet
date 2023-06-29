@@ -1,9 +1,16 @@
 package ca.usherbrooke.gegi.server.service;
 
 import ca.usherbrooke.gegi.server.admin.Event;
+import ca.usherbrooke.gegi.server.admin.Reservation;
 import ca.usherbrooke.gegi.server.persistence.EventMapper;
+<<<<<<< HEAD
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
+=======
+import ca.usherbrooke.gegi.server.persistence.ImageMapper;
+import ca.usherbrooke.gegi.server.persistence.ReservationMapper;
+import org.apache.commons.io.IOUtils;
+>>>>>>> Enes_test
 import org.eclipse.microprofile.jwt.JsonWebToken;
 import org.jboss.resteasy.plugins.providers.multipart.InputPart;
 import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataInput;
@@ -80,6 +87,23 @@ public class EventService {
         }
     }
 
+<<<<<<< HEAD
+=======
+    @POST
+    @Path("/uploadImage")
+    @Consumes(MediaType.APPLICATION_OCTET_STREAM)
+    public Response uploadImage(Blob imageData) {
+        // Generate a UUID for the image ID
+        String imageId = UUID.randomUUID().toString();
+        // Insert the image into the database using the mapper
+        imageMapper.insertImage(imageId, imageData);
+
+        return Response.status(Response.Status.CREATED).entity("Image uploaded successfully.").build();
+    }
+
+
+
+>>>>>>> Enes_test
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<Event> getAllEvents() {
@@ -87,6 +111,15 @@ public class EventService {
         return events;
     }
 
+<<<<<<< HEAD
 
+=======
+    @GET
+    @Path("/events4genie")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Event> getEventsGenie() {
+        return eventMapper.getEventsGenie();
+    }
+>>>>>>> Enes_test
 }
 

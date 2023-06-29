@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Obtenir billet</title>
+  <style>
+    body {
+      font-family: "Lato", sans-serif;
+    }
+    .event-form {
+      width: 500px;
+      margin: 0 auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+    .event-form select, .event-form button[type=button] {
+      width: 100%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+    .event-form button[type=button] {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    .event-form button[type=button]:hover {
+      background-color: #45a049;
+    }
+  </style>
+
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="http://localhost:8180/js/keycloak.js"></script>
+  <script>
+
+    function displayUserInfo() {
+      var token = keycloak.tokenParsed;
+      var name = token.name;
+
+      var userInfoList = document.createElement('ul');
+      var nameItem = document.createElement('li');
+      var rolesItem = document.createElement('li');
+
+      nameItem.textContent = 'Nom : \n' + name;
+      rolesItem.textContent =  'Role: Student';
+
+      userInfoList.appendChild(nameItem);
+      userInfoList.appendChild(rolesItem);
+
+      var userInfoDiv = document.getElementById('user-info');
+      userInfoDiv.innerHTML = ''; // Remove any existing content
+      userInfoDiv.appendChild(userInfoList);
+    }
+
+
+    var keycloak;
+    var accessToken
+
+    function initKeycloak() {
+      keycloak = new Keycloak({
+        "realm": "usager",
+        "auth-server-url": "http://localhost:8180/",
+        "ssl-required": "external",
+        "clientId": "frontend",
+        "public-client": true,
+        "confidential-port": 0
+      });
+      keycloak.init({ onLoad: 'login-required' })
+              .success(function (authenticated) {
+                if (authenticated) {
+                  accessToken = keycloak.token;
+                  alert('authenticated');
+                  displayUserInfo();
+                } else {
+                  alert('not authenticated');
+                }
+              })
+              .error(function () {
+                alert('failed to initialize');
+              });
+    }
+
+    function toggleSubMenuGuests() {
+      var checkbox = document.getElementById("checkbox");
+      var sousMenu = document.getElementById("sous-menu");
+
+      if (checkbox.checked) {
+        sousMenu.style.display = "block";
+      } else {
+        sousMenu.style.display = "none";
+      }
+    }
+
+    function submitReservation() {
+      var tokenData = keycloak.tokenParsed;
+      var Checkbox = document.getElementById('checkbox');
+      var EvenementID = localStorage.getItem('EvenementID');
+      var UsagerID = tokenData.preferred_username;
+      var Telephone_Invite = document.getElementById('Telephone_Invite').value;
+      var Nom_Invite = document.getElementById('Nom_Invite').value;
+      var Enregistration_Invite = false;
+
+      var reservation = {
+        EvenementID: EvenementID,
+        UsagerID: UsagerID,
+        Telephone_Invite: Telephone_Invite,
+        Nom_Invite: Nom_Invite,
+        Enregistration_Invite: Enregistration_Invite
+      };
+
+      if (Checkbox.checked && (Telephone_Invite === '' || Nom_Invite === '')) {
+        alert("Veuillez remplir tous les champs obligatoires.");
+        return;
+      }
+
+      axios.post('http://localhost:8888/api/reservations', reservation, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + keycloak.token // Replace keycloak.token with your actual bearer token
+        }
+      })
+              .then(function(response) {
+                if (response.status === 201) {
+                  alert("Reservation faite !");
+                  window.location.href = 'pc_HomePage.html'; // Replace with the path to your main menu HTML file
+                } else {
+                  alert(response.status);
+                }
+              })
+              .catch(function(error) {
+                console.error(error);
+              });
+    }
+
+  </script>
+</head>
+
+<body onload="initKeycloak()">
+<h2>Obtenir un billet</h2>
+<div class="event-form">
+  <form>
+    <input type="checkbox" id="checkbox" onclick="toggleSubMenuGuests()">
+    <label for="checkbox">J'invite quelqu'un!            (Optionnel)</label>
+    <div id="sous-menu" style="display: none;">
+      <input type="text" id="Nom_Invite" placeholder="Nom de invite">
+      <input type="text" id="Telephone_Invite" placeholder="Numero de telephone">
+    </div>
+    <button type="button" onclick="submitReservation()">Reserver</button>
+
+  </form>
+</div>
+</body>
+</html>
