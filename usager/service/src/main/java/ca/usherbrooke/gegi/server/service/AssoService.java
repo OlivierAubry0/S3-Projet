@@ -3,7 +3,6 @@ package ca.usherbrooke.gegi.server.service;
 import ca.usherbrooke.gegi.server.admin.AssoEtudiante;
 import ca.usherbrooke.gegi.server.persistence.AssoMapper;
 
-import org.apache.ibatis.annotations.Delete;
 import org.eclipse.microprofile.jwt.JsonWebToken;
 
 import javax.inject.Inject;
@@ -29,11 +28,6 @@ public class AssoService {
 
         assomapper.insertAsso(asso);
         return Response.status(Response.Status.CREATED).entity(asso).build();
-    }
-    @DELETE
-    public Response deleteAsso(AssoEtudiante asso) {
-        assomapper.deleteAsso(asso);
-        return Response.status(Response.Status.OK).build();
     }
 
     @GET

@@ -11,11 +11,6 @@
             (#{Asso_EtudianteID}, #{Asso_Etudiante_Nom}, #{FaculteID}, #{UsagerID})
     </insert>
 
-    <delete id="deleteAsso" parameterType="ca.usherbrooke.gegi.server.admin.AssoEtudiante">
-        DELETE FROM BASE_DE_DONNE.ASSO_ETUDIANTE
-        WHERE Asso_EtudianteID = #{Asso_EtudianteID}
-    </delete>
-
     <select id="getAllAsso" resultType="ca.usherbrooke.gegi.server.admin.AssoEtudiante">
         SELECT * FROM BASE_DE_DONNE.les_associations
     </select>
