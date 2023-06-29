@@ -1,6 +1,7 @@
 package ca.usherbrooke.gegi.server.persistence;
 
 import ca.usherbrooke.gegi.server.admin.AssoEtudiante;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -12,6 +13,10 @@ public interface AssoMapper {
 
     @Insert("INSERT INTO BASE_DE_DONNE.ASSO_ETUDIANTE (Asso_EtudianteID, Asso_Etudiante_Nom, FaculteID, UsagerID) VALUES(#{Asso_EtudianteID}, #{Asso_Etudiante_Nom}, #{FaculteID}, #{UsagerID})")
     void insertAsso(AssoEtudiante asso);
+
+    @Delete("DELETE FROM BASE_DE_DONNE.ASSO_ETUDIANTE WHERE Asso_EtudianteID = #{Asso_EtudianteID}")
+    void deleteAsso(AssoEtudiante asso);
+
 
     @Select("SELECT * FROM BASE_DE_DONNE.les_associations")
     List<AssoEtudiante> getAllAsso();
