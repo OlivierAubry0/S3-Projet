@@ -11,7 +11,6 @@ public interface EventMapper {
     @Insert("INSERT INTO BASE_DE_DONNE.EVENEMENT (EvenementID, Evenement_Nom, Evenement_Date, Evenement_Debut, Evenement_Fin, Asso_EtudianteID, Nombre_Places, Allow_Guests, Description, filename) VALUES(#{evenementID}, #{evenementNom}, #{evenementDate}, #{evenementDebut}, #{evenementFin}, #{assoEtudianteID}, #{nombrePlaces}, #{allowGuests}, #{description}, #{filename})")
     void insertEvent(Event event);
 
-<<<<<<< HEAD
     @Select("SELECT * FROM BASE_DE_DONNE.EVENEMENT")
     @Results({
             @Result(property = "evenementID", column = "EvenementID"),
@@ -25,10 +24,10 @@ public interface EventMapper {
             @Result(property = "description", column = "Description"),
             @Result(property = "filename", column = "filename")
     })
-=======
-    @Select("SELECT * FROM BASE_DE_DONNE.evenement_programmes")
->>>>>>> Enes_test
     List<Event> getAllEvents();
+
+    @Select("SELECT * FROM BASE_DE_DONNE.evenement_programmes")
+    List<Event> getAllEventsProg();
 
     @Select("SELECT * FROM BASE_DE_DONNE.evenement_programmes WHERE Asso_EtudianteID = 'AGEG'")
     List<Event> getEventsGenie();
