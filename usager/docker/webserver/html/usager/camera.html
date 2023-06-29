@@ -10,6 +10,8 @@
 
   <meta name="viewport" content="width=device-width; initial-scale=1.0; user-scalable=no" />
   <link rel="stylesheet" type="text/css" href="css/styles.css" />
+
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 
 <body>
@@ -104,6 +106,15 @@
   </div>
   <div id="interactive" class="viewport"></div>
 </section>
+
+<div class="event-form">
+  <form>
+    <input type="text" id="UsagerID" placeholder="cip etudiant">
+    <button type="button" onclick="CheckIfReserved()">Suivant</button>
+  </form>
+</div>
+<div class="large-button" id="users">
+
 <footer>
   <p>
     &copy; Made with ❤️ by Christoph Oberhofer
@@ -114,5 +125,57 @@
 <script src="//webrtc.github.io/adapter/adapter-latest.js" type="text/javascript"></script>
 <script src="../dist/quagga.js" type="text/javascript"></script>
 <script src="live_w_locator.js" type="text/javascript"></script>
+<script>
+
+  function CheckIfReserved() {
+    var EvenementID = localStorage.getItem('EvenementID');
+    var UsagerID = document.getElementById('UsagerID').value;
+
+    var reservationCheck = {
+      EvenementID: EvenementID,
+      UsagerID: UsagerID
+    };
+
+    var url = 'http://localhost:8888/api/scanning/checkUserReservation?EvenementID=' + encodeURIComponent(EvenementID) + '&UsagerID=' + encodeURIComponent(UsagerID);
+    axios.post(url, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+            .then(function(response) {
+              if (response.status === 201) {
+                var reservations = response.data;
+                if (reservations.length > 0) {
+                  var usersContainer = document.getElementById('users');
+                  usersContainer.innerHTML = ''; // Remove any existing content
+                  reservations.forEach(function (reservation) {
+                    var userButton = document.createElement('button');
+                    userButton.className = 'event';
+                    userButton.addEventListener('click', function () {
+                      localStorage.setItem('EvenementID', reservation.UsagerID);
+                      window.location.href = 'getTicket.html';
+                    });
+                    userButton.innerHTML =
+                            `<p>ID: ${reservation.UsagerID}</p>
+                        <p>Telephone de l'invité: ${reservation.Telephone_Invite}</p>
+                        <p>Nom de l'invité: ${reservation.Nom_Invite}</p>
+                        <p>Invité est-il validé? : ${reservation.Enregistration_Invite}</p>`;
+                    usersContainer.appendChild(userButton);
+                  });
+                } else {
+                  alert("Aucune réservation trouvée !");
+                }
+              } else {
+                alert(response.status);
+              }
+            })
+            .catch(function(error) {
+              console.error(error);
+            });
+  }
+
+</script>
+
 </body>
+
 </html>
