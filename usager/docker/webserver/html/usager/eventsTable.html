@@ -34,28 +34,31 @@
                 events.forEach(function(event) {
                     var eventDiv = document.createElement('div');
                     eventDiv.className = 'event';
-                    eventDiv.innerHTML =
-                        `<p>ID: ${event.evenementID}</p>
-             <p>Name: ${event.evenementNom}</p>
-             <p>Date: ${event.evenementDate}</p>
-             <p>Start: ${event.evenementDebut}</p>
-             <p>End: ${event.evenementFin}</p>
-             <p>Association ID: ${event.assoEtudianteID}</p>
-             <p>Number of Places: ${event.nombrePlaces}</p>
-             <p>Allow Guests: ${event.allowGuests}</p>
-             <p>Description: ${event.description}</p>
-             <img src="http://localhost:8080/${event.filename}" alt="Event Image" />`; // Assumes the 'filename' property contains the image URL
-
+                    eventDiv.innerHTML = `
+                    <form style="max-width: 600px; word-break: break-word; overflow: auto; max-height: 100%">
+                        <p><strong>Event Name:</strong>${event.evenementNom}</span></p>
+                        <p><strong>Date:</strong> <span>${event.evenementDate}</p>
+                        <p><strong>Start Time: </strong>${event.evenementDebut}</p>
+                        <p><strong>End Time: </strong>${event.evenementFin}</p>
+                        <p><strong>Number of Places: </strong>${event.nombrePlaces}</p>
+                        <p><strong>Allow Guests: </strong>${event.allowGuests ? 'Yes' : 'No'}</p>
+                        <pre style="font-family: Arial"><strong>Description: </strong>${event.description}</pre>
+                    </form>
+                    <img id="preview-image" src="http://localhost:8080/${event.filename}" alt="Event Image"
+                         style=" height: 300px; right: 1%;" onclick="window.location.href = 'getTicket.html'">
+                    `; // Assumes the 'filename' property contains the image URL
                     eventsContainer.appendChild(eventDiv);
+                    localStorage.setItem('EvenementID', event.evenementID);
                 });
             })
             .catch(function(error) {
                 console.error(error);
             });
     }
-
-    // Call the getEvents function to retrieve and display the events
     getEvents();
 </script>
 </body>
 </html>
+
+
+

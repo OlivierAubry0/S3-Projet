@@ -24,7 +24,7 @@ public class Event {
         this.evenementDebut = eventStart;
         this.evenementFin = eventEnd;
         this.assoEtudianteID = studentAssociationId;
-        this.nombrePlaces = nombrePlaces;
+        this.nombrePlaces = Integer.parseInt(nombrePlaces);
         this.Allow_Guests = Allow_Guests;
         this.description = description;
         this.filename = filename;
