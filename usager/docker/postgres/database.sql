@@ -126,8 +126,8 @@ CREATE TABLE FACULTE_POSSEDE_ASSO
 
 -----------------------------------
 INSERT INTO UNIVERSITE (UniversiteID, Universite_Nom)
-VALUES (1, 'Université de Sherbrooke'),
-       (2, 'Université Laval');
+VALUES (1, 'Université de sd'),
+       (2, 'Université sd');
 
 INSERT INTO FACULTE (FaculteID, Faculte_Nom, UniversiteID)
 VALUES (4028, 'Faculte de Genie', 1),
@@ -146,3 +146,4 @@ VALUES (1, 'Association 1', 1),
        (2, 'Association 2', 2),
        (3, 'Association 3', 3);
 
+delete from UNIVERSITE where Universite_Nom='Université de Sherbrooke'
