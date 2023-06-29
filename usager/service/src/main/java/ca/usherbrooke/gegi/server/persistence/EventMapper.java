@@ -31,5 +31,6 @@ public interface EventMapper {
 
     @Select("SELECT * FROM BASE_DE_DONNE.evenement_programmes WHERE Asso_EtudianteID = 'AGEG'")
     List<Event> getEventsGenie();
+
 }
 

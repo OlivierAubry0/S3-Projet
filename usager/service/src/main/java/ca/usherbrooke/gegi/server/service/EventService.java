@@ -94,5 +94,6 @@ public class EventService {
     public List<Event> getEventsGenie() {
         return eventMapper.getEventsGenie();
     }
+
 }
 
