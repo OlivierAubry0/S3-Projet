@@ -1,3 +1,5 @@
+
+
 CREATE VIEW evenement_programmes AS
     SELECT *
 FROM base_de_donne.evenement;
@@ -14,7 +16,7 @@ FROM base_de_donne.usager_possede_privilege;
 
 CREATE VIEW les_associations AS
 SELECT Asso_EtudianteID, Asso_Etudiante_Nom, FaculteID
-FROM ASSO_ETUDIANTE
+FROM base_de_donne.ASSO_ETUDIANTE
 
 ----------------------comment appeler la vue ? ---------------------------------------------
 --SELECT * FROM evenement_programmes;--
