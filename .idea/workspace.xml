@@ -9,6 +9,7 @@
       <change afterPath="$PROJECT_DIR$/usager/service/src/main/java/ca/usherbrooke/gegi/server/admin/CheckIfUserReserved.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/usager/docker/webserver/html/usager/assets/eventID_before_scanning.html" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/usager/docker/webserver/html/usager/camera.html" beforeDir="false" afterPath="$PROJECT_DIR$/usager/docker/webserver/html/usager/camera.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/usager/service/.gradle/7.4/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/.gradle/7.4/checksums/checksums.lock" afterDir="false" />
@@ -27,6 +28,17 @@
       <change beforePath="$PROJECT_DIR$/usager/service/src/main/java/ca/usherbrooke/gegi/server/persistence/ScanningMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/src/main/java/ca/usherbrooke/gegi/server/persistence/ScanningMapper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/usager/service/src/main/java/ca/usherbrooke/gegi/server/service/ScanningService.java" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/src/main/java/ca/usherbrooke/gegi/server/service/ScanningService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/usager/service/src/main/resources/ca/usherbrooke/fgen/api/persistence/ScanningMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/src/main/resources/ca/usherbrooke/fgen/api/persistence/ScanningMapper.xml" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/usager/docker/keycloak/startup-scripts/init.sh" beforeDir="false" afterPath="$PROJECT_DIR$/usager/docker/keycloak/startup-scripts/init.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/docker/webserver/html/usager/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/usager/docker/webserver/html/usager/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/docker/webserver/html/usager/pc_HomePage.html" beforeDir="false" afterPath="$PROJECT_DIR$/usager/docker/webserver/html/usager/pc_HomePage.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/service/.gradle/7.4/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/.gradle/7.4/checksums/checksums.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/service/.gradle/7.4/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/.gradle/7.4/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/service/.gradle/7.4/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/.gradle/7.4/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/service/.gradle/7.4/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/.gradle/7.4/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/service/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/service/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/.gradle/file-system.probe" afterDir="false" />
+>>>>>>> oli-database
     </list>
     <list id="369c521e-6498-4c34-9420-4a88351b04df" name="Changes by newto" comment="" />
     <list id="132ce79e-c3a8-42e5-aa9e-005f3e61ba33" name="Changes by ycast" comment="" />
@@ -101,6 +113,7 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
+<<<<<<< HEAD
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "ASKED_ADD_EXTERNAL_FILES": "true",
@@ -124,6 +137,29 @@
     "project.structure.side.proportion": "0.2",
     "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle",
     "vue.rearranger.settings.migration": "true"
+=======
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;yorman__XOXOX&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/olivi/git/S3-Projet/usager/service&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;configurable.group.editor&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+>>>>>>> oli-database
   },
   "keyToStringList": {
     "DatabaseDriversLRU": [
@@ -145,7 +181,11 @@
       <recent name="C:\Users\ycast\Desktop\Genie_Info\SESSION3\PROJET\Git\S3-Projet\usager\docker\webserver\html\usager" />
     </key>
   </component>
+<<<<<<< HEAD
   <component name="RunManager" selected="Quarkus.service.main (1)">
+=======
+  <component name="RunManager" selected="Quarkus.usager.service.main">
+>>>>>>> oli-database
     <configuration name="database.sql" type="DatabaseScript" editBeforeRun="true" temporary="true" nameIsGenerated="true">
       <script-file value="$PROJECT_DIR$/usager/docker/postgres/database.sql" />
       <script-mode>FILE</script-mode>
@@ -158,6 +198,7 @@
       <data-source id="7518f93b-754c-485e-bb1e-76f64c371c23" />
       <method v="2" />
     </configuration>
+<<<<<<< HEAD
     <configuration name="service [assemble]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -181,7 +222,19 @@
       <method v="2" />
     </configuration>
     <configuration name="service.main (1)" type="QuarkusRunConfigurationType" factoryName="Quarkus" nameIsGenerated="true">
+=======
+    <configuration name="pc_HomePage.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/service/usager/docker/webserver/html/usager/pc_HomePage.html" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
+    <configuration name="service.main" type="QuarkusRunConfigurationType" factoryName="Quarkus">
+>>>>>>> oli-database
       <module name="service.main" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="usager.service.main" type="QuarkusRunConfigurationType" factoryName="Quarkus" nameIsGenerated="true">
+      <module name="usager.service.main" />
       <QsGradleRunConfiguration>
         <ExternalSystemSettings>
           <option name="executionName" />
@@ -245,15 +298,24 @@
     <list>
       <item itemvalue="Database Script.database.sql" />
       <item itemvalue="Database Script.init.sql" />
+<<<<<<< HEAD
       <item itemvalue="Gradle.service [assemble]" />
       <item itemvalue="Quarkus.service.main (1)" />
+=======
+      <item itemvalue="JavaScript Debug.pc_HomePage.html" />
+      <item itemvalue="Quarkus.usager.service.main" />
+>>>>>>> oli-database
       <item itemvalue="Quarkus.service.main" />
       <item itemvalue="Shell Script.init.sh" />
       <item itemvalue="Shell Script.setdata.sh" />
     </list>
     <recent_temporary>
       <list>
+<<<<<<< HEAD
         <item itemvalue="Gradle.service [assemble]" />
+=======
+        <item itemvalue="JavaScript Debug.pc_HomePage.html" />
+>>>>>>> oli-database
         <item itemvalue="Shell Script.setdata.sh" />
         <item itemvalue="Shell Script.init.sh" />
         <item itemvalue="Database Script.database.sql" />
@@ -280,14 +342,32 @@
       <workItem from="1686277672313" duration="3464000" />
       <workItem from="1686281440487" duration="12893000" />
       <workItem from="1686314765340" duration="2258000" />
+<<<<<<< HEAD
       <workItem from="1687934133030" duration="8075000" />
       <workItem from="1687942310050" duration="1863000" />
       <workItem from="1687979399380" duration="31691000" />
+=======
+      <workItem from="1687013369134" duration="59000" />
+      <workItem from="1687013436430" duration="1836000" />
+      <workItem from="1687015302805" duration="183000" />
+      <workItem from="1687015500386" duration="875000" />
+>>>>>>> oli-database
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
