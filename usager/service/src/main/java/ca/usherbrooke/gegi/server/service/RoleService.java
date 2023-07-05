@@ -1,8 +1,8 @@
 package ca.usherbrooke.gegi.server.service;
 
-import ca.usherbrooke.gegi.server.business.Person;
-import java.util.List;
-import java.util.Map;
+import ca.usherbrooke.gegi.server.admin.Person;
+import org.eclipse.microprofile.jwt.JsonWebToken;
+
 import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
@@ -11,7 +11,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.SecurityContext;
-import org.eclipse.microprofile.jwt.JsonWebToken;
+import java.util.List;
+import java.util.Map;
 
 @Path("/api")
 @Produces({"application/json"})
@@ -33,7 +34,7 @@ public class RoleService {
         p.email = (String)this.jwt.getClaim("email");
         Map realmAccess = (Map)this.jwt.getClaim("realm_access");
         if (realmAccess != null && realmAccess.containsKey("roles")) {
-            p.roles = (List)realmAccess.get("roles");
+            p.roles = (String) realmAccess.get("roles");
         }
 
         System.out.println(p);
@@ -51,7 +52,7 @@ public class RoleService {
         p.email = (String)this.jwt.getClaim("email");
         Map realmAccess = (Map)this.jwt.getClaim("realm_access");
         if (realmAccess != null && realmAccess.containsKey("roles")) {
-            p.roles = (List)realmAccess.get("roles");
+            p.roles = (String) realmAccess.get("roles");
         }
 
         System.out.println(p);
@@ -69,7 +70,7 @@ public class RoleService {
         p.email = (String)this.jwt.getClaim("email");
         Map realmAccess = (Map)this.jwt.getClaim("realm_access");
         if (realmAccess != null && realmAccess.containsKey("roles")) {
-            p.roles = (List)realmAccess.get("roles");
+            p.roles = (String) realmAccess.get("roles");
         }
 
         System.out.println(p);
