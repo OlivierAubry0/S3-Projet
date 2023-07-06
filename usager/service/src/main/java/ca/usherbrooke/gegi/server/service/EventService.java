@@ -75,14 +75,6 @@ public class EventService {
     @Produces(MediaType.APPLICATION_JSON)
     public Response CheckMyEvents(@QueryParam("UsagerID") String UsagerID) {
         List<CheckMyEvents> MyEvents = eventMapper.CheckMyEvents(UsagerID);
-        if(MyEvents.isEmpty()){
-            return Response.status(Response.Status.METHOD_NOT_ALLOWED).entity(UsagerID).build();
-        }
-        else{
             return Response.status(Response.Status.CREATED).entity(MyEvents).build();
-        }
     }
-
-
-
 }
