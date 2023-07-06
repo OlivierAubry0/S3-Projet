@@ -9,4 +9,6 @@ import java.util.List;
 public interface UniversityMapper {
     @Select("SELECT * FROM BASE_DE_DONNE.UNIVERSITE")
     List<University> getAllUniversitiesNames();
+
+
 }

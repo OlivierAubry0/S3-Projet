@@ -72,21 +72,36 @@ public class KeycloakTokenScript {
             JSONArray usersArray = new JSONArray(output.toString());
             for (int i = 0; i < usersArray.length(); i++) {
                 JSONObject user = usersArray.getJSONObject(i);
+                String username = user.getString("username");
+                String email = user.getString("email");
+                String firstName = user.getString("firstName");
+                String lastName = user.getString("lastName");
+                String userId = user.getString("id");
+                System.out.println("  ");
+
                 System.out.println("Username: " + user.getString("username"));
                 System.out.println("Email: " + user.getString("email"));
                 System.out.println("First Name: " + user.getString("firstName"));
                 System.out.println("Last Name: " + user.getString("lastName"));
-                String userId = user.getString("id");
-                getUserRoles(token, userId);
-                getUserGroups(token, userId);
-                System.out.println("  ");
+                // get the user's roles
+                JSONArray rolesArray = getUserRoles(token, userId);
+                String role = (rolesArray.length() > 0) ? rolesArray.getJSONObject(0).getString("name") : null;
+
+                // get the user's groups
+                JSONArray groupsArray = getUserGroups(token, userId);
+                String groupName = (groupsArray.length() > 0) ? groupsArray.getJSONObject(0).getString("name") : null;
+
+                // insert the user into the usager table
+                insertUser(userId, lastName, firstName, role, groupName);
+
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public static void getUserRoles(String token, String userId) {
+    public static JSONArray getUserRoles(String token, String userId) {
+        JSONArray rolesArray= null;
         try {
             URL url = new URL("http://localhost:8180/admin/realms/usager/users/" + userId + "/role-mappings/realm");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -102,7 +117,7 @@ public class KeycloakTokenScript {
             }
             br.close();
 
-            JSONArray rolesArray = new JSONArray(output.toString());
+            rolesArray = new JSONArray(output.toString());
             System.out.println("Roles:");
             for (int i = 0; i < rolesArray.length(); i++) {
                 JSONObject role = rolesArray.getJSONObject(i);
@@ -111,9 +126,11 @@ public class KeycloakTokenScript {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return rolesArray;
     }
 
-    public static void getUserGroups(String token, String userId) {
+    public static JSONArray getUserGroups(String token, String userId) {
+        JSONArray groupsArray= null;
         try {
             URL url = new URL("http://localhost:8180/admin/realms/usager/users/" + userId + "/groups");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -129,20 +146,22 @@ public class KeycloakTokenScript {
             }
             br.close();
 
-            JSONArray groupsArray = new JSONArray(output.toString());
+            groupsArray = new JSONArray(output.toString());
             System.out.println("Groups:");
             for (int i = 0; i < groupsArray.length(); i++) {
                 JSONObject group = groupsArray.getJSONObject(i);
                 System.out.println("- " + group.getString("name"));
+                String groupName = group.getString("name");
                 String groupId = group.getString("id");
-                getGroupSubGroups(token, groupId);
+                getGroupSubGroups(token, groupId, groupName);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return groupsArray;
     }
 
-    public static void getGroupSubGroups(String token, String groupId) {
+    public static void getGroupSubGroups(String token, String groupId, String groupName) {
         try {
             URL url = new URL("http://localhost:8180/admin/realms/usager/groups/" + groupId);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -161,10 +180,16 @@ public class KeycloakTokenScript {
             JSONObject group = new JSONObject(output.toString());
             if(group.has("subGroups")) {
                 JSONArray subGroupsArray = group.getJSONArray("subGroups");
+                if(subGroupsArray.length() >= 2 && !universiteExists(groupName)) {
+                    insertUniversite(groupName);
+                }
                 System.out.println("Sub-Groups:");
                 for (int i = 0; i < subGroupsArray.length(); i++) {
                     JSONObject subGroup = subGroupsArray.getJSONObject(i);
                     System.out.println("- " + subGroup.getString("name"));
+                    if (!facultyExists(subGroup.getString("name"), groupName)) {
+                        insertFaculty(subGroup.getString("name"), groupName);
+                    }
                 }
             }
         } catch (Exception e) {
@@ -172,56 +197,158 @@ public class KeycloakTokenScript {
         }
     }
 
-    public static boolean isGroupExists(String groupName) {
+
+
+    public static void insertUniversite(String universiteNom) throws Exception {
         try {
-            Connection conn = getConnection(); // Establish a database connection
-            String query = "SELECT COUNT(*) FROM universite WHERE Universite_Nom = ?";
-            PreparedStatement stmt = null;
-            try {
-                stmt = conn.prepareStatement(query);
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
+            Connection con = getConnection();
+
+            String selectQuery = "SELECT * FROM base_de_donne.universite WHERE Universite_Nom = ?";
+            PreparedStatement selectPreparedStatement = con.prepareStatement(selectQuery);
+            selectPreparedStatement.setString(1, universiteNom);
+
+            ResultSet resultSet = selectPreparedStatement.executeQuery();
+
+            if(!resultSet.next()) {
+                String insertQuery = "INSERT INTO base_de_donne.universite (UniversiteID, Universite_Nom) VALUES (?, ?)";
+
+                // create the java statement
+                PreparedStatement insertPreparedStatement = con.prepareStatement(insertQuery);
+
+                int universiteID = generateRandom4DigitKey();
+                insertPreparedStatement.setInt(1, universiteID);
+                insertPreparedStatement.setString(2, universiteNom);
+
+                // execute the insert query
+                insertPreparedStatement.executeUpdate();
             }
-            stmt.setString(2, groupName);
-            ResultSet rs = stmt.executeQuery();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void insertFaculty(String facultyName, String universityName) throws Exception {
+        try {
+            Connection con = getConnection();
+
+            String selectUniversityQuery = "SELECT UniversiteID FROM base_de_donne.universite WHERE Universite_Nom = ?";
+            PreparedStatement selectUniversityPreparedStatement = con.prepareStatement(selectUniversityQuery);
+            selectUniversityPreparedStatement.setString(1, universityName);
+
+            ResultSet universityResultSet = selectUniversityPreparedStatement.executeQuery();
+
+            if(universityResultSet.next()) {
+                int universityID = universityResultSet.getInt("UniversiteID");
+
+                String selectFacultyQuery = "SELECT 1 FROM base_de_donne.faculte WHERE Faculte_Nom = ? AND UniversiteID = ?";
+                PreparedStatement selectFacultyPreparedStatement = con.prepareStatement(selectFacultyQuery);
+                selectFacultyPreparedStatement.setString(1, facultyName);
+                selectFacultyPreparedStatement.setInt(2, universityID);
+
+                ResultSet facultyResultSet = selectFacultyPreparedStatement.executeQuery();
+
+                if(!facultyResultSet.next()) {
+                    String insertQuery = "INSERT INTO base_de_donne.faculte (FaculteID, Faculte_Nom, UniversiteID) VALUES (?, ?, ?)";
+
+                    PreparedStatement insertPreparedStatement = con.prepareStatement(insertQuery);
+
+                    int facultyID = generateRandom4DigitKey();
+                    insertPreparedStatement.setInt(1, facultyID);
+                    insertPreparedStatement.setString(2, facultyName);
+                    insertPreparedStatement.setInt(3, universityID);
+
+                    insertPreparedStatement.executeUpdate();
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void insertUser(String userId, String lastName, String firstName, String role, String facultyName) {
+        try {
+            Connection con = getConnection();
+
+            String selectFacultyQuery = "SELECT FaculteID FROM base_de_donne.faculte WHERE Faculte_Nom = ?";
+            PreparedStatement selectFacultyPreparedStatement = con.prepareStatement(selectFacultyQuery);
+            selectFacultyPreparedStatement.setString(1, facultyName);
+
+            ResultSet facultyResultSet = selectFacultyPreparedStatement.executeQuery();
+
+            if(facultyResultSet.next()) {
+                int facultyID = facultyResultSet.getInt("FaculteID");
+
+                String selectUserQuery = "SELECT 1 FROM base_de_donne.usager WHERE UsagerID = ?";
+                PreparedStatement selectUserPreparedStatement = con.prepareStatement(selectUserQuery);
+                selectUserPreparedStatement.setString(1, userId);
+
+                ResultSet userResultSet = selectUserPreparedStatement.executeQuery();
+
+                if(!userResultSet.next()) {
+                    String insertQuery = "INSERT INTO base_de_donne.usager (UsagerID, Usager_Nom, Usager_Prenom, Usager_Role, FaculteID) VALUES (?, ?, ?, ?, ?)";
+
+                    PreparedStatement insertPreparedStatement = con.prepareStatement(insertQuery);
+
+                    insertPreparedStatement.setString(1, userId);
+                    insertPreparedStatement.setString(2, lastName);
+                    insertPreparedStatement.setString(3, firstName);
+                    insertPreparedStatement.setString(4, role);
+                    insertPreparedStatement.setInt(5, facultyID);
+
+                    insertPreparedStatement.executeUpdate();
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
+
+
+    private static int generateRandom4DigitKey() {
+        Random random = new Random();
+        return random.nextInt(9000) + 1000; // Generate a random number between 1000 and 9999 (inclusive)
+    }
+
+
+    public static boolean universiteExists(String universiteName) {
+        String query = "SELECT COUNT(*) FROM base_de_donne.universite WHERE Universite_Nom = ?";
+        try (Connection con = getConnection();
+             PreparedStatement preparedStatement = con.prepareStatement(query)) {
+
+            preparedStatement.setString(1, universiteName);
+            ResultSet rs = preparedStatement.executeQuery();
+
             if (rs.next()) {
                 int count = rs.getInt(1);
                 return count > 0;
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
         return false;
     }
 
-    public static void insertGroup(String groupName) {
-        try {
-            Connection conn = getConnection(); // Establish a database connection
-            String query = "INSERT INTO universite (UniversiteID, Universite_Nom) VALUES (?, ?)";
-            PreparedStatement stmt = conn.prepareStatement(query);
-            stmt.setString(2, groupName);
-            stmt.setString(1, generateRandomKey());
-            stmt.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
+    public static boolean facultyExists(String facultyName, String universiteName) {
+        String query = "SELECT COUNT(*) FROM base_de_donne.faculte JOIN base_de_donne.universite ON faculte.UniversiteID = universite.UniversiteID WHERE faculte.Faculte_Nom = ? AND universite.Universite_Nom = ?";
+        try (Connection con = getConnection();
+             PreparedStatement preparedStatement = con.prepareStatement(query)) {
+
+            preparedStatement.setString(1, facultyName);
+            preparedStatement.setString(2, universiteName);
+            ResultSet rs = preparedStatement.executeQuery();
+
+            if (rs.next()) {
+                int count = rs.getInt(1);
+                return count > 0;
+            }
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
+        return false;
     }
 
-    public static Connection getConnection() throws SQLException {
-        String url = "jdbc:mysql://localhost:5432/base_de_donne";
-        String username = "postgres";
-        String password = "postgres";
-        return DriverManager.getConnection(url, username, password);
-    }
-
-
-    public static String generateRandomKey() {
-        Random random = new Random();
-        int key = random.nextInt(9000) + 1000; // Generate a random 4-digit number
-        return String.valueOf(key);
-    }
 }

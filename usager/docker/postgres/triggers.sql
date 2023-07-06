@@ -43,7 +43,7 @@ END;
 $$ LANGUAGE plpgsql;
 DROP TRIGGER IF EXISTS check_prevent_nb_place ON BASE_DE_DONNE.RESERVATION;
 CREATE TRIGGER check_prevent_nb_place
-    BEFORE INSERT ON RESERVATION
+    BEFORE INSERT ON base_de_donne.RESERVATION
     FOR EACH ROW
     EXECUTE FUNCTION prevent_nb_place();
 
