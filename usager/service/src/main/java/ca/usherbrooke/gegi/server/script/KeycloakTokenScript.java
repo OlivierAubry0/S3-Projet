@@ -83,15 +83,13 @@ public class KeycloakTokenScript {
                 System.out.println("Email: " + user.getString("email"));
                 System.out.println("First Name: " + user.getString("firstName"));
                 System.out.println("Last Name: " + user.getString("lastName"));
-                // get the user's roles
+
                 JSONArray rolesArray = getUserRoles(token, userId);
                 String role = (rolesArray.length() > 0) ? rolesArray.getJSONObject(0).getString("name") : null;
 
-                // get the user's groups
                 JSONArray groupsArray = getUserGroups(token, userId);
                 String groupName = (groupsArray.length() > 0) ? groupsArray.getJSONObject(0).getString("name") : null;
 
-                // insert the user into the usager table
                 insertUser(userId, lastName, firstName, role, groupName);
 
             }
@@ -212,14 +210,12 @@ public class KeycloakTokenScript {
             if(!resultSet.next()) {
                 String insertQuery = "INSERT INTO base_de_donne.universite (UniversiteID, Universite_Nom) VALUES (?, ?)";
 
-                // create the java statement
                 PreparedStatement insertPreparedStatement = con.prepareStatement(insertQuery);
 
                 int universiteID = generateRandom4DigitKey();
                 insertPreparedStatement.setInt(1, universiteID);
                 insertPreparedStatement.setString(2, universiteNom);
 
-                // execute the insert query
                 insertPreparedStatement.executeUpdate();
             }
         } catch (SQLException e) {
@@ -310,7 +306,7 @@ public class KeycloakTokenScript {
 
     private static int generateRandom4DigitKey() {
         Random random = new Random();
-        return random.nextInt(9000) + 1000; // Generate a random number between 1000 and 9999 (inclusive)
+        return random.nextInt(9000) + 1000; 
     }
 
 
