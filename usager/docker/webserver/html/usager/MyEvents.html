@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Barcode Scanner</title>
+  <style>
+    body {
+      font-family: "Lato", sans-serif;
+    }
+    .event-form {
+      width: 500px;
+      margin: 0 auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+    .event-form select, .event-form button[type=button] {
+      width: 100%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+    .event-form button[type=button] {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    .event-form button[type=button]:hover {
+      background-color: #45a049;
+    }
+    .large-button {
+      display: inline-block;
+      background-color: #f1f1f1;
+      color: #268018;
+      border: none;
+      text-align: center;
+      text-decoration: none;
+      cursor: pointer;
+      position: absolute;
+      z-index: 4;
+      border-radius: 10%;
+      box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    }
+  </style>
+
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="http://localhost:8180/js/keycloak.js"></script>
+</head>
+
+
+
+<h1>Check My Events</h1>
+
+<div id="qr-reader" style="width: 600px"></div>
+
+<script src="https://unpkg.com/html5-qrcode"></script>
+<script>
+
+  var userID;
+  function displayUserInfo() {
+    var token = keycloak.tokenParsed;
+
+    var userInfoList = document.createElement('ul');
+
+    for (var prop in token) {
+      if (token.hasOwnProperty(prop)) {
+        var infoItem = document.createElement('li');
+        infoItem.textContent = prop + ': ' + token[prop];
+        userInfoList.appendChild(infoItem);
+        if(prop==='preferred_username'){
+          userID=token[prop];CheckMyEvents();
+        }
+      }
+    }
+
+    var userInfoDiv = document.getElementById('user-info');
+    userInfoDiv.innerHTML = ''; // Supprime tout contenu existant
+    userInfoDiv.appendChild(userInfoList);
+    console.log(userID);
+
+  }
+
+  var keycloak;
+
+  function initKeycloak() {
+
+    keycloak = new Keycloak({
+      "realm": "usager",
+      "auth-server-url": "http://localhost:8180/",
+      "ssl-required": "external",
+      "clientId": "frontend",
+      "public-client": true,
+      "confidential-port": 0
+    });
+    keycloak.init({ onLoad: 'login-required' })
+            .success(function (authenticated) {
+              if (authenticated) {
+                alert('authenticated');
+                displayUserInfo();
+              } else {
+                alert('not authenticated');
+              }
+            })
+            .error(function () {
+              alert('failed to initialize');
+            });
+  }
+
+
+  function CheckMyEvents() {
+    //var tokenData = keycloak.tokenParsed;
+    //var UsagerID = tokenData.preferred_username;
+    var UsagerID = userID;
+    var url = 'http://localhost:8888/api/events/MyEvents?UsagerID=' + encodeURIComponent(UsagerID);
+    axios.post(url, {}, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+            .then(function(response) {
+              if (response.status === 201) {
+                var MyEvents = response.data;
+                if (MyEvents.length > 0) {
+                  var usersContainer = document.getElementById('users');
+                  usersContainer.innerHTML = ''; // Remove any existing content
+                  MyEvents.forEach(function (MyEvents) {
+                    var userButton = document.createElement('button');
+                    userButton.className = 'event';
+                    userButton.addEventListener('click', function () {
+                      window.location.href = 'getTicket.html';
+                    });
+                    userButton.innerHTML =
+                            `<p>Nom evenement : ${MyEvents.Evenement_Nom}</p>
+                        <p>Date: ${MyEvents.Evenement_Date}</p>
+                        <p>Nom de l'invité: ${MyEvents.Nom_Invite}</p>
+                        <p>Invité est-il validé? : ${MyEvents.Enregistration_Invite}</p>`;
+                    usersContainer.appendChild(userButton);
+                  });
+                } else {
+                  alert("Aucun réservation trouvée !");
+                }
+              } else {
+                alert(response.status);
+              }
+            })
+            .catch(function(error) {
+              console.error(error);
+            });
+  }
+  function MyEventLoad(){
+    initKeycloak();
+    setTimeout(CheckMyEvents, 425); // cela fait en sorte que le code atend 0.425 secondes avant de s'exec.
+  }
+</script>
+</head>
+<body onload="initKeycloak()" >
+<h2>View All My Events</h2>
+<div class="large-button" id="users">
+  <!-- Les événements seront affichés ici sous forme de boutons -->
+</div>
+</body>
+</html>

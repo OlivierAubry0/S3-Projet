@@ -1,5 +1,6 @@
 package ca.usherbrooke.gegi.server.service;
 
+import ca.usherbrooke.gegi.server.admin.CheckIfUserReserved;
 import ca.usherbrooke.gegi.server.admin.Event;
 import ca.usherbrooke.gegi.server.admin.Reservation;
 import ca.usherbrooke.gegi.server.admin.Scanning;
@@ -10,6 +11,7 @@ import ca.usherbrooke.gegi.server.persistence.ScanningMapper;
 import org.apache.commons.io.IOUtils;
 import org.eclipse.microprofile.jwt.JsonWebToken;
 import org.jboss.logging.annotations.Param;
+import ca.usherbrooke.gegi.server.admin.CheckMyEvents;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
@@ -67,5 +69,20 @@ public class EventService {
     public List<Event> getEventsGenie() {
         return eventMapper.getEventsGenie();
     }
+
+    @POST
+    @Path("/MyEvents")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response CheckMyEvents(@QueryParam("UsagerID") String UsagerID) {
+        List<CheckMyEvents> MyEvents = eventMapper.CheckMyEvents(UsagerID);
+        if(MyEvents.isEmpty()){
+            return Response.status(Response.Status.METHOD_NOT_ALLOWED).entity(UsagerID).build();
+        }
+        else{
+            return Response.status(Response.Status.CREATED).entity(MyEvents).build();
+        }
+    }
+
+
 
 }

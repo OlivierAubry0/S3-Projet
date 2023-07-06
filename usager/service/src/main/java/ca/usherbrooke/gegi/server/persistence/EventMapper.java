@@ -1,5 +1,7 @@
 package ca.usherbrooke.gegi.server.persistence;
 
+import ca.usherbrooke.gegi.server.admin.CheckIfUserReserved;
+import ca.usherbrooke.gegi.server.admin.CheckMyEvents;
 import ca.usherbrooke.gegi.server.admin.Event;
 import ca.usherbrooke.gegi.server.admin.Scanning;
 import org.apache.ibatis.annotations.Mapper;
@@ -20,6 +22,9 @@ public interface EventMapper {
 
     @Select("SELECT * FROM BASE_DE_DONNE.evenement_programmes WHERE Asso_EtudianteID = 'AGEG'")
     List<Event> getEventsGenie();
+
+    @Select("SELECT Evenement_Nom, Evenement_Date, Nom_Invite, Enregistration_Invite FROM BASE_DE_DONNE.MyEvents WHERE UsagerID = #{UsagerID}")
+    List<CheckMyEvents> CheckMyEvents(@Param("UsagerID") String UsagerID);
 
 }
 
