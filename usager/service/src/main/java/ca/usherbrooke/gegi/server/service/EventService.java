@@ -63,13 +63,13 @@ public class EventService {
         return eventMapper.getAllEvents();
     }
 
-    @GET
+    @POST
     @Path("/events4genie")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Event> getEventsGenie() {
-        return eventMapper.getEventsGenie();
+    public Response getEvents(@QueryParam("Asso_EtudianteID") String Asso_EtudianteID) {
+        List<Event> Events = eventMapper.getEvents(Asso_EtudianteID);
+        return Response.status(Response.Status.CREATED).entity(Events).build();
     }
-
     @POST
     @Path("/MyEvents")
     @Produces(MediaType.APPLICATION_JSON)

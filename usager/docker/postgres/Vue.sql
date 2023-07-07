@@ -23,7 +23,7 @@ SELECT Asso_EtudianteID, Asso_Etudiante_Nom, FaculteID
 FROM base_de_donne.ASSO_ETUDIANTE;
 
 CREATE VIEW MyEvents AS
-    SELECT UsagerID, Evenement_Nom,Evenement_Date, Nom_Invite, Enregistration_Invite
+    SELECT UsagerID, reservation.EvenementID, Evenement_Nom,Evenement_Date, Nom_Invite, Enregistration_Invite
 FROM base_de_donne.evenement JOIN base_de_donne.reservation ON evenement.evenementid = reservation.evenementid;
 ----------------------comment appeler la vue ? ---------------------------------------------
 --SELECT * FROM evenement_programmes;--

@@ -9,6 +9,8 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
+import javax.ws.rs.DELETE;
+import javax.ws.rs.QueryParam;
 import java.util.List;
 
 @Mapper
@@ -20,11 +22,12 @@ public interface EventMapper {
     @Select("SELECT * FROM BASE_DE_DONNE.evenement_programmes")
     List<Event> getAllEvents();
 
-    @Select("SELECT * FROM BASE_DE_DONNE.evenement_programmes WHERE Asso_EtudianteID = 'AGEG'")
-    List<Event> getEventsGenie();
+    @Select("SELECT * FROM BASE_DE_DONNE.evenement_programmes WHERE Asso_EtudianteID = #{Asso_EtudianteID}")
+    List<Event> getEvents(@QueryParam("Asso_EtudianteID") String Asso_EtudianteID);
 
-    @Select("SELECT Evenement_Nom, Evenement_Date, Nom_Invite, Enregistration_Invite FROM BASE_DE_DONNE.MyEvents WHERE UsagerID = #{UsagerID}")
+    @Select("SELECT EvenementID, Evenement_Nom, Evenement_Date, Nom_Invite, Enregistration_Invite FROM BASE_DE_DONNE.MyEvents WHERE UsagerID = #{UsagerID}")
     List<CheckMyEvents> CheckMyEvents(@Param("UsagerID") String UsagerID);
+
 
 }
 

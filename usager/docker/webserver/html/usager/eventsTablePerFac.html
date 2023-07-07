@@ -28,8 +28,17 @@
     </style>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script>
+         var AssoID;
+        function getValueFromURL() {
+            var urlParams = new URLSearchParams(window.location.search);
+            AssoID = urlParams.get('AssoID');
+        }
+
+
         function getEventsGenie() {
-            axios.get('http://localhost:8888/api/events/events4genie', {
+            getValueFromURL();
+            var Asso_EtudianteID = AssoID;
+            axios.post('http://localhost:8888/api/events/events4genie?Asso_EtudianteID=' + encodeURIComponent(Asso_EtudianteID), {
                 headers: {
                     'Content-Type': 'application/json'
                 }

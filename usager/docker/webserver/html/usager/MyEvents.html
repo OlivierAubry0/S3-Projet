@@ -131,10 +131,13 @@
                     var userButton = document.createElement('button');
                     userButton.className = 'event';
                     userButton.addEventListener('click', function () {
-                      window.location.href = 'getTicket.html';
+                      localStorage.setItem('EvenementID', MyEvents.EvenementID);
+                      localStorage.setItem('UsagerID', userID);
+                      window.location.href = 'MyEventsActions.html';
                     });
                     userButton.innerHTML =
-                            `<p>Nom evenement : ${MyEvents.Evenement_Nom}</p>
+                            `
+                        <p>Nom evenement : ${MyEvents.Evenement_Nom}</p>
                         <p>Date: ${MyEvents.Evenement_Date}</p>
                         <p>Nom de l'invité: ${MyEvents.Nom_Invite}</p>
                         <p>Invité est-il validé? : ${MyEvents.Enregistration_Invite}</p>`;
