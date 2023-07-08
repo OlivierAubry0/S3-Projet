@@ -146,59 +146,6 @@
                 window.location.href = 'registration.html'; // Replace with the path to your registration HTML file
               });
     }
-    function requestStudent() {
-      const div = document.getElementById('title');
-      const span = div.firstElementChild;
-      axios.get("http://localhost:8888/api/student", {
-        headers: {
-          'Authorization': 'Bearer ' + keycloak.token
-        }
-      })
-              .then(function (response) {
-                console.log("Response: ", response.status);
-                span.innerHTML = '<br> <strong>' + response.data.cip + '</strong> </br>' +
-                        '<br> <strong>' + response.data.last_name + '</strong> </br>' +
-                        '<br> <strong>' + response.data.first_name + '</strong> </br>' +
-                        '<br> <strong>' + response.data.email + '</strong> </br>' +
-                        '<br> <strong>' + response.data.roles + '</strong> </br>'
-              })
-              .catch(function (error) {
-                console.log('refreshing');
-                keycloak.updateToken(5).then(function () {
-                  console.log('Token refreshed');
-                }).catch(function () {
-                  console.log('Failed to refresh token');
-                })
-              });
-      span.innerHTML = '<br> <strong>' + "Vous n'avez pas le role d'étudiant" + '</strong> </br>'
-    }
-
-    function requestTeacher() {
-      const div = document.getElementById('title');
-      const span = div.firstElementChild;
-      axios.get("http://localhost:8888/api/teacher", {
-        headers: {
-          'Authorization': 'Bearer ' + keycloak.token
-        }
-      })
-              .then(function (response) {
-                console.log("Response: ", response.status);
-                span.innerHTML = '<br> <strong>' + response.data.cip + '</strong> </br>' +
-                        '<br> <strong>' + response.data.last_name + '</strong> </br>' +
-                        '<br> <strong>' + response.data.first_name + '</strong> </br>' +
-                        '<br> <strong>' + response.data.email + '</strong> </br>' +
-                        '<br> <strong>' + response.data.roles + '</strong> </br>'
-              })
-              .catch(function (error) {
-                console.log('refreshing');
-                keycloak.updateToken(5).then(function () {
-                  console.log('Token refreshed');
-                }).catch(function () {
-                  console.log('Failed to refresh token');
-                })
-              });
-      span.innerHTML = '<br> <strong>' + "Vous n'avez pas le role d'enseignant" + '</strong> </br>'
-    }
 
     function logout() {
       let logoutURL = "http://localhost:8180//realms/usager/protocol/openid-connect/logout"
@@ -234,6 +181,40 @@
 <div id="title">
   <span></span>
 </div>
+<style>
+  /* Existing CSS styles */
+
+  /* New CSS animation */
+  @keyframes fade-in {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+
+  #univent-title {
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+
+    color: #FFFFFF;
+    animation: fade-in 1s ease-in;
+    position: absolute;
+    top: 10%;
+    width: 100%;
+    height: 90%;
+    left: 0;
+    right: 0;
+    background-color: white;
+    text-align: center;
+    z-index: 0;
+  }
+
+  /* Rest of the CSS styles */
+</style>
 
 <style>
 
@@ -274,7 +255,7 @@
     max-height: 50px;
     max-width: 150px;
     background-color: #268018;
-    color: white;
+    color: black;
     border: none;
     text-align: center;
     text-decoration: none;
@@ -295,6 +276,49 @@
 
   .large-button2:hover text {
     transform: translate(-50%, -50%) scale(1.2);
+  }
+  .large-button2:hover, .large-button2:active{
+    background-color: initial;
+    background-position: 0 0;
+    color: #268018 ;
+  }
+
+
+                                                       /* CSS */
+.button-24 {
+ background: #268018;
+ border: 1px solid #268018;
+ border-radius: 6px;
+ box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+ box-sizing: border-box;
+ color: #FFFFFF;
+ cursor: pointer;
+ display: inline-block;
+ font-family: nunito,roboto,proxima-nova,"proxima nova",sans-serif;
+ font-size: 16px;
+ font-weight: 800;
+ line-height: 16px;
+ min-height: 40px;
+ outline: 0;
+ padding: 12px 14px;
+ text-align: center;
+ text-rendering: geometricprecision;
+ text-transform: none;
+ user-select: none;
+ -webkit-user-select: none;
+ touch-action: manipulation;
+ vertical-align: middle;
+}
+
+  .button-24:hover,
+  .button-24:active {
+    background-color: initial;
+    background-position: 0 0;
+    color: #268018;
+  }
+
+  .button-24:active {
+    opacity: .5;
   }
 
   body {
@@ -367,19 +391,7 @@
     font-weight: bolder;
   }
 
-  #whiteZone {
-    position: absolute;
-    top: 10%;
-    width: 100%;
-    height: 90%;
-    left: 0;
-    right: 0;
-    background-color: white;
-    text-align: center;
-    z-index: 0;
-  }
-
-  #whiteZone p {
+  #univent-title p {
     position: absolute;
     top: 5%;
     margin: 0;
@@ -393,10 +405,6 @@
   <b id="user-info"></b>
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
   <a href="#" onclick="window.location.href='eventID_before_scanning.html'">Scanner</a>
-  <a href="#">About</a>
-  <a href="#">Services</a>
-  <a href="#">Clients</a>
-  <a href="#">Contact</a>
   <a href="#" onclick="logout()">Déconnexion</a>
 
 </div>
@@ -407,9 +415,11 @@
 
 <span style="font-size: 40px; font-weight: bold; cursor: pointer; position: absolute; top: 0; left: 0.5%; color: #FFFFFF;" onclick="openNav()">&#9776; UNIVENT</span>
 
-<div id="whiteZone">
-  <p>Bienvenue sur Univent, votre service de billeterie pour les événements officiels de l'Université de Sherbrooke.</p>
-</div>
+
+  <div id="univent-title" style="align-content: center">
+    <img src="assets/logo.png" style="width: 50%; height: 50%;">
+  </div>
+
 
 <button class="large-button2" style="top: 80%; left: 37%;" onclick="scrollToHeight()"><text>RESERVE TON BILLET!</text></button>
 
