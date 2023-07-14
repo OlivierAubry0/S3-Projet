@@ -50,8 +50,7 @@
                 FaculteID: newFaculteInput.value,
                 UsagerID: newAdminInput.value
             };
-
-            axios.put('http://localhost:8888/api/Asso/updateAsso', updatedAsso, {
+            axios.post('http://localhost:8888/api/Asso/updateAsso', updatedAsso, {
                 headers: {
                     'Content-Type': 'application/json'
                 }

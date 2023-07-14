@@ -4,7 +4,28 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="72deba85-9ca0-4a47-be77-f89dff0e225c" name="Changes" comment="" />
+    <list default="true" id="72deba85-9ca0-4a47-be77-f89dff0e225c" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/docker/webserver/html/usager/Assotables.html" beforeDir="false" afterPath="$PROJECT_DIR$/usager/docker/webserver/html/usager/Assotables.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/docker/webserver/html/usager/UpdateAsso.html" beforeDir="false" afterPath="$PROJECT_DIR$/usager/docker/webserver/html/usager/UpdateAsso.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/service/.gradle/7.4/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/.gradle/7.4/checksums/checksums.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/service/.gradle/7.4/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/.gradle/7.4/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/service/.gradle/7.4/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/.gradle/7.4/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/service/.gradle/7.4/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/.gradle/7.4/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/service/.gradle/7.4/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/.gradle/7.4/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/service/.gradle/7.4/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/.gradle/7.4/fileHashes/resourceHashesCache.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/service/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/service/build/classes/java/main/ca/usherbrooke/gegi/server/persistence/AssoMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/build/classes/java/main/ca/usherbrooke/gegi/server/persistence/AssoMapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/service/build/classes/java/main/ca/usherbrooke/gegi/server/service/AssoService.class" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/build/classes/java/main/ca/usherbrooke/gegi/server/service/AssoService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/service/build/resources/main/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/build/resources/main/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/service/build/service-dev.jar" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/build/service-dev.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/service/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/service/build/tmp/quarkusDev/quarkus-app-model.dat" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/build/tmp/quarkusDev/quarkus-app-model.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/service/build/tmp/quarkusDev/quarkus-app-test-model.dat" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/build/tmp/quarkusDev/quarkus-app-test-model.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/service/src/main/java/ca/usherbrooke/gegi/server/persistence/AssoMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/src/main/java/ca/usherbrooke/gegi/server/persistence/AssoMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/service/src/main/java/ca/usherbrooke/gegi/server/service/AssoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/src/main/java/ca/usherbrooke/gegi/server/service/AssoService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/src/main/resources/application.properties" afterDir="false" />
+    </list>
     <list id="369c521e-6498-4c34-9420-4a88351b04df" name="Changes by newto" comment="" />
     <list id="132ce79e-c3a8-42e5-aa9e-005f3e61ba33" name="Changes by ycast" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -13,6 +34,9 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$/usager/docker">
+      <ProjectState />
+    </projectState>
     <projectState path="$PROJECT_DIR$/usager/service">
       <ProjectState />
     </projectState>
@@ -20,6 +44,9 @@
   <component name="ExternalProjectsManager">
     <system id="GRADLE">
       <state>
+        <task path="$PROJECT_DIR$/usager/service">
+          <activation />
+        </task>
         <projects_view>
           <tree_state>
             <expand>
@@ -37,16 +64,32 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="HTML File" />
         <option value="Class" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="4b7df59a-9b55-4668-88c5-a025e989f589" />
+        <option name="url" value="https://github.com/OlivierAubry0/S3-Projet.git" />
+      </UrlAndAccount>
+    </option>
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectId" id="2QqHTehyPAUCt157AFu0Makfkn2" />
   <component name="ProjectLevelVcsManager">
@@ -56,42 +99,18 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-<<<<<<< HEAD
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;lickma&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/mthio/OneDrive - USherbrooke/S3-Projet&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.IDE.editor.colors.General&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
-=======
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "ASKED_ADD_EXTERNAL_FILES": "true",
     "DefaultHtmlFileTemplate": "HTML File",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
     "codeWithMe.voiceChat.enabledByDefault": "false",
-    "git-widget-placeholder": "lickma",
+    "git-widget-placeholder": "yorman__XOXOX",
     "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/Users/mthio/OneDrive - USherbrooke/S3-Projet",
+    "jdk.selected.JAVA_MODULE": "17",
+    "last_opened_file_path": "C:/Users/newto/OneDrive/Documents/GitHub/S3-Projet/usager/service",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -100,9 +119,8 @@
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "reference.settingsdialog.IDE.editor.colors.General",
+    "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle",
     "vue.rearranger.settings.migration": "true"
->>>>>>> 9fdfad0b643f84951cec86ff39e0a9468af9b5ab
   },
   "keyToStringList": {
     "DatabaseDriversLRU": [
@@ -119,11 +137,12 @@
       <recent name="C:\Users\olivi\git\S3-Projet\usager\docker\postgres" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\newto\OneDrive\Documents\GitHub\S3-Projet\usager\docker\webserver\html\usager" />
       <recent name="C:\Users\Enes\OneDrive - USherbrooke\Documents\GitHub\S3-Projet\usager\docker\webserver\html\usager" />
       <recent name="C:\Users\ycast\Desktop\Genie_Info\SESSION3\PROJET\Git\S3-Projet\usager\docker\webserver\html\usager" />
     </key>
   </component>
-  <component name="RunManager" selected="Quarkus.service.main">
+  <component name="RunManager" selected="Quarkus.service.main (1)">
     <configuration name="database.sql" type="DatabaseScript" editBeforeRun="true" temporary="true" nameIsGenerated="true">
       <script-file value="$PROJECT_DIR$/usager/docker/postgres/database.sql" />
       <script-mode>FILE</script-mode>
@@ -136,7 +155,29 @@
       <data-source id="7518f93b-754c-485e-bb1e-76f64c371c23" />
       <method v="2" />
     </configuration>
-    <configuration name="service.main" type="QuarkusRunConfigurationType" factoryName="Quarkus">
+    <configuration name="service [assemble]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/usager/service" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="assemble" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <ForceTestExec>false</ForceTestExec>
+      <method v="2" />
+    </configuration>
+    <configuration name="service.main (1)" type="QuarkusRunConfigurationType" factoryName="Quarkus" nameIsGenerated="true">
       <module name="service.main" />
       <QsGradleRunConfiguration>
         <ExternalSystemSettings>
@@ -148,7 +189,9 @@
             <list />
           </option>
           <option name="taskNames">
-            <list />
+            <list>
+              <option value="quarkusDev" />
+            </list>
           </option>
           <option name="vmOptions" />
         </ExternalSystemSettings>
@@ -157,6 +200,11 @@
         <DebugAllEnabled>false</DebugAllEnabled>
         <ForceTestExec>false</ForceTestExec>
       </QsGradleRunConfiguration>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="service.main" type="QuarkusRunConfigurationType" factoryName="Quarkus">
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -194,15 +242,18 @@
     <list>
       <item itemvalue="Database Script.database.sql" />
       <item itemvalue="Database Script.init.sql" />
+      <item itemvalue="Gradle.service [assemble]" />
+      <item itemvalue="Quarkus.service.main (1)" />
       <item itemvalue="Quarkus.service.main" />
       <item itemvalue="Shell Script.init.sh" />
       <item itemvalue="Shell Script.setdata.sh" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Database Script.database.sql" />
-        <item itemvalue="Shell Script.init.sh" />
+        <item itemvalue="Gradle.service [assemble]" />
         <item itemvalue="Shell Script.setdata.sh" />
+        <item itemvalue="Shell Script.init.sh" />
+        <item itemvalue="Database Script.database.sql" />
         <item itemvalue="Database Script.init.sql" />
       </list>
     </recent_temporary>
@@ -226,15 +277,12 @@
       <workItem from="1686277672313" duration="3464000" />
       <workItem from="1686281440487" duration="12893000" />
       <workItem from="1686314765340" duration="2258000" />
-      <workItem from="1687411478117" duration="94000" />
-      <workItem from="1687439224542" duration="47000" />
-      <workItem from="1687439326600" duration="30000" />
-      <workItem from="1687439388654" duration="32000" />
-      <workItem from="1687575679092" duration="213000" />
-<<<<<<< HEAD
-      <workItem from="1687912184518" duration="32000" />
-=======
->>>>>>> 9fdfad0b643f84951cec86ff39e0a9468af9b5ab
+      <workItem from="1687934133030" duration="8075000" />
+      <workItem from="1687942310050" duration="1863000" />
+      <workItem from="1687979399380" duration="32598000" />
+      <workItem from="1688142246806" duration="1224000" />
+      <workItem from="1688614516726" duration="35332000" />
+      <workItem from="1689314495183" duration="6758000" />
     </task>
     <servers />
   </component>
@@ -243,5 +291,17 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <default-breakpoints>
+        <breakpoint enabled="true" type="java-exception" />
+        <breakpoint enabled="true" type="javascript-exception" />
+      </default-breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>
