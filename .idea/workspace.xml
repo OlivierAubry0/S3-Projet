@@ -4,30 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="72deba85-9ca0-4a47-be77-f89dff0e225c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/.name" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/usager/service/src/main/java/ca/usherbrooke/gegi/server/admin/CheckIfUserReserved.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usager/docker/webserver/html/usager/assets/eventID_before_scanning.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/usager/docker/webserver/html/usager/camera.html" beforeDir="false" afterPath="$PROJECT_DIR$/usager/docker/webserver/html/usager/camera.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usager/service/.gradle/7.4/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/.gradle/7.4/checksums/checksums.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usager/service/.gradle/7.4/dependencies-accessors/dependencies-accessors.lock" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/.gradle/7.4/dependencies-accessors/dependencies-accessors.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usager/service/.gradle/7.4/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/.gradle/7.4/executionHistory/executionHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usager/service/.gradle/7.4/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/.gradle/7.4/executionHistory/executionHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usager/service/.gradle/7.4/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/.gradle/7.4/fileHashes/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usager/service/.gradle/7.4/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/.gradle/7.4/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usager/service/.gradle/7.4/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/.gradle/7.4/fileHashes/resourceHashesCache.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usager/service/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usager/service/build/classes/java/main/ca/usherbrooke/gegi/server/persistence/ScanningMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/build/classes/java/main/ca/usherbrooke/gegi/server/persistence/ScanningMapper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usager/service/build/classes/java/main/ca/usherbrooke/gegi/server/service/ScanningService.class" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/build/classes/java/main/ca/usherbrooke/gegi/server/service/ScanningService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usager/service/build/resources/main/ca/usherbrooke/fgen/api/persistence/ScanningMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/build/resources/main/ca/usherbrooke/fgen/api/persistence/ScanningMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usager/service/build/service-dev.jar" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/build/service-dev.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usager/service/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usager/service/src/main/java/ca/usherbrooke/gegi/server/persistence/ScanningMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/src/main/java/ca/usherbrooke/gegi/server/persistence/ScanningMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usager/service/src/main/java/ca/usherbrooke/gegi/server/service/ScanningService.java" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/src/main/java/ca/usherbrooke/gegi/server/service/ScanningService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usager/service/src/main/resources/ca/usherbrooke/fgen/api/persistence/ScanningMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/src/main/resources/ca/usherbrooke/fgen/api/persistence/ScanningMapper.xml" afterDir="false" />
-    </list>
+    <list default="true" id="72deba85-9ca0-4a47-be77-f89dff0e225c" name="Changes" comment="" />
     <list id="369c521e-6498-4c34-9420-4a88351b04df" name="Changes by newto" comment="" />
     <list id="132ce79e-c3a8-42e5-aa9e-005f3e61ba33" name="Changes by ycast" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -36,9 +13,6 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="ExternalProjectsData">
-    <projectState path="$PROJECT_DIR$/usager/docker">
-      <ProjectState />
-    </projectState>
     <projectState path="$PROJECT_DIR$/usager/service">
       <ProjectState />
     </projectState>
@@ -66,8 +40,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="HTML File" />
         <option value="Class" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -101,51 +75,59 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "DefaultHtmlFileTemplate": "HTML File",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "codeWithMe.voiceChat.enabledByDefault": "false",
-    "git-widget-placeholder": "yorman__XOXOX",
-    "ignore.virus.scanning.warn.message": "true",
-    "jdk.selected.JAVA_MODULE": "17",
-    "last_opened_file_path": "C:/Users/newto/OneDrive/Documents/GitHub/S3-Projet/usager/service",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;yorman__XOXOX&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;17&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/olivi/git/S3-Projet/usager/docker/webserver/html/usager/assets&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.projectsettings.compiler.javacompiler&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "postgresql"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;postgresql&quot;
     ],
-    "RunConfigurationTargetLRU": [
-      "7518f93b-754c-485e-bb1e-76f64c371c23",
-      "2b510b42-62b2-49d6-bae7-341fe52a21de"
+    &quot;RunConfigurationTargetLRU&quot;: [
+      &quot;7518f93b-754c-485e-bb1e-76f64c371c23&quot;,
+      &quot;2b510b42-62b2-49d6-bae7-341fe52a21de&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\olivi\git\S3-Projet\usager\docker\webserver\html\usager\assets" />
       <recent name="C:\Users\olivi\git\S3-Projet\usager\docker\postgres" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\olivi\git\S3-Projet\usager\docker\webserver\html\usager\assets" />
       <recent name="C:\Users\newto\OneDrive\Documents\GitHub\S3-Projet\usager\docker\webserver\html\usager" />
       <recent name="C:\Users\Enes\OneDrive - USherbrooke\Documents\GitHub\S3-Projet\usager\docker\webserver\html\usager" />
       <recent name="C:\Users\ycast\Desktop\Genie_Info\SESSION3\PROJET\Git\S3-Projet\usager\docker\webserver\html\usager" />
     </key>
   </component>
-  <component name="RunManager" selected="Quarkus.service.main (1)">
+  <component name="RunManager" selected="Quarkus.service.main">
+    <configuration name="Vue.sql" type="DatabaseScript" editBeforeRun="true" temporary="true" nameIsGenerated="true">
+      <script-file value="$PROJECT_DIR$/usager/docker/postgres/Vue.sql" />
+      <script-mode>FILE</script-mode>
+      <data-source id="2b510b42-62b2-49d6-bae7-341fe52a21de" />
+      <method v="2" />
+    </configuration>
     <configuration name="database.sql" type="DatabaseScript" editBeforeRun="true" temporary="true" nameIsGenerated="true">
       <script-file value="$PROJECT_DIR$/usager/docker/postgres/database.sql" />
       <script-mode>FILE</script-mode>
@@ -155,7 +137,13 @@
     <configuration name="init.sql" type="DatabaseScript" editBeforeRun="true" temporary="true" nameIsGenerated="true">
       <script-file value="$PROJECT_DIR$/usager/docker/postgres/init.sql" />
       <script-mode>FILE</script-mode>
-      <data-source id="7518f93b-754c-485e-bb1e-76f64c371c23" />
+      <data-source id="2b510b42-62b2-49d6-bae7-341fe52a21de" />
+      <method v="2" />
+    </configuration>
+    <configuration name="triggers.sql" type="DatabaseScript" editBeforeRun="true" temporary="true" nameIsGenerated="true">
+      <script-file value="$PROJECT_DIR$/usager/docker/postgres/triggers.sql" />
+      <script-mode>FILE</script-mode>
+      <data-source id="2b510b42-62b2-49d6-bae7-341fe52a21de" />
       <method v="2" />
     </configuration>
     <configuration name="service [assemble]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
@@ -180,7 +168,32 @@
       <ForceTestExec>false</ForceTestExec>
       <method v="2" />
     </configuration>
-    <configuration name="service.main (1)" type="QuarkusRunConfigurationType" factoryName="Quarkus" nameIsGenerated="true">
+    <configuration name="Unnamed" type="QuarkusRunConfigurationType" factoryName="Quarkus" nameIsGenerated="true">
+      <module name="service.main" />
+      <QsGradleRunConfiguration>
+        <ExternalSystemSettings>
+          <option name="executionName" />
+          <option name="externalProjectPath" value="$PROJECT_DIR$/usager/service" />
+          <option name="externalSystemIdString" value="GRADLE" />
+          <option name="scriptParameters" />
+          <option name="taskDescriptions">
+            <list />
+          </option>
+          <option name="taskNames">
+            <list />
+          </option>
+          <option name="vmOptions" />
+        </ExternalSystemSettings>
+        <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+        <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+        <DebugAllEnabled>false</DebugAllEnabled>
+        <ForceTestExec>false</ForceTestExec>
+      </QsGradleRunConfiguration>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="service.main" type="QuarkusRunConfigurationType" factoryName="Quarkus">
       <module name="service.main" />
       <QsGradleRunConfiguration>
         <ExternalSystemSettings>
@@ -207,57 +220,22 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="service.main" type="QuarkusRunConfigurationType" factoryName="Quarkus">
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="init.sh" type="ShConfigurationType" temporary="true">
-      <option name="SCRIPT_TEXT" value="" />
-      <option name="INDEPENDENT_SCRIPT_PATH" value="true" />
-      <option name="SCRIPT_PATH" value="$PROJECT_DIR$/usager/docker/keycloak/startup-scripts/init.sh" />
-      <option name="SCRIPT_OPTIONS" value="" />
-      <option name="INDEPENDENT_SCRIPT_WORKING_DIRECTORY" value="true" />
-      <option name="SCRIPT_WORKING_DIRECTORY" value="$PROJECT_DIR$/usager/docker/keycloak/startup-scripts" />
-      <option name="INDEPENDENT_INTERPRETER_PATH" value="true" />
-      <option name="INTERPRETER_PATH" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="EXECUTE_IN_TERMINAL" value="true" />
-      <option name="EXECUTE_SCRIPT_FILE" value="true" />
-      <envs />
-      <method v="2" />
-    </configuration>
-    <configuration name="setdata.sh" type="ShConfigurationType" temporary="true">
-      <option name="SCRIPT_TEXT" value="" />
-      <option name="INDEPENDENT_SCRIPT_PATH" value="true" />
-      <option name="SCRIPT_PATH" value="$PROJECT_DIR$/usager/docker/keycloak/data/setdata.sh" />
-      <option name="SCRIPT_OPTIONS" value="" />
-      <option name="INDEPENDENT_SCRIPT_WORKING_DIRECTORY" value="true" />
-      <option name="SCRIPT_WORKING_DIRECTORY" value="$PROJECT_DIR$/usager/docker/keycloak/data" />
-      <option name="INDEPENDENT_INTERPRETER_PATH" value="true" />
-      <option name="INTERPRETER_PATH" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="EXECUTE_IN_TERMINAL" value="true" />
-      <option name="EXECUTE_SCRIPT_FILE" value="true" />
-      <envs />
-      <method v="2" />
-    </configuration>
     <list>
+      <item itemvalue="Database Script.Vue.sql" />
+      <item itemvalue="Database Script.triggers.sql" />
       <item itemvalue="Database Script.database.sql" />
       <item itemvalue="Database Script.init.sql" />
       <item itemvalue="Gradle.service [assemble]" />
-      <item itemvalue="Quarkus.service.main (1)" />
       <item itemvalue="Quarkus.service.main" />
-      <item itemvalue="Shell Script.init.sh" />
-      <item itemvalue="Shell Script.setdata.sh" />
+      <item itemvalue="Quarkus.Unnamed" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.service [assemble]" />
-        <item itemvalue="Shell Script.setdata.sh" />
-        <item itemvalue="Shell Script.init.sh" />
         <item itemvalue="Database Script.database.sql" />
         <item itemvalue="Database Script.init.sql" />
+        <item itemvalue="Database Script.Vue.sql" />
+        <item itemvalue="Database Script.triggers.sql" />
+        <item itemvalue="Gradle.service [assemble]" />
       </list>
     </recent_temporary>
   </component>
@@ -282,7 +260,23 @@
       <workItem from="1686314765340" duration="2258000" />
       <workItem from="1687934133030" duration="8075000" />
       <workItem from="1687942310050" duration="1863000" />
-      <workItem from="1687979399380" duration="31691000" />
+      <workItem from="1687975663921" duration="129000" />
+      <workItem from="1687975801804" duration="262000" />
+      <workItem from="1687976083416" duration="79000" />
+      <workItem from="1687976173702" duration="395000" />
+      <workItem from="1687976578493" duration="1690000" />
+      <workItem from="1687978400513" duration="804000" />
+      <workItem from="1687988100257" duration="1105000" />
+      <workItem from="1687989462526" duration="5019000" />
+      <workItem from="1688499117021" duration="48000" />
+      <workItem from="1688562820401" duration="306000" />
+      <workItem from="1688563144782" duration="444000" />
+      <workItem from="1688563600760" duration="755000" />
+      <workItem from="1688649775148" duration="2918000" />
+      <workItem from="1688772830239" duration="1049000" />
+      <workItem from="1688831755238" duration="3401000" />
+      <workItem from="1688854957586" duration="5671000" />
+      <workItem from="1688874114654" duration="2627000" />
     </task>
     <servers />
   </component>
@@ -291,14 +285,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <default-breakpoints>
-        <breakpoint enabled="true" type="java-exception" />
-        <breakpoint enabled="true" type="javascript-exception" />
-      </default-breakpoints>
-    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

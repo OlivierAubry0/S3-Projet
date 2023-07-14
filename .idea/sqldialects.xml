@@ -3,6 +3,5 @@
   <component name="SqlDialectMappings">
     <file url="file://$PROJECT_DIR$/usager/docker/postgres/database.sql" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/usager/docker/postgres/init.sql" dialect="Greenplum" />
-    <file url="file://$PROJECT_DIR$/usager/service/src/main/resources/ca/usherbrooke/fgen/api/persistence/EventMapper.xml" dialect="GenericSQL" />
   </component>
 </project>
