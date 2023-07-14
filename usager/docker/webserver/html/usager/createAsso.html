@@ -1,189 +1,188 @@
 <!DOCTYPE html>
-<html lang="">
+<html>
 <head>
-  <title>View All Asso</title>
+  <title>Create New Asso</title>
   <style>
-    .large-button {
-      background-color: #f1f1f1;
-      color: #268018;
-      border: none;
-      text-align: left;
-      text-decoration: none;
-      cursor: pointer;
-      border-radius: 10px;
-      padding: 10px;
-      margin-bottom: 10px;
-      box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    body {
+      font-family: "Lato", sans-serif;
     }
-    .large-button p {
-      margin: 0;
-      font-size: 16px;
+    .asso-form {
+      width: 500px;
+      margin: 0 auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
     }
-    .pop-up-container {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
+    .asso-form select, .asso-form button[type=button] {
       width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.8);
-      z-index: 9999;
+      padding: 12px 20px;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
     }
-    .pop-up-content {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%) scale(0.8);
-      background-color: #f1f1f1;
-      color: #268018;
-      padding: 100px;
-      border-radius: 10px;
-      transition: transform 0.3s ease;
-    }
-    .pop-up-content{
-      transform: translate(-50%, -50%) scale(1);
-    }
-    .pop-up-content p {
-      margin: 10px 0;
-      font-size: 18px;
-    }
-    .pop-up-content button {
-      margin-top: 20px;
-      padding: 8px 16px;
-      background-color: #4CAF50;
-      color: white;
-      border: none;
-      cursor: pointer;
-      font-size: 16px;
-    }
-    .pop-up-content {
-      position: absolute;
-      top: -25px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 0;
-      height: 0;
-      border-left: 10px solid transparent;
-      border-right: 10px solid transparent;
-      border-bottom: 15px solid #4CAF50;
-    }
-    .filter-container {
-      margin-bottom: 10px;
-    }
-    .filter-container input[type="text"] {
-      padding: 15px;
-    }
-    .filter-container button[type="button"] {
-      padding: 5px 10px;
+    .asso-form button[type=button] {
       background-color: #4CAF50;
       color: white;
       border: none;
       cursor: pointer;
     }
-    .filter-container button[type="button"]:hover {
+    .asso-form button[type=button]:hover {
       background-color: #45a049;
     }
   </style>
+
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="http://localhost:8180/js/keycloak.js"></script>
   <script>
-    function showAssoDetails(asso) {
-      var popUpContainer = document.getElementById('popUpContainer');
-      var popUpContent = document.getElementById('popUpContent');
-      var closeButton = document.createElement('button');
-      closeButton.textContent = 'Retour';
-      closeButton.addEventListener('click', function() {
-        popUpContainer.style.display = 'none';
-      });
 
-      var modifyButton = document.createElement('button');
-      modifyButton.textContent = 'Modifier';
-      modifyButton.addEventListener('click', function() {
-        // Ajouter la logique de modification ici
-      });
+    function displayUserInfo() {
+      var token = keycloak.tokenParsed;
+      var name = token.name;
 
-      var deleteButton = document.createElement('button');
-      deleteButton.textContent = 'Supprimer';
-      deleteButton.addEventListener('click', function() {
-        // Ajouter la logique de suppression ici
-      });
+      var userInfoList = document.createElement('ul');
+      var nameItem = document.createElement('li');
+      var rolesItem = document.createElement('li');
 
-      popUpContent.innerHTML =
-              `<div class="triangle"></div>
-         <p><strong>ID:</strong> ${asso.Asso_EtudianteID}</p>
-         <p><strong>Nom:</strong> ${asso.Asso_Etudiante_Nom}</p>
-         <p><strong>Faculte:</strong> ${asso.Faculte_Nom}</p>
-         <p><strong>Administrateur:</strong> ${asso.UsagerID}</p>`;
+      nameItem.textContent = 'Nom : \n' + name;
+      rolesItem.textContent = 'Role: master';
 
-      popUpContent.appendChild(modifyButton);
-      popUpContent.appendChild(deleteButton);
-      popUpContent.appendChild(closeButton);
-      popUpContainer.style.display = 'flex';
-      setTimeout(function() {
-        popUpContent.classList.add('show');
-      }, 100);
+      userInfoList.appendChild(nameItem);
+      userInfoList.appendChild(rolesItem);
+
+      var userInfoDiv = document.getElementById('user-info');
+      userInfoDiv.innerHTML = ''; // Remove any existing content
+      userInfoDiv.appendChild(userInfoList);
     }
 
-    function getAsso() {
-      axios.get('http://localhost:8888/api/Asso/getAsso', {
+
+    var keycloak;
+
+    function initKeycloak() {
+      keycloak = new Keycloak({
+        "realm": "usager",
+        "auth-server-url": "http://localhost:8180/",
+        "ssl-required": "external",
+        "clientId": "frontend",
+        "public-client": true,
+        "confidential-port": 0
+      });
+      keycloak.init({ onLoad: 'login-required' })
+              .success(function (authenticated) {
+                if (authenticated) {
+                  alert('authenticated');
+                  displayUserInfo();
+                } else {
+                  alert('not authenticated');
+                }
+              })
+              .error(function () {
+                alert('failed to initialize');
+              });
+
+    }
+
+    function submitAsso() {
+      var Asso_EtudianteID = document.getElementById('Asso_EtudianteID').value;
+      var Asso_Etudiante_Nom = document.getElementById('Asso_Etudiante_Nom').value;
+      var FaculteID = document.getElementById('FaculteID').value;
+      var UsagerID = document.getElementById('UsagerID').value;
+
+      var asso = {
+        Asso_EtudianteID: Asso_EtudianteID,
+        Asso_Etudiante_Nom: Asso_Etudiante_Nom,
+        FaculteID: FaculteID,
+        UsagerID: UsagerID
+      };
+
+      axios.post('http://localhost:8888/api/Asso', asso, {
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + keycloak.token // Replace keycloak.token with your actual bearer token
         }
       })
               .then(function(response) {
-                var assos = response.data;
-                var assoContainer = document.getElementById('associations');
-                assos.forEach(function(asso) {
-                  var assoButton = document.createElement('button');
-                  assoButton.className = 'large-button';
-                  assoButton.innerHTML =
-                          `<p><strong>ID:</strong> ${asso.Asso_EtudianteID}</p>
-               <p><strong>Nom:</strong> ${asso.Asso_Etudiante_Nom}</p>
-               <p><strong>Faculte:</strong> ${asso.Faculte_Nom}</p>
-               <p><strong>Administrateur:</strong> ${asso.UsagerID}</p>`;
-
-                  assoButton.addEventListener('click', function() {
-                    showAssoDetails(asso);
-                  });
-
-                  assoContainer.appendChild(assoButton);
-                });
+                if (response.status === 201) {
+                  alert("Association created!");
+                  window.location.href = 'master_manager.html'; // Replace with the path to your main menu HTML file
+                }else {
+                  alert(response.status);
+                }
               })
               .catch(function(error) {
                 console.error(error);
+                alert("Assurez vous que l'admin existe et que l'id n'est pas encore utilisé ");
               });
     }
 
-    function filterAsso() {
-      var input = document.getElementById('assoFilter').value.toLowerCase();
-      var assos = document.getElementsByClassName('large-button');
-      for (var i = 0; i < assos.length; i++) {
-        var assoName = assos[i].getElementsByTagName('p')[1].textContent.toLowerCase();
-        if (assoName.includes(input) || input === "") {
-          assos[i].style.display = 'block';
-        } else {
-          assos[i].style.display = 'none';
-        }
-      }
+    function submitImage() {
+      var imageInput = document.getElementById('imageInput');
+      var file = imageInput.files[0];
+
+      var reader = new FileReader();
+
+      reader.onload = function(asso) {
+        var arrayBuffer = asso.target.result;
+
+        var blob = new Blob([arrayBuffer], { type: file.type });
+
+        var formData = new FormData();
+        formData.append('image', blob);
+
+        axios.post('http://localhost:8888/api/Asso/uploadImage', formData)
+                .then(function(response) {
+                  console.log('Image uploaded successfully.');
+                })
+                .catch(function(error) {
+                  console.error('Error uploading image:', error);
+                });
+      };
+
+      reader.readAsArrayBuffer(file);
     }
+
   </script>
 </head>
-<body onload="getAsso()">
-<h2>View All Asso</h2>
-<div class="filter-container">
-  <input type="text" id="assoFilter" placeholder="Filter by name">
-  <button type="button" onclick="filterAsso()">Filter</button>
-</div>
-<div id="associations">
-  <!-- Associations will be displayed here -->
-</div>
-<div id="popUpContainer" class="pop-up-container">
-  <div id="popUpContent" class="pop-up-content">
-    <!-- Association details will be displayed here -->
-  </div>
+
+<body onload="initKeycloak()">
+<h2>Create New Asso</h2>
+<div class="asso-form">
+  <form>
+    <label for="Asso_EtudianteID">AssoEtudiante Id:</label><br>
+    <select id="Asso_EtudianteID" name="Asso_EtudianteID">
+      <option value="1001">1001</option>
+      <option value="1002">1002</option>
+      <option value="1003">1003</option>
+    </select><br>
+
+    <label for="Asso_Etudiante_Nom">AssoEtudiante Name:</label><br>
+    <select id="Asso_Etudiante_Nom" name="Asso_Etudiante_Nom">
+      <option value="ageg">ageg</option>
+      <option value="amus">amus</option>
+      <option value="flsh">flsh</option>
+    </select><br>
+
+    <label for="FaculteID">AssoEtudiante Fac:</label><br>
+    <select id="FaculteID" name="FaculteID">
+      <option value="1">Science</option>
+      <option value="2">Droit</option>
+      <option value="3">Genie</option>
+    </select><br>
+
+    <label for="UsagerID">AssoEtudiante admin:</label><br>
+    <select id="UsagerID" name="UsagerID">
+      <option value="admin1">admin1</option>
+      <option value="admin2">admin2</option>
+      <option value="admin3">admin3</option>
+    </select><br>
+
+    <button type="button" onclick="submitAsso()">Submit</button>
+
+    <input type="file" id="imageInput" accept="image/*">
+    <button type="button" onclick="submitImage()">Submit Image</button>
+  </form>
 </div>
 </body>
 </html>

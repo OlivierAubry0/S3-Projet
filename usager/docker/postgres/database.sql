@@ -59,7 +59,7 @@ CREATE TABLE PRIVILEGE
 
 CREATE TABLE FACULTE
 (
-    FaculteID INT NOT NULL,
+    FaculteID VARCHAR(50) NOT NULL,
     Faculte_Nom VARCHAR(100) NOT NULL,
     UniversiteID INT NOT NULL,
     PRIMARY KEY (FaculteID),
@@ -73,7 +73,7 @@ CREATE TABLE USAGER
     Usager_Prenom VARCHAR(100) NOT NULL,
     Usager_Photo VARCHAR(100) NOT NULL,
     CodeQR INT NOT NULL,
-    FaculteID INT NOT NULL,
+    FaculteID VARCHAR(50) NOT NULL,
     PRIMARY KEY (UsagerID),
     FOREIGN KEY (FaculteID) REFERENCES FACULTE(FaculteID)
 );
@@ -82,7 +82,7 @@ CREATE TABLE ASSO_ETUDIANTE
 (
     Asso_EtudianteID VARCHAR(50) NOT NULL,
     Asso_Etudiante_Nom VARCHAR(100) NOT NULL,
-    FaculteID INT ,
+    FaculteID VARCHAR(50) NOT NULL,
     UsagerID VARCHAR(100) NOT NULL,
     PRIMARY KEY (Asso_EtudianteID),
     FOREIGN KEY (FaculteID) REFERENCES FACULTE(FaculteID),
@@ -113,7 +113,7 @@ CREATE TABLE RESERVATION
 CREATE TABLE FACULTE_POSSEDE_ASSO
 (
     Asso_EtudanteID VARCHAR(50) NOT NULL,
-    FaculteID INT NOT NULL,
+    FaculteID VARCHAR(50) NOT NULL,
     PRIMARY KEY (Asso_EtudanteID, FaculteID),
     FOREIGN KEY (Asso_EtudanteID) REFERENCES ASSO_ETUDIANTE(Asso_EtudianteID),
     FOREIGN KEY (FaculteID) REFERENCES FACULTE(FaculteID)
@@ -132,10 +132,6 @@ INSERT INTO FACULTE (FaculteID, Faculte_Nom, UniversiteID)
 VALUES (1, 'Science',1),
        (2, 'Medecine',1),
        (3, 'Droit',1);
-
-VALUES (1, 'Université A',1),
-       (2, 'Université B',1),
-       (3, 'Université C',1);
 
 INSERT INTO USAGER (UsagerID, Usager_Nom, Usager_Prenom, Usager_Photo, CodeQR, FaculteID)
 VALUES  ('admin1', 'nomadmin', 'prenomadmin', 'photoadmin', 0102, 1);

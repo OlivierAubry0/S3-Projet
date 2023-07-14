@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Update a Asso</title>
+    <style>
+        body {
+            font-family: "Lato", sans-serif;
+        }
+        .asso-form {
+            width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .asso-form input[type=text], .asso-form button[type=button] {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .asso-form button[type=button] {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .asso-form button[type=button]:hover {
+            background-color: #45a049;
+        }
+    </style>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="http://localhost:8180/js/keycloak.js"></script>
+    <script>
+
+        function UpdateAsso() {
+            var newIDInput = document.getElementById('newID');
+            var newNomInput = document.getElementById('newNom');
+            var newFaculteInput = document.getElementById('newFaculte');
+            var newAdminInput = document.getElementById('newAdmin');
+
+            var updatedAsso = {
+                Asso_EtudianteID: newIDInput.value,
+                Asso_Etudiante_Nom: newNomInput.value,
+                FaculteID: newFaculteInput.value,
+                UsagerID: newAdminInput.value
+            };
+
+            axios.put('http://localhost:8888/api/Asso/updateAsso', updatedAsso, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+                .then(function(response) {
+                    if (response.status === 200) {
+                        alert("L'association a été mise à jour avec succès.");
+                        window.location.href = 'Assotables.html';
+                        // Effectuer les actions supplémentaires nécessaires après la mise à jour de l'association
+                    } else {
+                        console.log("Une erreur s'est produite lors de la mise à jour de l'association." + response.status);
+                    }
+                })
+                .catch(function(error) {
+                    console.error(error);
+                    console.log("Une erreur s'est produite lors de la mise à jour de l'association. catch");
+                });
+        }
+
+        function submitImage() {
+            var imageInput = document.getElementById('imageInput');
+            var file = imageInput.files[0];
+
+            var reader = new FileReader();
+
+            reader.onload = function(asso) {
+                var arrayBuffer = asso.target.result;
+
+                var blob = new Blob([arrayBuffer], { type: file.type });
+
+                var formData = new FormData();
+                formData.append('image', blob);
+
+                axios.post('http://localhost:8888/api/Asso/uploadImage', formData)
+                    .then(function(response) {
+                        console.log('Image uploaded successfully.');
+                    })
+                    .catch(function(error) {
+                        console.error('Error uploading image:', error);
+                    });
+            };
+
+            reader.readAsArrayBuffer(file);
+        }
+
+    </script>
+</head>
+
+<body onload="initKeycloak()">
+<h2>Update Asso</h2>
+<div class="asso-form">
+    <form>
+        <label for="Asso_EtudianteID">AssoEtudiante ID:</label><br>
+        <input type="text" id="Asso_EtudianteID" name="Asso_EtudianteID"><br>
+
+        <label for="Asso_Etudiante_Nom">AssoEtudiante Name:</label><br>
+        <input type="text" id="Asso_Etudiante_Nom" name="Asso_Etudiante_Nom"><br>
+
+        <label for="FaculteID">AssoEtudiante Fac:</label><br>
+        <input type="text" id="FaculteID" name="FaculteID"><br>
+
+        <label for="UsagerID">AssoEtudiante admin:</label><br>
+        <input type="text" id="UsagerID" name="UsagerID"><br>
+
+        <button type="button" onclick="UpdateAsso()">Update</button>
+
+        <input type="file" id="imageInput" accept="image/*">
+        <button type="button" onclick="submitImage()">Submit Image</button>
+    </form>
+</div>
+</body>
+</html>
