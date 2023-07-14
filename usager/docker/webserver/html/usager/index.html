@@ -3,7 +3,7 @@
 <head>
     <title>OS Detection</title>
 </head>
-<body >
+<body>
 <script>
 
     var userAgent = navigator.userAgent || navigator.vendor || window.opera;
@@ -17,54 +17,6 @@
     } else {
         // Load default HTML file for other operating systems
         window.location.href = "pc_HomePage.html";
-    }
-
-    function initKeycloak() {
-        keycloak = new Keycloak({
-            "realm": "usager",
-            "auth-server-url": "http://localhost:8180/",
-            "ssl-required": "external",
-            "clientId": "frontend",
-            "public-client": true,
-            "confidential-port": 0
-        });
-        keycloak.init({onLoad: 'login-required'}).then(function (authenticated) {
-            //alert(authenticated ? 'authenticated' : 'not authenticated');
-            if (authenticated) {
-                var roles = keycloak.tokenParsed.realm_access.roles;
-
-                if (roles.includes('enseignant')) {
-                    window.location.href = 'admin_event_creator.html';
-                    return;
-                }
-            } else {
-                alert('Not authenticated');
-            }
-
-        }).catch(function () {
-            alert('failed to initialize');
-        }).finally(function () {
-            displayUserInfo(); // Call the function to display user info
-        });
-        function displayUserInfo() {
-            var token = keycloak.tokenParsed;
-            var name = token.name;
-
-            var userInfoList = document.createElement('ul');
-            var nameItem = document.createElement('li');
-            var rolesItem = document.createElement('li');
-
-            nameItem.textContent = 'Nom : \n' + name;
-            rolesItem.textContent =  'Role: Admin';
-
-            userInfoList.appendChild(nameItem);
-            userInfoList.appendChild(rolesItem);
-
-            var userInfoDiv = document.getElementById('user-info');
-            userInfoDiv.innerHTML = ''; // Supprime tout contenu existant
-            userInfoDiv.appendChild(userInfoList);
-        }
-
     }
 </script>
 </body>
