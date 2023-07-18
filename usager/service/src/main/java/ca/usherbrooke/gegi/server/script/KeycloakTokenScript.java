@@ -4,6 +4,9 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.io.PrintWriter;
+import java.io.FileOutputStream;
+import java.nio.charset.StandardCharsets;
 import java.sql.*;
 import java.util.Random;
 
@@ -29,7 +32,7 @@ public class KeycloakTokenScript {
             Process process = Runtime.getRuntime().exec(command);
 
             // Read
-            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream(), StandardCharsets.UTF_8));
             String line;
             StringBuilder response = new StringBuilder();
 
@@ -53,6 +56,7 @@ public class KeycloakTokenScript {
     }
 
     public static void getUsers(String token) {
+        JSONArray usersData = new JSONArray();
         try {
             URL url = new URL("http://localhost:8180/admin/realms/usager/users");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -77,29 +81,30 @@ public class KeycloakTokenScript {
                 String firstName = user.getString("firstName");
                 String lastName = user.getString("lastName");
                 String userId = user.getString("id");
-                System.out.println("  ");
 
-                System.out.println("Username: " + user.getString("username"));
-                System.out.println("Email: " + user.getString("email"));
-                System.out.println("First Name: " + user.getString("firstName"));
-                System.out.println("Last Name: " + user.getString("lastName"));
+                JSONObject userJson = new JSONObject();
+                userJson.put("username", username);
+                userJson.put("email", email);
+                userJson.put("firstName", firstName);
+                userJson.put("lastName", lastName);
 
                 JSONArray rolesArray = getUserRoles(token, userId);
-                String role = (rolesArray.length() > 0) ? rolesArray.getJSONObject(0).getString("name") : null;
+                userJson.put("realmRoles", new JSONArray(rolesArray.toString()));
 
                 JSONArray groupsArray = getUserGroups(token, userId);
-                String groupName = (groupsArray.length() > 0) ? groupsArray.getJSONObject(0).getString("name") : null;
+                userJson.put("groups", new JSONArray(groupsArray.toString()));
 
-                insertUser(userId, lastName, firstName, role, groupName);
-
+                usersData.put(userJson);
             }
+            System.out.println(usersData.toString(2));
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
+
     public static JSONArray getUserRoles(String token, String userId) {
-        JSONArray rolesArray= null;
+        JSONArray rolesArray= new JSONArray();
         try {
             URL url = new URL("http://localhost:8180/admin/realms/usager/users/" + userId + "/role-mappings/realm");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -107,7 +112,7 @@ public class KeycloakTokenScript {
             conn.setRequestProperty("Authorization", "Bearer " + token);
             conn.setRequestProperty("Content-Type", "application/json");
 
-            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), StandardCharsets.UTF_8));
             StringBuilder output = new StringBuilder();
             String line;
             while ((line = br.readLine()) != null) {
@@ -115,20 +120,18 @@ public class KeycloakTokenScript {
             }
             br.close();
 
-            rolesArray = new JSONArray(output.toString());
-            System.out.println("Roles:");
-            for (int i = 0; i < rolesArray.length(); i++) {
-                JSONObject role = rolesArray.getJSONObject(i);
-                System.out.println("- " + role.getString("name"));
+            JSONArray roles = new JSONArray(output.toString());
+            for (int i = 0; i < roles.length(); i++) {
+                JSONObject role = roles.getJSONObject(i);
+                rolesArray.put(role.getString("name"));  // add the role name to rolesArray
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return rolesArray;
+        return rolesArray;  // return the array of role names
     }
-
     public static JSONArray getUserGroups(String token, String userId) {
-        JSONArray groupsArray= null;
+        JSONArray groupsArray = new JSONArray();
         try {
             URL url = new URL("http://localhost:8180/admin/realms/usager/users/" + userId + "/groups");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -136,7 +139,7 @@ public class KeycloakTokenScript {
             conn.setRequestProperty("Authorization", "Bearer " + token);
             conn.setRequestProperty("Content-Type", "application/json");
 
-            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), StandardCharsets.UTF_8));
             StringBuilder output = new StringBuilder();
             String line;
             while ((line = br.readLine()) != null) {
@@ -144,14 +147,15 @@ public class KeycloakTokenScript {
             }
             br.close();
 
-            groupsArray = new JSONArray(output.toString());
-            System.out.println("Groups:");
-            for (int i = 0; i < groupsArray.length(); i++) {
-                JSONObject group = groupsArray.getJSONObject(i);
-                System.out.println("- " + group.getString("name"));
-                String groupName = group.getString("name");
-                String groupId = group.getString("id");
-                getGroupSubGroups(token, groupId, groupName);
+            JSONArray groups = new JSONArray(output.toString());
+            for (int i = 0; i < groups.length(); i++) {
+                JSONObject group = groups.getJSONObject(i);
+                JSONObject groupJson = new JSONObject();
+                groupJson.put("name", group.getString("name"));
+
+                JSONArray subGroupsArray = getGroupSubGroups(token, group.getString("id"));
+                groupJson.put("subGroups", subGroupsArray);
+                groupsArray.put(groupJson);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -159,7 +163,8 @@ public class KeycloakTokenScript {
         return groupsArray;
     }
 
-    public static void getGroupSubGroups(String token, String groupId, String groupName) {
+    public static JSONArray getGroupSubGroups(String token, String groupId) {
+        JSONArray subGroupsArray = new JSONArray();
         try {
             URL url = new URL("http://localhost:8180/admin/realms/usager/groups/" + groupId);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -167,7 +172,7 @@ public class KeycloakTokenScript {
             conn.setRequestProperty("Authorization", "Bearer " + token);
             conn.setRequestProperty("Content-Type", "application/json");
 
-            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), StandardCharsets.UTF_8));
             StringBuilder output = new StringBuilder();
             String line;
             while ((line = br.readLine()) != null) {
@@ -176,23 +181,17 @@ public class KeycloakTokenScript {
             br.close();
 
             JSONObject group = new JSONObject(output.toString());
-            if(group.has("subGroups")) {
-                JSONArray subGroupsArray = group.getJSONArray("subGroups");
-                if(subGroupsArray.length() >= 2 && !universiteExists(groupName)) {
-                    insertUniversite(groupName);
-                }
-                System.out.println("Sub-Groups:");
-                for (int i = 0; i < subGroupsArray.length(); i++) {
-                    JSONObject subGroup = subGroupsArray.getJSONObject(i);
-                    System.out.println("- " + subGroup.getString("name"));
-                    if (!facultyExists(subGroup.getString("name"), groupName)) {
-                        insertFaculty(subGroup.getString("name"), groupName);
-                    }
+            if (group.has("subGroups")) {
+                JSONArray subGroups = group.getJSONArray("subGroups");
+                for (int i = 0; i < subGroups.length(); i++) {
+                    JSONObject subGroup = subGroups.getJSONObject(i);
+                    subGroupsArray.put(subGroup.getString("name"));
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return subGroupsArray;
     }
 
 
@@ -302,11 +301,9 @@ public class KeycloakTokenScript {
     }
 
 
-
-
     private static int generateRandom4DigitKey() {
         Random random = new Random();
-        return random.nextInt(9000) + 1000; 
+        return random.nextInt(9000) + 1000;
     }
 
 

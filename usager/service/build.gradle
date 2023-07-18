@@ -29,6 +29,8 @@ dependencies {
     implementation 'org.json:json:20210307'
     implementation 'org.keycloak:keycloak-admin-client:15.0.2'
     implementation 'mysql:mysql-connector-java:8.0.23'
+    implementation 'com.mashape.unirest:unirest-java:1.4.9'
+
 }
 version = '1.0.0'
 
