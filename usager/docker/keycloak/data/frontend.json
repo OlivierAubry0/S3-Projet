@@ -54,6 +54,7 @@
     "nodeReRegistrationTimeout": -1,
     "defaultClientScopes": [
         "web-origins",
+        "acr",
         "roles",
         "profile",
         "email"

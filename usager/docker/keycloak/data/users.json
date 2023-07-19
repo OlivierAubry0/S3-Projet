@@ -1,6 +1,6 @@
 [
   {
-    "firstName": "�\u2030lodie",
+    "firstName": "Elodie",
     "lastName": "Amar",
     "realmRoles": [
       "default-roles-master",
@@ -81,7 +81,7 @@
     "username": "beab1802"
   },
   {
-    "firstName": "�\u2030tienne",
+    "firstName": "Etienne",
     "lastName": "Bellerive-Blais",
     "realmRoles": [
       "default-roles-master",
@@ -95,7 +95,7 @@
     "username": "bele0801"
   },
   {
-    "firstName": "�\u2030mile",
+    "firstName": "Emile",
     "lastName": "Bélanger",
     "realmRoles": [
       "default-roles-master",
@@ -155,7 +155,7 @@
     "lastName": "Boone,",
     "realmRoles": [
       "default-roles-master",
-      "directeur-d�partement"
+      "directeur-département"
     ],
     "groups": [{
       "name": "Faculte de Genie",
@@ -384,7 +384,7 @@
     "lastName": "Farhi,",
     "realmRoles": [
       "default-roles-master",
-      "coordonnateur-p�dagogique"
+      "coordonnateur-pédagogique"
     ],
     "groups": [{
       "name": "Faculte de Gestion",
@@ -686,7 +686,7 @@
     "lastName": "University",
     "realmRoles": [
       "default-roles-usager",
-      "coordonnateur-p�dagogique"
+      "coordonnateur-pédagogique"
     ],
     "groups": [{
       "name": "Universite de Laval",
@@ -788,7 +788,7 @@
     "lastName": "nomdumaster",
     "realmRoles": [
       "default-roles-master",
-      "coordonnateur-p�dagogique"
+      "coordonnateur-pédagogique"
     ],
     "groups": [{
       "name": "Universite de Sherbrooke",
@@ -830,7 +830,7 @@
     "username": "pald2501"
   },
   {
-    "firstName": "�\u2030ric",
+    "firstName": "Eric",
     "lastName": "Plourde",
     "realmRoles": [
       "coordonnateur-programme",
@@ -1063,5 +1063,3 @@
     "username": "turv5324"
   }
 ]
-
-
