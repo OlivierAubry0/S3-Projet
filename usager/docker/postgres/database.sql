@@ -54,20 +54,11 @@ CREATE TABLE PRIVILEGE
 
 CREATE TABLE FACULTE
 (
-    FaculteID INT NOT NULL,
+    FaculteID VARCHAR(50) NOT NULL,
     Faculte_Nom VARCHAR(100) NOT NULL,
     UniversiteID INT NOT NULL,
     PRIMARY KEY (FaculteID),
     FOREIGN KEY (UniversiteID) REFERENCES UNIVERSITE(UniversiteID)
-);
-
-CREATE TABLE ASSO_ETUDIANTE
-(
-    Asso_EtudianteID VARCHAR(50) NOT NULL,
-    Asso_Etudiante_Nom VARCHAR(100) NOT NULL,
-    FaculteID INT ,
-    PRIMARY KEY (Asso_EtudianteID),
-    FOREIGN KEY (FaculteID) REFERENCES FACULTE(FaculteID)
 );
 
 CREATE TABLE USAGER
@@ -75,12 +66,22 @@ CREATE TABLE USAGER
     UsagerID VARCHAR(100) NOT NULL,
     Usager_Nom VARCHAR(100) NOT NULL,
     Usager_Prenom VARCHAR(100) NOT NULL,
-    Usager_Photo VARCHAR(100),
-    Usager_Role VARCHAR(100),
-    CodeQR INT,
-    FaculteID INT NOT NULL,
+    Usager_Photo VARCHAR(100) NOT NULL,
+    CodeQR INT NOT NULL,
+    FaculteID VARCHAR(50) NOT NULL,
     PRIMARY KEY (UsagerID),
     FOREIGN KEY (FaculteID) REFERENCES FACULTE(FaculteID)
+);
+
+CREATE TABLE ASSO_ETUDIANTE
+(
+    Asso_EtudianteID VARCHAR(50) NOT NULL,
+    Asso_Etudiante_Nom VARCHAR(100) NOT NULL,
+    FaculteID VARCHAR(50) NOT NULL,
+    UsagerID VARCHAR(100) NOT NULL,
+    PRIMARY KEY (Asso_EtudianteID),
+    FOREIGN KEY (FaculteID) REFERENCES FACULTE(FaculteID),
+    FOREIGN KEY (UsagerID) REFERENCES USAGER(UsagerID)
 );
 
 CREATE TABLE USAGER_POSSEDE_PRIVILEGE
@@ -107,7 +108,7 @@ CREATE TABLE RESERVATION
 CREATE TABLE FACULTE_POSSEDE_ASSO
 (
     Asso_EtudanteID VARCHAR(50) NOT NULL,
-    FaculteID INT NOT NULL,
+    FaculteID VARCHAR(50) NOT NULL,
     PRIMARY KEY (Asso_EtudanteID, FaculteID),
     FOREIGN KEY (Asso_EtudanteID) REFERENCES ASSO_ETUDIANTE(Asso_EtudianteID),
     FOREIGN KEY (FaculteID) REFERENCES FACULTE(FaculteID)
@@ -127,14 +128,14 @@ VALUES (4028, 'Faculte de Genie', 1),
        (2222, 'Campus de genie', 2),
        (2332, 'Campus de sante', 2);
 
-INSERT INTO FACULTE (FaculteID, Faculte_Nom, UniversiteID)
-VALUES (1, 'Université A',1),
-       (2, 'Université B',1),
-       (3, 'Université C',1);
+INSERT INTO USAGER (UsagerID, Usager_Nom, Usager_Prenom, Usager_Photo, CodeQR, FaculteID)
+VALUES ('admin1', 'nomadmin', 'prenomadmin', 'photoadmin', 0102, 4028),
+       ('admin2', 'nomadmin2', 'prenomadmin2', 'photoadmin2', 0103, 4028),
+       ('admin3', 'nomadmin3', 'prenomadmin3', 'photoadmin3', 0104, 4028);
 
-INSERT INTO ASSO_ETUDIANTE (Asso_EtudianteID, Asso_Etudiante_Nom, FaculteID)
-VALUES (1, 'Association 1', 1),
-       (2, 'Association 2', 2),
-       (3, 'Association 3', 3);
+INSERT INTO ASSO_ETUDIANTE (Asso_EtudianteID, Asso_Etudiante_Nom, FaculteID, UsagerID)
+VALUES (1, 'Association 1', 4028, 'admin1'),
+       (2, 'Association 2', 4028, 'admin1'),
+       (3, 'Association 3', 4028, 'admin1');
 
 delete from UNIVERSITE where Universite_Nom='Université de Sherbrooke'
