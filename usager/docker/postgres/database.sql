@@ -39,13 +39,8 @@ CREATE TABLE EVENEMENT
     --Nombre_Places    VARCHAR(50),
     Allow_Guests     BOOLEAN,
     Description      VARCHAR(100),
+    filename        VARCHAR(255),
     PRIMARY KEY (EvenementID)
-);
-
-CREATE TABLE images (
-                        id VARCHAR(50) PRIMARY KEY,
-                        data oid not null ,
-                        created_at TIMESTAMPTZ DEFAULT NOW()
 );
 
 CREATE TABLE PRIVILEGE
@@ -59,11 +54,20 @@ CREATE TABLE PRIVILEGE
 
 CREATE TABLE FACULTE
 (
-    FaculteID VARCHAR(50) NOT NULL,
+    FaculteID INT NOT NULL,
     Faculte_Nom VARCHAR(100) NOT NULL,
     UniversiteID INT NOT NULL,
     PRIMARY KEY (FaculteID),
     FOREIGN KEY (UniversiteID) REFERENCES UNIVERSITE(UniversiteID)
+);
+
+CREATE TABLE ASSO_ETUDIANTE
+(
+    Asso_EtudianteID VARCHAR(50) NOT NULL,
+    Asso_Etudiante_Nom VARCHAR(100) NOT NULL,
+    FaculteID INT ,
+    PRIMARY KEY (Asso_EtudianteID),
+    FOREIGN KEY (FaculteID) REFERENCES FACULTE(FaculteID)
 );
 
 CREATE TABLE USAGER
@@ -71,27 +75,17 @@ CREATE TABLE USAGER
     UsagerID VARCHAR(100) NOT NULL,
     Usager_Nom VARCHAR(100) NOT NULL,
     Usager_Prenom VARCHAR(100) NOT NULL,
-    Usager_Photo VARCHAR(100) NOT NULL,
-    CodeQR INT NOT NULL,
-    FaculteID VARCHAR(50) NOT NULL,
+    Usager_Photo VARCHAR(100),
+    Usager_Role VARCHAR(100),
+    CodeQR INT,
+    FaculteID INT NOT NULL,
     PRIMARY KEY (UsagerID),
     FOREIGN KEY (FaculteID) REFERENCES FACULTE(FaculteID)
 );
 
-CREATE TABLE ASSO_ETUDIANTE
-(
-    Asso_EtudianteID VARCHAR(50) NOT NULL,
-    Asso_Etudiante_Nom VARCHAR(100) NOT NULL,
-    FaculteID VARCHAR(50) NOT NULL,
-    UsagerID VARCHAR(100) NOT NULL,
-    PRIMARY KEY (Asso_EtudianteID),
-    FOREIGN KEY (FaculteID) REFERENCES FACULTE(FaculteID),
-    FOREIGN KEY (UsagerID) REFERENCES USAGER(UsagerID)
-);
-
 CREATE TABLE USAGER_POSSEDE_PRIVILEGE
 (
-    UsagerID VARCHAR(100) NOT NULL,
+    UsagerID varchar(100) NOT NULL,
     PrivilegeID INT,
     PRIMARY KEY (UsagerID, PrivilegeID),
     FOREIGN KEY (UsagerID) REFERENCES USAGER(UsagerID),
@@ -113,7 +107,7 @@ CREATE TABLE RESERVATION
 CREATE TABLE FACULTE_POSSEDE_ASSO
 (
     Asso_EtudanteID VARCHAR(50) NOT NULL,
-    FaculteID VARCHAR(50) NOT NULL,
+    FaculteID INT NOT NULL,
     PRIMARY KEY (Asso_EtudanteID, FaculteID),
     FOREIGN KEY (Asso_EtudanteID) REFERENCES ASSO_ETUDIANTE(Asso_EtudianteID),
     FOREIGN KEY (FaculteID) REFERENCES FACULTE(FaculteID)
@@ -123,15 +117,24 @@ CREATE TABLE FACULTE_POSSEDE_ASSO
 
 -----------------------------------
 INSERT INTO UNIVERSITE (UniversiteID, Universite_Nom)
-VALUES (1, 'Université A'),
-       (2, 'Université B'),
-       (3, 'Université C');
+VALUES (1, 'Université de sd'),
+       (2, 'Université sd');
 
 INSERT INTO FACULTE (FaculteID, Faculte_Nom, UniversiteID)
+VALUES (4028, 'Faculte de Genie', 1),
+       (4038, 'Ecole de gestion', 1),
+       (4039, 'Faculte de musique', 1),
+       (2222, 'Campus de genie', 2),
+       (2332, 'Campus de sante', 2);
 
-VALUES (1, 'Science',1),
-       (2, 'Medecine',1),
-       (3, 'Droit',1);
+INSERT INTO FACULTE (FaculteID, Faculte_Nom, UniversiteID)
+VALUES (1, 'Université A',1),
+       (2, 'Université B',1),
+       (3, 'Université C',1);
 
-INSERT INTO USAGER (UsagerID, Usager_Nom, Usager_Prenom, Usager_Photo, CodeQR, FaculteID)
-VALUES  ('admin1', 'nomadmin', 'prenomadmin', 'photoadmin', 0102, 1);
+INSERT INTO ASSO_ETUDIANTE (Asso_EtudianteID, Asso_Etudiante_Nom, FaculteID)
+VALUES (1, 'Association 1', 1),
+       (2, 'Association 2', 2),
+       (3, 'Association 3', 3);
+
+delete from UNIVERSITE where Universite_Nom='Université de Sherbrooke'
