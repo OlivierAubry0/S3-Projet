@@ -12,7 +12,7 @@
     </insert>
 
     <select id="getAllAsso" resultType="ca.usherbrooke.gegi.server.admin.AssoEtudiante">
-        SELECT * FROM BASE_DE_DONNE.les_associations
+        SELECT * FROM BASE_DE_DONNE.les_assos
     </select>
 
 </mapper>

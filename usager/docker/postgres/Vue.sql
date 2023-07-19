@@ -18,7 +18,7 @@ CREATE VIEW les_benevoles AS
     SELECT UsagerID, privilegeid
 FROM base_de_donne.usager_possede_privilege;
 
-CREATE VIEW les_associations AS
+CREATE VIEW les_assos AS
 SELECT Asso_EtudianteID, Asso_Etudiante_Nom, FaculteID
 FROM base_de_donne.ASSO_ETUDIANTE;
 
