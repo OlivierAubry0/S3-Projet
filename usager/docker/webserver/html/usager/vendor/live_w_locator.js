@@ -86,22 +86,22 @@ $(function() {
             var streamLabel = Quagga.CameraAccess.getActiveStreamLabel();
 
             return Quagga.CameraAccess.enumerateVideoDevices()
-            .then(function(devices) {
-                function pruneText(text) {
-                    return text.length > 30 ? text.substr(0, 30) : text;
-                }
-                var $deviceSelection = document.getElementById("deviceSelection");
-                while ($deviceSelection.firstChild) {
-                    $deviceSelection.removeChild($deviceSelection.firstChild);
-                }
-                devices.forEach(function(device) {
-                    var $option = document.createElement("option");
-                    $option.value = device.deviceId || device.id;
-                    $option.appendChild(document.createTextNode(pruneText(device.label || device.deviceId || device.id)));
-                    $option.selected = streamLabel === device.label;
-                    $deviceSelection.appendChild($option);
+                .then(function(devices) {
+                    function pruneText(text) {
+                        return text.length > 30 ? text.substr(0, 30) : text;
+                    }
+                    var $deviceSelection = document.getElementById("deviceSelection");
+                    while ($deviceSelection.firstChild) {
+                        $deviceSelection.removeChild($deviceSelection.firstChild);
+                    }
+                    devices.forEach(function(device) {
+                        var $option = document.createElement("option");
+                        $option.value = device.deviceId || device.id;
+                        $option.appendChild(document.createTextNode(pruneText(device.label || device.deviceId || device.id)));
+                        $option.selected = streamLabel === device.label;
+                        $deviceSelection.appendChild($option);
+                    });
                 });
-            });
         },
         attachListeners: function() {
             var self = this;
@@ -165,10 +165,10 @@ $(function() {
             var track = Quagga.CameraAccess.getActiveTrack();
             if (track && typeof track.getCapabilities === 'function') {
                 switch (setting) {
-                case 'zoom':
-                    return track.applyConstraints({advanced: [{zoom: parseFloat(value)}]});
-                case 'torch':
-                    return track.applyConstraints({advanced: [{torch: !!value}]});
+                    case 'zoom':
+                        return track.applyConstraints({advanced: [{zoom: parseFloat(value)}]});
+                    case 'torch':
+                        return track.applyConstraints({advanced: [{torch: !!value}]});
                 }
             }
         },
@@ -286,6 +286,11 @@ $(function() {
         if (App.lastResult !== code) {
             App.lastResult = code;
             var $node = null, canvas = Quagga.canvas.dom.image;
+
+            detectedBarcode = code;
+
+            // Send the detected barcode to phone_scanner.html using window.postMessage()
+            window.postMessage({ detectedBarcode: detectedBarcode }, window.location.href);
 
             $node = $('<li><div class="thumbnail"><div class="imgWrapper"><img /></div><div class="caption"><h4 class="code"></h4></div></div></li>');
             $node.find("img").attr("src", canvas.toDataURL());

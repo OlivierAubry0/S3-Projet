@@ -3710,6 +3710,7 @@
                 }
 
                 function addResult(result, imageData) {
+                    alert(result);
                     if (!imageData || !_resultCollector) {
                         return;
                     }
@@ -3732,6 +3733,7 @@
                 }
 
                 function publishResult(result, imageData) {
+
                     var resultToPublish = result;
 
                     if (result && _onUIThread) {

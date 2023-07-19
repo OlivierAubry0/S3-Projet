@@ -101,7 +101,7 @@
     </fieldset>
   </div>
   <div id="result_strip">
-    <ul class="thumbnails"></ul>
+    <ul class="thumbnails" ></ul>
     <ul class="collector"></ul>
   </div>
   <div id="interactive" class="viewport"></div>
@@ -110,7 +110,7 @@
 <div class="event-form">
   <form>
     <input type="text" id="UsagerID" placeholder="cip etudiant">
-    <button type="button" onclick="CheckIfReserved()">Suivant</button>
+    <button type="button" id="usagersubmit" onclick="CheckIfReserved()">Suivant</button>
   </form>
 </div>
 <div class="large-button" id="users"></div>
@@ -124,8 +124,25 @@
 <script src="vendor/jquery-1.9.0.min.js" type="text/javascript"></script>
 <script src="//webrtc.github.io/adapter/adapter-latest.js" type="text/javascript"></script>
 <script src="../dist/quagga.js" type="text/javascript"></script>
-<script src="live_w_locator.js" type="text/javascript"></script>
+<script src="vendor/live_w_locator.js" type="text/javascript"></script>
+
 <script>
+  // Function to handle messages received from live_locator.js
+  function handleMessage(event) {
+    if (event.data && event.data.detectedBarcode) {
+      var detectedBarcode = event.data.detectedBarcode;
+
+      // Convert all capital letters to lowercase
+      var minimizedBarcode = detectedBarcode.toLowerCase();
+
+      document.getElementById('UsagerID').value = minimizedBarcode;
+      document.getElementById("usagersubmit").click();
+      document.getElementById('UsagerID').value = "";
+    }
+  }
+
+  // Listen for messages from live_locator.js
+  window.addEventListener('message', handleMessage, false);
 
   function CheckIfReserved() {
     var EvenementID = localStorage.getItem('EvenementID');
@@ -166,14 +183,15 @@
                   alert("Aucune réservation trouvée !");
                 }
               } else {
+                alert("Aucune réservation trouvée !");
                 alert(response.status);
               }
             })
             .catch(function(error) {
+              alert("Aucune réservation trouvée !");
               console.error(error);
             });
   }
-
 
 </script>
 </body>
