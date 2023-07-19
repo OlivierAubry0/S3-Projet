@@ -124,7 +124,7 @@
 
   </style>
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-  <script src="http://localhost:8180/js/keycloak.js"></script>
+  <script src="http://192.168.2.216:8180/js/keycloak.js"></script>
   <script>
 
     var keycloak;
@@ -132,7 +132,7 @@
     function initKeycloak() {
       keycloak = new Keycloak({
         "realm": "usager",
-        "auth-server-url": "http://localhost:8180/",
+        "auth-server-url": "http://192.168.2.216:8180/",
         "ssl-required": "external",
         "clientId": "frontend",
         "public-client": true,
@@ -163,7 +163,7 @@
     function requestStudent() {
       const div = document.getElementById('title');
       const span = div.firstElementChild;
-      axios.get("http://localhost:8888/api/student", {
+      axios.get("http://192.168.2.216:8888/api/student", {
         headers: {
           'Authorization': 'Bearer ' + keycloak.token
         }
@@ -190,7 +190,7 @@
     function requestTeacher() {
       const div = document.getElementById('title');
       const span = div.firstElementChild;
-      axios.get("http://localhost:8888/api/teacher", {
+      axios.get("http://192.168.2.216:8888/api/teacher", {
         headers: {
           'Authorization': 'Bearer ' + keycloak.token
         }
@@ -215,7 +215,7 @@
     }
 
     function logout() {
-      let logoutURL = "http://localhost:8180//realms/usager/protocol/openid-connect/logout"
+      let logoutURL = "http://192.168.2.216:8180//realms/usager/protocol/openid-connect/logout"
       window.location.href = logoutURL;
     }
 
@@ -255,7 +255,7 @@
 <div id="mySidenav" class="sidenav">
   <a href="#" onclick="logout()">Déconnexion</a>
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-  <a href="#" onclick="window.location.href='camera.html'">Scanner</a>
+  <a href="#" onclick="window.location.href='EventID_scanner_PHONE.html'">Scanner</a>
   <a href="#">Services</a>
   <a href="#">Clients</a>
   <a href="#">Contact</a>
@@ -276,7 +276,7 @@
 
 <div id="Facultes">FACULTÉS</div>
 
-<div id="genie" style="left: 5%; top: 40%" onclick="window.location.href ='eventstable.html'">Génie</div>
+<div id="genie" style="left: 5%; top: 40%" onclick="window.location.href ='eventsTablePHONE.html'">Génie</div>
 <div id="EDG" style="left: 55%; top: 40%;">École de gestion</div>
 
 <div id="education" style="left: 5%; top: 55%">Éducation</div>

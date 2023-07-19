@@ -136,7 +136,7 @@
       UsagerID: UsagerID
     };
 
-    var url = 'http://localhost:8888/api/scanning/checkUserReservation?EvenementID=' + encodeURIComponent(EvenementID) + '&UsagerID=' + encodeURIComponent(UsagerID);
+    var url = 'http://192.168.2.216:8888/api/scanning/checkUserReservation?EvenementID=' + encodeURIComponent(EvenementID) + '&UsagerID=' + encodeURIComponent(UsagerID);
     axios.post(url, {
       headers: {
         'Content-Type': 'application/json'

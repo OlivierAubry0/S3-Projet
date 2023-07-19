@@ -38,7 +38,7 @@ CREATE TABLE EVENEMENT
     Nombre_Places INT,
     --Nombre_Places    VARCHAR(50),
     Allow_Guests     BOOLEAN,
-    Description      VARCHAR(100),
+    Description      VARCHAR(255),
     filename        VARCHAR(255),
     PRIMARY KEY (EvenementID)
 );
