@@ -18,6 +18,23 @@
           "value": "projet"
         }
       ]
+    },{
+      "username": "master0102",
+      "enabled": true,
+      "firstName": "prenomdumaster",
+      "lastName": "nomdumaster",
+      "email": "master0102@usherbrooke.ca",
+      "realmRoles": [
+        "coordonnateur-pédagogique",
+        "default-roles-master"
+      ],
+      "credentials": [
+        {
+          "temporary": true,
+          "type": "password",
+          "value": "projet"
+        }
+      ]
     }
   ]
 }
