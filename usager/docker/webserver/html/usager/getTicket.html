@@ -1,36 +1,188 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Obtenir billet</title>
   <style>
-    body {
-      font-family: "Lato", sans-serif;
-    }
-    .event-form {
-      width: 500px;
-      margin: 0 auto;
-      padding: 20px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      box-sizing: border-box;
-    }
-    .event-form select, .event-form button[type=button] {
+    /* CSS styles */
+
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
       width: 100%;
-      padding: 12px 20px;
-      margin: 8px 0;
-      display: inline-block;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      box-sizing: border-box;
-    }
-    .event-form button[type=button] {
-      background-color: #4CAF50;
+      height: 10%;
+      background-color: #268018;
       color: white;
-      border: none;
-      cursor: pointer;
+      transition: top 0.3s;
+      z-index: 999; /* Set a high z-index value */
     }
-    .event-form button[type=button]:hover {
-      background-color: #45a049;
+
+    .header.hidden {
+      top: -100px; /* Move the header offscreen */
+    }
+
+
+    .sidenav {
+      height: 100%;
+      width: 0;
+      position: fixed;
+      z-index: 100000;
+      top: 0;
+      left: 0;
+      background-color: #0B4F00;
+      overflow-x: hidden;
+      transition: 0.5s;
+      padding-top: 60px;
+    }
+
+    .sidenav a {
+      padding: 8px 8px 8px 32px;
+      text-decoration: none;
+      font-size: 25px;
+      color: #5BFF5E;
+      display: block;
+      transition: 0.3s;
+      z-index: 3;
+    }
+
+    .sidenav a:hover {
+      color: #f1f1f1;
+      z-index: 3;
+    }
+
+    .sidenav .closebtn {
+      position: absolute;
+      top: 0;
+      right: 25px;
+      font-size: 36px;
+      margin-left: 50px;
+      z-index: 3;
+    }
+
+
+
+    #Facultes {
+      position: absolute;
+      top: 105%;
+      left: 43%;
+      font-size: 30px;
+      height: 10%;
+      font-weight: bolder;
+    }
+
+    #univent-title {
+      font-size: 40px;
+      font-weight: bold;
+      cursor: pointer;
+      color: #FFFFFF;
+      animation: fade-in 1s ease-in;
+      position: absolute;
+      top: 10%;
+      width: 100%;
+      height: 90%;
+      left: 0;
+      right: 0;
+      background-color: white;
+      text-align: center;
+      z-index: 0;
+    }
+
+    .large-button {
+      display: inline-block;
+      padding: 100px 100px;
+      max-height: 100px;
+      max-width: 100px;
+      background-color: #f1f1f1;
+      color: #268018;
+      border: none;
+      text-align: center;
+      text-decoration: none;
+      cursor: pointer;
+      position: absolute;
+      z-index: 4;
+      border-radius: 10%;
+      box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    }
+
+    .large-button span {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 25px;
+      font-weight: bold;
+    }
+
+    .large-button:hover span {
+      transform: translate(-50%, -50%) scale(1.2);
+    }
+
+    .button-24 {
+      background: #268018;
+      border: 1px solid #268018;
+      border-radius: 6px;
+      box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+      box-sizing: border-box;
+      color: white;
+      cursor: pointer;
+      display: inline-block;
+      font-family: nunito, roboto, proxima-nova, "proxima nova", sans-serif;
+      font-size: 16px;
+      font-weight: 800;
+      line-height: 16px;
+      min-height: 40px;
+      outline: 0;
+      padding: 12px 14px;
+      text-align: center;
+      text-rendering: geometricprecision;
+      text-transform: none;
+      user-select: none;
+      -webkit-user-select: none;
+      touch-action: manipulation;
+      vertical-align: middle;
+      position: absolute;
+      top: 60%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .button-24:hover,
+    .button-24:active {
+      background-color: initial;
+      background-position: 0 0;
+      color: #268018;
+    }
+
+    .button-24:active {
+      opacity: .5;
+    }
+
+    @keyframes fade-in {
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity:1;
+      }
+    }
+
+    .footer {
+      position: absolute;
+      top: 195%;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 5%;
+      background-color: #268018;
+      color: white;
+      padding: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+    .footer-text {
+      font-size: 16px;
+      font-weight: bold;
     }
     .sidenav {
       height: 100%;
@@ -143,53 +295,54 @@
       } else {
         sousMenu.style.display = "none";
       }
-    }
-
-    function submitReservation() {
-      var tokenData = keycloak.tokenParsed;
-      var Checkbox = document.getElementById('checkbox');
-      var EvenementID = localStorage.getItem('EvenementID');
-      var UsagerID = tokenData.preferred_username;
-      var Telephone_Invite = document.getElementById('Telephone_Invite').value;
-      var Nom_Invite = document.getElementById('Nom_Invite').value;
-      var Enregistration_Invite = false;
-
-      var reservation = {
-        EvenementID: EvenementID,
-        UsagerID: UsagerID,
-        Telephone_Invite: Telephone_Invite,
-        Nom_Invite: Nom_Invite,
-        Enregistration_Invite: Enregistration_Invite
-      };
-
-      if (Checkbox.checked && (Telephone_Invite === '' || Nom_Invite === '')) {
-        alert("Veuillez remplir tous les champs obligatoires.");
-        return;
+      .event-form {
+        width: 500px;
+        margin: 0 auto;
+        position: inherit;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
       }
+      .event-form select, .event-form button[type=button] {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+      }
+      .event-form button[type=button] {
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        cursor: pointer;
+      }
+      .event-form button[type=button]:hover {
+        background-color: #45a049;
+      }
+      h2 {
+        text-align: center;
+      }
+    </style>
 
-      axios.post('http://localhost:8888/api/reservations', reservation, {
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer ' + keycloak.token // Replace keycloak.token with your actual bearer token
-        }
-      })
-              .then(function(response) {
-                if (response.status === 201) {
-                  alert("Reservation faite !");
-                  window.location.href = 'pc_HomePage.html'; // Replace with the path to your main menu HTML file
-                } else {
-                  alert(response.status);
-                }
-              })
-              .catch(function(error) {
-                console.error(error);
-              });
-    }
-
-  </script>
-</head>
-
+  </head>
 <body onload="initKeycloak()">
+<div id="mySidenav" class="sidenav">
+  <b id="user-info"></b>
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  <a href="#" onclick="window.location.href='eventID_before_scanning.html'">Scanner</a>
+  <a href="#" onclick="logout()">Déconnexion</a>
+</div>
+<header id="header" class="header">
+  <div style="position: absolute; width: 18%; height: 8%;">
+  <span style="font-size: 40px; top: 0%; font-weight: bold; cursor: pointer; position: absolute; top: 0; left: 0.5%; color: #FFFFFF;"
+        onclick="openNav()">&#9776; UNIVENT</span>
+
+
+  </div>
+</header>
 <h2>Obtenir un billet</h2>
 <span style="font-size: 40px; font-weight: bold; cursor: pointer; position: absolute; top: 0; left: 0.5%; color: #5BFF5E;" onclick="openNav()">&#9776;</span>
 <div class="event-form">
@@ -217,4 +370,111 @@
   <a href="#" onclick="logout()">Déconnexion</a>
 </div>
 </body>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="http://localhost:8180/js/keycloak.js"></script>
+<script>
+  var keycloak;
+
+  function initKeycloak() {
+    keycloak = new Keycloak({
+      "realm": "usager",
+      "auth-server-url": "http://localhost:8180/",
+      "ssl-required": "external",
+      "clientId": "frontend",
+      "public-client": true,
+      "confidential-port": 0
+    });
+
+    keycloak.init({ onLoad: 'login-required' }).then(function (authenticated) {
+      if (authenticated) {
+        var roles = keycloak.tokenParsed.realm_access.roles;
+        checkUserExists();
+        if (roles.includes('enseignant')) {
+          window.location.href = 'admin_event_creator.html';
+          return;
+        } else if (roles.includes('coordonnateur-pédagogique')) {
+          window.location.href = 'master_manager.html';
+          return;
+        }
+      } else {
+        alert('Not authenticated');
+      }
+    }).catch(function () {
+      alert('Failed to initialize');
+    }).finally(function () {
+      displayUserInfo();
+    });
+  }
+
+  function checkUserExists() {
+    axios.get(`http://localhost:8888/api/users/check/${keycloak.tokenParsed.preferred_username}`, {
+      headers: {
+        'Authorization': 'Bearer ' + keycloak.token
+      }
+    }).then(function (response) {
+      displayUserInfo();
+    }).catch(function (error) {
+      window.location.href = 'registration.html';
+    });
+  }
+
+  function logout() {
+    let logoutURL = "http://localhost:8180/realms/usager/protocol/openid-connect/logout";
+    window.location.href = logoutURL;
+  }
+
+  function openNav() {
+    document.getElementById("mySidenav").style.width = "250px";
+    document.getElementById("user-info").classList.add("fade-in");
+  }
+
+  function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+    document.getElementById("user-info").classList.remove("fade-in");
+  }
+
+  function scrollToHeight() {
+    var scrollHeight = 1380; // Adjust the desired scroll height here
+    var duration = 1000; // Adjust the duration of the glide animation (in milliseconds)
+
+    var start = null;
+    var initialY = window.pageYOffset;
+
+    function step(timestamp) {
+      if (!start) start = timestamp;
+      var progress = timestamp - start;
+      var scrollY = initialY + easeInOutQuad(progress, 0, scrollHeight - initialY, duration);
+      window.scrollTo(0, scrollY);
+      if (progress < duration) {
+        window.requestAnimationFrame(step);
+      }
+    }
+
+    function easeInOutQuad(t, b, c, d) {
+      t /= d / 2;
+      if (t < 1) return c / 2 * t * t + b;
+      t--;
+      return -c / 2 * (t * (t - 2) - 1) + b;
+    }
+
+    window.requestAnimationFrame(step);
+  }
+
+  function displayUserInfo() {
+    var token = keycloak.tokenParsed;
+    var name = token.name;
+
+    var userInfoList = document.createElement('ul');
+    var nameItem = document.createElement('li');
+    var rolesItem = document.createElement('li');
+
+    nameItem.textContent = 'Connecté: \n' + name;
+
+    userInfoList.appendChild(nameItem);;
+
+    var userInfoDiv = document.getElementById('user-info');
+    userInfoDiv.innerHTML = '';
+    userInfoDiv.appendChild(userInfoList);
+  }
+</script>
 </html>

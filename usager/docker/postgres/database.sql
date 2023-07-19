@@ -27,10 +27,6 @@ CREATE TABLE UNIVERSITE
 
 );
 
-
-
-
-
 CREATE TABLE EVENEMENT
 (
     EvenementID      VARCHAR(50) NOT NULL,
@@ -42,13 +38,8 @@ CREATE TABLE EVENEMENT
     Nombre_Places INT,
     Allow_Guests     BOOLEAN,
     Description      VARCHAR(100),
+    filename        VARCHAR(255),
     PRIMARY KEY (EvenementID)
-);
-
-CREATE TABLE images (
-                        id VARCHAR(50) PRIMARY KEY,
-                        data oid not null ,
-                        created_at TIMESTAMPTZ DEFAULT NOW()
 );
 
 CREATE TABLE PRIVILEGE
@@ -80,11 +71,12 @@ CREATE TABLE ASSO_ETUDIANTE
 
 CREATE TABLE USAGER
 (
-    UsagerID INT NOT NULL,
+    UsagerID VARCHAR(100) NOT NULL,
     Usager_Nom VARCHAR(100) NOT NULL,
     Usager_Prenom VARCHAR(100) NOT NULL,
-    Usager_Photo VARCHAR(100) NOT NULL,
-    CodeQR INT NOT NULL,
+    Usager_Photo VARCHAR(100),
+    Usager_Role VARCHAR(100),
+    CodeQR INT,
     FaculteID INT NOT NULL,
     PRIMARY KEY (UsagerID),
     FOREIGN KEY (FaculteID) REFERENCES FACULTE(FaculteID)
@@ -92,7 +84,7 @@ CREATE TABLE USAGER
 
 CREATE TABLE USAGER_POSSEDE_PRIVILEGE
 (
-    UsagerID INT NOT NULL,
+    UsagerID varchar(100) NOT NULL,
     PrivilegeID INT,
     PRIMARY KEY (UsagerID, PrivilegeID),
     FOREIGN KEY (UsagerID) REFERENCES USAGER(UsagerID),
@@ -124,9 +116,15 @@ CREATE TABLE FACULTE_POSSEDE_ASSO
 
 -----------------------------------
 INSERT INTO UNIVERSITE (UniversiteID, Universite_Nom)
-VALUES (1, 'Université A'),
-       (2, 'Université B'),
-       (3, 'Université C');
+VALUES (1, 'Université de sd'),
+       (2, 'Université sd');
+
+INSERT INTO FACULTE (FaculteID, Faculte_Nom, UniversiteID)
+VALUES (4028, 'Faculte de Genie', 1),
+       (4038, 'Ecole de gestion', 1),
+       (4039, 'Faculte de musique', 1),
+       (2222, 'Campus de genie', 2),
+       (2332, 'Campus de sante', 2);
 
 INSERT INTO FACULTE (FaculteID, Faculte_Nom, UniversiteID)
 VALUES (1, 'Université A',1),
@@ -138,3 +136,4 @@ VALUES (1, 'Association 1', 1),
        (2, 'Association 2', 2),
        (3, 'Association 3', 3);
 
+delete from UNIVERSITE where Universite_Nom='Université de Sherbrooke'
