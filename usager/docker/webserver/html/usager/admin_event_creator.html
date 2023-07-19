@@ -19,16 +19,17 @@
         "public-client": true,
         "confidential-port": 0
       });
-      keycloak.init({onLoad: 'login-required'}).then(function (authenticated) {
-        alert(authenticated ? 'authenticated' : 'not authenticated');
-
-      }).catch(function () {
-        alert('failed to initialize');
-      }).finally(function () {
+      keycloak.init({onLoad: 'login-required'}).then(function(authenticated) {
+        if (authenticated) {
+          console.log('Authenticated');
+        } else {
+         console.log('Not authenticated');
+        }
+      }).catch(function() {
+        console.log('Failed to initialize');
+      }).finally(function() {
         displayUserInfo(); // Call the function to display user info
       });
-
-
     }
 
     function logout() {

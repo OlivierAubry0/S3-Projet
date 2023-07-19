@@ -1,18 +1,29 @@
+
+<meta charset="UTF-8">
+<meta http-equiv="Content-type" content="text/html; charset=UTF-8">
+
 <!DOCTYPE html>
 <html>
 <head>
   <title>Create New Event</title>
   <style>
     body {
+      background-color: #268018 ;
       font-family: "Lato", sans-serif;
+      align-items: center;
+      justify-content: flex-end;
+      color: white;
+
     }
     .event-form {
-      width: 500px;
-      margin: 0 auto;
+      position: absolute;
       padding: 20px;
       border: 1px solid #ccc;
       border-radius: 4px;
       box-sizing: border-box;
+      top: 19%;
+      width: 90%;
+      margin: 1%;
     }
     .event-form select, .event-form button[type=button] {
       width: 100%;
@@ -32,6 +43,50 @@
     .event-form button[type=button]:hover {
       background-color: #45a049;
     }
+
+    .sidenav {
+      height: 100%;
+      width: 0;
+      position: fixed;
+      z-index: 3;
+      top: 0;
+      left: 0;
+      background-color: #0B4F00;
+      overflow-x: hidden;
+      transition: 0.5s;
+      padding-top: 60px;
+    }
+
+    .sidenav a {
+      padding: 8px 8px 8px 32px;
+      text-decoration: none;
+      font-size: 25px;
+      color: #5BFF5E;
+      display: block;
+      transition: 0.3s;
+      z-index: 3;
+    }
+
+    .sidenav a:hover {
+      color: #f1f1f1;
+      z-index: 3;
+    }
+
+    .sidenav .closebtn {
+      position: absolute;
+      top: 0;
+      right: 25px;
+      font-size: 36px;
+      margin-left: 50px;
+      z-index: 3;
+    }
+
+    @media screen and (max-height: 450px) {
+      .sidenav {padding-top: 15px;}
+      .sidenav a {font-size: 18px;}
+    }
+
+
   </style>
 
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
@@ -50,33 +105,30 @@
         "public-client": true,
         "confidential-port": 0
       });
-      keycloak.init({ onLoad: 'login-required' })
-              .success(function (authenticated) {
-                if (authenticated) {
-                  alert('authenticated');
-                  displayUserInfo();
-                } else {
-                  alert('not authenticated');
-                }
-              })
-              .error(function () {
-                alert('failed to initialize');
-              });
+      keycloak.init({onLoad: 'login-required'}).then(function(authenticated) {
+        if (authenticated) {
+          console.log('Authenticated');
+        } else {
+          console.log('Not authenticated');
+        }
+      }).catch(function() {
+        console.log('Failed to initialize');
+      }).finally(function() {
+        displayUserInfo(); // Call the function to display user info
+      });
     }
 
     function submitEvent() {
-      var evenementID = document.getElementById('id').value;
       var evenementNom = document.getElementById('name').value;
       var evenementDate = document.getElementById('date').value;
       var evenementDebut = document.getElementById('start').value;
       var evenementFin = document.getElementById('end').value;
-      var assoEtudianteID = document.getElementById('assoID').value;
+      var assoEtudianteID = keycloak.tokenParsed.name;
       var nombrePlaces = document.getElementById('places').value;
       var allowGuests = document.getElementById('allow-guests').checked;
       var description = document.getElementById('description').value;
 
       var event = {
-        evenementID: evenementID,
         evenementNom: evenementNom,
         evenementDate: evenementDate,
         evenementDebut: evenementDebut,
@@ -84,18 +136,30 @@
         assoEtudianteID: assoEtudianteID,
         nombrePlaces: nombrePlaces,
         allowGuests: allowGuests,
-        description: description
+        description: description,
+        filename: '',
       };
 
-      axios.post('http://localhost:8888/api/events', event, {
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer ' + keycloak.token // Replace keycloak.token with your actual bearer token
-        }
-      })
+      const fileInput = document.getElementById('imageInput');
+      const file = fileInput.files[0];
+      const imageName = file.name;
+
+      event.filename = imageName;
+
+      const formData = new FormData();
+      formData.append('eventData', JSON.stringify(event)); // Convert event object to JSON and append it to the form data
+      formData.append('image', file, imageName); // Append the image file with the given name
+
+      axios
+              .post('http://localhost:8888/api/events', formData, {
+                headers: {
+                  'Content-Type': 'multipart/form-data',
+                  Authorization: 'Bearer ' + keycloak.token // Replace keycloak.token with your actual bearer token
+                }
+              })
               .then(function(response) {
                 if (response.status === 201) {
-                  alert("Event created!");
+                  alert('Event created!');
                   window.location.href = 'admin_event_creator.html'; // Replace with the path to your main menu HTML file
                 } else {
                   alert(response.status);
@@ -106,103 +170,140 @@
               });
     }
 
-    function submitImage() {
-      var imageInput = document.getElementById('imageInput');
-      var file = imageInput.files[0];
-
-      var reader = new FileReader();
-
-      reader.onload = function(event) {
-        var arrayBuffer = event.target.result;
-
-        var blob = new Blob([arrayBuffer], { type: file.type });
-
-        var formData = new FormData();
-        formData.append('image', blob);
-
-        axios.post('http://localhost:8888/api/events/uploadImage', formData)
-                .then(function(response) {
-                  console.log('Image uploaded successfully.');
-                })
-                .catch(function(error) {
-                  console.error('Error uploading image:', error);
-                });
-      };
-
-      reader.readAsArrayBuffer(file);
+    function logout() {
+      let logoutURL = "http://localhost:8180//realms/usager/protocol/openid-connect/logout"
+      window.location.href = logoutURL;
     }
+
+    function openNav() {
+      document.getElementById("mySidenav").style.width = "250px";
+      document.getElementById("user-info").classList.add("fade-in");
+    }
+
+    function closeNav() {
+      document.getElementById("mySidenav").style.width = "0";
+      document.getElementById("user-info").classList.remove("fade-in");
+    }
+
+    function updateEventPreview() {
+      var evenementNom = document.getElementById('name').value;
+      var evenementDate = document.getElementById('date').value;
+      var evenementDebut = document.getElementById('start').value;
+      var evenementFin = document.getElementById('end').value;
+      var nombrePlaces = document.getElementById('places').value;
+      var allowGuests = document.getElementById('allow-guests').checked;
+      var description = document.getElementById('description').value;
+
+      var eventPreview = document.getElementById('event-preview');
+      eventPreview.innerHTML = `
+    <form style="max-width: 600px; word-break: break-word; overflow: auto; max-height: 100%">
+        <p><strong>Event Name:</strong>${evenementNom}</span></p>
+        <p><strong>Date:</strong> <span${evenementDate}</p>
+        <p><strong>Start Time: </strong>${evenementDebut}</p>
+        <p><strong>End Time: </strong>${evenementFin}</p>
+        <p><strong>Number of Places: </strong>${nombrePlaces}</p>
+        <p><strong>Allow Guests: </strong>${allowGuests ? 'Yes' : 'No'}</p>
+        <pre style="font-family: Arial"><strong>Description: </strong>${description}</pre>
+    </form>
+    <img id="preview-image" src="shadow_image.png" alt="Ajoute un image!"
+    style="width: 50%; height: 95%; position: absolute; right: 1%">
+  `;
+
+      var fileInput = document.getElementById('imageInput');
+      var previewImage = document.getElementById('preview-image');
+      if (fileInput.files && fileInput.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+          previewImage.src = e.target.result;
+        };
+        reader.readAsDataURL(fileInput.files[0]);
+      }
+    }
+
+
 
   </script>
 </head>
 
-<body onload="initKeycloak()">
-<h2>Create New Event</h2>
-<div class="event-form">
+<body onload="initKeycloak();">
+
+<div id="mySidenav" class="sidenav">
+  <b id="user-info"></b>
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  <a href="#" onclick="window.location.href='camera.html'">Scanner</a>
+  <a href="#">About</a>
+  <a href="#">Services</a>
+  <a href="#">Clients</a>
+  <a href="#">Contact</a>
+  <a href="#" onclick="logout()">Déconnexion</a>
+</div>
+
+<div style="position: absolute; top: 1%; right: 1%; width: 200px; height: 40px;">
+  <img src="assets/UdeS.png" alt="logo_UdS" style="width: 100%; height: 100%;">
+</div>
+
+<span style="font-size: 40px; font-weight: bold; cursor: pointer; position: absolute; top: 0; left: 0.5%; color: #FFFFFF;" onclick="openNav()">&#9776; UNIVENT</span>
+
+<div>
+<h2 style="position: absolute; text-align: center; top: 7%; left: 40%">Créer un évènement</h2>
+</div>
+<div class="event-form" style="width: 30%; left: 0; position: absolute">
   <form>
-    <label for="id">Event Id:</label><br>
-    <select id="id" name="eventId">
-      <option value="1001">1001</option>
-      <option value="1002">1002</option>
-      <option value="1003">1003</option>
-    </select><br>
+
+    <label for="imageInput">Image:</label><br>
+    <input type="file" id="imageInput" accept="image/*"><br>
 
     <label for="name">Event Name:</label><br>
-    <select id="name" name="name">
-      <option value="5a8">5a8</option>
-      <option value="4a7">4a7</option>
-      <option value="after">after</option>
-    </select><br>
+    <input type="text" id="name" name="name"><br>
 
     <label for="start">Start Time:</label><br>
-    <select id="start" name="start">
-      <option value="4">4</option>
-      <option value="5">5</option>
-      <option value="9">9</option>
-    </select><br>
+    <input type="time" id="start" name="start"><br>
 
     <label for="end">End Time:</label><br>
-    <select id="end" name="end">
-      <option value="7">7</option>
-      <option value="8">8</option>
-      <option value="0000">0000</option>
-    </select><br>
+    <input type="time" id="end" name="end"><br>
 
     <label for="date">Event Date:</label><br>
-    <select id="date" name="date">
-      <option value="2023-06-09">2023-06-09</option>
-      <option value="2023-06-20">2023-06-20</option>
-      <option value="2023-06-20">2023-06-20</option>
-    </select><br>
-
-    <label for="assoID">association Etudiante ID:</label><br>
-    <select id="assoID" name="assoId">
-      <option value="AGEG">Association Generale Etudiants Genie</option>
-      <option value="AFLESH">Association Faculte Lettre et Sciences Humaines</option>
-      <option value="AMUS">Association Musulmane UDES</option>
-    </select><br>
+    <input type="date" id="date" name="date"><br>
 
     <label for="places">Number of Places:</label><br>
-    <select id="places" name="places">
-      <option value="2">2</option>
-      <option value="300">300</option>
-      <option value="400">400</option>
-    </select><br>
+    <input type="text" id="places" name="places"><br>
 
     <label for="allow-guests">Allow Guests:</label>
     <input type="checkbox" id="allow-guests" name="allow-guests"><br>
 
     <label for="description">Description:</label><br>
-    <select id="description" name="description">
-      <option value="ceciestuncinqahuit">ceciestuncinqahuit</option>
-      <option value="ceciestunquatreasept">ceciestunquatreasept</option>
-      <option value="afterdansunbar">afterdansunbar</option>
-    </select><br>
+    <textarea id="description" name="description" rows="4" style="max-width: 100%"></textarea><br>
 
     <button type="button" onclick="submitEvent()">Submit</button>
-
-    <input type="file" id="imageInput" accept="image/*">
-    <button type="button" onclick="submitImage()">Submit Image</button>
   </form>
 </div>
+
+<div id="event-preview" style="position: absolute; width: 55%; top: 21%; right: 5%; border: 1px solid #cccccc; padding: 1%; display: flex; flex-wrap: wrap; height: 70%">
+  <div style="position: absolute; left: 1%; padding-right: 10px;">
+    <p><strong>Event Name:</strong> Event Name</p>
+    <p><strong>Date:</strong> Event Date</p>
+    <p><strong>Start Time:</strong> Start Time</p>
+    <p><strong>End Time:</strong> End Time</p>
+    <p><strong>Number of Places:</strong> Number of Places</p>
+    <p><strong>Allow Guests:</strong> No</p>
+    <p><strong>Description:</strong> Description</p>
+  </div>
+  <div style="position: absolute; right: 1%; max-width: 50%; height: 95%">
+    <img id="preview-image" src="assets/shadow_image.jpg" alt="Preview Image" style="width: 100%; height: 100%;">
+  </div>
+</div>
+
+
+<script>
+  document.getElementById('name').addEventListener('input', updateEventPreview);
+  document.getElementById('date').addEventListener('input', updateEventPreview);
+  document.getElementById('start').addEventListener('input', updateEventPreview);
+  document.getElementById('end').addEventListener('input', updateEventPreview);
+  document.getElementById('places').addEventListener('input', updateEventPreview);
+  document.getElementById('allow-guests').addEventListener('change', updateEventPreview);
+  document.getElementById('description').addEventListener('input', updateEventPreview);
+  document.getElementById('imageInput').addEventListener('change', updateEventPreview);
+</script>
+
 </body>
 </html>

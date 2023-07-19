@@ -47,7 +47,7 @@
       var rolesItem = document.createElement('li');
 
       nameItem.textContent = 'Nom : \n' + name;
-      rolesItem.textContent =  'Role: master';
+      rolesItem.textContent = 'Role: master';
 
       userInfoList.appendChild(nameItem);
       userInfoList.appendChild(rolesItem);
@@ -88,11 +88,13 @@
       var Asso_EtudianteID = document.getElementById('Asso_EtudianteID').value;
       var Asso_Etudiante_Nom = document.getElementById('Asso_Etudiante_Nom').value;
       var FaculteID = document.getElementById('FaculteID').value;
+      var UsagerID = document.getElementById('UsagerID').value;
 
       var asso = {
         Asso_EtudianteID: Asso_EtudianteID,
         Asso_Etudiante_Nom: Asso_Etudiante_Nom,
-        FaculteID: FaculteID
+        FaculteID: FaculteID,
+        UsagerID: UsagerID
       };
 
       axios.post('http://localhost:8888/api/Asso', asso, {
@@ -105,12 +107,13 @@
                 if (response.status === 201) {
                   alert("Association created!");
                   window.location.href = 'master_manager.html'; // Replace with the path to your main menu HTML file
-                } else {
+                }else {
                   alert(response.status);
                 }
               })
               .catch(function(error) {
                 console.error(error);
+                alert("Assurez vous que l'admin existe et que l'id n'est pas encore utilisé ");
               });
     }
 
@@ -156,16 +159,23 @@
 
     <label for="Asso_Etudiante_Nom">AssoEtudiante Name:</label><br>
     <select id="Asso_Etudiante_Nom" name="Asso_Etudiante_Nom">
-      <option value="ageg">ageg</option>
-      <option value="amus">amus</option>
-      <option value="flsh">flsh</option>
+      <option value="Ageg">Ageg</option>
+      <option value="Amus">Amus</option>
+      <option value="Flsh">Flsh</option>
     </select><br>
 
     <label for="FaculteID">AssoEtudiante Fac:</label><br>
     <select id="FaculteID" name="FaculteID">
-      <option value="1">1</option>
-      <option value="2">2</option>
-      <option value="3">3</option>
+      <option value="4028">Faculte de Genie</option>
+      <option value="4038">Ecole de gestion</option>
+      <option value="4039">Faculte de musique</option>
+    </select><br>
+
+    <label for="UsagerID">AssoEtudiante admin:</label><br>
+    <select id="UsagerID" name="UsagerID">
+      <option value="admin1">admin1</option>
+      <option value="admin2">admin2</option>
+      <option value="admin3">admin3</option>
     </select><br>
 
     <button type="button" onclick="submitAsso()">Submit</button>
