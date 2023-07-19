@@ -72,7 +72,7 @@
         //alert(authenticated ? 'authenticated' : 'not authenticated');
         if (authenticated) {
           var roles = keycloak.tokenParsed.realm_access.roles;
-          checkUserExists();
+
           if (roles.includes('enseignant')) {
             window.location.href = 'admin_event_creator.html';
             return;
