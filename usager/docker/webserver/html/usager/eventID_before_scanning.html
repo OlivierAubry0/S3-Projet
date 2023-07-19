@@ -74,7 +74,6 @@
                 .success(function (authenticated) {
                     if (authenticated) {
                         accessToken = keycloak.token;
-                        alert('authenticated');
                         displayUserInfo();
                     } else {
                         alert('not authenticated');
@@ -97,11 +96,11 @@
             })
                 .then(function(response) {
                     if (response.status === 201) {
-                        alert("Evenement trouvé !");
+                        alert("Événement trouvé !");
                         localStorage.setItem('EvenementID', EvenementID);
                         window.location.href = 'camera.html'; // Replace with the path to your main menu HTML file
                     } else {
-                        alert(response.status + ' evenement inexistant');
+                        alert(response.status + 'Événement inexistant');
                     }
                 })
                 .catch(function(error) {

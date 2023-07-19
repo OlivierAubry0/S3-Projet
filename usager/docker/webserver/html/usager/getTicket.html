@@ -32,6 +32,47 @@
     .event-form button[type=button]:hover {
       background-color: #45a049;
     }
+    .sidenav {
+      height: 100%;
+      width: 0;
+      position: fixed;
+      z-index: 3;
+      top: 0;
+      left: 0;
+      background-color: #0B4F00;
+      overflow-x: hidden;
+      transition: 0.5s;
+      padding-top: 60px;
+    }
+
+    .sidenav a {
+      padding: 8px 8px 8px 32px;
+      text-decoration: none;
+      font-size: 25px;
+      color: #5BFF5E;
+      display: block;
+      transition: 0.3s;
+      z-index: 3;
+    }
+
+    .sidenav a:hover {
+      color: #5BFF5E;
+      z-index: 3;
+    }
+
+    .sidenav .closebtn {
+      position: absolute;
+      top: 0;
+      right: 25px;
+      font-size: 36px;
+      margin-left: 50px;
+      z-index: 3;
+    }
+
+    @media screen and (max-height: 450px) {
+      .sidenav {padding-top: 15px;}
+      .sidenav a {font-size: 18px;}
+    }
   </style>
 
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
@@ -47,14 +88,23 @@
       var rolesItem = document.createElement('li');
 
       nameItem.textContent = 'Nom : \n' + name;
-      rolesItem.textContent =  'Role: Student';
+      rolesItem.textContent =  'Role: Etudiant';
 
       userInfoList.appendChild(nameItem);
       userInfoList.appendChild(rolesItem);
 
       var userInfoDiv = document.getElementById('user-info');
-      userInfoDiv.innerHTML = ''; // Remove any existing content
+      userInfoDiv.innerHTML = ''; // Supprime tout contenu existant
       userInfoDiv.appendChild(userInfoList);
+    }
+    function openNav() {
+      document.getElementById("mySidenav").style.width = "250px";
+      document.getElementById("user-info").classList.add("fade-in");
+    }
+
+    function closeNav() {
+      document.getElementById("mySidenav").style.width = "0";
+      document.getElementById("user-info").classList.remove("fade-in");
     }
 
 
@@ -74,7 +124,6 @@
               .success(function (authenticated) {
                 if (authenticated) {
                   accessToken = keycloak.token;
-                  alert('authenticated');
                   displayUserInfo();
                 } else {
                   alert('not authenticated');
@@ -142,6 +191,7 @@
 
 <body onload="initKeycloak()">
 <h2>Obtenir un billet</h2>
+<span style="font-size: 40px; font-weight: bold; cursor: pointer; position: absolute; top: 0; left: 0.5%; color: #5BFF5E;" onclick="openNav()">&#9776;</span>
 <div class="event-form">
   <form>
     <input type="checkbox" id="checkbox" onclick="toggleSubMenuGuests()">
@@ -153,6 +203,18 @@
     <button type="button" onclick="submitReservation()">Reserver</button>
 
   </form>
+</div>
+<div id="mySidenav" class="sidenav">
+  <b id="user-info"></b>
+  <a href="#" onclick="window.location.href='pc_HomePage.html'">Page d'acceuil</a>
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  <a href="#" onclick="window.location.href='eventID_before_scanning.html'">Scanner</a>
+  <a href="#" onclick="window.location.href='MyEvents.html'">Mes Événements</a>
+  <a href="#">About</a>
+  <a href="#">Services</a>
+  <a href="#">Clients</a>
+  <a href="#">Contact</a>
+  <a href="#" onclick="logout()">Déconnexion</a>
 </div>
 </body>
 </html>
