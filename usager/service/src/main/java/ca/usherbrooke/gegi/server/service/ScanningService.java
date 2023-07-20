@@ -37,7 +37,7 @@ public class ScanningService {
     public Response CheckUserReservation(@QueryParam("EvenementID") String EvenementID, @QueryParam("UsagerID") String UsagerID) {
         List<CheckIfUserReserved> reservations = scanningMapper.CheckUserReservation(EvenementID, UsagerID);
         if (reservations.isEmpty()) {
-            return Response.status(Response.Status.METHOD_NOT_ALLOWED).entity(EvenementID).build();
+            return Response.status(Response.Status.NO_CONTENT).entity(EvenementID).build();
         } else {
             return Response.status(Response.Status.CREATED).entity(reservations).build();
         }

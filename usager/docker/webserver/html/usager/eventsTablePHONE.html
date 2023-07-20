@@ -4,20 +4,43 @@
   <title>Events</title>
 
   <style>
-    .event-form {
-      position: absolute;
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .events-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
       padding: 20px;
+    }
+
+    .event-card {
+      width: 300px;
       border: 1px solid #ccc;
       border-radius: 4px;
       box-sizing: border-box;
-      top: 19%;
-      width: 90%;
-      margin: 1%;
+      padding: 10px;
+      overflow: hidden;
+    }
+
+    .event-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      cursor: pointer;
+    }
+
+    .event-card p {
+      margin: 5px 0;
     }
   </style>
 </head>
 <body>
-<div id="events"></div>
+<div class="events-container" id="events"></div>
 
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
@@ -27,31 +50,29 @@
         'Content-Type': 'application/json'
       }
     })
-            .then(function(response) {
+            .then(function (response) {
               var events = response.data;
               var eventsContainer = document.getElementById('events');
 
-              events.forEach(function(event) {
-                var eventDiv = document.createElement('div');
-                eventDiv.className = 'event';
-                eventDiv.innerHTML = `
-                    <form style="max-width: 600px; word-break: break-word; overflow: auto; max-height: 100%">
-                        <p><strong>Event Name:</strong>${event.evenementNom}</span></p>
-                        <p><strong>Date:</strong> <span>${event.evenementDate}</p>
-                        <p><strong>Start Time: </strong>${event.evenementDebut}</p>
-                        <p><strong>End Time: </strong>${event.evenementFin}</p>
-                        <p><strong>Number of Places: </strong>${event.nombrePlaces}</p>
-                        <p><strong>Allow Guests: </strong>${event.allowGuests ? 'Yes' : 'No'}</p>
-                        <pre style="font-family: Arial"><strong>Description: </strong>${event.description}</pre>
-                    </form>
-                    <img id="preview-image" src="http://localhost:8080/${event.filename}" alt="Event Image"
-                         style=" height: 300px; right: 1%;" onclick="window.location.href = 'getTicket.html'">
-                    `; // Assumes the 'filename' property contains the image URL
-                eventsContainer.appendChild(eventDiv);
+              events.forEach(function (event) {
+                var eventCard = document.createElement('div');
+                eventCard.className = 'event-card';
+                eventCard.innerHTML = `
+            <img src="http://192.168.2.216:8080/${event.filename}" alt="Event Image" onclick="window.location.href = 'getTicket.html'">
+            <h3>${event.evenementNom}</h3>
+            <p><strong>Date:</strong> ${event.evenementDate}</p>
+            <p><strong>Start Time:</strong> ${event.evenementDebut}</p>
+            <p><strong>End Time:</strong> ${event.evenementFin}</p>
+            <p><strong>Number of Places:</strong> ${event.nombrePlaces}</p>
+            <p><strong>Allow Guests:</strong> ${event.allowGuests ? 'Yes' : 'No'}</p>
+            <p><strong>Description:</strong></p>
+            <pre>${event.description}</pre>
+          `;
+                eventsContainer.appendChild(eventCard);
                 localStorage.setItem('EvenementID', event.evenementID);
               });
             })
-            .catch(function(error) {
+            .catch(function (error) {
               console.error(error);
             });
   }
@@ -59,6 +80,3 @@
 </script>
 </body>
 </html>
-
-
-
