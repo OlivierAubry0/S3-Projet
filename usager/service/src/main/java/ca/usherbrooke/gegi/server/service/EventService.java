@@ -1,36 +1,29 @@
 package ca.usherbrooke.gegi.server.service;
 
+import ca.usherbrooke.gegi.server.admin.CheckIfUserReserved;
 import ca.usherbrooke.gegi.server.admin.Event;
+import ca.usherbrooke.gegi.server.admin.Reservation;
+import ca.usherbrooke.gegi.server.admin.Scanning;
 import ca.usherbrooke.gegi.server.persistence.EventMapper;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.eclipse.microprofile.config.inject.ConfigProperty;
+import ca.usherbrooke.gegi.server.persistence.ImageMapper;
+import ca.usherbrooke.gegi.server.persistence.ReservationMapper;
+import ca.usherbrooke.gegi.server.persistence.ScanningMapper;
+import org.apache.commons.io.IOUtils;
 import org.eclipse.microprofile.jwt.JsonWebToken;
-import org.jboss.resteasy.plugins.providers.multipart.InputPart;
-import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataInput;
+import org.jboss.logging.annotations.Param;
+import ca.usherbrooke.gegi.server.admin.CheckMyEvents;
 
 import javax.inject.Inject;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.io.IOException;
 import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
+import java.sql.Blob;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
-@javax.ws.rs.Path("/api/events")
+@Path("/api/events")
 public class EventService {
-
-
-    @ConfigProperty(name = "upload.directory") // Specify the directory to store the images
-    String uploadDirectory;
-
-    private static final String IMAGE_BASE_URL = "http://localhost:8080/";
 
     @Inject
     JsonWebToken jwt;
@@ -38,62 +31,50 @@ public class EventService {
     @Inject
     EventMapper eventMapper;
 
+    @Inject
+    private ImageMapper imageMapper;
+
     @POST
-    @Consumes(MediaType.MULTIPART_FORM_DATA)
-    public Response createEvent(MultipartFormDataInput input) {
-        Map<String, List<InputPart>> formDataMap = input.getFormDataMap();
+    public Response createEvent(Event event) {
+        // Generate a UUID and set it as the eventId
+        event.setEvenementID(UUID.randomUUID().toString());
 
-        try {
-            // Parse the event data from JSON
-            String eventData = formDataMap.get("eventData").get(0).getBodyAsString();
-            ObjectMapper objectMapper = new ObjectMapper();
-            Event event = objectMapper.readValue(eventData, Event.class);
-
-
-            // Generate a UUID and set it as the eventId
-            event.setEvenementID(UUID.randomUUID().toString());
-            String fileName = UUID.randomUUID().toString() + ".jpg";
-
-            Path filePath = Path.of(uploadDirectory, fileName);
-
-            List<InputPart> imageParts = formDataMap.get("image");
-            if (imageParts != null && !imageParts.isEmpty()) {
-                InputPart imagePart = imageParts.get(0);
-                // Save the image file with the given name
-                imagePart.getBody(InputStream.class, null).transferTo(Files.newOutputStream(filePath));
-
-                // Extract the filename from the filePath
-                Path filenamePath = filePath.getFileName();
-                String filename = filenamePath.toString();
-
-                // Assign the filename to the event object
-                event.setFilename(filename);
-            }
-
-            // Insert the event and perform any necessary operations
-            eventMapper.insertEvent(event);
-
-            return Response.status(Response.Status.CREATED).entity(event).build();
-        } catch (IOException e) {
-            e.printStackTrace();
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
-        }
+        eventMapper.insertEvent(event);
+        return Response.status(Response.Status.CREATED).entity(event).build();
     }
+
+    @POST
+    @Path("/uploadImage")
+    @Consumes(MediaType.APPLICATION_OCTET_STREAM)
+    public Response uploadImage(Blob imageData) {
+        // Generate a UUID for the image ID
+        String imageId = UUID.randomUUID().toString();
+        // Insert the image into the database using the mapper
+        imageMapper.insertImage(imageId, imageData);
+
+        return Response.status(Response.Status.CREATED).entity("Image uploaded successfully.").build();
+    }
+
 
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<Event> getAllEvents() {
-        List<Event> events = eventMapper.getAllEvents();
-        return events;
+        return eventMapper.getAllEvents();
     }
 
-    @GET
-    @javax.ws.rs.Path("/events4genie")
+    @POST
+    @Path("/events4genie")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Event> getEventsGenie() {
-        return eventMapper.getEventsGenie();
+    public Response getEvents(@QueryParam("Asso_EtudianteID") String Asso_EtudianteID) {
+        List<Event> Events = eventMapper.getEvents(Asso_EtudianteID);
+        return Response.status(Response.Status.CREATED).entity(Events).build();
     }
-
+    @POST
+    @Path("/MyEvents")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response CheckMyEvents(@QueryParam("UsagerID") String UsagerID) {
+        List<CheckMyEvents> MyEvents = eventMapper.CheckMyEvents(UsagerID);
+            return Response.status(Response.Status.CREATED).entity(MyEvents).build();
+    }
 }
-

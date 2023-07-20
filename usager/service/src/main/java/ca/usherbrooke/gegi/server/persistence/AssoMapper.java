@@ -12,6 +12,7 @@ public interface AssoMapper {
     @Insert("INSERT INTO BASE_DE_DONNE.ASSO_ETUDIANTE (Asso_EtudianteID, Asso_Etudiante_Nom, FaculteID, UsagerID) VALUES(#{Asso_EtudianteID}, #{Asso_Etudiante_Nom}, #{FaculteID}, #{UsagerID})")
     void insertAsso(AssoEtudiante asso);
 
+    //@Select("SELECT * FROM BASE_DE_DONNE.les_assos")
     @Delete("DELETE FROM BASE_DE_DONNE.ASSO_ETUDIANTE WHERE Asso_EtudianteID = #{Asso_EtudianteID}")
     void deleteAsso(@Param("Asso_EtudianteID") String Asso_EtudianteID);
 

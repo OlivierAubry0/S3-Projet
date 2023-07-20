@@ -1,19 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Barcode Scanner</title>
+  <title>Check My Events</title>
   <style>
     body {
       font-family: "Lato", sans-serif;
     }
-    .event-form {
-      width: 500px;
-      margin: 0 auto;
-      padding: 20px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      box-sizing: border-box;
-    }
+
     .event-form select, .event-form button[type=button] {
       width: 100%;
       padding: 12px 20px;
@@ -31,6 +24,19 @@
     }
     .event-form button[type=button]:hover {
       background-color: #45a049;
+    }
+    .large-button {
+      display: inline-block;
+      background-color: #f1f1f1;
+      color: #268018;
+      border: none;
+      text-align: center;
+      text-decoration: none;
+      cursor: pointer;
+      position: absolute;
+      z-index: 4;
+      border-radius: 10%;
+      box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
     }
     .sidenav {
       height: 100%;
@@ -78,20 +84,39 @@
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script src="http://localhost:8180/js/keycloak.js"></script>
 </head>
-<body onload = "initKeycloak()">
-<h1>Barcode Scanner</h1>
+
+
+
+<h1>...</h1>
 
 <div id="qr-reader" style="width: 600px"></div>
 
 <script src="https://unpkg.com/html5-qrcode"></script>
 <script>
-  function onScanSuccess(decodedText, decodedResult) {
-    console.log(`Code scanned = ${decodedText}`, decodedResult);
-  }
-  var html5QrcodeScanner = new Html5QrcodeScanner(
-          "qr-reader", { fps: 10, qrbox: 250 });
-  html5QrcodeScanner.render(onScanSuccess);
 
+  var userID;
+  function getUserInfo() {
+    var token = keycloak.tokenParsed;
+
+    var userInfoList = document.createElement('ul');
+
+    for (var prop in token) {
+      if (token.hasOwnProperty(prop)) {
+        var infoItem = document.createElement('li');
+        infoItem.textContent = prop + ': ' + token[prop];
+        userInfoList.appendChild(infoItem);
+        if(prop==='preferred_username'){
+          userID=token[prop];CheckMyEvents();
+        }
+      }
+    }
+
+    var userInfoDiv = document.getElementById('user-info');
+    userInfoDiv.innerHTML = ''; // Supprime tout contenu existant
+    userInfoDiv.appendChild(userInfoList);
+    console.log(userID);
+
+  }
   function displayUserInfo() {
     var token = keycloak.tokenParsed;
     var name = token.name;
@@ -110,20 +135,11 @@
     userInfoDiv.innerHTML = ''; // Supprime tout contenu existant
     userInfoDiv.appendChild(userInfoList);
   }
-  function openNav() {
-    document.getElementById("mySidenav").style.width = "250px";
-    document.getElementById("user-info").classList.add("fade-in");
-  }
-
-  function closeNav() {
-    document.getElementById("mySidenav").style.width = "0";
-    document.getElementById("user-info").classList.remove("fade-in");
-  }
 
   var keycloak;
-  var accessToken
 
   function initKeycloak() {
+
     keycloak = new Keycloak({
       "realm": "usager",
       "auth-server-url": "http://localhost:8180/",
@@ -135,7 +151,7 @@
     keycloak.init({ onLoad: 'login-required' })
             .success(function (authenticated) {
               if (authenticated) {
-                accessToken = keycloak.token;
+                getUserInfo();
                 displayUserInfo();
               } else {
                 alert('not authenticated');
@@ -145,65 +161,87 @@
               alert('failed to initialize');
             });
   }
+  function openNav() {
+    document.getElementById("mySidenav").style.width = "250px";
+    document.getElementById("user-info").classList.add("fade-in");
+  }
 
+  function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+    document.getElementById("user-info").classList.remove("fade-in");
+  }
 
-  function CheckIfReserved() {
-    var EvenementID = localStorage.getItem('EvenementID');
-    var UsagerID = document.getElementById('UsagerID').value;
-
-    var reservationCheck = {
-      EvenementID: EvenementID,
-      UsagerID: UsagerID
-    };
-
-    var url = 'http://localhost:8888/api/scanning/checkUserReservation?EvenementID=' + encodeURIComponent(EvenementID) + '&UsagerID=' + encodeURIComponent(UsagerID);
-    axios.post(url, {
+  function CheckMyEvents() {
+    var UsagerID = userID;
+    var url = 'http://localhost:8888/api/events/MyEvents?UsagerID=' + encodeURIComponent(UsagerID);
+    axios.post(url, {}, {
       headers: {
         'Content-Type': 'application/json'
       }
     })
-            .then(function(response) {
+            .then(function (response) {
               if (response.status === 201) {
-                var reservations = response.data;
-                if (reservations.length > 0) {
+                var MyEvents = response.data;
+                if (MyEvents.length > 0) {
                   var usersContainer = document.getElementById('users');
                   usersContainer.innerHTML = ''; // Remove any existing content
-                  reservations.forEach(function (reservation) {
+                  var leftPosition = 205, topPosition=100; // Initial top position
+                  var count = 0; // Initialize count
+                  MyEvents.forEach(function (MyEvents, index) {
                     var userButton = document.createElement('button');
                     userButton.className = 'event';
+                    userButton.style.position = 'absolute';
+                    userButton.style.top = topPosition + 'px';// Set the top position dynamically
+                    userButton.style.left = leftPosition + 'px'; // Set the left position dynamically
+                    userButton.style.size = 'absolute';
+                    userButton.style.width = 200 + 'px';
+                    userButton.style.height = 200 + 'px';
                     userButton.addEventListener('click', function () {
-                      localStorage.setItem('EvenementID', reservation.UsagerID);
-                      window.location.href = 'getTicket.html';
+                      localStorage.setItem('EvenementID', MyEvents.EvenementID);
+                      localStorage.setItem('UsagerID', userID);
+                      window.location.href = 'MyEventsActions.html';
                     });
                     userButton.innerHTML =
-                            `<p>ID: ${reservation.UsagerID}</p>
-                        <p>Telephone de l'invité: ${reservation.Telephone_Invite}</p>
-                        <p>Nom de l'invité: ${reservation.Nom_Invite}</p>
-                        <p>Invité est-il validé? : ${reservation.Enregistration_Invite}</p>`;
+                            `
+              <p>Nom evenement : ${MyEvents.Evenement_Nom}</p>
+              <p>Date: ${MyEvents.Evenement_Date}</p>
+              <p>Nom de l'invité: ${MyEvents.Nom_Invite}</p>
+              <p>Invité est-il validé? : ${MyEvents.Enregistration_Invite}</p>`;
                     usersContainer.appendChild(userButton);
+                    leftPosition += 300; // Increment the top position by 300px for the next button
+                    count++; // Increment count
+                    if (count >= 3) {
+                      leftPosition = 205; // Reset the top position to 205 pixels
+                      topPosition+=300;
+                      count = 0; // Reset count to zero
+                    }
                   });
                 } else {
-                  alert("Aucune réservation trouvée !");
+                  alert("Aucun réservation trouvée !");
                 }
               } else {
                 alert(response.status);
               }
             })
-            .catch(function(error) {
+            .catch(function (error) {
               console.error(error);
             });
   }
+  var val_x=205, hauteur=840,count=3;
+ function position(){
+    val_x+=300;
+    if (count>=3){
+      hauteur+=300;
+      val_x=205;
+      count=0;
+    }
+ }
 </script>
+</head>
+<body onload="initKeycloak()" >
+<h2>View All My Events </h2>
 <span style="font-size: 40px; font-weight: bold; cursor: pointer; position: absolute; top: 0; left: 0.5%; color: #5BFF5E;" onclick="openNav()">&#9776;</span>
-<div class="event-form">
-  <form>
-    <input type="text" id="UsagerID" placeholder="cip etudiant">
-    <button type="button" onclick="CheckIfReserved()">Suivant</button>
-  </form>
-</div>
-<div class="large-button" id="users">
-  <!-- Les événements seront affichés ici sous forme de boutons -->
-</div>
+
 <div id="mySidenav" class="sidenav">
   <b id="user-info"></b>
   <a href="#" onclick="window.location.href='pc_HomePage.html'">Page d'acceuil</a>
@@ -215,6 +253,9 @@
   <a href="#">Clients</a>
   <a href="#">Contact</a>
   <a href="#" onclick="logout()">Déconnexion</a>
+</div>
+<div class="large-button" id="users" >
+  <!-- Les événements seront affichés ici sous forme de boutons -->
 </div>
 </body>
 </html>
