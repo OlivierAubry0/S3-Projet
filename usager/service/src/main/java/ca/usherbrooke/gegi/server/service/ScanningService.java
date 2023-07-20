@@ -42,4 +42,5 @@ public class ScanningService {
             return Response.status(Response.Status.CREATED).entity(reservations).build();
         }
     }
+
 }

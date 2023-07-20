@@ -123,7 +123,7 @@
       var evenementDate = document.getElementById('date').value;
       var evenementDebut = document.getElementById('start').value;
       var evenementFin = document.getElementById('end').value;
-      var assoEtudianteID = keycloak.tokenParsed.name;
+      var assoEtudianteID = localStorage.getItem('Asso_EtudianteID');
       var nombrePlaces = document.getElementById('places').value;
       var allowGuests = document.getElementById('allow-guests').checked;
       var description = document.getElementById('description').value;

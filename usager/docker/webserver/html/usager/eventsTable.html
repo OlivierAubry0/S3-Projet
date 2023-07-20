@@ -59,6 +59,23 @@
             justify-content: center;
             gap: 20px;
             padding: 20px;
+            background-color: #E8F5E9; /* Vert clair pour le fond */
+        }
+
+        #filterBar {
+            display: flex;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            background-color: white; /* Fond blanc pour la barre de filtrage fixée en haut */
+            padding: 10px;
+            z-index: 1; /* Assure que la barre de filtrage reste au-dessus du reste du contenu */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Ombre légère pour la barre de filtrage */
+            margin-bottom: 20px;
+        }
+
+        #filterInput {
+            padding: 5px;
         }
 
         .event-card {
@@ -74,6 +91,65 @@
             width: 100%;
             height: auto;
             object-fit: cover;
+            cursor: pointer;
+            font-size: 16px;
+            width: 300px;
+            margin-right: 10px;
+        }
+
+        #filterButton {
+            padding: 8px 15px;
+            background-color: #4CAF50; /* Vert pour le bouton de filtrage */
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        #filterButton:hover {
+            background-color: #45a049; /* Légère variation de vert au survol du bouton de filtrage */
+        }
+
+        #events {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .event {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 20px;
+            width: 250px;
+            background-color: #FFFFFF; /* Blanc pour l'arrière-plan de l'événement */
+        }
+
+        .event form {
+            margin-bottom: 10px;
+        }
+
+        .event button {
+            padding: 10px 20px;
+            background-color: #4CAF50; /* Vert pour le bouton */
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .event button:hover {
+            background-color: #45a049; /* Légère variation de vert au survol du bouton */
+        }
+
+        .event img {
+            height: 200px;
+            margin-top: 10px;
             cursor: pointer;
         }
 
@@ -100,6 +176,12 @@
 
     </style>
 </head>
+<body>
+<div id="filterBar">
+    <input type="text" placeholder="Filter by name" id="filterInput">
+    <button id="filterButton" onclick="filterEvents()">Filtrer</button>
+</div>
+<div id="events"></div>
 <body onload="initKeycloak()">
 
 <div id="mySidenav" class="sidenav">
@@ -214,6 +296,25 @@
                 console.error(error);
             });
     }
+
+    function filterEvents() {
+        var input, filter, events, eventName, i;
+        input = document.getElementById('filterInput');
+        filter = input.value.toUpperCase();
+        events = document.getElementsByClassName('event');
+
+        for (i = 0; i < events.length; i++) {
+            eventName = events[i].getElementsByTagName('p')[0]; // Recherche dans le premier paragraphe <p>
+            if (eventName) {
+                if (eventName.innerText.toUpperCase().indexOf(filter) > -1) {
+                    events[i].style.display = ''; // Afficher l'événement si le filtre correspond
+                } else {
+                    events[i].style.display = 'none'; // Masquer l'événement si le filtre ne correspond pas
+                }
+            }
+        }
+    }
+
     getEvents();
 </script>
 </body>

@@ -1,33 +1,151 @@
 <!DOCTYPE html>
-<html>
+<html lang="">
 <head>
   <title>View All Asso</title>
   <style>
     .large-button {
-      display: inline-block;
       background-color: #f1f1f1;
       color: #268018;
       border: none;
-      text-align: center;
+      text-align: left;
       text-decoration: none;
       cursor: pointer;
-      position: absolute;
-      z-index: 4;
-      border-radius: 10%;
+      border-radius: 10px;
+      padding: 10px;
+      margin-bottom: 10px;
       box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
     }
-    .event-form button[type=button] {
+
+    .large-button p {
+      margin: 0;
+      font-size: 16px;
+    }
+
+    .large-button:hover {
+      background-color: #d4d4d4;
+    }
+
+    .pop-up-container {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      z-index: 9999;
+    }
+
+    .pop-up-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0.8);
+      background-color: #f1f1f1;
+      color: #268018;
+      padding: 100px;
+      border-radius: 10px;
+      transition: transform 0.3s ease;
+    }
+
+    .pop-up-content.show {
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    .pop-up-content p {
+      margin: 10px 0;
+      font-size: 18px;
+    }
+
+    .pop-up-content button {
+      margin-top: 20px;
+      padding: 8px 16px;
       background-color: #4CAF50;
-      color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .filter-container {
+      margin-bottom: 10px;
+    }
+
+    .filter-container input[type="text"] {
+      padding: 15px;
+    }
+
+    .filter-container button[type="button"] {
+      padding: 5px 10px;
+      background-color: #4CAF50;
+      color: white;
       border: none;
       cursor: pointer;
     }
-    .event-form button[type=button]:hover {
+
+    .filter-container button[type="button"]:hover {
       background-color: #45a049;
+    }
+
+    .edit-input {
+      display: block;
+      margin-bottom: 10px;
     }
   </style>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="http://localhost:8180/js/keycloak.js"></script>
   <script>
+
+    var currentAsso = null; // Variable globale pour stocker l'association sélectionnée
+
+    function showAssoDetails(asso) {
+      var popUpContainer = document.getElementById('popUpContainer');
+      var popUpContent = document.getElementById('popUpContent');
+      var closeButton = document.createElement('button');
+      closeButton.textContent = 'Retour';
+      closeButton.addEventListener('click', function() {
+        popUpContainer.style.display = 'none';
+      });
+
+      popUpContent.innerHTML =
+              `<p><strong>ID:</strong> ${asso.Asso_EtudianteID}</p>
+         <p><strong>Nom:</strong> ${asso.Asso_Etudiante_Nom}</p>
+         <p><strong>Faculte:</strong> ${asso.Faculte_Nom}</p>
+         <p><strong>Administrateur:</strong> ${asso.UsagerID}</p>`;
+
+      // Stocker les valeurs des champs dans la variable globale currentAsso
+      currentAsso = {
+        Asso_EtudianteID: asso.Asso_EtudianteID,
+        Asso_Etudiante_Nom: asso.Asso_Etudiante_Nom,
+        FaculteID: asso.FaculteID,
+        UsagerID: asso.UsagerID
+      };
+
+      var editButton = document.createElement('button');
+      editButton.textContent = 'Modifier';
+      editButton.addEventListener('click', function() {
+        editAsso(asso);
+      });
+
+      var deleteButton = document.createElement('button');
+      deleteButton.textContent = 'Supprimer';
+      deleteButton.addEventListener('click', function() {
+        deleteAsso(currentAsso);
+      });
+
+      popUpContent.appendChild(editButton);
+      popUpContent.appendChild(deleteButton);
+      popUpContent.appendChild(closeButton);
+      popUpContainer.style.display = 'flex';
+      setTimeout(function() {
+        popUpContent.classList.add('show');
+      }, 100);
+    }
+
     function getAsso() {
       axios.get('http://localhost:8888/api/Asso/getAsso', {
         headers: {
@@ -39,11 +157,17 @@
                 var assoContainer = document.getElementById('associations');
                 assos.forEach(function(asso) {
                   var assoButton = document.createElement('button');
-                  assoButton.className = 'asso';
+                  assoButton.className = 'large-button';
                   assoButton.innerHTML =
-                          `<p>ID: ${asso.AssoEtudianteID}</p>
-                            <p>Name: ${asso.AssoEtudianteNom}</p>
-                            <p>Faculte ID: ${asso.FaculteID}</p>`;
+                          `<p><strong>ID:</strong> ${asso.Asso_EtudianteID}</p>
+               <p><strong>Nom:</strong> ${asso.Asso_Etudiante_Nom}</p>
+               <p><strong>Faculte:</strong> ${asso.Faculte_Nom}</p>
+               <p><strong>Administrateur:</strong> ${asso.UsagerID}</p>`;
+
+                  assoButton.addEventListener('click', function() {
+                    showAssoDetails(asso);
+                  });
+
                   assoContainer.appendChild(assoButton);
                 });
               })
@@ -51,12 +175,239 @@
                 console.error(error);
               });
     }
+
+    function filterAsso() {
+      var input = document.getElementById('assoFilter').value.toLowerCase();
+      var assos = document.getElementsByClassName('large-button');
+      for (var i = 0; i < assos.length; i++) {
+        var assoName = assos[i].getElementsByTagName('p')[1].textContent.toLowerCase();
+        if (input === "") {
+          // Si le champ de filtre est vide, rétablir la disposition horizontale
+          assos[i].style.display = 'inline-block';
+        } else if (assoName.includes(input)) {
+          // Si le nom de l'association correspond à la recherche, afficher l'association
+          assos[i].style.display = 'inline-block';
+        } else {
+          // Sinon, masquer l'association
+          assos[i].style.display = 'none';
+        }
+      }
+    }
+/*
+    function saveAsso(asso) {
+      var editNom = document.getElementById('editNom').value;
+      var editFaculte = document.getElementById('editFaculte').value;
+      var editAdmin = document.getElementById('editAdmin').value;
+
+      // Mettre à jour les propriétés de l'association
+      asso.Asso_Etudiante_Nom = editNom;
+      asso.FaculteID = editFaculte;
+      asso.UsagerID = editAdmin;
+
+      // Effectuer la requête PUT pour mettre à jour l'association
+      axios.post('http://localhost:8888/api/Asso/Asso_EtudianteID?Asso_EtudianteID=' + encodeURIComponent(asso.Asso_EtudianteID), asso, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+
+              .then(function(response) {
+                if (response.status === 200) {
+                  alert("L'association a été modifiée avec succès.");
+
+                  // Fermer la fenêtre de modification
+                  var popUpContainer = document.getElementById('popUpContainer');
+                  popUpContainer.style.display = 'none';
+                  window.location.href = 'Assotables.html';
+
+                } else {
+                  console.log("Une erreur s'est produite lors de la modification de l'association." + response.status);
+                }
+              })
+              .catch(function(error) {
+                console.error(error);
+                console.log("Une erreur s'est produite lors de la modification de l'association. catch");
+              });
+
+    }
+
+*/
+
+    function saveAsso(asso) {
+      var editNom = document.getElementById('editNom').value;
+      var editFaculte = document.getElementById('editFaculte').value;
+      var editAdmin = document.getElementById('editAdmin').value;
+      var assId = asso.Asso_EtudianteID
+      // Mettre à jour les propriétés de l'association
+      asso.Asso_Etudiante_Nom = editNom;
+      asso.FaculteID = editFaculte;
+      asso.UsagerID = editAdmin;
+      var url = 'http://localhost:8888/api/Asso/Asso_EtudianteID?Asso_EtudianteID=' + encodeURIComponent(assId) + '&FaculteID=' + encodeURI(editFaculte) + '&Asso_Etudiante_Nom=' + encodeURI(editNom) + '&UsagerID=' + encodeURI(editAdmin);
+      // Effectuer la requête PUT pour mettre à jour l'association
+      axios.post(url, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+
+              .then(function(response) {
+                if (response.status === 200) {
+                  alert("L'association a été modifiée avec succès.");
+
+                  // Fermer la fenêtre de modification
+                  var popUpContainer = document.getElementById('popUpContainer');
+                  popUpContainer.style.display = 'none';
+                  window.location.href = 'Assotables.html';
+
+                } else {
+                  console.log("Une erreur s'est produite lors de la modification de l'association." + response.status);
+                }
+              })
+              .catch(function(error) {
+                console.error(error);
+                console.log("Une erreur s'est produite lors de la modification de l'association. catch");
+              });
+
+    }
+    function cancelEdit() {
+      var popUpContainer = document.getElementById('popUpContainer');
+      popUpContainer.style.display = 'none';
+    }
+
+
+    function editAsso(asso) {
+      var popUpContent = document.getElementById('popUpContent');
+
+      // Supprimer le contenu existant de la fenêtre contextuelle
+      popUpContent.innerHTML = '';
+
+      // Créer les champs de modification
+      var editForm = document.createElement('form');
+      editForm.id = 'editForm';
+
+      var nomLabel = document.createElement('label');
+      nomLabel.textContent = 'Nom:';
+      var editNom = document.createElement('input');
+      editNom.type = 'text';
+      editNom.id = 'editNom';
+      editNom.value = asso.Asso_Etudiante_Nom;
+      editNom.required = true;
+      editNom.classList.add('edit-input'); // Ajout de la classe CSS
+
+      var faculteLabel = document.createElement('label');
+      faculteLabel.textContent = 'Faculte:';
+      var editFaculte = document.createElement('select');
+      editFaculte.id = 'editFaculte';
+      editFaculte.required = true;
+      editFaculte.classList.add('edit-input'); // Ajout de la classe CSS
+
+      var faculteOption1 = document.createElement('option');
+      faculteOption1.value = '4028';
+      faculteOption1.textContent = 'Faculte de Genie';
+
+      var faculteOption2 = document.createElement('option');
+      faculteOption2.value = '4038';
+      faculteOption2.textContent = 'Ecole de gestion';
+
+      var faculteOption3 = document.createElement('option');
+      faculteOption3.value = '4039';
+      faculteOption3.textContent = 'Faculte de musique';
+
+// Ajouter les options au menu déroulant
+      editFaculte.appendChild(faculteOption1);
+      editFaculte.appendChild(faculteOption2);
+      editFaculte.appendChild(faculteOption3);
+
+      var adminLabel = document.createElement('label');
+      adminLabel.textContent = 'Administrateur:';
+      var editAdmin = document.createElement('input');
+      editAdmin.type = 'text';
+      editAdmin.id = 'editAdmin';
+      editAdmin.value = asso.UsagerID;
+      editAdmin.required = true;
+      editAdmin.classList.add('edit-input'); // Ajout de la classe CSS
+
+      var saveButton = document.createElement('button');
+      saveButton.type = 'submit';
+      saveButton.textContent = 'Enregistrer';
+
+      var cancelButton = document.createElement('button');
+      cancelButton.type = 'button';
+      cancelButton.textContent = 'Annuler';
+      cancelButton.addEventListener('click', function() {
+        cancelEdit();
+      });
+
+      // Ajouter un gestionnaire d'événements pour soumettre le formulaire de modification
+      editForm.addEventListener('submit', function(event) {
+        event.preventDefault(); // Empêcher le rechargement de la page par défaut
+        saveAsso(asso);
+      });
+
+      // Ajouter les éléments au formulaire de modification
+      editForm.appendChild(nomLabel);
+      editForm.appendChild(editNom);
+      editForm.appendChild(faculteLabel);
+      editForm.appendChild(editFaculte);
+      editForm.appendChild(adminLabel);
+      editForm.appendChild(editAdmin);
+      editForm.appendChild(saveButton);
+      editForm.appendChild(cancelButton);
+
+      // Ajouter le formulaire de modification à la fenêtre contextuelle
+      popUpContent.appendChild(editForm);
+
+      // Afficher la fenêtre contextuelle
+      var popUpContainer = document.getElementById('popUpContainer');
+      popUpContainer.style.display = 'flex';
+      setTimeout(function() {
+        popUpContent.classList.add('show');
+      }, 100);
+    }
+
+
+
+
+    function deleteAsso(currentAsso) {
+      if (currentAsso) {
+        axios.delete('http://localhost:8888/api/Asso?Asso_EtudianteID=' + encodeURIComponent(currentAsso.Asso_EtudianteID), {
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        })
+                .then(function(response) {
+                  if (response.status === 200) {
+                    alert("L'association a été supprimée avec succès.");
+                    window.location.href = 'Assotables.html';
+                    // Effectuer les actions supplémentaires nécessaires après la suppression de l'association
+                  } else {
+                    console.log("Une erreur s'est produite lors de la suppression de l'association." + response.status);
+                  }
+                })
+                .catch(function(error) {
+                  console.error(error);
+                  console.log("Une erreur s'est produite lors de la suppression de l'association. catch");
+                });
+      } else {
+        console.log("Aucune association sélectionnée");
+      }
+    }
+
   </script>
 </head>
-<body onload="getAsso()">
+<body onload="getAsso();">
 <h2>View All Asso</h2>
-<div class="large-button" id="associations">
-  <!-- Events will be displayed here -->
+<div class="filter-container">
+  <input type="text" id="assoFilter" placeholder="Filter by name">
+  <button type="button" onclick="filterAsso()">Filter</button>
+</div>
+<div id="associations">
+  <!-- Associations will be displayed here -->
+</div>
+<div id="popUpContainer" class="pop-up-container">
+  <div id="popUpContent" class="pop-up-content">
+    <!-- Association details will be displayed here -->
+  </div>
 </div>
 </body>
 </html>

@@ -262,7 +262,6 @@
                 .success(function (authenticated) {
                     if (authenticated) {
                         accessToken = keycloak.token;
-                        alert('Authentifié');
                         displayUserInfo();
                     } else {
                         alert('Non authentifié');
@@ -288,7 +287,7 @@
                         localStorage.setItem('EvenementID', EvenementID);
                         window.location.href = 'camera.html'; // Replace with the path to your main menu HTML file
                     } else {
-                        alert(response.status + ' Événement inexistant');
+                        alert(response.status + 'Événement inexistant');
                     }
                 })
                 .catch(function(error) {

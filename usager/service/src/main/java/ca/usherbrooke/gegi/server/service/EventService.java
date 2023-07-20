@@ -1,18 +1,19 @@
 package ca.usherbrooke.gegi.server.service;
 
+import ca.usherbrooke.gegi.server.admin.CheckIfUserReserved;
 import ca.usherbrooke.gegi.server.admin.Event;
+import ca.usherbrooke.gegi.server.admin.EventShowedToStudents;
 import ca.usherbrooke.gegi.server.persistence.EventMapper;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.eclipse.microprofile.jwt.JsonWebToken;
+import org.jboss.logging.annotations.Param;
+import ca.usherbrooke.gegi.server.admin.CheckMyEvents;
 import org.jboss.resteasy.plugins.providers.multipart.InputPart;
 import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataInput;
 
 import javax.inject.Inject;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.io.IOException;
@@ -88,12 +89,19 @@ public class EventService {
         return events;
     }
 
-    @GET
+    @POST
     @javax.ws.rs.Path("/events4genie")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Event> getEventsGenie() {
-        return eventMapper.getEventsGenie();
+    public Response getEvents(@QueryParam("FaculteID") String FaculteID) {
+        List<EventShowedToStudents> Events = eventMapper.getEvents(FaculteID);
+        return Response.status(Response.Status.CREATED).entity(Events).build();
     }
-
+    @POST
+    @javax.ws.rs.Path("/MyEvents")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response CheckMyEvents(@QueryParam("UsagerID") String UsagerID) {
+        List<CheckMyEvents> MyEvents = eventMapper.CheckMyEvents(UsagerID);
+            return Response.status(Response.Status.CREATED).entity(MyEvents).build();
+    }
 }
 

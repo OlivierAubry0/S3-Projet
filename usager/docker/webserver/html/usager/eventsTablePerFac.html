@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>View All Engineering Events</title>
+    <style>
+        body {
+            font-family: "Lato", sans-serif;
+            background-color: #008000; /* Couleur de fond verte */
+            color: white; /* Couleur du texte en blanc */
+            margin: 0; /* Supprime les marges par défaut */
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh; /* Hauteur minimale de la fenêtre visible */
+        }
+
+        h2 {
+            margin-top: 0; /* Supprime la marge supérieure par défaut */
+        }
+
+        .event-form {
+            width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            background-color: #fff; /* Couleur de fond blanche pour les formulaires */
+            color: #333; /* Couleur du texte dans les formulaires */
+        }
+
+        .event-form select,
+        .event-form button[type=button] {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .event-form button[type=button] {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .event-form button[type=button]:hover {
+            background-color: #45a049;
+        }
+
+        .sidenav {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            z-index: 3;
+            top: 0;
+            left: 0;
+            background-color: #0B4F00;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+        }
+
+        .sidenav a {
+            padding: 8px 8px 8px 32px;
+            text-decoration: none;
+            font-size: 25px;
+            color: #5BFF5E;
+            display: block;
+            transition: 0.3s;
+            z-index: 3;
+        }
+
+        .sidenav a:hover {
+            color: #5BFF5E;
+            z-index: 3;
+        }
+
+        .sidenav .closebtn {
+            position: absolute;
+            top: 0;
+            right: 25px;
+            font-size: 36px;
+            margin-left: 50px;
+            z-index: 3;
+        }
+
+        .event-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .event-button {
+            position: relative;
+            margin: 20px;
+            width: 200px;
+            height: 300px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .event-button img {
+            max-width: 100%;
+            max-height: 200px;
+            margin-bottom: 10px;
+        }
+
+        .event-button p {
+            margin: 0;
+            text-align: center;
+        }
+
+        @media screen and (max-width: 600px) {
+            .event-button {
+                width: 100%;
+            }
+        }
+    </style>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+
+        function displayUserInfo() {
+            var token = keycloak.tokenParsed;
+            var name = token.name;
+
+            var userInfoList = document.createElement('ul');
+            var nameItem = document.createElement('li');
+            var rolesItem = document.createElement('li');
+
+            nameItem.textContent = 'Nom : \n' + name;
+            rolesItem.textContent =  'Role: Etudiant';
+
+            userInfoList.appendChild(nameItem);
+            userInfoList.appendChild(rolesItem);
+
+            var userInfoDiv = document.getElementById('user-info');
+            userInfoDiv.innerHTML = ''; // Supprime tout contenu existant
+            userInfoDiv.appendChild(userInfoList);
+        }
+
+        var keycloak;
+
+        function initKeycloak() {
+
+            keycloak = new Keycloak({
+                "realm": "usager",
+                "auth-server-url": "http://localhost:8180/",
+                "ssl-required": "external",
+                "clientId": "frontend",
+                "public-client": true,
+                "confidential-port": 0
+            });
+            keycloak.init({ onLoad: 'login-required' })
+                .success(function (authenticated) {
+                    if (authenticated) {
+                        getUserInfo();
+                        displayUserInfo();
+                    } else {
+                        alert('not authenticated');
+                    }
+                })
+                .error(function () {
+                    alert('failed to initialize');
+                });
+        }
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "250px";
+            document.getElementById("user-info").classList.add("fade-in");
+        }
+
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+            document.getElementById("user-info").classList.remove("fade-in");
+        }
+
+        var FacID;
+        function getValueFromURL() {
+            var urlParams = new URLSearchParams(window.location.search);
+            FacID = urlParams.get('FaculteID');
+        }
+
+
+        function getEventsGenie() {
+            getValueFromURL();
+            var FaculteID = FacID;
+            axios.post('http://localhost:8888/api/events/events4genie?FaculteID=' + encodeURIComponent(FaculteID), {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+                .then(function(response) {
+                    var events = response.data;
+                    var eventsContainer = document.getElementById('events');
+                    var leftPosition = 205, topPosition=100; // Initial top position
+                    var count = 0; // Initialize count
+                    events.forEach(function(event) {
+                        var eventButton = document.createElement('button');
+                        eventButton.className = 'event';
+                        eventButton.style.position = 'absolute';
+                        eventButton.style.top = topPosition + 'px';// Set the top position dynamically
+                        eventButton.style.left = leftPosition + 'px'; // Set the left position dynamically
+                        eventButton.style.size = 'absolute';
+                        eventButton.style.width = 200 + 'px';
+                        eventButton.style.height = 300 + 'px';
+                        eventButton.addEventListener('click', function() {
+                            // Code à exécuter lorsque le bouton est cliqué
+                            //alert('Événement ID: ' + event.evenementID);
+                            localStorage.setItem('EvenementID', event.evenementID);
+                            window.location.href = 'getTicket.html';
+                        });
+                        eventButton.innerHTML =
+                            `<p>ID: ${event.evenementID}</p>
+                            <p>Name: ${event.evenementNom}</p>
+                            <p>Date: ${event.evenementDate}</p>
+                            <p>Start: ${event.evenementDebut}</p>
+                            <p>End: ${event.evenementFin}</p>
+                            <p>Association ID: ${event.assoEtudianteID}</p>
+                            <p>Number of Places: ${event.nombrePlaces}</p>
+                            <p>Allow Guests: ${event.allowGuests}</p>
+                            <p>Description: ${event.description}</p>
+                    <img id="preview-image" src="http://localhost:8080/${event.filename}" alt="Event Image"
+                         style=" height: 300px; right: 1%;" onclick="window.location.href = 'getTicket.html'">`;
+                        eventsContainer.appendChild(eventButton);
+                        leftPosition += 300; // Increment the top position by 300px for the next button
+                        count++; // Increment count
+                        if (count >= 3) {
+                            leftPosition = 205; // Reset the top position to 205 pixels
+                            topPosition+=300;
+                            count = 0; // Reset count to zero
+                        }
+                    });
+                })
+                .catch(function(error) {
+                    console.error(error);
+                });
+        }
+    </script>
+</head>
+<body onload="getEventsGenie()">
+<h2>View All Events</h2>
+<div class="event-form" id="events">
+    <!-- Les événements seront affichés ici sous forme de boutons -->
+</div>
+<span style="font-size: 40px; font-weight: bold; cursor: pointer; position: absolute; top: 0; left: 0.5%; color: #5BFF5E;" onclick="openNav()">&#9776;</span>
+<div id="mySidenav" class="sidenav">
+    <b id="user-info"></b>
+    <a href="#" onclick="window.location.href='pc_HomePage.html'">Page d'acceuil</a>
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <a href="#" onclick="window.location.href='eventID_before_scanning.html'">Scanner</a>
+    <a href="#" onclick="window.location.href='MyEvents.html'">Mes Événements</a>
+    <a href="#">About</a>
+    <a href="#">Services</a>
+    <a href="#">Clients</a>
+    <a href="#">Contact</a>
+    <a href="#" onclick="logout()">Déconnexion</a>
+</div>
+</body>
+</html>
