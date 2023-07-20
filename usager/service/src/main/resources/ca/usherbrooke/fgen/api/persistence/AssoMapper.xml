@@ -6,13 +6,25 @@
 
     <insert id="insertAsso" parameterType="ca.usherbrooke.gegi.server.admin.AssoEtudiante">
         INSERT INTO BASE_DE_DONNE.ASSO_ETUDIANTE
-            (Asso_EtudianteID, Asso_Etudiante_Nom, FaculteID)
+            (Asso_EtudianteID, Asso_Etudiante_Nom, FaculteID, UsagerID)
         VALUES
-            (#{Asso_EtudianteID}, #{Asso_Etudiante_Nom}, #{FaculteID})
+            (#{Asso_EtudianteID}, #{Asso_Etudiante_Nom}, #{FaculteID}, #{UsagerID})
     </insert>
+
+    <delete id="deleteAsso" parameterType="ca.usherbrooke.gegi.server.admin.AssoEtudiante">
+        DELETE FROM BASE_DE_DONNE.ASSO_ETUDIANTE
+        WHERE Asso_EtudianteID = #{Asso_EtudianteID}
+    </delete>
 
     <select id="getAllAsso" resultType="ca.usherbrooke.gegi.server.admin.AssoEtudiante">
         SELECT * FROM BASE_DE_DONNE.les_associations
     </select>
 
+    <update id="updateAsso" parameterType="ca.usherbrooke.gegi.server.admin.AssoEtudiante">
+        UPDATE BASE_DE_DONNE.ASSO_ETUDIANTE
+        SET Asso_Etudiante_Nom = #{Asso_Etudiante_Nom}, FaculteID = #{FaculteID}, UsagerID = #{UsagerID}
+        WHERE Asso_EtudianteID = #{Asso_EtudianteID}
+    </update>
+
 </mapper>
+

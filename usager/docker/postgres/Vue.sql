@@ -15,8 +15,9 @@ CREATE VIEW les_benevoles AS
 FROM base_de_donne.usager_possede_privilege;
 
 CREATE VIEW les_associations AS
-SELECT Asso_EtudianteID, Asso_Etudiante_Nom, FaculteID
-FROM base_de_donne.ASSO_ETUDIANTE
+SELECT ae.Asso_EtudianteID, ae.Asso_Etudiante_Nom, f.Faculte_Nom, UsagerID
+FROM base_de_donne.ASSO_ETUDIANTE ae
+JOIN base_de_donne.Faculte f ON ae.FaculteID = f.FaculteID;
 
 ----------------------comment appeler la vue ? ---------------------------------------------
 --SELECT * FROM evenement_programmes;--

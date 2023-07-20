@@ -2,7 +2,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="Content-type" content="text/html; charset=UTF-8">
 
-<html>
+<html lang="">
 
 <head>
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
@@ -64,20 +64,6 @@
       userInfoDiv.appendChild(userInfoList);
     }
 
-
-    function getEvents() {
-      axios.get('http://localhost:8888/api/events')
-              .then(function (response) {
-                console.log(response.data);
-                var eventInfoDiv = document.getElementById('event-info');
-                eventInfoDiv.innerHTML = JSON.stringify(response.data); // Convert events to string and set it as the div content
-              })
-              .catch(function (error) {
-                console.error(error);
-              });
-    }
-
-
   </script>
 
   <style>
@@ -107,6 +93,7 @@
       color: #f1f1f1;
     }
   </style>
+  <title></title>
 
 </head>
 
@@ -205,16 +192,6 @@
     border-radius: 1%;
   }
 
-  .text-overlay {
-    position: absolute;
-    top: 20%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: white;
-    font-size: 50px;
-    text-align: center;
-  }
-
 </style>
 
 <div id="mySidenav" class="sidenav">
@@ -237,11 +214,11 @@
   <img src="assets/concert.jpg" alt="event_image">
 </div>
 
-<button class="large-button" style="top: 55%; left: 14%;" onclick="window.location.href='createAsso.html'"><span>Fonction1</span></button>
+<button class="large-button" style="top: 55%; left: 14%;" onclick="window.location.href='createAsso.html'"><span>Creer une association</span></button>
 <!-- <button class="large-button" style="top: 50%; left: 35%;" onclick="getEvents()"><span>Événements programmés</span></button> -->
-<button class="large-button" style="top: 55%; left: 32.4%;" onclick="window.location.href = 'Assotables.html'"><span>Fonction2</span></button>
-<button class="large-button" style="top: 55%; left: 50.9%;"><span>Fonction3</span></button>
-<button class="large-button" style="top: 55%; left: 69.1%;"onclick="window.location.href = 'pc_HomePage.html'"><span>Fonction4</span></button>
+<button class="large-button" style="top: 55%; left: 32.4%;" onclick="window.location.href = 'Assotables.html'"><span>Voir les associations</span></button>
+<button class="large-button" style="top: 55%; left: 50.9%;"><span>Fonction 3</span></button>
+<button class="large-button" style="top: 55%; left: 69.1%;" onclick="window.location.href = 'pc_HomePage.html'"><span>Fonction4</span></button>
 
 <div id="event-info" style="position: absolute; top: 90%;"></div>
 
