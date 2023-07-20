@@ -5,7 +5,20 @@
     <style>
         body {
             font-family: "Lato", sans-serif;
+            background-color: #008000; /* Couleur de fond verte */
+            color: white; /* Couleur du texte en blanc */
+            margin: 0; /* Supprime les marges par défaut */
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh; /* Hauteur minimale de la fenêtre visible */
         }
+
+        h2 {
+            margin-top: 0; /* Supprime la marge supérieure par défaut */
+        }
+
         .event-form {
             width: 500px;
             margin: 0 auto;
@@ -13,8 +26,12 @@
             border: 1px solid #ccc;
             border-radius: 4px;
             box-sizing: border-box;
+            background-color: #fff; /* Couleur de fond blanche pour les formulaires */
+            color: #333; /* Couleur du texte dans les formulaires */
         }
-        .event-form select, .event-form button[type=button] {
+
+        .event-form select,
+        .event-form button[type=button] {
             width: 100%;
             padding: 12px 20px;
             margin: 8px 0;
@@ -23,15 +40,18 @@
             border-radius: 4px;
             box-sizing: border-box;
         }
+
         .event-form button[type=button] {
             background-color: #4CAF50;
             color: white;
             border: none;
             cursor: pointer;
         }
+
         .event-form button[type=button]:hover {
             background-color: #45a049;
         }
+
         .sidenav {
             height: 100%;
             width: 0;
@@ -69,9 +89,43 @@
             z-index: 3;
         }
 
-        @media screen and (max-height: 450px) {
-            .sidenav {padding-top: 15px;}
-            .sidenav a {font-size: 18px;}
+        .event-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .event-button {
+            position: relative;
+            margin: 20px;
+            width: 200px;
+            height: 300px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .event-button img {
+            max-width: 100%;
+            max-height: 200px;
+            margin-bottom: 10px;
+        }
+
+        .event-button p {
+            margin: 0;
+            text-align: center;
+        }
+
+        @media screen and (max-width: 600px) {
+            .event-button {
+                width: 100%;
+            }
         }
     </style>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
@@ -175,7 +229,9 @@
                             <p>Association ID: ${event.assoEtudianteID}</p>
                             <p>Number of Places: ${event.nombrePlaces}</p>
                             <p>Allow Guests: ${event.allowGuests}</p>
-                            <p>Description: ${event.description}</p>`;
+                            <p>Description: ${event.description}</p>
+                    <img id="preview-image" src="http://localhost:8080/${event.filename}" alt="Event Image"
+                         style=" height: 300px; right: 1%;" onclick="window.location.href = 'getTicket.html'">`;
                         eventsContainer.appendChild(eventButton);
                         leftPosition += 300; // Increment the top position by 300px for the next button
                         count++; // Increment count
@@ -194,7 +250,7 @@
 </head>
 <body onload="getEventsGenie()">
 <h2>View All Events</h2>
-<div class="large-button" id="events">
+<div class="event-form" id="events">
     <!-- Les événements seront affichés ici sous forme de boutons -->
 </div>
 <span style="font-size: 40px; font-weight: bold; cursor: pointer; position: absolute; top: 0; left: 0.5%; color: #5BFF5E;" onclick="openNav()">&#9776;</span>

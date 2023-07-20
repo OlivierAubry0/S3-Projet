@@ -12,10 +12,7 @@ import org.jboss.resteasy.plugins.providers.multipart.InputPart;
 import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataInput;
 
 import javax.inject.Inject;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.io.IOException;
@@ -92,8 +89,6 @@ public class EventService {
     }
 
     @POST
-    @Path("/events4genie")
-    @GET
     @javax.ws.rs.Path("/events4genie")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getEvents(@QueryParam("Asso_EtudianteID") String Asso_EtudianteID) {
@@ -101,7 +96,7 @@ public class EventService {
         return Response.status(Response.Status.CREATED).entity(Events).build();
     }
     @POST
-    @Path("/MyEvents")
+    @javax.ws.rs.Path("/MyEvents")
     @Produces(MediaType.APPLICATION_JSON)
     public Response CheckMyEvents(@QueryParam("UsagerID") String UsagerID) {
         List<CheckMyEvents> MyEvents = eventMapper.CheckMyEvents(UsagerID);

@@ -4,15 +4,43 @@
     <title>Events</title>
 
     <style>
-        .event-form {
-            position: absolute;
+        body {
+            font-family: Arial, sans-serif;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            justify-content: center;
+            align-items: center;
             padding: 20px;
+        }
+
+        .event {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             border: 1px solid #ccc;
             border-radius: 4px;
-            box-sizing: border-box;
-            top: 19%;
-            width: 90%;
-            margin: 1%;
+            padding: 20px;
+            max-width: 600px;
+        }
+
+        .event form {
+            margin-bottom: 10px;
+        }
+
+        .event button {
+            padding: 10px 20px;
+            background-color: #5BFF5E;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .event img {
+            height: 300px;
+            margin-top: 10px;
+            cursor: pointer;
         }
     </style>
 </head>
@@ -35,17 +63,18 @@
                     var eventDiv = document.createElement('div');
                     eventDiv.className = 'event';
                     eventDiv.innerHTML = `
-                    <form style="max-width: 600px; word-break: break-word; overflow: auto; max-height: 100%">
-                        <p><strong>Event Name:</strong>${event.evenementNom}</span></p>
-                        <p><strong>Date:</strong> <span>${event.evenementDate}</p>
-                        <p><strong>Start Time: </strong>${event.evenementDebut}</p>
-                        <p><strong>End Time: </strong>${event.evenementFin}</p>
-                        <p><strong>Number of Places: </strong>${event.nombrePlaces}</p>
-                        <p><strong>Allow Guests: </strong>${event.allowGuests ? 'Yes' : 'No'}</p>
-                        <pre style="font-family: Arial"><strong>Description: </strong>${event.description}</pre>
+                    <form>
+                        <p><strong>Event Name:</strong> ${event.evenementNom}</p>
+                        <p><strong>Date:</strong> ${event.evenementDate}</p>
+                        <p><strong>Start Time:</strong> ${event.evenementDebut}</p>
+                        <p><strong>End Time:</strong> ${event.evenementFin}</p>
+                        <p><strong>Number of Places:</strong> ${event.nombrePlaces}</p>
+                        <p><strong>Allow Guests:</strong> ${event.allowGuests ? 'Yes' : 'No'}</p>
+                        <pre style="font-family: Arial"><strong>Description:</strong> ${event.description}</pre>
+                        <button type="button" onclick="window.location.href = 'getTicket.html'">Get Ticket</button>
                     </form>
                     <img id="preview-image" src="http://localhost:8080/${event.filename}" alt="Event Image"
-                         style=" height: 300px; right: 1%;" onclick="window.location.href = 'getTicket.html'">
+                         onclick="window.location.href = 'getTicket.html'">
                     `; // Assumes the 'filename' property contains the image URL
                     eventsContainer.appendChild(eventDiv);
                     localStorage.setItem('EvenementID', event.evenementID);
@@ -59,6 +88,3 @@
 </script>
 </body>
 </html>
-
-
-
