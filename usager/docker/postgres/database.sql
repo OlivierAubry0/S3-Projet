@@ -120,12 +120,7 @@ INSERT INTO UNIVERSITE (UniversiteID, Universite_Nom)
 VALUES (1, 'Université de sd'),
        (2, 'Université sd');
 
-INSERT INTO FACULTE (FaculteID, Faculte_Nom, UniversiteID)
-VALUES (4028, 'Faculte de Genie', 1),
-       (4038, 'Ecole de gestion', 1),
-       (4039, 'Faculte de musique', 1),
-       (2222, 'Campus de genie', 2),
-       (2332, 'Campus de sante', 2);
+
 
 INSERT INTO FACULTE (FaculteID, Faculte_Nom, UniversiteID)
 VALUES (1, 'Université A',1),

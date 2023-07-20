@@ -27,12 +27,17 @@ echo "beginning of finalisation ...."
 
 sherbrooke_group_id=$(/opt/keycloak/bin/kcadm.sh create groups -r usager -s name="Universite De Sherbrooke" -i)
 genie_sherbrooke_id=$(/opt/keycloak/bin/kcadm.sh create groups/$sherbrooke_group_id/children -r usager -s name="Faculte de Genie" -i)
+/opt/keycloak/bin/kcadm.sh create groups/$genie_sherbrooke_id/children -r usager -s name="Universite De Sherbrooke"
 gestion_sherbrooke_id=$(/opt/keycloak/bin/kcadm.sh create groups/$sherbrooke_group_id/children -r usager -s name="Faculte de Gestion" -i)
+/opt/keycloak/bin/kcadm.sh create groups/$gestion_sherbrooke_id/children -r usager -s name="Universite De Sherbrooke"
 droit_sherbrooke_id=$(/opt/keycloak/bin/kcadm.sh create groups/$sherbrooke_group_id/children -r usager -s name="Faculte de Droit" -i)
+/opt/keycloak/bin/kcadm.sh create groups/$droit_sherbrooke_id/children -r usager -s name="Universite De Sherbrooke"
 
 laval_group_id=$(/opt/keycloak/bin/kcadm.sh create groups -r usager -s name="Universite De Laval" -i)
 genie_laval_id=$(/opt/keycloak/bin/kcadm.sh create groups/$laval_group_id/children -r usager -s name="Faculte de Genie" -i)
+/opt/keycloak/bin/kcadm.sh create groups/$genie_laval_id/children -r usager -s name="Universite De Laval"
 medecine_laval_id=$(/opt/keycloak/bin/kcadm.sh create groups/$laval_group_id/children -r usager -s name="Faculte de Medecine" -i)
+/opt/keycloak/bin/kcadm.sh create groups/$medecine_laval_id/children -r usager -s name="Universite De Laval"
 
 
 
