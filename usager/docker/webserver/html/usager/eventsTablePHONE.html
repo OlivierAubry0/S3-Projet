@@ -11,7 +11,11 @@
     }
 
     .events-container {
+      position: absolute;
+      top: 10%;
       display: flex;
+      right: 0;
+      left: 0;
       flex-wrap: wrap;
       justify-content: center;
       gap: 20px;
@@ -19,7 +23,7 @@
     }
 
     .event-card {
-      width: 300px;
+      width: 600px;
       border: 1px solid #ccc;
       border-radius: 4px;
       box-sizing: border-box;
@@ -29,13 +33,14 @@
 
     .event-card img {
       width: 100%;
-      height: 200px;
+      height: max-content;
       object-fit: cover;
       cursor: pointer;
     }
 
     .event-card p {
       margin: 5px 0;
+      font-size: 50px;
     }
 
     .sidenav {

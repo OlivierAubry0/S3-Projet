@@ -98,7 +98,7 @@ public class KeycloakTokenScript {
                 String groupName = (groupsArray.length() > 0) ? groupsArray.getJSONObject(0).getString("name") : null;
 
                 // insert the user into the usager table
-                insertUser(userId, lastName, firstName, role, groupName);
+                insertUser(username, lastName, firstName, role, groupName);
 
             }
         } catch (Exception e) {
