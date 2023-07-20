@@ -13,6 +13,6 @@ public interface AssoMapper {
     @Insert("INSERT INTO BASE_DE_DONNE.ASSO_ETUDIANTE (Asso_EtudianteID, Asso_Etudiante_Nom, FaculteID) VALUES(#{Asso_EtudianteID}, #{Asso_Etudiante_Nom}, #{FaculteID})")
     void insertAsso(AssoEtudiante asso);
 
-    @Select("SELECT * FROM BASE_DE_DONNE.les_associations")
+    @Select("SELECT * FROM BASE_DE_DONNE.les_assos")
     List<AssoEtudiante> getAllAsso();
 }
