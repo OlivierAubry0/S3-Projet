@@ -37,15 +37,82 @@
     .event-card p {
       margin: 5px 0;
     }
+
+    .sidenav {
+      height: 100%;
+      width: 0;
+      position: fixed;
+      z-index: 3;
+      top: 0;
+      left: 0;
+      background-color: #0B4F00;
+      overflow-x: hidden;
+      transition: 0.5s;
+      padding-top: 60px;
+    }
+
+    .sidenav a {
+      padding: 8px 8px 8px 32px;
+      text-decoration: none;
+      font-size: 120px;
+      color: #5BFF5E;
+      display: block;
+      transition: 0.3s;
+      z-index: 3;
+    }
+
+    .sidenav a:hover {
+      color: #0B4F00;
+      z-index: 3;
+    }
+
+    .sidenav .closebtn {
+      position: absolute;
+      top: 0;
+      right: 25px;
+      font-size: 120px;
+      margin-left: 50px;
+      z-index: 3;
+    }
+
+    @media screen and (max-height: 450px) {
+      .sidenav {padding-top: 15px;}
+      .sidenav a {font-size: 120px;}
+    }
+
   </style>
 </head>
 <body>
 <div class="events-container" id="events"></div>
 
+<div id="mySidenav" class="sidenav">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  <a href="#" onclick="window.location.href='EventID_scanner_PHONE.html'">Scanner</a>
+  <a href="#" onclick="logout()">Déconnexion</a>
+  <b id="user-info" style="color: #5BFF5E"></b>
+</div>
+
+<span style="font-size: 120px; font-weight: bold; cursor: pointer; position: absolute; top: 0; left: 0.5%; align-self: center; color: #0B4F00;" onclick="openNav()">&#9776; UNIVENT</span>
+
+<div style="top: 8%" id="blackLine1">
+</div>
+
+<script src="includes/ipaddress.js"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
+
+  function openNav() {
+    document.getElementById("mySidenav").style.width = "100%";
+    document.getElementById("user-info").classList.add("fade-in");
+  }
+
+  function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+    document.getElementById("user-info").classList.remove("fade-in");
+  }
+
   function getEvents() {
-    axios.get('http://192.168.2.216:8888/api/events', {
+    axios.get('http://'+ ipAddress +':8888/api/events', {
       headers: {
         'Content-Type': 'application/json'
       }
@@ -58,7 +125,7 @@
                 var eventCard = document.createElement('div');
                 eventCard.className = 'event-card';
                 eventCard.innerHTML = `
-            <img src="http://192.168.2.216:8080/${event.filename}" alt="Event Image" onclick="window.location.href = 'getTicket.html'">
+            <img src="http://${ipAddress}:8080/${event.filename}" alt="Event Image" onclick="window.location.href = 'getTicket.html'">
             <h3>${event.evenementNom}</h3>
             <p><strong>Date:</strong> ${event.evenementDate}</p>
             <p><strong>Start Time:</strong> ${event.evenementDebut}</p>

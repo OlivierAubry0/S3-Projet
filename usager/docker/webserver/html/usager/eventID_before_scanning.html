@@ -193,13 +193,14 @@
             font-family: "Lato", sans-serif;
         }
         .event-form {
-            width: 500px;
+            top: 100px;
+            left: 0px;
+            right: 0px;
             margin: 0 auto;
-            position: inherit;
+            position: absolute;
             padding: 20px;
             border: 1px solid #ccc;
             border-radius: 4px;
-            box-sizing: border-box;
         }
         .event-form select, .event-form button[type=button] {
             width: 100%;
@@ -312,7 +313,7 @@
     </div>
 </header>
 <h2>Entrer l'ID de l'évènement</h2>
-<div class="event-form">
+<div class="event-form" style="width: 500px;">
     <form>
         <input type="text" id="EvenementID" placeholder="ID de l'évènement">
         <button type="button" onclick="submitEventID()">Suivant</button>

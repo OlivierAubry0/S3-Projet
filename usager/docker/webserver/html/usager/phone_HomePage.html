@@ -123,8 +123,13 @@
     }
 
   </style>
+  <script src="includes/ipaddress.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-  <script src="http://192.168.2.216:8180/js/keycloak.js"></script>
+  <script>
+    const script = document.createElement('script');
+    script.src = `http://${ipAddress}:8180/js/keycloak.js`;
+    document.head.appendChild(script);
+  </script>
   <script>
 
     var keycloak;
@@ -132,7 +137,7 @@
     function initKeycloak() {
       keycloak = new Keycloak({
         "realm": "usager",
-        "auth-server-url": "http://192.168.2.216:8180/",
+        "auth-server-url": `http://${ipAddress}:8180/`,
         "ssl-required": "external",
         "clientId": "frontend",
         "public-client": true,
@@ -163,7 +168,7 @@
     function requestStudent() {
       const div = document.getElementById('title');
       const span = div.firstElementChild;
-      axios.get("http://192.168.2.216:8888/api/student", {
+      axios.get(`http:${ipAddress}:8888/api/student`, {
         headers: {
           'Authorization': 'Bearer ' + keycloak.token
         }
@@ -190,7 +195,7 @@
     function requestTeacher() {
       const div = document.getElementById('title');
       const span = div.firstElementChild;
-      axios.get("http://192.168.2.216:8888/api/teacher", {
+      axios.get(`http://${ipAddress}:8888/api/teacher`, {
         headers: {
           'Authorization': 'Bearer ' + keycloak.token
         }
@@ -215,7 +220,7 @@
     }
 
     function logout() {
-      let logoutURL = "http://192.168.2.216:8180//realms/usager/protocol/openid-connect/logout"
+      let logoutURL = `http://${ipAddress}:8180//realms/usager/protocol/openid-connect/logout`
       window.location.href = logoutURL;
     }
 
@@ -253,12 +258,9 @@
 <body onload="initKeycloak()" >
 
 <div id="mySidenav" class="sidenav">
-  <a href="#" onclick="logout()">Déconnexion</a>
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
   <a href="#" onclick="window.location.href='EventID_scanner_PHONE.html'">Scanner</a>
-  <a href="#">Services</a>
-  <a href="#">Clients</a>
-  <a href="#">Contact</a>
+  <a href="#" onclick="logout()">Déconnexion</a>
   <b id="user-info" style="color: #5BFF5E"></b>
 </div>
 

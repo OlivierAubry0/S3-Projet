@@ -1,18 +1,210 @@
 <!DOCTYPE html>
 <html>
+<style>
+  /* CSS styles */
+
+  .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 10%;
+    background-color: #268018;
+    color: white;
+    transition: top 0.3s;
+    z-index: 999; /* Set a high z-index value */
+  }
+
+  .header.hidden {
+    top: -100px; /* Move the header offscreen */
+  }
+
+  .sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 3;
+    top: 0;
+    left: 0;
+    background-color: #0B4F00;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+  }
+
+  .sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 120px;
+    color: #5BFF5E;
+    display: block;
+    transition: 0.3s;
+    z-index: 3;
+  }
+
+  .sidenav a:hover {
+    color: #0B4F00;
+    z-index: 3;
+  }
+
+  .sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 120px;
+    margin-left: 50px;
+    z-index: 3;
+  }
+
+  @media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 120px;}
+  }
+
+
+
+  #Facultes {
+    position: absolute;
+    top: 105%;
+    left: 43%;
+    font-size: 30px;
+    height: 10%;
+    font-weight: bolder;
+  }
+
+  #univent-title {
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #FFFFFF;
+    animation: fade-in 1s ease-in;
+    position: absolute;
+    top: 10%;
+    width: 100%;
+    height: 90%;
+    left: 0;
+    right: 0;
+    background-color: white;
+    text-align: center;
+    z-index: 0;
+  }
+
+  .large-button {
+    display: inline-block;
+    padding: 100px 100px;
+    max-height: 100px;
+    max-width: 100px;
+    background-color: #f1f1f1;
+    color: #268018;
+    border: none;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    position: absolute;
+    z-index: 4;
+    border-radius: 10%;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
+
+  .large-button span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 25px;
+    font-weight: bold;
+  }
+
+  .large-button:hover span {
+    transform: translate(-50%, -50%) scale(1.2);
+  }
+
+  .button-24 {
+    background: #268018;
+    border: 1px solid #268018;
+    border-radius: 6px;
+    box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+    box-sizing: border-box;
+    color: white;
+    cursor: pointer;
+    display: inline-block;
+    font-family: nunito, roboto, proxima-nova, "proxima nova", sans-serif;
+    font-size: 16px;
+    font-weight: 800;
+    line-height: 16px;
+    min-height: 40px;
+    outline: 0;
+    padding: 12px 14px;
+    text-align: center;
+    text-rendering: geometricprecision;
+    text-transform: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: middle;
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .button-24:hover,
+  .button-24:active {
+    background-color: initial;
+    background-position: 0 0;
+    color: #268018;
+  }
+
+  .button-24:active {
+    opacity: .5;
+  }
+
+  @keyframes fade-in {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity:1;
+    }
+  }
+
+  .footer {
+    position: absolute;
+    top: 195%;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 5%;
+    background-color: #268018;
+    color: white;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+  }
+  .footer-text {
+    font-size: 16px;
+    font-weight: bold;
+  }
+</style>
 <head>
-  <title>Entrez ID de l'event</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-type" content="text/html; charset=UTF-8">
+  <title>ID</title>
   <style>
     body {
       font-family: "Lato", sans-serif;
     }
     .event-form {
-      width: 500px;
+      top: 40%;
+      left: 0px;
+      right: 0px;
       margin: 0 auto;
+      position: absolute;
       padding: 20px;
       border: 1px solid #ccc;
       border-radius: 4px;
-      box-sizing: border-box;
     }
     .event-form select, .event-form button[type=button] {
       width: 100%;
@@ -32,97 +224,152 @@
     .event-form button[type=button]:hover {
       background-color: #45a049;
     }
+    h2 {
+      text-align: center;
+    }
   </style>
 
+  <script src="includes/ipaddress.js"></script>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-  <script src="http://192.168.2.216:8180/js/keycloak.js"></script>
   <script>
-
-    function displayUserInfo() {
-      var token = keycloak.tokenParsed;
-      var name = token.name;
-
-      var userInfoList = document.createElement('ul');
-      var nameItem = document.createElement('li');
-      var rolesItem = document.createElement('li');
-
-      nameItem.textContent = 'Nom : \n' + name;
-      rolesItem.textContent =  'Role: Student';
-
-      userInfoList.appendChild(nameItem);
-      userInfoList.appendChild(rolesItem);
-
-      var userInfoDiv = document.getElementById('user-info');
-      userInfoDiv.innerHTML = ''; // Remove any existing content
-      userInfoDiv.appendChild(userInfoList);
-    }
-
-
-    var keycloak;
-    var accessToken
-
-    function initKeycloak() {
-      keycloak = new Keycloak({
-        "realm": "usager",
-        "auth-server-url": "http://192.168.2.216:8180/",
-        "ssl-required": "external",
-        "clientId": "frontend",
-        "public-client": true,
-        "confidential-port": 0
-      });
-      keycloak.init({ onLoad: 'login-required' })
-              .success(function (authenticated) {
-                if (authenticated) {
-                  accessToken = keycloak.token;
-                  alert('authenticated');
-                  displayUserInfo();
-                } else {
-                  alert('not authenticated');
-                }
-              })
-              .error(function () {
-                alert('failed to initialize');
-              });
-    }
-
-
+    const script = document.createElement('script');
+    script.src = `http://${ipAddress}:8180/js/keycloak.js`;
+    document.head.appendChild(script);
+  </script>
+  <script>
     function submitEventID() {
       var EvenementID = document.getElementById('EvenementID').value;
 
-      axios.get('http://192.168.2.216:8888/api/scanning?EvenementID=' + encodeURIComponent(EvenementID), {
+      axios.get(`http://${ipAddress}:8888/api/scanning?EvenementID=` + encodeURIComponent(EvenementID), {
         headers: {
           'Content-Type': 'application/json',
-
         }
       })
               .then(function(response) {
                 if (response.status === 201) {
-                  alert("Evenement trouvé !");
+                  alert("Événement trouvé !");
                   localStorage.setItem('EvenementID', EvenementID);
                   window.location.href = 'phone_scanner.html'; // Replace with the path to your main menu HTML file
                 } else {
-                  alert(response.status + ' evenement inexistant');
+                  alert(response.status + ' Événement inexistant');
                 }
               })
               .catch(function(error) {
-                alert("erreur");
-                alert(error);
                 console.error(error);
               });
     }
-
   </script>
 </head>
-
 <body onload="initKeycloak()">
-<h2>Entrer ID de l'evenement</h2>
-<div class="event-form">
+<div id="mySidenav" class="sidenav">
+  <b id="user-info" style="font-size: 30px"></b>
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  <a href="#" onclick="window.location.href='EventID_scanner_PHONE.html'">Scanner</a>
+  <a href="#" onclick="logout()">Déconnexion</a>
+</div>
+<span style="font-size: 120px; font-weight: bold; cursor: pointer; position: absolute; top: 0; left: 0.5%; align-self: center; color: #0B4F00;" onclick="openNav()">&#9776; UNIVENT</span>
+<div style="top: 8%" id="blackLine1">
+</div>
+
+<h2 style="position: absolute; left: 0; right: 0; font-size: 80px; top: 20%">Entrer l'ID de l'évènement</h2>
+<div class="event-form" style="width: 800px;">
   <form>
-
-    <input type="text" id="EvenementID" placeholder="Id de l'evenement">
-    <button type="button" onclick="submitEventID()">Suivant</button>
-
+    <input type="text" id="EvenementID" placeholder="ID de l'évènement" style="font-size: 57px">
+    <button type="button" onclick="submitEventID()" style="font-size: 50px">Suivant</button>
   </form>
 </div>
 </body>
+<script>
+  var keycloak;
+
+  function initKeycloak() {
+    keycloak = new Keycloak({
+      "realm": "usager",
+      "auth-server-url": `http://${ipAddress}:8180/`,
+      "ssl-required": "external",
+      "clientId": "frontend",
+      "public-client": true,
+      "confidential-port": 0
+    });
+
+    keycloak.init({ onLoad: 'login-required' }).then(function (authenticated) {
+      if (authenticated) {
+        var roles = keycloak.tokenParsed.realm_access.roles;
+
+        if (roles.includes('enseignant')) {
+          window.location.href = 'admin_event_creator.html';
+          return;
+        } else if (roles.includes('coordonnateur-pédagogique')) {
+          window.location.href = 'master_manager.html';
+          return;
+        }
+      } else {
+        alert('Not authenticated');
+      }
+    }).catch(function () {
+      alert('Failed to initialize');
+    }).finally(function () {
+      displayUserInfo();
+    });
+  }
+
+  function logout() {
+    let logoutURL = "http://"+ ipAddress +":8180/realms/usager/protocol/openid-connect/logout";
+    window.location.href = logoutURL;
+  }
+
+  function openNav() {
+    document.getElementById("mySidenav").style.width = "100%";
+    document.getElementById("user-info").classList.add("fade-in");
+  }
+
+  function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+    document.getElementById("user-info").classList.remove("fade-in");
+  }
+
+  function scrollToHeight() {
+    var scrollHeight = 1380; // Adjust the desired scroll height here
+    var duration = 1000; // Adjust the duration of the glide animation (in milliseconds)
+
+    var start = null;
+    var initialY = window.pageYOffset;
+
+    function step(timestamp) {
+      if (!start) start = timestamp;
+      var progress = timestamp - start;
+      var scrollY = initialY + easeInOutQuad(progress, 0, scrollHeight - initialY, duration);
+      window.scrollTo(0, scrollY);
+      if (progress < duration) {
+        window.requestAnimationFrame(step);
+      }
+    }
+
+    function easeInOutQuad(t, b, c, d) {
+      t /= d / 2;
+      if (t < 1) return c / 2 * t * t + b;
+      t--;
+      return -c / 2 * (t * (t - 2) - 1) + b;
+    }
+
+    window.requestAnimationFrame(step);
+  }
+
+  function displayUserInfo() {
+    var token = keycloak.tokenParsed;
+    var name = token.name;
+
+    var userInfoList = document.createElement('ul');
+    var nameItem = document.createElement('li');
+    var rolesItem = document.createElement('li');
+
+    nameItem.textContent = 'Connecté: \n' + name;
+
+    userInfoList.appendChild(nameItem);;
+
+    var userInfoDiv = document.getElementById('user-info');
+    userInfoDiv.innerHTML = '';
+    userInfoDiv.appendChild(userInfoList);
+  }
+</script>
 </html>
