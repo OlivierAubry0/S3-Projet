@@ -4,13 +4,8 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.io.PrintWriter;
-import java.io.FileOutputStream;
-import java.nio.charset.StandardCharsets;
 import java.sql.*;
 import java.util.Random;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -34,7 +29,7 @@ public class KeycloakTokenScript {
             Process process = Runtime.getRuntime().exec(command);
 
             // Read
-            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream(), "UTF-8"));
             String line;
             StringBuilder response = new StringBuilder();
 
@@ -58,7 +53,6 @@ public class KeycloakTokenScript {
     }
 
     public static void getUsers(String token) {
-        JSONArray usersData = new JSONArray();
         try {
             URL url = new URL("http://localhost:8180/admin/realms/usager/users");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -66,10 +60,8 @@ public class KeycloakTokenScript {
             conn.setRequestProperty("Authorization", "Bearer " + token);
             conn.setRequestProperty("Content-Type", "application/json");
             conn.setDoOutput(true);
-            String contentType = conn.getHeaderField("Content-Type");
-            System.out.println(contentType);
 
-            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
             StringBuilder output = new StringBuilder();
             String line;
             while ((line = br.readLine()) != null) {
@@ -85,41 +77,48 @@ public class KeycloakTokenScript {
                 String firstName = user.getString("firstName");
                 String lastName = user.getString("lastName");
                 String userId = user.getString("id");
+                System.out.println("  ");
 
-                JSONObject userJson = new JSONObject();
-                userJson.put("username", username);
-                userJson.put("email", email);
-                userJson.put("firstName", firstName);
-                userJson.put("lastName", lastName);
-
+                System.out.println("Username: " + user.getString("username"));
+                System.out.println("Email: " + user.getString("email"));
+                System.out.println("First Name: " + user.getString("firstName"));
+                System.out.println("Last Name: " + user.getString("lastName"));
+                // get the user's roles
                 JSONArray rolesArray = getUserRoles(token, userId);
-                userJson.put("realmRoles", new JSONArray(rolesArray.toString()));
-
+                String role = null;
+                for (int j = 0; j < rolesArray.length(); j++) {
+                    String roleCandidate = rolesArray.getJSONObject(j).getString("name");
+                    if (!"default-roles-master".equals(roleCandidate)) {
+                        role = roleCandidate;
+                        break;
+                    }
+                }
+                // get the user's groups
                 JSONArray groupsArray = getUserGroups(token, userId);
-                userJson.put("groups", new JSONArray(groupsArray.toString()));
+                String groupName = (groupsArray.length() > 0) ? groupsArray.getJSONObject(0).getString("name") : null;
 
-                usersData.put(userJson);
+                // insert the user into the usager table
+                insertUser(userId, lastName, firstName, role, groupName);
 
             }
-            System.out.println(usersData.toString(2));
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-
     public static JSONArray getUserRoles(String token, String userId) {
-        JSONArray rolesArray= new JSONArray();
+        JSONArray rolesArray= null;
         try {
             URL url = new URL("http://localhost:8180/admin/realms/usager/users/" + userId + "/role-mappings/realm");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("GET");
             conn.setRequestProperty("Authorization", "Bearer " + token);
             conn.setRequestProperty("Content-Type", "application/json");
-            conn.setRequestProperty("Accept-Charset", "UTF-8");
+
+            System.out.println("Response Content-Type: " + conn.getHeaderField("Content-Type"));  // add this line
 
 
-            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
             StringBuilder output = new StringBuilder();
             String line;
             while ((line = br.readLine()) != null) {
@@ -127,18 +126,20 @@ public class KeycloakTokenScript {
             }
             br.close();
 
-            JSONArray roles = new JSONArray(output.toString());
-            for (int i = 0; i < roles.length(); i++) {
-                JSONObject role = roles.getJSONObject(i);
-                rolesArray.put(role.getString("name"));  // add the role name to rolesArray
+            rolesArray = new JSONArray(output.toString());
+            System.out.println("Roles:");
+            for (int i = 0; i < rolesArray.length(); i++) {
+                JSONObject role = rolesArray.getJSONObject(i);
+                System.out.println("- " + role.getString("name"));
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return rolesArray;  // return the array of role names
+        return rolesArray;
     }
+
     public static JSONArray getUserGroups(String token, String userId) {
-        JSONArray groupsArray = new JSONArray();
+        JSONArray groupsArray= null;
         try {
             URL url = new URL("http://localhost:8180/admin/realms/usager/users/" + userId + "/groups");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -146,8 +147,7 @@ public class KeycloakTokenScript {
             conn.setRequestProperty("Authorization", "Bearer " + token);
             conn.setRequestProperty("Content-Type", "application/json");
 
-
-            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), StandardCharsets.UTF_8));
+            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
             StringBuilder output = new StringBuilder();
             String line;
             while ((line = br.readLine()) != null) {
@@ -155,15 +155,14 @@ public class KeycloakTokenScript {
             }
             br.close();
 
-            JSONArray groups = new JSONArray(output.toString());
-            for (int i = 0; i < groups.length(); i++) {
-                JSONObject group = groups.getJSONObject(i);
-                JSONObject groupJson = new JSONObject();
-                groupJson.put("name", group.getString("name"));
-
-                JSONArray subGroupsArray = getGroupSubGroups(token, group.getString("id"));
-                groupJson.put("subGroups", subGroupsArray);
-                groupsArray.put(groupJson);
+            groupsArray = new JSONArray(output.toString());
+            System.out.println("Groups:");
+            for (int i = 0; i < groupsArray.length(); i++) {
+                JSONObject group = groupsArray.getJSONObject(i);
+                System.out.println("- " + group.getString("name"));
+                String groupName = group.getString("name");
+                String groupId = group.getString("id");
+                getGroupSubGroups(token, groupId, groupName);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -171,8 +170,7 @@ public class KeycloakTokenScript {
         return groupsArray;
     }
 
-    public static JSONArray getGroupSubGroups(String token, String groupId) {
-        JSONArray subGroupsArray = new JSONArray();
+    public static void getGroupSubGroups(String token, String groupId, String groupName) {
         try {
             URL url = new URL("http://localhost:8180/admin/realms/usager/groups/" + groupId);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -180,7 +178,7 @@ public class KeycloakTokenScript {
             conn.setRequestProperty("Authorization", "Bearer " + token);
             conn.setRequestProperty("Content-Type", "application/json");
 
-            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), StandardCharsets.UTF_8));
+            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
             StringBuilder output = new StringBuilder();
             String line;
             while ((line = br.readLine()) != null) {
@@ -190,16 +188,173 @@ public class KeycloakTokenScript {
 
             JSONObject group = new JSONObject(output.toString());
             if (group.has("subGroups")) {
-                JSONArray subGroups = group.getJSONArray("subGroups");
-                for (int i = 0; i < subGroups.length(); i++) {
-                    JSONObject subGroup = subGroups.getJSONObject(i);
-                    subGroupsArray.put(subGroup.getString("name"));
+                JSONArray subGroupsArray = group.getJSONArray("subGroups");
+
+                // Only add to database if there's exactly one subgroup
+                if (subGroupsArray.length() == 1) {
+                    System.out.println("Sub-Group:");
+                    JSONObject subGroup = subGroupsArray.getJSONObject(0);
+                    String universityName = subGroup.getString("name");
+
+                    // Generate a random 4 digit university ID and faculty ID
+                    Random rand = new Random();
+                    String universityID = String.format("%04d", rand.nextInt(10000));
+                    String facultyID = String.format("%04d", rand.nextInt(10000));
+
+                    insertIntoDatabase(universityID, universityName);
+                    insertIntoFaculte(facultyID, groupName, universityName);
+                    System.out.println("- " + universityName);
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return subGroupsArray;
     }
+
+
+
+
+    public static void insertUser(String userId, String lastName, String firstName, String role, String groupName) {
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        try {
+            // Get a connection to the database
+            conn = DatabaseConnection.getConnection();
+
+            // First check if user already exists
+            String checkUserSql = "SELECT 1 FROM BASE_DE_DONNE.USAGER WHERE UsagerID = ?";
+            pstmt = conn.prepareStatement(checkUserSql);
+            pstmt.setString(1, userId);
+            rs = pstmt.executeQuery();
+
+            if(rs.next()) {
+                // User already exists, skip this user
+                System.out.println("User with id: " + userId + " already exists. Skipping...");
+                return;
+            }
+            pstmt.close(); // Close the previous PreparedStatement
+
+            // Get faculty id if it exists
+            String facultyId = null;
+            String sqlFaculty = "SELECT FaculteID FROM BASE_DE_DONNE.FACULTE WHERE Faculte_Nom = ?";
+            pstmt = conn.prepareStatement(sqlFaculty);
+            pstmt.setString(1, groupName);
+            rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                facultyId = rs.getString("FaculteID");
+            }
+            rs.close(); // Close the previous ResultSet
+            pstmt.close(); // Close the previous PreparedStatement
+
+            // Prepare the SQL statement
+            String sqlUser;
+            if (facultyId != null) {
+                sqlUser = "INSERT INTO BASE_DE_DONNE.USAGER (UsagerID, Usager_Nom, Usager_Prenom, Usager_Role, FaculteID) VALUES (?, ?, ?, ?, ?)";
+                pstmt = conn.prepareStatement(sqlUser);
+
+                // Set the values
+                pstmt.setString(1, userId);
+                pstmt.setString(2, lastName);
+                pstmt.setString(3, firstName);
+                pstmt.setString(4, role);
+                pstmt.setString(5, facultyId);
+            } else {
+                sqlUser = "INSERT INTO BASE_DE_DONNE.USAGER (UsagerID, Usager_Nom, Usager_Prenom, Usager_Role) VALUES (?, ?, ?, ?)";
+                pstmt = conn.prepareStatement(sqlUser);
+
+                // Set the values
+                pstmt.setString(1, userId);
+                pstmt.setString(2, lastName);
+                pstmt.setString(3, firstName);
+                pstmt.setString(4, role);
+            }
+
+            // Execute the statement
+            pstmt.executeUpdate();
+
+            System.out.println("User inserted successfully");
+
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+
+        } finally {
+            // Finally block to close resources
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            }
+        }
+    }
+
+
+
+    public static void insertIntoDatabase(String universityID, String universityName) {
+        try (Connection connection = DatabaseConnection.getConnection()) {
+            // Check if university is already in the database
+            String sqlCheck = "SELECT * FROM base_de_donne.UNIVERSITE WHERE Universite_Nom = ?";
+            PreparedStatement statementCheck = connection.prepareStatement(sqlCheck);
+            statementCheck.setString(1, universityName);
+            ResultSet resultSet = statementCheck.executeQuery();
+
+            // If university is not already in the database, add it
+            if (!resultSet.next()) {
+                String sqlInsert = "INSERT INTO base_de_donne.UNIVERSITE (UniversiteID, Universite_Nom) VALUES (?, ?)";
+                PreparedStatement statementInsert = connection.prepareStatement(sqlInsert);
+                statementInsert.setString(1, universityID);
+                statementInsert.setString(2, universityName);
+                statementInsert.executeUpdate();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void insertIntoFaculte(String facultyID, String facultyName, String universityName) {
+        try (Connection connection = DatabaseConnection.getConnection()) {
+            // Find the university ID in the UNIVERSITE table
+            String sqlSelect = "SELECT * FROM base_de_donne.UNIVERSITE WHERE Universite_Nom = ?";
+            PreparedStatement statementSelect = connection.prepareStatement(sqlSelect);
+            statementSelect.setString(1, universityName);
+            ResultSet resultSet = statementSelect.executeQuery();
+
+            // If university found, insert new faculty
+            if (resultSet.next()) {
+                String universityID = resultSet.getString("UniversiteID");
+
+                // Check if faculty with the same name and university ID is already in the database
+                String sqlCheck = "SELECT * FROM base_de_donne.FACULTE WHERE Faculte_Nom = ? AND UniversiteID = ?";
+                PreparedStatement statementCheck = connection.prepareStatement(sqlCheck);
+                statementCheck.setString(1, facultyName);
+                statementCheck.setString(2, universityID);
+                ResultSet resultSetCheck = statementCheck.executeQuery();
+
+                // If faculty is not already in the database, add it
+                if (!resultSetCheck.next()) {
+                    String sqlInsert = "INSERT INTO base_de_donne.FACULTE (FaculteID, Faculte_Nom, UniversiteID) VALUES (?, ?, ?)";
+                    PreparedStatement statementInsert = connection.prepareStatement(sqlInsert);
+                    statementInsert.setString(1, facultyID);
+                    statementInsert.setString(2, facultyName);
+                    statementInsert.setString(3, universityID);
+                    statementInsert.executeUpdate();
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
 
 }

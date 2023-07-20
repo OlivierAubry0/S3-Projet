@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 
 public class DatabaseConnection {
-    private static final String DATABASE_URL = "jdbc:postgresql://localhost:5432/postgres";
+    private static final String DATABASE_URL = "jdbc:postgresql://localhost:5432/postgres?characterEncoding=UTF-8";
     private static final String DATABASE_USER = "postgres";
     private static final String DATABASE_PASSWORD = "postgres";
 
@@ -18,4 +18,7 @@ public class DatabaseConnection {
         }
     }
 }
+
+
+
 
