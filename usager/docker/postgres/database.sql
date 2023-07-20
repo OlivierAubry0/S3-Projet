@@ -22,7 +22,7 @@ SET search_path = BASE_DE_DONNE, pg_catalog;
 
 CREATE TABLE UNIVERSITE
 (
-    UniversiteID INT NOT NULL PRIMARY KEY ,
+    UniversiteID VARCHAR(50) NOT NULL PRIMARY KEY ,
     Universite_Nom VARCHAR(50) NOT NULL
 
 );
@@ -55,7 +55,7 @@ CREATE TABLE FACULTE
 (
     FaculteID VARCHAR(50) NOT NULL,
     Faculte_Nom VARCHAR(100) NOT NULL,
-    UniversiteID INT NOT NULL,
+    UniversiteID VARCHAR(50) NOT NULL,
     PRIMARY KEY (FaculteID),
     FOREIGN KEY (UniversiteID) REFERENCES UNIVERSITE(UniversiteID)
 );
@@ -65,9 +65,10 @@ CREATE TABLE USAGER
     UsagerID VARCHAR(100) NOT NULL,
     Usager_Nom VARCHAR(100) NOT NULL,
     Usager_Prenom VARCHAR(100) NOT NULL,
-    Usager_Photo VARCHAR(100) NOT NULL,
-    CodeQR INT NOT NULL,
-    FaculteID VARCHAR(50) NOT NULL,
+    Usager_Photo VARCHAR(100),
+    Usager_Role VARCHAR(100),
+    CodeQR INT,
+    FaculteID VARCHAR(50) NULL,
     PRIMARY KEY (UsagerID),
     FOREIGN KEY (FaculteID) REFERENCES FACULTE(FaculteID)
 );
@@ -121,11 +122,18 @@ VALUES (1, 'Université de sd'),
        (2, 'Université sd');
 
 
+INSERT INTO FACULTE (FaculteID, Faculte_Nom, UniversiteID)
+VALUES (4028, 'Faculte de Genie', 1),
+       (4038, 'Ecole de gestion', 1),
+       (4039, 'Faculte de musique', 1),
+       (2222, 'Campus de genie', 2),
+       (2332, 'Campus de sante', 2);
 
 INSERT INTO USAGER (UsagerID, Usager_Nom, Usager_Prenom, Usager_Photo, CodeQR, FaculteID)
 VALUES ('admin1', 'nomadmin', 'prenomadmin', 'photoadmin', 0102, 4028),
        ('admin2', 'nomadmin2', 'prenomadmin2', 'photoadmin2', 0103, 4028),
        ('admin3', 'nomadmin3', 'prenomadmin3', 'photoadmin3', 0104, 4028);
+
 
 INSERT INTO ASSO_ETUDIANTE (Asso_EtudianteID, Asso_Etudiante_Nom, FaculteID, UsagerID)
 VALUES (1, 'Association 1', 4028, 'admin1'),

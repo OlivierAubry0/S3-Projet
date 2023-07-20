@@ -217,6 +217,8 @@
 
       prevScrollpos = currentScrollPos;
     };
+
+
   </script>
 </head>
 
@@ -227,6 +229,8 @@
   <b id="user-info"></b>
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
   <a href="#" onclick="window.location.href='eventID_before_scanning.html'">Scanner</a>
+  <a href="#" onclick="window.location.href='MyEvents.html'">Mes Évenements</a>
+  <a href="#" onclick="window.location.href='pc_HomePage.html'">Acceuil</a>
   <a href="#" onclick="logout()">Déconnexion</a>
 </div>
 
@@ -249,7 +253,7 @@
 <button class="large-button" style="top: 115%; left: 12%;"><span>Droit</span></button>
 <button class="large-button" style="top: 115%; left: 32%;"><span>École de gestion</span></button>
 <button class="large-button" style="top: 115%; left: 52%;"><span>Éducation</span></button>
-<button class="large-button" style="top: 115%; left: 72%;" onclick="window.location.href = 'eventsTable.html'"><span>Génie</span></button>
+<button class="large-button" style="top: 115%; left: 72%;" onclick=redirectToEventsTablePerFac('4028')><span>Génie</span></button>
 
 <button class="large-button" style="top: 155%; left: 12%;"><span>Lettres et <br> sciences humaines</span></button>
 <button class="large-button" style="top: 155%; left: 32%;"><span>Médecine et <br >sciences de la santé</span></button>
@@ -259,6 +263,12 @@
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="http://localhost:8180/js/keycloak.js"></script>
 <script>
+
+  function redirectToEventsTablePerFac(value) {
+    var url = 'eventsTablePerFac.html?FaculteID=' + encodeURIComponent(value);
+    window.location.href = url;
+  }
+
   var keycloak;
 
   function initKeycloak() {
