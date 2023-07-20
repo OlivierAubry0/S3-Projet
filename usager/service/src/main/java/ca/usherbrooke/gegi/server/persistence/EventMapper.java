@@ -32,7 +32,7 @@ public interface EventMapper {
     List<Event> getAllEvents();
 
     @Select("SELECT * FROM BASE_DE_DONNE.evenement_programmes_per_fac WHERE FaculteID = #{FaculteID}")
-    List<EventShowedToStudents> getEvents(@QueryParam("FaculteID") String FaculteID);
+    List<EventShowedToStudents> getEvents(@Param("FaculteID") String FaculteID);
 
     @Select("SELECT EvenementID, Evenement_Nom, Evenement_Date, Nom_Invite, Enregistration_Invite FROM BASE_DE_DONNE.MyEvents WHERE UsagerID = #{UsagerID}")
     List<CheckMyEvents> CheckMyEvents(@Param("UsagerID") String UsagerID);

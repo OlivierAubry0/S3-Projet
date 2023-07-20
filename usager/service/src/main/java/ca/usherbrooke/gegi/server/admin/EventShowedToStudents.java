@@ -28,7 +28,7 @@ public class EventShowedToStudents {
         this.Asso_Etudiante_Nom = AssoName;
         this.FaculteID = FacID;
         this.nombrePlaces = Integer.parseInt(nombrePlaces);
-        this.Allow_Guests = Allow_Guests;
+        this.Allow_Guests = allowGuests;
         this.description = description;
         this.filename = filename;
     }

@@ -203,6 +203,7 @@
                 .then(function(response) {
                     var events = response.data;
                     var eventsContainer = document.getElementById('events');
+                    eventsContainer.innerHTML = '';
                     var leftPosition = 205, topPosition=100; // Initial top position
                     var count = 0; // Initialize count
                     events.forEach(function(event) {
