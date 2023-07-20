@@ -22,7 +22,7 @@ SET search_path = BASE_DE_DONNE, pg_catalog;
 
 CREATE TABLE UNIVERSITE
 (
-    UniversiteID INT NOT NULL PRIMARY KEY ,
+    UniversiteID VARCHAR(50) NOT NULL PRIMARY KEY ,
     Universite_Nom VARCHAR(50) NOT NULL
 
 );
@@ -54,9 +54,9 @@ CREATE TABLE PRIVILEGE
 
 CREATE TABLE FACULTE
 (
-    FaculteID INT NOT NULL,
+    FaculteID VARCHAR(50) NOT NULL,
     Faculte_Nom VARCHAR(100) NOT NULL,
-    UniversiteID INT NOT NULL,
+    UniversiteID VARCHAR(50) NOT NULL,
     PRIMARY KEY (FaculteID),
     FOREIGN KEY (UniversiteID) REFERENCES UNIVERSITE(UniversiteID)
 );
@@ -65,7 +65,7 @@ CREATE TABLE ASSO_ETUDIANTE
 (
     Asso_EtudianteID VARCHAR(50) NOT NULL,
     Asso_Etudiante_Nom VARCHAR(100) NOT NULL,
-    FaculteID INT ,
+    FaculteID VARCHAR(50) ,
     PRIMARY KEY (Asso_EtudianteID),
     FOREIGN KEY (FaculteID) REFERENCES FACULTE(FaculteID)
 );
@@ -78,7 +78,7 @@ CREATE TABLE USAGER
     Usager_Photo VARCHAR(100),
     Usager_Role VARCHAR(100),
     CodeQR INT,
-    FaculteID INT NOT NULL,
+    FaculteID VARCHAR(50) NULL,
     PRIMARY KEY (UsagerID),
     FOREIGN KEY (FaculteID) REFERENCES FACULTE(FaculteID)
 );
@@ -107,7 +107,7 @@ CREATE TABLE RESERVATION
 CREATE TABLE FACULTE_POSSEDE_ASSO
 (
     Asso_EtudanteID VARCHAR(50) NOT NULL,
-    FaculteID INT NOT NULL,
+    FaculteID VARCHAR(50) NOT NULL,
     PRIMARY KEY (Asso_EtudanteID, FaculteID),
     FOREIGN KEY (Asso_EtudanteID) REFERENCES ASSO_ETUDIANTE(Asso_EtudianteID),
     FOREIGN KEY (FaculteID) REFERENCES FACULTE(FaculteID)
@@ -137,4 +137,7 @@ VALUES (1, 'Association 1', 1),
        (2, 'Association 2', 2),
        (3, 'Association 3', 3);
 
-delete from UNIVERSITE where Universite_Nom='Université de Sherbrooke'
+delete from UNIVERSITE where Universite_Nom='Université de Sherbrooke';
+
+SELECT pg_encoding_to_char(encoding) FROM pg_database WHERE datname = 'base_de_donne';
+
