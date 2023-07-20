@@ -3,6 +3,7 @@ package ca.usherbrooke.gegi.server.persistence;
 import ca.usherbrooke.gegi.server.admin.CheckIfUserReserved;
 import ca.usherbrooke.gegi.server.admin.CheckMyEvents;
 import ca.usherbrooke.gegi.server.admin.Event;
+import ca.usherbrooke.gegi.server.admin.EventShowedToStudents;
 import org.apache.ibatis.annotations.*;
 
 import javax.ws.rs.DELETE;
@@ -30,17 +31,11 @@ public interface EventMapper {
     })
     List<Event> getAllEvents();
 
-    @Select("SELECT * FROM BASE_DE_DONNE.evenement_programmes WHERE Asso_EtudianteID = #{Asso_EtudianteID}")
-    List<Event> getEvents(@QueryParam("Asso_EtudianteID") String Asso_EtudianteID);
+    @Select("SELECT * FROM BASE_DE_DONNE.evenement_programmes_per_fac WHERE FaculteID = #{FaculteID}")
+    List<EventShowedToStudents> getEvents(@QueryParam("FaculteID") String FaculteID);
 
     @Select("SELECT EvenementID, Evenement_Nom, Evenement_Date, Nom_Invite, Enregistration_Invite FROM BASE_DE_DONNE.MyEvents WHERE UsagerID = #{UsagerID}")
     List<CheckMyEvents> CheckMyEvents(@Param("UsagerID") String UsagerID);
-
-    @Select("SELECT * FROM evenement_programmes")
-    List<Event> getAllEventsProg();
-
-    @Select("SELECT * FROM evenement_programmes WHERE Asso_EtudianteID = 'AGEG'")
-    List<Event> getEventsGenie();
 
 }
 

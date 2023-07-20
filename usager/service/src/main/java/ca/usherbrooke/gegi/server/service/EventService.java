@@ -2,6 +2,7 @@ package ca.usherbrooke.gegi.server.service;
 
 import ca.usherbrooke.gegi.server.admin.CheckIfUserReserved;
 import ca.usherbrooke.gegi.server.admin.Event;
+import ca.usherbrooke.gegi.server.admin.EventShowedToStudents;
 import ca.usherbrooke.gegi.server.persistence.EventMapper;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
@@ -91,8 +92,8 @@ public class EventService {
     @POST
     @javax.ws.rs.Path("/events4genie")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getEvents(@QueryParam("Asso_EtudianteID") String Asso_EtudianteID) {
-        List<Event> Events = eventMapper.getEvents(Asso_EtudianteID);
+    public Response getEvents(@QueryParam("FaculteID") String FaculteID) {
+        List<EventShowedToStudents> Events = eventMapper.getEvents(FaculteID);
         return Response.status(Response.Status.CREATED).entity(Events).build();
     }
     @POST

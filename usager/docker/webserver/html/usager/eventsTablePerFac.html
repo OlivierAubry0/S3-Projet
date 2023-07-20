@@ -185,17 +185,17 @@
             document.getElementById("user-info").classList.remove("fade-in");
         }
 
-        var AssoID;
+        var FacID;
         function getValueFromURL() {
             var urlParams = new URLSearchParams(window.location.search);
-            AssoID = urlParams.get('AssoID');
+            FacID = urlParams.get('FaculteID');
         }
 
 
         function getEventsGenie() {
             getValueFromURL();
-            var Asso_EtudianteID = AssoID;
-            axios.post('http://localhost:8888/api/events/events4genie?Asso_EtudianteID=' + encodeURIComponent(Asso_EtudianteID), {
+            var FaculteID = FacID;
+            axios.post('http://localhost:8888/api/events/events4genie?FaculteID=' + encodeURIComponent(FaculteID), {
                 headers: {
                     'Content-Type': 'application/json'
                 }
