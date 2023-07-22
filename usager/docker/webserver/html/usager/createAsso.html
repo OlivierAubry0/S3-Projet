@@ -14,8 +14,10 @@
       border-radius: 4px;
       box-sizing: border-box;
     }
-    .asso-form select, .asso-form button[type=button] {
-      width: 100%;
+    .asso-form select,
+    .asso-form input[type="text"],
+    .asso-form button[type=button] {
+      width: 100%; /* Set all input elements to full width */
       padding: 12px 20px;
       margin: 8px 0;
       display: inline-block;
@@ -32,8 +34,49 @@
     .asso-form button[type=button]:hover {
       background-color: #45a049;
     }
-  </style>
 
+    .sidenav {
+      height: 100%;
+      width: 0;
+      position: fixed;
+      z-index: 3;
+      top: 0;
+      left: 0;
+      background-color: #0B4F00;
+      overflow-x: hidden;
+      transition: 0.5s;
+      padding-top: 60px;
+    }
+
+    .sidenav a {
+      padding: 8px 8px 8px 32px;
+      text-decoration: none;
+      font-size: 25px;
+      color: #5BFF5E;
+      display: block;
+      transition: 0.3s;
+      z-index: 3;
+    }
+
+    .sidenav a:hover {
+      color: #f1f1f1;
+      z-index: 3;
+    }
+
+    .sidenav .closebtn {
+      position: absolute;
+      top: 0;
+      right: 25px;
+      font-size: 36px;
+      margin-left: 50px;
+      z-index: 3;
+    }
+
+    @media screen and (max-height: 450px) {
+      .sidenav {padding-top: 15px;}
+      .sidenav a {font-size: 18px;}
+    }
+  </style>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script src="http://localhost:8180/js/keycloak.js"></script>
   <script>
@@ -85,13 +128,11 @@
     }
 
     function submitAsso() {
-      var Asso_EtudianteID = document.getElementById('Asso_EtudianteID').value;
       var Asso_Etudiante_Nom = document.getElementById('Asso_Etudiante_Nom').value;
       var FaculteID = document.getElementById('FaculteID').value;
       var UsagerID = document.getElementById('UsagerID').value;
 
       var asso = {
-        Asso_EtudianteID: Asso_EtudianteID,
         Asso_Etudiante_Nom: Asso_Etudiante_Nom,
         FaculteID: FaculteID,
         UsagerID: UsagerID
@@ -117,52 +158,44 @@
               });
     }
 
-    function submitImage() {
-      var imageInput = document.getElementById('imageInput');
-      var file = imageInput.files[0];
+    function logout() {
+      let logoutURL = "http://localhost:8180//realms/usager/protocol/openid-connect/logout"
+      window.location.href = logoutURL;
+    }
 
-      var reader = new FileReader();
+    function openNav() {
+      document.getElementById("mySidenav").style.width = "250px";
+      document.getElementById("user-info").classList.add("fade-in");
+    }
 
-      reader.onload = function(asso) {
-        var arrayBuffer = asso.target.result;
-
-        var blob = new Blob([arrayBuffer], { type: file.type });
-
-        var formData = new FormData();
-        formData.append('image', blob);
-
-        axios.post('http://localhost:8888/api/Asso/uploadImage', formData)
-                .then(function(response) {
-                  console.log('Image uploaded successfully.');
-                })
-                .catch(function(error) {
-                  console.error('Error uploading image:', error);
-                });
-      };
-
-      reader.readAsArrayBuffer(file);
+    function closeNav() {
+      document.getElementById("mySidenav").style.width = "0";
+      document.getElementById("user-info").classList.remove("fade-in");
     }
 
   </script>
 </head>
-
 <body onload="initKeycloak()">
+
+<div id="mySidenav" class="sidenav">
+  <b id="user-info"></b>
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  <a href="#" onclick="window.location.href='camera.html'">Scanner</a>
+  <a href="#">About</a>
+  <a href="#">Services</a>
+  <a href="#">Clients</a>
+  <a href="#">Contact</a>
+  <a href="#" onclick="logout()">Déconnexion</a>
+</div>
+
+<span style="font-size: 40px; font-weight: bold; cursor: pointer; position: absolute; top: 0; left: 0.5%; color: #FFFFFF;" onclick="openNav()">&#9776; UNIVENT</span>
+
 <h2>Create New Asso</h2>
 <div class="asso-form">
   <form>
-    <label for="Asso_EtudianteID">AssoEtudiante Id:</label><br>
-    <select id="Asso_EtudianteID" name="Asso_EtudianteID">
-      <option value="1001">1001</option>
-      <option value="1002">1002</option>
-      <option value="1003">1003</option>
-    </select><br>
 
     <label for="Asso_Etudiante_Nom">AssoEtudiante Name:</label><br>
-    <select id="Asso_Etudiante_Nom" name="Asso_Etudiante_Nom">
-      <option value="Ageg">Ageg</option>
-      <option value="Amus">Amus</option>
-      <option value="Flsh">Flsh</option>
-    </select><br>
+    <input type="text" id="Asso_Etudiante_Nom" name="Asso_Etudiante_Nom"><br>
 
     <label for="FaculteID">AssoEtudiante Fac:</label><br>
     <select id="FaculteID" name="FaculteID">
@@ -180,8 +213,6 @@
 
     <button type="button" onclick="submitAsso()">Submit</button>
 
-    <input type="file" id="imageInput" accept="image/*">
-    <button type="button" onclick="submitImage()">Submit Image</button>
   </form>
 </div>
 </body>

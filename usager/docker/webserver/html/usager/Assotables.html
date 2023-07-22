@@ -112,14 +112,13 @@
       });
 
       popUpContent.innerHTML =
-              `<p><strong>ID:</strong> ${asso.Asso_EtudianteID}</p>
+              `
          <p><strong>Nom:</strong> ${asso.Asso_Etudiante_Nom}</p>
          <p><strong>Faculte:</strong> ${asso.Faculte_Nom}</p>
          <p><strong>Administrateur:</strong> ${asso.UsagerID}</p>`;
 
       // Stocker les valeurs des champs dans la variable globale currentAsso
       currentAsso = {
-        Asso_EtudianteID: asso.Asso_EtudianteID,
         Asso_Etudiante_Nom: asso.Asso_Etudiante_Nom,
         FaculteID: asso.FaculteID,
         UsagerID: asso.UsagerID
@@ -159,10 +158,10 @@
                   var assoButton = document.createElement('button');
                   assoButton.className = 'large-button';
                   assoButton.innerHTML =
-                          `<p><strong>ID:</strong> ${asso.Asso_EtudianteID}</p>
-               <p><strong>Nom:</strong> ${asso.Asso_Etudiante_Nom}</p>
-               <p><strong>Faculte:</strong> ${asso.Faculte_Nom}</p>
-               <p><strong>Administrateur:</strong> ${asso.UsagerID}</p>`;
+                          `
+          <p><strong>Nom:</strong> ${asso.Asso_Etudiante_Nom}</p>
+          <p><strong>Faculte:</strong> ${asso.Faculte_Nom}</p>
+          <p><strong>Administrateur:</strong> ${asso.UsagerID}</p>`;
 
                   assoButton.addEventListener('click', function() {
                     showAssoDetails(asso);
@@ -193,45 +192,6 @@
         }
       }
     }
-/*
-    function saveAsso(asso) {
-      var editNom = document.getElementById('editNom').value;
-      var editFaculte = document.getElementById('editFaculte').value;
-      var editAdmin = document.getElementById('editAdmin').value;
-
-      // Mettre à jour les propriétés de l'association
-      asso.Asso_Etudiante_Nom = editNom;
-      asso.FaculteID = editFaculte;
-      asso.UsagerID = editAdmin;
-
-      // Effectuer la requête PUT pour mettre à jour l'association
-      axios.post('http://localhost:8888/api/Asso/Asso_EtudianteID?Asso_EtudianteID=' + encodeURIComponent(asso.Asso_EtudianteID), asso, {
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      })
-
-              .then(function(response) {
-                if (response.status === 200) {
-                  alert("L'association a été modifiée avec succès.");
-
-                  // Fermer la fenêtre de modification
-                  var popUpContainer = document.getElementById('popUpContainer');
-                  popUpContainer.style.display = 'none';
-                  window.location.href = 'Assotables.html';
-
-                } else {
-                  console.log("Une erreur s'est produite lors de la modification de l'association." + response.status);
-                }
-              })
-              .catch(function(error) {
-                console.error(error);
-                console.log("Une erreur s'est produite lors de la modification de l'association. catch");
-              });
-
-    }
-
-*/
 
     function saveAsso(asso) {
       var editNom = document.getElementById('editNom').value;
