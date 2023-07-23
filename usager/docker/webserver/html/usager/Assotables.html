@@ -72,15 +72,18 @@
     }
 
     .filter-container {
-      margin-bottom: 10px;
+      text-align: center;
+      margin-top: 20px; /* Add some space between the heading and filtering elements */
+      margin-bottom: 20px; /* Add some space between filtering elements and associations */
     }
 
     .filter-container input[type="text"] {
-      padding: 15px;
+      padding: 10px;
+      margin-right: 10px; /* Add some space between input and button */
     }
 
     .filter-container button[type="button"] {
-      padding: 5px 10px;
+      padding: 8px 16px;
       background-color: #4CAF50;
       color: white;
       border: none;
@@ -91,9 +94,54 @@
       background-color: #45a049;
     }
 
-    .edit-input {
+    h2 {
+      text-align: center;
+    }
+
+    .sidenav {
+      height: 100%;
+      width: 0;
+      position: fixed;
+      z-index: 3;
+      top: 0;
+      left: 0;
+      background-color: #0B4F00;
+      overflow-x: hidden;
+      transition: 0.5s;
+      padding-top: 60px;
+    }
+
+    .sidenav a {
+      padding: 8px 8px 8px 32px;
+      text-decoration: none;
+      font-size: 25px;
+      color: #5BFF5E;
       display: block;
-      margin-bottom: 10px;
+      transition: 0.3s;
+      z-index: 3;
+    }
+
+    .sidenav a:hover {
+      color: #f1f1f1;
+      z-index: 3;
+    }
+
+    .sidenav .closebtn {
+      position: absolute;
+      top: 0;
+      right: 25px;
+      font-size: 36px;
+      margin-left: 50px;
+      z-index: 3;
+    }
+
+    @media screen and (max-height: 450px) {
+      .sidenav {padding-top: 15px;}
+      .sidenav a {font-size: 18px;}
+    }
+
+    #openNavSpan {
+      color: #0B4F00;
     }
   </style>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
@@ -353,10 +401,35 @@
       }
     }
 
+    function logout() {
+      let logoutURL = "http://localhost:8180//realms/usager/protocol/openid-connect/logout"
+      window.location.href = logoutURL;
+    }
+
+    function openNav() {
+      document.getElementById("mySidenav").style.width = "250px";
+      document.getElementById("user-info").classList.add("fade-in");
+    }
+
+    function closeNav() {
+      document.getElementById("mySidenav").style.width = "0";
+      document.getElementById("user-info").classList.remove("fade-in");
+    }
+
   </script>
 </head>
 <body onload="getAsso();">
+<div id="mySidenav" class="sidenav">
+  <b id="user-info"></b>
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  <a href="master_manager.html">Accueil</a>
+  <a href="#" onclick="logout()">Déconnexion</a>
+</div>
+
+<!-- Update the ID of the span element to target it in the CSS -->
+<span id="openNavSpan" style="font-size: 40px; font-weight: bold; cursor: pointer; position: absolute; top: 0; left: 0.5%;" onclick="openNav()">&#9776; UNIVENT</span>
 <h2>View All Asso</h2>
+<!-- Move the filter-container below the h2 element to place it after the heading -->
 <div class="filter-container">
   <input type="text" id="assoFilter" placeholder="Filter by name">
   <button type="button" onclick="filterAsso()">Filter</button>

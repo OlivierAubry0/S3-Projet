@@ -92,53 +92,6 @@
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script src="http://localhost:8180/js/keycloak.js"></script>
   <script>
-
-    function displayUserInfo() {
-      var token = keycloak.tokenParsed;
-      var name = token.name;
-
-      var userInfoList = document.createElement('ul');
-      var nameItem = document.createElement('li');
-      var rolesItem = document.createElement('li');
-
-      nameItem.textContent = 'Nom : \n' + name;
-      rolesItem.textContent = 'Role: master';
-
-      userInfoList.appendChild(nameItem);
-      userInfoList.appendChild(rolesItem);
-
-      var userInfoDiv = document.getElementById('user-info');
-      userInfoDiv.innerHTML = ''; // Remove any existing content
-      userInfoDiv.appendChild(userInfoList);
-    }
-
-
-    var keycloak;
-
-    function initKeycloak() {
-      keycloak = new Keycloak({
-        "realm": "usager",
-        "auth-server-url": "http://localhost:8180/",
-        "ssl-required": "external",
-        "clientId": "frontend",
-        "public-client": true,
-        "confidential-port": 0
-      });
-      keycloak.init({ onLoad: 'login-required' })
-              .success(function (authenticated) {
-                if (authenticated) {
-                  alert('authenticated');
-                  displayUserInfo();
-                } else {
-                  alert('not authenticated');
-                }
-              })
-              .error(function () {
-                alert('failed to initialize');
-              });
-
-    }
-
     function submitAsso() {
       var Asso_Etudiante_Nom = document.getElementById('Asso_Etudiante_Nom').value;
       var FaculteID = document.getElementById('FaculteID').value;
@@ -187,9 +140,8 @@
 
   </script>
 </head>
-<body onload="initKeycloak()">
+<body>
 <div id="mySidenav" class="sidenav">
-  <b id="user-info"></b>
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
   <a href="master_manager.html">Accueil</a>
   <a href="#" onclick="logout()">Déconnexion</a>
