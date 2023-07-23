@@ -4,7 +4,9 @@
   <title>Create New Asso</title>
   <style>
     body {
+      background-color: white;
       font-family: "Lato", sans-serif;
+      color: grey;
     }
     .asso-form {
       width: 500px;
@@ -17,7 +19,7 @@
     .asso-form select,
     .asso-form input[type="text"],
     .asso-form button[type=button] {
-      width: 100%; /* Set all input elements to full width */
+      width: 100%;
       padding: 12px 20px;
       margin: 8px 0;
       display: inline-block;
@@ -75,6 +77,16 @@
     @media screen and (max-height: 450px) {
       .sidenav {padding-top: 15px;}
       .sidenav a {font-size: 18px;}
+    }
+
+    /* Center the title */
+    h2 {
+      text-align: center;
+    }
+
+    /* Change the color of the hamburger icon and 'UNIVENT' text to green */
+    #openNavSpan {
+      color: #0B4F00;
     }
   </style>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
@@ -176,19 +188,15 @@
   </script>
 </head>
 <body onload="initKeycloak()">
-
 <div id="mySidenav" class="sidenav">
   <b id="user-info"></b>
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-  <a href="#" onclick="window.location.href='camera.html'">Scanner</a>
-  <a href="#">About</a>
-  <a href="#">Services</a>
-  <a href="#">Clients</a>
-  <a href="#">Contact</a>
+  <a href="master_manager.html">Accueil</a>
   <a href="#" onclick="logout()">Déconnexion</a>
 </div>
 
-<span style="font-size: 40px; font-weight: bold; cursor: pointer; position: absolute; top: 0; left: 0.5%; color: #FFFFFF;" onclick="openNav()">&#9776; UNIVENT</span>
+<!-- Update the ID of the span element to target it in the CSS -->
+<span id="openNavSpan" style="font-size: 40px; font-weight: bold; cursor: pointer; position: absolute; top: 0; left: 0.5%;" onclick="openNav()">&#9776; UNIVENT</span>
 
 <h2>Create New Asso</h2>
 <div class="asso-form">
