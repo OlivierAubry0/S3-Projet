@@ -218,7 +218,6 @@
         keycloak.init({ onLoad: 'login-required' }).then(function (authenticated) {
             if (authenticated) {
                 var roles = keycloak.tokenParsed.realm_access.roles;
-                checkUserExists();
                 if (roles.includes('enseignant')) {
                     window.location.href = 'admin_event_creator.html';
                     return;
@@ -236,17 +235,6 @@
         });
     }
 
-    function checkUserExists() {
-        axios.get(`http://localhost:8888/api/users/check/${keycloak.tokenParsed.preferred_username}`, {
-            headers: {
-                'Authorization': 'Bearer ' + keycloak.token
-            }
-        }).then(function (response) {
-            displayUserInfo();
-        }).catch(function (error) {
-            window.location.href = 'registration.html';
-        });
-    }
 
     function logout() {
         let logoutURL = "http://localhost:8180/realms/usager/protocol/openid-connect/logout";
