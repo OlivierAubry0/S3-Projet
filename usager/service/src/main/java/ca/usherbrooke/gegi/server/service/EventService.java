@@ -1,3 +1,4 @@
+//EventService
 package ca.usherbrooke.gegi.server.service;
 
 import ca.usherbrooke.gegi.server.admin.CheckIfUserReserved;
@@ -101,7 +102,7 @@ public class EventService {
     @Produces(MediaType.APPLICATION_JSON)
     public Response CheckMyEvents(@QueryParam("UsagerID") String UsagerID) {
         List<CheckMyEvents> MyEvents = eventMapper.CheckMyEvents(UsagerID);
-            return Response.status(Response.Status.CREATED).entity(MyEvents).build();
+        return Response.status(Response.Status.CREATED).entity(MyEvents).build();
     }
 }
 
