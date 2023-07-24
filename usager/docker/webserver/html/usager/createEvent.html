@@ -6,88 +6,6 @@
 <html>
 <head>
   <title>Create New Event</title>
-  <style>
-    body {
-      background-color: #268018 ;
-      font-family: "Lato", sans-serif;
-      align-items: center;
-      justify-content: flex-end;
-      color: white;
-
-    }
-    .event-form {
-      position: absolute;
-      padding: 20px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      box-sizing: border-box;
-      top: 19%;
-      width: 90%;
-      margin: 1%;
-    }
-    .event-form select, .event-form button[type=button] {
-      width: 100%;
-      padding: 12px 20px;
-      margin: 8px 0;
-      display: inline-block;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      box-sizing: border-box;
-    }
-    .event-form button[type=button] {
-      background-color: #4CAF50;
-      color: white;
-      border: none;
-      cursor: pointer;
-    }
-    .event-form button[type=button]:hover {
-      background-color: #45a049;
-    }
-
-    .sidenav {
-      height: 100%;
-      width: 0;
-      position: fixed;
-      z-index: 3;
-      top: 0;
-      left: 0;
-      background-color: #0B4F00;
-      overflow-x: hidden;
-      transition: 0.5s;
-      padding-top: 60px;
-    }
-
-    .sidenav a {
-      padding: 8px 8px 8px 32px;
-      text-decoration: none;
-      font-size: 25px;
-      color: #5BFF5E;
-      display: block;
-      transition: 0.3s;
-      z-index: 3;
-    }
-
-    .sidenav a:hover {
-      color: #f1f1f1;
-      z-index: 3;
-    }
-
-    .sidenav .closebtn {
-      position: absolute;
-      top: 0;
-      right: 25px;
-      font-size: 36px;
-      margin-left: 50px;
-      z-index: 3;
-    }
-
-    @media screen and (max-height: 450px) {
-      .sidenav {padding-top: 15px;}
-      .sidenav a {font-size: 18px;}
-    }
-
-
-  </style>
 
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script src="http://localhost:8180/js/keycloak.js"></script>
@@ -230,6 +148,89 @@
     document.getElementById('imageInput').addEventListener('change', updateEventPreview);
 
   </script>
+
+  <style>
+    body {
+      background-color: #268018 ;
+      font-family: "Lato", sans-serif;
+      align-items: center;
+      justify-content: flex-end;
+      color: white;
+
+    }
+    .event-form {
+      position: absolute;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+      top: 19%;
+      width: 90%;
+      margin: 1%;
+    }
+    .event-form select, .event-form button[type=button] {
+      width: 100%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+    .event-form button[type=button] {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    .event-form button[type=button]:hover {
+      background-color: #45a049;
+    }
+
+    .sidenav {
+      height: 100%;
+      width: 0;
+      position: fixed;
+      z-index: 3;
+      top: 0;
+      left: 0;
+      background-color: #0B4F00;
+      overflow-x: hidden;
+      transition: 0.5s;
+      padding-top: 60px;
+    }
+
+    .sidenav a {
+      padding: 8px 8px 8px 32px;
+      text-decoration: none;
+      font-size: 25px;
+      color: #5BFF5E;
+      display: block;
+      transition: 0.3s;
+      z-index: 3;
+    }
+
+    .sidenav a:hover {
+      color: #f1f1f1;
+      z-index: 3;
+    }
+
+    .sidenav .closebtn {
+      position: absolute;
+      top: 0;
+      right: 25px;
+      font-size: 36px;
+      margin-left: 50px;
+      z-index: 3;
+    }
+
+    @media screen and (max-height: 450px) {
+      .sidenav {padding-top: 15px;}
+      .sidenav a {font-size: 18px;}
+    }
+
+
+  </style>
 </head>
 
 <body onload="initKeycloak();">

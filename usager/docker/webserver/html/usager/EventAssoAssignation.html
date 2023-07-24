@@ -2,6 +2,79 @@
 <html lang="">
 <head>
   <title>View All Asso</title>
+
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="http://localhost:8180/js/keycloak.js"></script>
+  <script>
+
+    var currentAsso = null; // Variable globale pour stocker l'association sélectionnée
+
+    function showAssoDetails(asso) {
+      var popUpContainer = document.getElementById('popUpContainer');
+      var popUpContent = document.getElementById('popUpContent');
+      var closeButton = document.createElement('button');
+      closeButton.textContent = 'Retour';
+      closeButton.addEventListener('click', function() {
+        popUpContainer.style.display = 'none';
+      });
+
+      popUpContent.innerHTML =
+              `</p>
+         <p><strong>Nom:</strong> ${asso.Asso_Etudiante_Nom}</p>
+         <p><strong>Faculte:</strong> ${asso.Faculte_Nom}</p>
+         `;
+
+      // Stocker les valeurs des champs dans la variable globale currentAsso
+      currentAsso = {
+        Asso_EtudianteID: asso.Asso_EtudianteID,
+        Asso_Etudiante_Nom: asso.Asso_Etudiante_Nom,
+        FaculteID: asso.FaculteID,
+        UsagerID: asso.UsagerID
+      };
+
+      popUpContent.appendChild(editButton);
+      popUpContent.appendChild(deleteButton);
+      popUpContent.appendChild(closeButton);
+      popUpContainer.style.display = 'flex';
+      setTimeout(function() {
+        popUpContent.classList.add('show');
+      }, 100);
+    }
+
+    function getAsso() {
+      axios.get('http://localhost:8888/api/Asso/getAsso', {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+              .then(function(response) {
+                var assos = response.data;
+                var assoContainer = document.getElementById('associations');
+                assos.forEach(function(asso) {
+                  var assoButton = document.createElement('button');
+                  localStorage.setItem('Asso_EtudianteID', asso.Asso_EtudianteID);
+                  assoButton.className = 'large-button';
+                  assoButton.innerHTML =
+                          `
+               <p><strong>Nom:</strong> ${asso.Asso_Etudiante_Nom}</p>
+               <p><strong>Faculte:</strong> ${asso.Faculte_Nom}</p>
+               `;
+
+                  assoButton.addEventListener('click', function() {
+                    showAssoDetails(asso);
+                  });
+
+                  assoContainer.appendChild(assoButton);
+                });
+              })
+              .catch(function(error) {
+                console.error(error);
+              });
+    }
+
+
+  </script>
+
   <style>
     .large-button {
       background-color: #f1f1f1;
@@ -96,77 +169,6 @@
       margin-bottom: 10px;
     }
   </style>
-  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-  <script src="http://localhost:8180/js/keycloak.js"></script>
-  <script>
-
-    var currentAsso = null; // Variable globale pour stocker l'association sélectionnée
-
-    function showAssoDetails(asso) {
-      var popUpContainer = document.getElementById('popUpContainer');
-      var popUpContent = document.getElementById('popUpContent');
-      var closeButton = document.createElement('button');
-      closeButton.textContent = 'Retour';
-      closeButton.addEventListener('click', function() {
-        popUpContainer.style.display = 'none';
-      });
-
-      popUpContent.innerHTML =
-              `</p>
-         <p><strong>Nom:</strong> ${asso.Asso_Etudiante_Nom}</p>
-         <p><strong>Faculte:</strong> ${asso.Faculte_Nom}</p>
-         `;
-
-      // Stocker les valeurs des champs dans la variable globale currentAsso
-      currentAsso = {
-        Asso_EtudianteID: asso.Asso_EtudianteID,
-        Asso_Etudiante_Nom: asso.Asso_Etudiante_Nom,
-        FaculteID: asso.FaculteID,
-        UsagerID: asso.UsagerID
-      };
-
-      popUpContent.appendChild(editButton);
-      popUpContent.appendChild(deleteButton);
-      popUpContent.appendChild(closeButton);
-      popUpContainer.style.display = 'flex';
-      setTimeout(function() {
-        popUpContent.classList.add('show');
-      }, 100);
-    }
-
-    function getAsso() {
-      axios.get('http://localhost:8888/api/Asso/getAsso', {
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      })
-              .then(function(response) {
-                var assos = response.data;
-                var assoContainer = document.getElementById('associations');
-                assos.forEach(function(asso) {
-                  var assoButton = document.createElement('button');
-                  localStorage.setItem('Asso_EtudianteID', asso.Asso_EtudianteID);
-                  assoButton.className = 'large-button';
-                  assoButton.innerHTML =
-                          `
-               <p><strong>Nom:</strong> ${asso.Asso_Etudiante_Nom}</p>
-               <p><strong>Faculte:</strong> ${asso.Faculte_Nom}</p>
-               `;
-
-                  assoButton.addEventListener('click', function() {
-                    showAssoDetails(asso);
-                  });
-
-                  assoContainer.appendChild(assoButton);
-                });
-              })
-              .catch(function(error) {
-                console.error(error);
-              });
-    }
-
-
-  </script>
 </head>
 <body onload="getAsso();">
 <h2>View All Asso</h2>

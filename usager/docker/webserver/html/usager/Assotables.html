@@ -2,100 +2,6 @@
 <html lang="">
 <head>
   <title>View All Asso</title>
-  <style>
-    .large-button {
-      background-color: #f1f1f1;
-      color: #268018;
-      border: none;
-      text-align: left;
-      text-decoration: none;
-      cursor: pointer;
-      border-radius: 10px;
-      padding: 10px;
-      margin-bottom: 10px;
-      box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
-    }
-
-    .large-button p {
-      margin: 0;
-      font-size: 16px;
-    }
-
-    .large-button:hover {
-      background-color: #d4d4d4;
-    }
-
-    .pop-up-container {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.8);
-      z-index: 9999;
-    }
-
-    .pop-up-content {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%) scale(0.8);
-      background-color: #f1f1f1;
-      color: #268018;
-      padding: 100px;
-      border-radius: 10px;
-      transition: transform 0.3s ease;
-    }
-
-    .pop-up-content.show {
-      transform: translate(-50%, -50%) scale(1);
-    }
-
-    .pop-up-content p {
-      margin: 10px 0;
-      font-size: 18px;
-    }
-
-    .pop-up-content button {
-      margin-top: 20px;
-      padding: 8px 16px;
-      background-color: #4CAF50;
-      color: white;
-      border: none;
-      cursor: pointer;
-      font-size: 16px;
-    }
-
-    .filter-container {
-      margin-bottom: 10px;
-    }
-
-    .filter-container input[type="text"] {
-      padding: 15px;
-    }
-
-    .filter-container button[type="button"] {
-      padding: 5px 10px;
-      background-color: #4CAF50;
-      color: white;
-      border: none;
-      cursor: pointer;
-    }
-
-    .filter-container button[type="button"]:hover {
-      background-color: #45a049;
-    }
-
-    .edit-input {
-      display: block;
-      margin-bottom: 10px;
-    }
-  </style>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script src="http://localhost:8180/js/keycloak.js"></script>
   <script>
@@ -394,6 +300,100 @@
     }
 
   </script>
+  <style>
+    .large-button {
+      background-color: #f1f1f1;
+      color: #268018;
+      border: none;
+      text-align: left;
+      text-decoration: none;
+      cursor: pointer;
+      border-radius: 10px;
+      padding: 10px;
+      margin-bottom: 10px;
+      box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    }
+
+    .large-button p {
+      margin: 0;
+      font-size: 16px;
+    }
+
+    .large-button:hover {
+      background-color: #d4d4d4;
+    }
+
+    .pop-up-container {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      z-index: 9999;
+    }
+
+    .pop-up-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0.8);
+      background-color: #f1f1f1;
+      color: #268018;
+      padding: 100px;
+      border-radius: 10px;
+      transition: transform 0.3s ease;
+    }
+
+    .pop-up-content.show {
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    .pop-up-content p {
+      margin: 10px 0;
+      font-size: 18px;
+    }
+
+    .pop-up-content button {
+      margin-top: 20px;
+      padding: 8px 16px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .filter-container {
+      margin-bottom: 10px;
+    }
+
+    .filter-container input[type="text"] {
+      padding: 15px;
+    }
+
+    .filter-container button[type="button"] {
+      padding: 5px 10px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    .filter-container button[type="button"]:hover {
+      background-color: #45a049;
+    }
+
+    .edit-input {
+      display: block;
+      margin-bottom: 10px;
+    }
+  </style>
 </head>
 <body onload="getAsso();">
 <h2>View All Asso</h2>

@@ -2,6 +2,128 @@
 <html>
 <head>
     <title>View All Engineering Events</title>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+
+        function displayUserInfo() {
+            var token = keycloak.tokenParsed;
+            var name = token.name;
+
+            var userInfoList = document.createElement('ul');
+            var nameItem = document.createElement('li');
+            var rolesItem = document.createElement('li');
+
+            nameItem.textContent = 'Nom : \n' + name;
+            rolesItem.textContent =  'Role: Etudiant';
+
+            userInfoList.appendChild(nameItem);
+            userInfoList.appendChild(rolesItem);
+
+            var userInfoDiv = document.getElementById('user-info');
+            userInfoDiv.innerHTML = ''; // Supprime tout contenu existant
+            userInfoDiv.appendChild(userInfoList);
+        }
+
+        var keycloak;
+
+        function initKeycloak() {
+
+            keycloak = new Keycloak({
+                "realm": "usager",
+                "auth-server-url": "http://localhost:8180/",
+                "ssl-required": "external",
+                "clientId": "frontend",
+                "public-client": true,
+                "confidential-port": 0
+            });
+            keycloak.init({ onLoad: 'login-required' })
+                .success(function (authenticated) {
+                    if (authenticated) {
+                        getUserInfo();
+                        displayUserInfo();
+                    } else {
+                        alert('not authenticated');
+                    }
+                })
+                .error(function () {
+                    alert('failed to initialize');
+                });
+        }
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "250px";
+            document.getElementById("user-info").classList.add("fade-in");
+        }
+
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+            document.getElementById("user-info").classList.remove("fade-in");
+        }
+
+        var FacID;
+        function getValueFromURL() {
+            var urlParams = new URLSearchParams(window.location.search);
+            FacID = urlParams.get('FaculteID');
+        }
+
+
+        function getEventsGenie() {
+            getValueFromURL();
+            var FaculteID = FacID;
+            axios.post('http://localhost:8888/api/events/events4genie?FaculteID=' + encodeURIComponent(FaculteID), {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+                .then(function(response) {
+                    var events = response.data;
+                    var eventsContainer = document.getElementById('events');
+                    eventsContainer.innerHTML = '';
+                    var leftPosition = 205, topPosition=100; // Initial top position
+                    var count = 0; // Initialize count
+                    events.forEach(function(event) {
+                        var eventButton = document.createElement('button');
+                        eventButton.className = 'event';
+                        eventButton.style.position = 'absolute';
+                        eventButton.style.top = topPosition + 'px';// Set the top position dynamically
+                        eventButton.style.left = leftPosition + 'px'; // Set the left position dynamically
+                        eventButton.style.size = 'absolute';
+                        eventButton.style.width = 200 + 'px';
+                        eventButton.style.height = 300 + 'px';
+                        eventButton.addEventListener('click', function() {
+                            // Code à exécuter lorsque le bouton est cliqué
+                            //alert('Événement ID: ' + event.evenementID);
+                            localStorage.setItem('EvenementID', event.evenementID);
+                            window.location.href = 'getTicket.html';
+                        });
+                        eventButton.innerHTML =
+                            `<p>ID: ${event.evenementID}</p>
+                            <p>Name: ${event.evenementNom}</p>
+                            <p>Date: ${event.evenementDate}</p>
+                            <p>Start: ${event.evenementDebut}</p>
+                            <p>End: ${event.evenementFin}</p>
+                            <p>Association ID: ${event.assoEtudianteID}</p>
+                            <p>Number of Places: ${event.nombrePlaces}</p>
+                            <p>Allow Guests: ${event.allowGuests}</p>
+                            <p>Description: ${event.description}</p>
+                    <img id="preview-image" src="http://localhost:8080/${event.filename}" alt="Event Image"
+                         style=" height: 300px; right: 1%;" onclick="window.location.href = 'getTicket.html'">`;
+                        eventsContainer.appendChild(eventButton);
+                        leftPosition += 300; // Increment the top position by 300px for the next button
+                        count++; // Increment count
+                        if (count >= 3) {
+                            leftPosition = 205; // Reset the top position to 205 pixels
+                            topPosition+=300;
+                            count = 0; // Reset count to zero
+                        }
+                    });
+                })
+                .catch(function(error) {
+                    console.error(error);
+                });
+        }
+    </script>
+
     <style>
         body {
             font-family: "Lato", sans-serif;
@@ -128,126 +250,6 @@
             }
         }
     </style>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script>
-
-        function displayUserInfo() {
-            var token = keycloak.tokenParsed;
-            var name = token.name;
-
-            var userInfoList = document.createElement('ul');
-            var nameItem = document.createElement('li');
-            var rolesItem = document.createElement('li');
-
-            nameItem.textContent = 'Nom : \n' + name;
-            rolesItem.textContent =  'Role: Etudiant';
-
-            userInfoList.appendChild(nameItem);
-            userInfoList.appendChild(rolesItem);
-
-            var userInfoDiv = document.getElementById('user-info');
-            userInfoDiv.innerHTML = ''; // Supprime tout contenu existant
-            userInfoDiv.appendChild(userInfoList);
-        }
-
-        var keycloak;
-
-        function initKeycloak() {
-
-            keycloak = new Keycloak({
-                "realm": "usager",
-                "auth-server-url": "http://localhost:8180/",
-                "ssl-required": "external",
-                "clientId": "frontend",
-                "public-client": true,
-                "confidential-port": 0
-            });
-            keycloak.init({ onLoad: 'login-required' })
-                .success(function (authenticated) {
-                    if (authenticated) {
-                        getUserInfo();
-                        displayUserInfo();
-                    } else {
-                        alert('not authenticated');
-                    }
-                })
-                .error(function () {
-                    alert('failed to initialize');
-                });
-        }
-        function openNav() {
-            document.getElementById("mySidenav").style.width = "250px";
-            document.getElementById("user-info").classList.add("fade-in");
-        }
-
-        function closeNav() {
-            document.getElementById("mySidenav").style.width = "0";
-            document.getElementById("user-info").classList.remove("fade-in");
-        }
-
-        var FacID;
-        function getValueFromURL() {
-            var urlParams = new URLSearchParams(window.location.search);
-            FacID = urlParams.get('FaculteID');
-        }
-
-
-        function getEventsGenie() {
-            getValueFromURL();
-            var FaculteID = FacID;
-            axios.post('http://localhost:8888/api/events/events4genie?FaculteID=' + encodeURIComponent(FaculteID), {
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            })
-                .then(function(response) {
-                    var events = response.data;
-                    var eventsContainer = document.getElementById('events');
-                    eventsContainer.innerHTML = '';
-                    var leftPosition = 205, topPosition=100; // Initial top position
-                    var count = 0; // Initialize count
-                    events.forEach(function(event) {
-                        var eventButton = document.createElement('button');
-                        eventButton.className = 'event';
-                        eventButton.style.position = 'absolute';
-                        eventButton.style.top = topPosition + 'px';// Set the top position dynamically
-                        eventButton.style.left = leftPosition + 'px'; // Set the left position dynamically
-                        eventButton.style.size = 'absolute';
-                        eventButton.style.width = 200 + 'px';
-                        eventButton.style.height = 300 + 'px';
-                        eventButton.addEventListener('click', function() {
-                            // Code à exécuter lorsque le bouton est cliqué
-                            //alert('Événement ID: ' + event.evenementID);
-                            localStorage.setItem('EvenementID', event.evenementID);
-                            window.location.href = 'getTicket.html';
-                        });
-                        eventButton.innerHTML =
-                            `<p>ID: ${event.evenementID}</p>
-                            <p>Name: ${event.evenementNom}</p>
-                            <p>Date: ${event.evenementDate}</p>
-                            <p>Start: ${event.evenementDebut}</p>
-                            <p>End: ${event.evenementFin}</p>
-                            <p>Association ID: ${event.assoEtudianteID}</p>
-                            <p>Number of Places: ${event.nombrePlaces}</p>
-                            <p>Allow Guests: ${event.allowGuests}</p>
-                            <p>Description: ${event.description}</p>
-                    <img id="preview-image" src="http://localhost:8080/${event.filename}" alt="Event Image"
-                         style=" height: 300px; right: 1%;" onclick="window.location.href = 'getTicket.html'">`;
-                        eventsContainer.appendChild(eventButton);
-                        leftPosition += 300; // Increment the top position by 300px for the next button
-                        count++; // Increment count
-                        if (count >= 3) {
-                            leftPosition = 205; // Reset the top position to 205 pixels
-                            topPosition+=300;
-                            count = 0; // Reset count to zero
-                        }
-                    });
-                })
-                .catch(function(error) {
-                    console.error(error);
-                });
-        }
-    </script>
 </head>
 <body onload="getEventsGenie()">
 <h2>View All Events</h2>

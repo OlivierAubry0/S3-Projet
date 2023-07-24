@@ -2,37 +2,6 @@
 <html>
 <head>
   <title>Create New Asso</title>
-  <style>
-    body {
-      font-family: "Lato", sans-serif;
-    }
-    .asso-form {
-      width: 500px;
-      margin: 0 auto;
-      padding: 20px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      box-sizing: border-box;
-    }
-    .asso-form select, .asso-form button[type=button] {
-      width: 100%;
-      padding: 12px 20px;
-      margin: 8px 0;
-      display: inline-block;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      box-sizing: border-box;
-    }
-    .asso-form button[type=button] {
-      background-color: #4CAF50;
-      color: white;
-      border: none;
-      cursor: pointer;
-    }
-    .asso-form button[type=button]:hover {
-      background-color: #45a049;
-    }
-  </style>
 
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script src="http://localhost:8180/js/keycloak.js"></script>
@@ -144,6 +113,39 @@
     }
 
   </script>
+
+  <style>
+    body {
+      font-family: "Lato", sans-serif;
+    }
+    .asso-form {
+      width: 500px;
+      margin: 0 auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+    .asso-form select, .asso-form button[type=button] {
+      width: 100%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+    .asso-form button[type=button] {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    .asso-form button[type=button]:hover {
+      background-color: #45a049;
+    }
+  </style>
+
 </head>
 
 <body onload="initKeycloak()">
