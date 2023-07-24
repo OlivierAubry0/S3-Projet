@@ -220,7 +220,14 @@
       }
     }
 
-
+    document.getElementById('name').addEventListener('input', updateEventPreview);
+    document.getElementById('date').addEventListener('input', updateEventPreview);
+    document.getElementById('start').addEventListener('input', updateEventPreview);
+    document.getElementById('end').addEventListener('input', updateEventPreview);
+    document.getElementById('places').addEventListener('input', updateEventPreview);
+    document.getElementById('allow-guests').addEventListener('change', updateEventPreview);
+    document.getElementById('description').addEventListener('input', updateEventPreview);
+    document.getElementById('imageInput').addEventListener('change', updateEventPreview);
 
   </script>
 </head>
@@ -292,18 +299,6 @@
     <img id="preview-image" src="assets/shadow_image.jpg" alt="Preview Image" style="width: 100%; height: 100%;">
   </div>
 </div>
-
-
-<script>
-  document.getElementById('name').addEventListener('input', updateEventPreview);
-  document.getElementById('date').addEventListener('input', updateEventPreview);
-  document.getElementById('start').addEventListener('input', updateEventPreview);
-  document.getElementById('end').addEventListener('input', updateEventPreview);
-  document.getElementById('places').addEventListener('input', updateEventPreview);
-  document.getElementById('allow-guests').addEventListener('change', updateEventPreview);
-  document.getElementById('description').addEventListener('input', updateEventPreview);
-  document.getElementById('imageInput').addEventListener('change', updateEventPreview);
-</script>
 
 </body>
 </html>
