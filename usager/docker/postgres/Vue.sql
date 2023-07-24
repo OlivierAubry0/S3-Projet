@@ -7,7 +7,7 @@ DROP VIEW IF EXISTS  les_assos;
 DROP VIEW IF EXISTS  evenement_programmes_per_fac;
 
 CREATE VIEW evenement_programmes AS
-    SELECT *
+SELECT *
 FROM base_de_donne.evenement;
 
 CREATE VIEW evenement_programmes_per_fac AS
@@ -30,12 +30,12 @@ FROM
     ASSO_ETUDIANTE a ON e.Asso_EtudianteID = a.Asso_EtudianteID;
 
 CREATE VIEW places_reserves AS
-    SELECT EvenementID, UsagerID, Telephone_Invite,Nom_Invite, Enregistration_Invite
+SELECT EvenementID, UsagerID, Telephone_Invite,Nom_Invite, Enregistration_Invite
 FROM base_de_donne.reservation;
 
 
 CREATE VIEW les_benevoles AS
-    SELECT UsagerID, privilegeid
+SELECT UsagerID, privilegeid
 FROM base_de_donne.usager_possede_privilege;
 
 CREATE VIEW les_assos AS
@@ -45,10 +45,10 @@ FROM base_de_donne.ASSO_ETUDIANTE;
 CREATE VIEW les_associations AS
 SELECT ae.Asso_EtudianteID, ae.Asso_Etudiante_Nom, f.Faculte_Nom, UsagerID
 FROM base_de_donne.ASSO_ETUDIANTE ae
-JOIN base_de_donne.Faculte f ON ae.FaculteID = f.FaculteID;
+         JOIN base_de_donne.Faculte f ON ae.FaculteID = f.FaculteID;
 
 CREATE VIEW MyEvents AS
-    SELECT UsagerID, reservation.EvenementID, Evenement_Nom,Evenement_Date, Nom_Invite, Enregistration_Invite
+SELECT UsagerID, reservation.EvenementID, Evenement_Nom,Evenement_Date, Nom_Invite, Enregistration_Invite
 FROM base_de_donne.evenement JOIN base_de_donne.reservation ON evenement.evenementid = reservation.evenementid;
 ----------------------comment appeler la vue ? ---------------------------------------------
 --SELECT * FROM evenement_programmes;--

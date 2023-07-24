@@ -77,14 +77,14 @@ public class Event {
     public void setAssoEtudianteID(String assoEtudianteID) {
         this.assoEtudianteID = assoEtudianteID;
     }
-/*
-    public String getNombrePlaces() {
-        return nombrePlaces;
-    }
+    /*
+        public String getNombrePlaces() {
+            return nombrePlaces;
+        }
 
-    public void setNombrePlaces(String nombrePlaces) {
-        this.nombrePlaces = nombrePlaces;
-    }*/
+        public void setNombrePlaces(String nombrePlaces) {
+            this.nombrePlaces = nombrePlaces;
+        }*/
     public int getNombrePlaces() {
         return nombrePlaces;
     }
