@@ -6,6 +6,43 @@
   <meta http-equiv="Content-type" content="text/html; charset=UTF-8">
 
   <style>
+
+    .sidenav {
+      height: 100%;
+      width: 0;
+      position: fixed;
+      z-index: 3;
+      top: 0;
+      left: 0;
+      background-color: #0B4F00;
+      overflow-x: hidden;
+      transition: 0.5s;
+      padding-top: 60px;
+    }
+
+    .sidenav a {
+      padding: 8px 8px 8px 32px;
+      text-decoration: none;
+      font-size: 25px;
+      color: #5BFF5E;
+      display: block;
+      transition: 0.3s;
+      z-index: 3;
+    }
+
+    .sidenav a:hover {
+      color: #5BFF5E;
+      z-index: 3;
+    }
+
+    .sidenav .closebtn {
+      position: absolute;
+      top: 0;
+      right: 25px;
+      font-size: 36px;
+      margin-left: 50px;
+      z-index: 3;
+    }
     /* CSS styles */
     .header {
       position: fixed;
@@ -226,16 +263,6 @@
       window.location.href = logoutURL;
     }
 
-    function openNav() {
-      document.getElementById("mySidenav").style.width = "250px";
-      document.getElementById("user-info").classList.add("fade-in");
-    }
-
-    function closeNav() {
-      document.getElementById("mySidenav").style.width = "0";
-      document.getElementById("user-info").classList.remove("fade-in");
-    }
-
     function scrollToHeight() {
       var scrollHeight = 1380; // Adjust the desired scroll height here
       var duration = 1000; // Adjust the duration of the glide animation (in milliseconds)
@@ -278,6 +305,16 @@
       var userInfoDiv = document.getElementById('user-info');
       userInfoDiv.innerHTML = '';
       userInfoDiv.appendChild(userInfoList);
+    }
+
+    function openNav() {
+      document.getElementById("mySidenav").style.width = "250px";
+      document.getElementById("user-info").classList.add("fade-in");
+    }
+
+    function closeNav() {
+      document.getElementById("mySidenav").style.width = "0";
+      document.getElementById("user-info").classList.remove("fade-in");
     }
   </script>
 </head>
