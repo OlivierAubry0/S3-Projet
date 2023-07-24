@@ -207,7 +207,7 @@
             keycloak.init({ onLoad: 'login-required' }).then(function (authenticated) {
                 if (authenticated) {
                     var roles = keycloak.tokenParsed.realm_access.roles;
-                    checkUserExists();
+                   // checkUserExists();
                     if (roles.includes('enseignant')) {
                         window.location.href = 'admin_event_creator.html';
                         return;
