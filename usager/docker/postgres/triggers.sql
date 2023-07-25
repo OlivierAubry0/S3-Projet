@@ -95,7 +95,34 @@ CREATE TRIGGER check_duplicate_invite
     AFTER INSERT ON BASE_DE_DONNE.RESERVATION
     FOR EACH ROW
     EXECUTE FUNCTION prevent_invitation();
+------------------------ Creation de la fonction qui regarde si l'invite apparait 2x ------------------------------------
+CREATE OR REPLACE FUNCTION prevent_transfer()
+    RETURNS TRIGGER
+AS $$
+DECLARE
+    user_existence INT;
+BEGIN
 
+    SELECT COUNT(*)
+    INTO user_existence
+    FROM BASE_DE_DONNE.usager
+    WHERE usagerid = NEW.usagerid ;
+
+    IF user_existence > 0 THEN
+        UPDATE BASE_DE_DONNE.RESERVATION
+        SET usagerid = NEW.usagerid
+        WHERE usagerid = NEW.usagerid AND EvenementID = NEW.EvenementID;
+    ELSIF user_existence <= 0 THEN
+        RAISE EXCEPTION 'Cette personne est inexistante :(' ;
+    END IF;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+DROP TRIGGER IF EXISTS check_transfer_existence ON BASE_DE_DONNE.RESERVATION;
+CREATE TRIGGER check_transfer_existence
+    BEFORE UPDATE ON BASE_DE_DONNE.RESERVATION
+    FOR EACH ROW
+EXECUTE FUNCTION prevent_transfer();
 -----------------Creation de la fonction qui assure qu'un usager ne peut pas reserver 2x pr un evenement---------------------------
 /*CREATE OR REPLACE FUNCTION prevent_double_registration()
     RETURNS TRIGGER

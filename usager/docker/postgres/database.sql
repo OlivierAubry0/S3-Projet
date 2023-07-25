@@ -125,9 +125,12 @@ VALUES (1, 'Université de sd'),
 INSERT INTO FACULTE (FaculteID, Faculte_Nom, UniversiteID)
 VALUES (4028, 'Faculte de Genie', 1),
        (4038, 'Ecole de gestion', 1),
-       (4039, 'Faculte de musique', 1),
-       (2222, 'Campus de genie', 2),
-       (2332, 'Campus de sante', 2);
+       (4029, 'Droit', 1),
+       (4039, 'Education', 1),
+       (4030, 'Lettres et sciences humaines', 1),
+       (4040, 'Medecine et sciences de la sante', 1),
+       (4031, 'Faculte des Sciences', 1),
+       (4041, 'Sciences de lactivite physique', 1);
 
 INSERT INTO USAGER (UsagerID, Usager_Nom, Usager_Prenom, Usager_Photo, CodeQR, FaculteID)
 VALUES ('admin1', 'nomadmin', 'prenomadmin', 'photoadmin', 0102, 4028),
