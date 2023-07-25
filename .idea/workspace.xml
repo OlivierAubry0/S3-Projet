@@ -5,10 +5,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="72deba85-9ca0-4a47-be77-f89dff0e225c" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usager/docker/webserver/html/usager/eventsTablePerFac.html" beforeDir="false" afterPath="$PROJECT_DIR$/usager/docker/webserver/html/usager/eventsTablePerFac.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usager/service/src/main/java/ca/usherbrooke/gegi/server/admin/EventShowedToStudents.java" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/src/main/java/ca/usherbrooke/gegi/server/admin/EventShowedToStudents.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usager/service/src/main/java/ca/usherbrooke/gegi/server/persistence/EventMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/src/main/java/ca/usherbrooke/gegi/server/persistence/EventMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/docker/keycloak/startup-scripts/init.sh" beforeDir="false" afterPath="$PROJECT_DIR$/usager/docker/keycloak/startup-scripts/init.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/docker/webserver/html/usager/admin_event_creator.html" beforeDir="false" afterPath="$PROJECT_DIR$/usager/docker/webserver/html/usager/admin_event_creator.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/service/.gradle/7.6/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/.gradle/7.6/checksums/checksums.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/service/.gradle/7.6/checksums/md5-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/.gradle/7.6/checksums/md5-checksums.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/service/.gradle/7.6/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/.gradle/7.6/checksums/sha1-checksums.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/service/.gradle/7.6/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/.gradle/7.6/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/service/.gradle/7.6/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/.gradle/7.6/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/service/.gradle/7.6/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/.gradle/7.6/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/service/.gradle/7.6/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/.gradle/7.6/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/service/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/service/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/service/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/.gradle/file-system.probe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/service/build/service-dev.jar" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/build/service-dev.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/service/build/tmp/quarkusDev/quarkus-app-model.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/service/build/tmp/quarkusDev/quarkus-app-test-model.dat" beforeDir="false" />
     </list>
     <list id="369c521e-6498-4c34-9420-4a88351b04df" name="Changes by newto" comment="" />
     <list id="132ce79e-c3a8-42e5-aa9e-005f3e61ba33" name="Changes by ycast" comment="" />
@@ -95,7 +108,7 @@
     &quot;git-widget-placeholder&quot;: &quot;yorman__XOXOX&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;jdk.selected.JAVA_MODULE&quot;: &quot;17&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/newto/OneDrive/Documents/GitHub/S3-Projet/usager/service&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/olivi/git/S3-Projet/usager/docker&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -122,12 +135,14 @@
       <recent name="C:\Users\olivi\git\S3-Projet\usager\docker\postgres" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\olivi\git\S3-Projet\usager\service" />
+      <recent name="C:\Users\olivi\git" />
       <recent name="C:\Users\newto\OneDrive\Documents\GitHub\S3-Projet\usager\docker\webserver\html\usager" />
       <recent name="C:\Users\Enes\OneDrive - USherbrooke\Documents\GitHub\S3-Projet\usager\docker\webserver\html\usager" />
       <recent name="C:\Users\ycast\Desktop\Genie_Info\SESSION3\PROJET\Git\S3-Projet\usager\docker\webserver\html\usager" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.KeycloakTokenScript">
+  <component name="RunManager" selected="Quarkus.service.main">
     <configuration name="KeycloakTokenScript" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="ca.usherbrooke.gegi.server.script.KeycloakTokenScript" />
       <module name="service.main" />
@@ -242,10 +257,10 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.KeycloakTokenScript" />
         <item itemvalue="Shell Script.init.sh" />
-        <item itemvalue="Gradle.service [assemble]" />
         <item itemvalue="Shell Script.setdata.sh" />
+        <item itemvalue="Application.KeycloakTokenScript" />
+        <item itemvalue="Gradle.service [assemble]" />
         <item itemvalue="Database Script.database.sql" />
       </list>
     </recent_temporary>
@@ -274,6 +289,8 @@
       <workItem from="1687979399380" duration="31691000" />
       <workItem from="1689783985135" duration="18343000" />
       <workItem from="1689860110096" duration="1281000" />
+      <workItem from="1690088302300" duration="4180000" />
+      <workItem from="1690313218644" duration="1810000" />
     </task>
     <servers />
   </component>
