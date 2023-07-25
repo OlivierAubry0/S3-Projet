@@ -74,6 +74,58 @@
       .sidenav {padding-top: 15px;}
       .sidenav a {font-size: 18px;}
     }
+    .flex-container {
+      display: flex; /* Use flex display */
+      justify-content: space-between; /* Distribute items with equal space between them */
+      align-items: center; /* Center items vertically within the container */
+      background-color: #f2f2f2;
+      padding: 24px;
+    }
+
+    .event-img {
+      position: relative;
+
+      width: 300px;
+      height: 150px;
+      background-color: #fff;
+      border: 1px #ccc;
+      border-radius: 1px;
+      padding: 10px;
+      margin-left: 10px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      align-items: center;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.01);
+    }
+
+    .event-button {
+
+      position: relative;
+      justify-content: space-evenly;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex: 1;
+    }
+
+    .event-button img {
+
+      max-width: 100%;
+      max-height: 200px;
+      margin-bottom: 10px;
+    }
+
+    .event-button p {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin: 3px;
+      padding: 3px;
+      text-align: center;
+    }
   </style>
 
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
@@ -125,6 +177,45 @@
       } else {
         sousMenu.style.display = "none";
       }
+    }
+    function ShowEventUrReserving() {
+      var EvenementID = localStorage.getItem('EvenementID');
+      axios.post('http://localhost:8888/api/events/eventsReservation?EvenementID=' + encodeURIComponent(EvenementID), {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+              .then(function(response) {
+                var events = response.data;
+                var eventsContainer = document.getElementById('events');
+                eventsContainer.innerHTML = '';
+                events.forEach(function(event) {
+                  var eventButton = document.createElement('button');
+                  eventButton.addEventListener('click', function() {
+                    // Code à exécuter lorsque le bouton est cliqué
+                    //alert('Événement ID: ' + event.evenementID);
+                    localStorage.setItem('EvenementID', event.EvenementID);
+                  });
+                  eventButton.innerHTML =
+                          `<div class="flex-container">
+                             <div>
+                                <p>Nom: ${event.Evenement_Nom}</p>
+                                <p>Date: ${event.Evenement_Date}</p>
+                                <p>Début: ${event.Evenement_Debut}</p>
+                                <p>Fin: ${event.Evenement_Fin}</p>
+                                <p>Association ID: ${event.Asso_EtudianteID}</p>
+                                <p>Nombre de places: ${event.Nombre_Places}</p>
+                                <p>Droit aux invités ? ${event.Allow_Guests ? 'Oui' : 'Non'} </p>
+                                <p>Description: ${event.Description}</p>
+                             </div>
+                             <img src="http://localhost:8080/${event.filename}" alt="Event Image" class="event-img" onclick="window.location.href = 'getTicket.html'">
+                             </div>`;
+                  eventsContainer.appendChild(eventButton);
+                });
+              })
+              .catch(function(error) {
+                console.error(error);
+              });
     }
 
     function submitReservation() {
@@ -220,7 +311,7 @@
   </script>
 </head>
 
-<body onload="initKeycloak()">
+<body onload="initKeycloak();ShowEventUrReserving()">
 
 <div id="mySidenav" class="sidenav">
   <b id="user-info"></b>
@@ -237,6 +328,8 @@
 </div>
 
 <h2 style="position: absolute; left: 36%; top: 10%; font-size: xxx-large">Obtenir un billet</h2>
+<div class="event-button" id="events">
+</div>
 <div class="event-form" style="position: absolute; left: 32%; top: 30%">
   <form>
     <input type="checkbox" id="checkbox" onclick="toggleSubMenuGuests()">

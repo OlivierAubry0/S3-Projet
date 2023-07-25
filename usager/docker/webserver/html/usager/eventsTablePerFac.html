@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>View All Engineering Events</title>
+    <title>View Events</title>
 
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script>
@@ -70,7 +70,7 @@
         function getEventsGenie() {
             getValueFromURL();
             var FaculteID = FacID;
-            axios.post('http://localhost:8888/api/events/events4genie?FaculteID=' + encodeURIComponent(FaculteID), {
+            axios.post('http://localhost:8888/api/events/events4genie?FaculteID=' + encodeURIComponent(FaculteID), {},{
                 headers: {
                     'Content-Type': 'application/json'
                 }
@@ -83,39 +83,27 @@
                     var count = 0; // Initialize count
                     events.forEach(function(event) {
                         var eventButton = document.createElement('button');
-                        eventButton.className = 'event';
-                        eventButton.style.position = 'absolute';
-                        eventButton.style.top = topPosition + 'px';// Set the top position dynamically
-                        eventButton.style.left = leftPosition + 'px'; // Set the left position dynamically
-                        eventButton.style.size = 'absolute';
-                        eventButton.style.width = 200 + 'px';
-                        eventButton.style.height = 300 + 'px';
                         eventButton.addEventListener('click', function() {
                             // Code à exécuter lorsque le bouton est cliqué
                             //alert('Événement ID: ' + event.evenementID);
-                            localStorage.setItem('EvenementID', event.evenementID);
+                            localStorage.setItem('EvenementID', event.EvenementID);
                             window.location.href = 'getTicket.html';
                         });
                         eventButton.innerHTML =
-                            `<p>ID: ${event.evenementID}</p>
-                            <p>Name: ${event.evenementNom}</p>
-                            <p>Date: ${event.evenementDate}</p>
-                            <p>Start: ${event.evenementDebut}</p>
-                            <p>End: ${event.evenementFin}</p>
-                            <p>Association ID: ${event.assoEtudianteID}</p>
-                            <p>Number of Places: ${event.nombrePlaces}</p>
-                            <p>Allow Guests: ${event.allowGuests}</p>
-                            <p>Description: ${event.description}</p>
-                    <img id="preview-image" src="http://localhost:8080/${event.filename}" alt="Event Image"
-                         style=" height: 300px; right: 1%;" onclick="window.location.href = 'getTicket.html'">`;
+                            `<div class="flex-container">
+                             <div>
+                                <p>Nom: ${event.Evenement_Nom}</p>
+                                <p>Date: ${event.Evenement_Date}</p>
+                                <p>Début: ${event.Evenement_Debut}</p>
+                                <p>Fin: ${event.Evenement_Fin}</p>
+                                <p>Association ID: ${event.Asso_EtudianteID}</p>
+                                <p>Nombre de places: ${event.Nombre_Places}</p>
+                                <p>Droit aux invités ? ${event.Allow_Guests ? 'Oui' : 'Non'} </p>
+                                <p>Description: ${event.Description}</p>
+                             </div>
+                             <img src="http://localhost:8080/${event.filename}" alt="Event Image" class="event-img" onclick="window.location.href = 'getTicket.html'">
+                             </div>`;
                         eventsContainer.appendChild(eventButton);
-                        leftPosition += 300; // Increment the top position by 300px for the next button
-                        count++; // Increment count
-                        if (count >= 3) {
-                            leftPosition = 205; // Reset the top position to 205 pixels
-                            topPosition+=300;
-                            count = 0; // Reset count to zero
-                        }
                     });
                 })
                 .catch(function(error) {
@@ -127,7 +115,7 @@
     <style>
         body {
             font-family: "Lato", sans-serif;
-            background-color: #008000; /* Couleur de fond verte */
+            background-color: #008000;
             color: white; /* Couleur du texte en blanc */
             margin: 0; /* Supprime les marges par défaut */
             padding: 20px;
@@ -141,16 +129,6 @@
             margin-top: 0; /* Supprime la marge supérieure par défaut */
         }
 
-        .event-form {
-            width: 500px;
-            margin: 0 auto;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-            background-color: #fff; /* Couleur de fond blanche pour les formulaires */
-            color: #333; /* Couleur du texte dans les formulaires */
-        }
 
         .event-form select,
         .event-form button[type=button] {
@@ -210,37 +188,56 @@
             margin-left: 50px;
             z-index: 3;
         }
+        .flex-container {
+            display: flex; /* Use flex display */
+            justify-content: space-between; /* Distribute items with equal space between them */
+            align-items: center; /* Center items vertically within the container */
+            background-color: #f2f2f2;
+            padding: 24px;
+        }
 
-        .event-container {
+        .event-img {
+            position: relative;
+
+            width: 300px;
+            height: 150px;
+            background-color: #fff;
+            border: 1px #ccc;
+            border-radius: 1px;
+            padding: 10px;
+            margin-left: 10px;
             display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
+            flex-direction: column;
+            flex: 1;
             align-items: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.01);
         }
 
         .event-button {
+
             position: relative;
-            margin: 20px;
-            width: 200px;
-            height: 300px;
-            background-color: #fff;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            padding: 10px;
+            justify-content: space-evenly;
+            padding: 24px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            flex: 1;
         }
 
         .event-button img {
+
             max-width: 100%;
             max-height: 200px;
             margin-bottom: 10px;
         }
 
         .event-button p {
-            margin: 0;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 3px;
+            padding: 3px;
             text-align: center;
         }
 
@@ -252,8 +249,7 @@
     </style>
 </head>
 <body onload="getEventsGenie()">
-<h2>View All Events</h2>
-<div class="event-form" id="events">
+<div  class="event-button" id="events">
     <!-- Les événements seront affichés ici sous forme de boutons -->
 </div>
 <span style="font-size: 40px; font-weight: bold; cursor: pointer; position: absolute; top: 0; left: 0.5%; color: #5BFF5E;" onclick="openNav()">&#9776;</span>
