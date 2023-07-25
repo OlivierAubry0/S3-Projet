@@ -106,7 +106,7 @@
       axios.post('http://localhost:8888/api/Asso', asso, {
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': 'Bearer ' + keycloak.token // Replace keycloak.token with your actual bearer token
+          //'Authorization': 'Bearer ' + keycloak.token // Replace keycloak.token with your actual bearer token
         }
       })
               .then(function(response) {
@@ -158,20 +158,72 @@
     <input type="text" id="Asso_Etudiante_Nom" name="Asso_Etudiante_Nom"><br>
 
     <label for="FaculteID">AssoEtudiante Fac:</label><br>
-    <select id="FaculteID" name="FaculteID">
-      <option value="4028">Faculte de Genie</option>
-      <option value="4038">Ecole de gestion</option>
-      <option value="4039">Faculte de musique</option>
-    </select><br>
+    <select id="FaculteID" name="FaculteID"></select><br>
+
 
     <label for="UsagerID">AssoEtudiante admin:</label><br>
-    <select id="UsagerID" name="UsagerID">
-      <option value="admin1">admin1</option>
-      <option value="admin2">admin2</option>
-      <option value="admin3">admin3</option>
-    </select><br>
+    <select id="UsagerID" name="UsagerID"></select><br>
 
     <button type="button" onclick="submitAsso()">Submit</button>
+
+    <script>
+
+      function populateFaculteOptions() {
+        axios.get('http://localhost:8888/api/Asso/getAllFaculteData', {
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        })
+                .then(function(response) {
+                  var faculteData = response.data; // La réponse doit être un objet avec noms et ID de facultés
+                  var select = document.getElementById('FaculteID');
+
+                  faculteData.forEach(function(faculte) {
+                    var option = document.createElement('option');
+                    option.value = faculte.id; // ID de la faculté
+                    option.textContent = faculte.name; // Nom de la faculté
+                    select.appendChild(option);
+                  });
+                })
+                .catch(function(error) {
+                  console.error(error);
+                  alert("Erreur lors de la récupération des facultés.");
+                });
+      }
+
+      function populateUsagerOptions() {
+        // Récupérer les identifiants d'utilisateurs à partir du service en utilisant Axios
+        axios.get('http://localhost:8888/api/Asso/getUsagerID', {
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        })
+                .then(function(response) {
+                  var usagerIDs = response.data; // La réponse doit être une liste de chaînes de caractères (identifiants d'utilisateurs)
+                  var select = document.getElementById('UsagerID');
+
+                  usagerIDs.forEach(function(usagerID) {
+                    var option = document.createElement('option');
+                    option.value = usagerID;
+                    option.textContent = usagerID;
+                    select.appendChild(option);
+                  });
+                })
+                .catch(function(error) {
+                  console.error(error);
+                  alert("Erreur lors de la récupération des administrateurs.");
+                });
+      }
+
+      // Appelez les fonctions pour charger les options lors du chargement de la page
+      window.onload = function() {
+        populateUsagerOptions();
+        populateFaculteOptions();
+      };
+
+
+      // ... Autres parties du code ...
+    </script>
 
   </form>
 </div>

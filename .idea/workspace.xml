@@ -4,7 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="72deba85-9ca0-4a47-be77-f89dff0e225c" name="Changes" comment="" />
+    <list default="true" id="72deba85-9ca0-4a47-be77-f89dff0e225c" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/docker/webserver/html/usager/Assotables.html" beforeDir="false" afterPath="$PROJECT_DIR$/usager/docker/webserver/html/usager/Assotables.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/docker/webserver/html/usager/createAsso.html" beforeDir="false" afterPath="$PROJECT_DIR$/usager/docker/webserver/html/usager/createAsso.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/service/build/resources/main/ca/usherbrooke/fgen/api/persistence/AssoMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/build/resources/main/ca/usherbrooke/fgen/api/persistence/AssoMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/service/src/main/java/ca/usherbrooke/gegi/server/persistence/AssoMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/src/main/java/ca/usherbrooke/gegi/server/persistence/AssoMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/service/src/main/java/ca/usherbrooke/gegi/server/service/AssoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/src/main/java/ca/usherbrooke/gegi/server/service/AssoService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/service/src/main/resources/ca/usherbrooke/fgen/api/persistence/AssoMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/src/main/resources/ca/usherbrooke/fgen/api/persistence/AssoMapper.xml" afterDir="false" />
+    </list>
     <list id="369c521e-6498-4c34-9420-4a88351b04df" name="Changes by newto" comment="" />
     <list id="132ce79e-c3a8-42e5-aa9e-005f3e61ba33" name="Changes by ycast" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -264,6 +273,7 @@
       <workItem from="1689988584455" duration="32000" />
       <workItem from="1690070378253" duration="19000" />
       <workItem from="1690084692670" duration="72000" />
+      <workItem from="1690231173778" duration="77000" />
     </task>
     <servers />
   </component>

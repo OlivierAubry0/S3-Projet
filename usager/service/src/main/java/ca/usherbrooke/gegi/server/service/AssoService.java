@@ -1,6 +1,7 @@
 package ca.usherbrooke.gegi.server.service;
 
 import ca.usherbrooke.gegi.server.admin.AssoEtudiante;
+import ca.usherbrooke.gegi.server.admin.FaculteData;
 import ca.usherbrooke.gegi.server.persistence.AssoMapper;
 
 import org.apache.ibatis.annotations.Delete;
@@ -53,5 +54,19 @@ public class AssoService {
         } catch (Exception e) {
             return Response.status(Response.Status.METHOD_NOT_ALLOWED).entity(Asso_Etudiante_Nom).build();
         }
+    }
+
+    @GET
+    @Path("/getUsagerID")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<String> getAllUsagerID() {
+        return assomapper.getAllUsagerID();
+    }
+
+    @GET
+    @Path("/getAllFaculteData")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<FaculteData> getAllFaculteData() {
+        return assomapper.getAllFaculteData();
     }
 }
