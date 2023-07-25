@@ -2,121 +2,11 @@
 <html>
 <head>
   <title>Create New Asso</title>
-
-  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-  <script src="http://localhost:8180/js/keycloak.js"></script>
-  <script>
-
-    function displayUserInfo() {
-      var token = keycloak.tokenParsed;
-      var name = token.name;
-
-      var userInfoList = document.createElement('ul');
-      var nameItem = document.createElement('li');
-      var rolesItem = document.createElement('li');
-
-      nameItem.textContent = 'Nom : \n' + name;
-      rolesItem.textContent = 'Role: master';
-
-      userInfoList.appendChild(nameItem);
-      userInfoList.appendChild(rolesItem);
-
-      var userInfoDiv = document.getElementById('user-info');
-      userInfoDiv.innerHTML = ''; // Remove any existing content
-      userInfoDiv.appendChild(userInfoList);
-    }
-
-
-    var keycloak;
-
-    function initKeycloak() {
-      keycloak = new Keycloak({
-        "realm": "usager",
-        "auth-server-url": "http://localhost:8180/",
-        "ssl-required": "external",
-        "clientId": "frontend",
-        "public-client": true,
-        "confidential-port": 0
-      });
-      keycloak.init({ onLoad: 'login-required' })
-              .success(function (authenticated) {
-                if (authenticated) {
-                  alert('authenticated');
-                  displayUserInfo();
-                } else {
-                  alert('not authenticated');
-                }
-              })
-              .error(function () {
-                alert('failed to initialize');
-              });
-
-    }
-
-    function submitAsso() {
-      var Asso_EtudianteID = document.getElementById('Asso_EtudianteID').value;
-      var Asso_Etudiante_Nom = document.getElementById('Asso_Etudiante_Nom').value;
-      var FaculteID = document.getElementById('FaculteID').value;
-      var UsagerID = document.getElementById('UsagerID').value;
-
-      var asso = {
-        Asso_EtudianteID: Asso_EtudianteID,
-        Asso_Etudiante_Nom: Asso_Etudiante_Nom,
-        FaculteID: FaculteID,
-        UsagerID: UsagerID
-      };
-
-      axios.post('http://localhost:8888/api/Asso', asso, {
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer ' + keycloak.token // Replace keycloak.token with your actual bearer token
-        }
-      })
-              .then(function(response) {
-                if (response.status === 201) {
-                  alert("Association created!");
-                  window.location.href = 'master_manager.html'; // Replace with the path to your main menu HTML file
-                }else {
-                  alert(response.status);
-                }
-              })
-              .catch(function(error) {
-                console.error(error);
-                alert("Assurez vous que l'admin existe et que l'id n'est pas encore utilisé ");
-              });
-    }
-
-    function submitImage() {
-      var imageInput = document.getElementById('imageInput');
-      var file = imageInput.files[0];
-
-      var reader = new FileReader();
-
-      reader.onload = function(asso) {
-        var arrayBuffer = asso.target.result;
-
-        var blob = new Blob([arrayBuffer], { type: file.type });
-
-        var formData = new FormData();
-        formData.append('image', blob);
-
-        axios.post('http://localhost:8888/api/Asso/uploadImage', formData)
-                .then(function(response) {
-                  console.log('Image uploaded successfully.');
-                })
-                .catch(function(error) {
-                  console.error('Error uploading image:', error);
-                });
-      };
-
-      reader.readAsArrayBuffer(file);
-    }
-
-  </script>
-
   <style>
     body {
+      background-color: white;
       font-family: "Lato", sans-serif;
+      color: grey;
     }
     .asso-form {
       width: 500px;
@@ -126,7 +16,9 @@
       border-radius: 4px;
       box-sizing: border-box;
     }
-    .asso-form select, .asso-form button[type=button] {
+    .asso-form select,
+    .asso-form input[type="text"],
+    .asso-form button[type=button] {
       width: 100%;
       padding: 12px 20px;
       margin: 8px 0;
@@ -144,46 +36,195 @@
     .asso-form button[type=button]:hover {
       background-color: #45a049;
     }
+
+    .sidenav {
+      height: 100%;
+      width: 0;
+      position: fixed;
+      z-index: 3;
+      top: 0;
+      left: 0;
+      background-color: #0B4F00;
+      overflow-x: hidden;
+      transition: 0.5s;
+      padding-top: 60px;
+    }
+
+    .sidenav a {
+      padding: 8px 8px 8px 32px;
+      text-decoration: none;
+      font-size: 25px;
+      color: #5BFF5E;
+      display: block;
+      transition: 0.3s;
+      z-index: 3;
+    }
+
+    .sidenav a:hover {
+      color: #f1f1f1;
+      z-index: 3;
+    }
+
+    .sidenav .closebtn {
+      position: absolute;
+      top: 0;
+      right: 25px;
+      font-size: 36px;
+      margin-left: 50px;
+      z-index: 3;
+    }
+
+    @media screen and (max-height: 450px) {
+      .sidenav {padding-top: 15px;}
+      .sidenav a {font-size: 18px;}
+    }
+
+    /* Center the title */
+    h2 {
+      text-align: center;
+    }
+
+    /* Change the color of the hamburger icon and 'UNIVENT' text to green */
+    #openNavSpan {
+      color: #0B4F00;
+    }
   </style>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="http://localhost:8180/js/keycloak.js"></script>
+  <script>
+    function submitAsso() {
+      var Asso_Etudiante_Nom = document.getElementById('Asso_Etudiante_Nom').value;
+      var FaculteID = document.getElementById('FaculteID').value;
+      var UsagerID = document.getElementById('UsagerID').value;
 
+      var asso = {
+        Asso_Etudiante_Nom: Asso_Etudiante_Nom,
+        FaculteID: FaculteID,
+        UsagerID: UsagerID
+      };
+
+      axios.post('http://localhost:8888/api/Asso', asso, {
+        headers: {
+          'Content-Type': 'application/json',
+          //'Authorization': 'Bearer ' + keycloak.token // Replace keycloak.token with your actual bearer token
+        }
+      })
+              .then(function(response) {
+                if (response.status === 201) {
+                  alert("Association created!");
+                  window.location.href = 'master_manager.html'; // Replace with the path to your main menu HTML file
+                }else {
+                  alert(response.status);
+                }
+              })
+              .catch(function(error) {
+                console.error(error);
+                alert("Assurez vous que l'admin existe et que l'id n'est pas encore utilisé ");
+              });
+    }
+
+    function logout() {
+      let logoutURL = "http://localhost:8180//realms/usager/protocol/openid-connect/logout"
+      window.location.href = logoutURL;
+    }
+
+    function openNav() {
+      document.getElementById("mySidenav").style.width = "250px";
+      document.getElementById("user-info").classList.add("fade-in");
+    }
+
+    function closeNav() {
+      document.getElementById("mySidenav").style.width = "0";
+      document.getElementById("user-info").classList.remove("fade-in");
+    }
+
+  </script>
 </head>
+<body>
+<div id="mySidenav" class="sidenav">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  <a href="master_manager.html">Accueil</a>
+  <a href="#" onclick="logout()">Déconnexion</a>
+</div>
 
-<body onload="initKeycloak()">
+<!-- Update the ID of the span element to target it in the CSS -->
+<span id="openNavSpan" style="font-size: 40px; font-weight: bold; cursor: pointer; position: absolute; top: 0; left: 0.5%;" onclick="openNav()">&#9776; UNIVENT</span>
+
 <h2>Create New Asso</h2>
 <div class="asso-form">
   <form>
-    <label for="Asso_EtudianteID">AssoEtudiante Id:</label><br>
-    <select id="Asso_EtudianteID" name="Asso_EtudianteID">
-      <option value="1001">1001</option>
-      <option value="1002">1002</option>
-      <option value="1003">1003</option>
-    </select><br>
 
     <label for="Asso_Etudiante_Nom">AssoEtudiante Name:</label><br>
-    <select id="Asso_Etudiante_Nom" name="Asso_Etudiante_Nom">
-      <option value="Ageg">Ageg</option>
-      <option value="Amus">Amus</option>
-      <option value="Flsh">Flsh</option>
-    </select><br>
+    <input type="text" id="Asso_Etudiante_Nom" name="Asso_Etudiante_Nom"><br>
 
     <label for="FaculteID">AssoEtudiante Fac:</label><br>
-    <select id="FaculteID" name="FaculteID">
-      <option value="4028">Faculte de Genie</option>
-      <option value="4038">Ecole de gestion</option>
-      <option value="4039">Faculte de musique</option>
-    </select><br>
+    <select id="FaculteID" name="FaculteID"></select><br>
+
 
     <label for="UsagerID">AssoEtudiante admin:</label><br>
-    <select id="UsagerID" name="UsagerID">
-      <option value="admin1">admin1</option>
-      <option value="admin2">admin2</option>
-      <option value="admin3">admin3</option>
-    </select><br>
+    <select id="UsagerID" name="UsagerID"></select><br>
 
     <button type="button" onclick="submitAsso()">Submit</button>
 
-    <input type="file" id="imageInput" accept="image/*">
-    <button type="button" onclick="submitImage()">Submit Image</button>
+    <script>
+
+      function populateFaculteOptions() {
+        axios.get('http://localhost:8888/api/Asso/getAllFaculteData', {
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        })
+                .then(function(response) {
+                  var faculteData = response.data; // La réponse doit être un objet avec noms et ID de facultés
+                  var select = document.getElementById('FaculteID');
+
+                  faculteData.forEach(function(faculte) {
+                    var option = document.createElement('option');
+                    option.value = faculte.id; // ID de la faculté
+                    option.textContent = faculte.name; // Nom de la faculté
+                    select.appendChild(option);
+                  });
+                })
+                .catch(function(error) {
+                  console.error(error);
+                  alert("Erreur lors de la récupération des facultés.");
+                });
+      }
+
+      function populateUsagerOptions() {
+        // Récupérer les identifiants d'utilisateurs à partir du service en utilisant Axios
+        axios.get('http://localhost:8888/api/Asso/getUsagerID', {
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        })
+                .then(function(response) {
+                  var usagerIDs = response.data; // La réponse doit être une liste de chaînes de caractères (identifiants d'utilisateurs)
+                  var select = document.getElementById('UsagerID');
+
+                  usagerIDs.forEach(function(usagerID) {
+                    var option = document.createElement('option');
+                    option.value = usagerID;
+                    option.textContent = usagerID;
+                    select.appendChild(option);
+                  });
+                })
+                .catch(function(error) {
+                  console.error(error);
+                  alert("Erreur lors de la récupération des administrateurs.");
+                });
+      }
+
+      // Appelez les fonctions pour charger les options lors du chargement de la page
+      window.onload = function() {
+        populateUsagerOptions();
+        populateFaculteOptions();
+      };
+
+
+      // ... Autres parties du code ...
+    </script>
+
   </form>
 </div>
 </body>
