@@ -98,7 +98,7 @@ CREATE TABLE RESERVATION
 (
     EvenementID VARCHAR(50),
     UsagerID VARCHAR(50),
-    Telephone_Invite VARCHAR(10) CHECK (Telephone_Invite ~ '^[0-9]{10}$') NULL,
+    Telephone_Invite VARCHAR(10) NULL,
     Nom_Invite VARCHAR(50) NULL,
     Enregistration_Invite BOOLEAN,
     PRIMARY KEY (EvenementID, UsagerID),

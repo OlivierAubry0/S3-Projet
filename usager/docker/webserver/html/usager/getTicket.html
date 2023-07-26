@@ -245,7 +245,14 @@
                 console.error(error);
               });
     }
-
+    function validateTelephoneInvite(telephoneInvite) {
+      const regex = /^([0-9]{10}|\s{10})$/;
+      if (regex.test(telephoneInvite) || telephoneInvite === null) {
+        return true;
+      } else {
+        return false;
+      }
+    }
     function submitReservation() {
       var tokenData = keycloak.tokenParsed;
       var Checkbox = document.getElementById('checkbox');
@@ -263,10 +270,11 @@
         Enregistration_Invite: Enregistration_Invite
       };
 
-      if (Checkbox.checked && (Telephone_Invite === '' || Nom_Invite === '')) {
-        alert("Veuillez remplir tous les champs obligatoires.");
+      if (Checkbox.checked && (Telephone_Invite === '' || Nom_Invite === '' || !validateTelephoneInvite(Telephone_Invite))) {
+        alert("Veuillez vérifier les champs suivants : \n -Le nom. \n -Le numéro de téléphone.");
         return;
       }
+
 
       axios.post('http://localhost:8888/api/reservations', reservation, {
         headers: {
