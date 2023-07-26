@@ -35,7 +35,8 @@ CREATE TABLE EVENEMENT
     Evenement_Debut  VARCHAR(50),
     Evenement_Fin    VARCHAR(50),
     Asso_EtudianteID VARCHAR(50),
-    Nombre_Places INT,
+    Nombre_Places INT CHECK ( Nombre_Places>=0 ),
+    Nombres_Places_Restantes INT,
     Allow_Guests     BOOLEAN,
     Description      VARCHAR(255),
     filename        VARCHAR(255),
@@ -97,7 +98,7 @@ CREATE TABLE RESERVATION
 (
     EvenementID VARCHAR(50),
     UsagerID VARCHAR(50),
-    Telephone_Invite VARCHAR(11) NULL,
+    Telephone_Invite VARCHAR(10) CHECK (Telephone_Invite ~ '^[0-9]{10}$') NULL,
     Nom_Invite VARCHAR(50) NULL,
     Enregistration_Invite BOOLEAN,
     PRIMARY KEY (EvenementID, UsagerID),

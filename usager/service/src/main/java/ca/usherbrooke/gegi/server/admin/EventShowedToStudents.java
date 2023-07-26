@@ -1,13 +1,14 @@
 package ca.usherbrooke.gegi.server.admin;
 
 public class EventShowedToStudents {
-    public String evenementID;
+    public String EvenementID;
     public String Evenement_Nom;
     public String Evenement_Date;
     public String Evenement_Debut;
     public String Evenement_Fin;
     public String Asso_EtudianteID;
     public int Nombre_Places;
+    public int Nombres_Places_Restantes;
     //private String nombrePlaces;
     public boolean Allow_Guests;
     public String Description;
@@ -18,8 +19,8 @@ public class EventShowedToStudents {
         // Default constructor
     }
 
-    public EventShowedToStudents(String eventId, String eventName, String eventDate, String eventStart, String eventEnd, String studentAssociationId, String AssoName, String FacID, String nombrePlaces, boolean allowGuests, String description, String filename) {
-        this.evenementID = eventId;
+    public EventShowedToStudents(String eventId, String eventName, String eventDate, String eventStart, String eventEnd, String studentAssociationId, String AssoName, String FacID, int nombrePlaces,int nombrePlacesRestantes, boolean allowGuests, String description, String filename) {
+        this.EvenementID = eventId;
         this.Evenement_Nom = eventName;
         this.Evenement_Date = eventDate;
         this.Evenement_Debut = eventStart;
@@ -27,18 +28,19 @@ public class EventShowedToStudents {
         this.Asso_EtudianteID = studentAssociationId;
         this.Asso_Etudiante_Nom = AssoName;
         this.FaculteID = FacID;
-        this.Nombre_Places = Integer.parseInt(nombrePlaces);
+        this.Nombre_Places = nombrePlaces;
+        this.Nombres_Places_Restantes=nombrePlacesRestantes;
         this.Allow_Guests = allowGuests;
         this.Description = description;
         this.filename = filename;
     }
 
     public String getEvenementID() {
-        return evenementID;
+        return EvenementID;
     }
 
     public void setEvenementID(String evenementID) {
-        this.evenementID = evenementID;
+        this.EvenementID = evenementID;
     }
 
     public String getEvenementNom() {
@@ -94,6 +96,13 @@ public class EventShowedToStudents {
 
     public void setNombrePlaces(int nombrePlaces) {
         this.Nombre_Places = nombrePlaces;
+    }
+    public int getNombres_Places_Restantes() {
+        return Nombres_Places_Restantes;
+    }
+
+    public void setNombres_Places_Restantes(int nombresPlacesRestantes) {
+        this.Nombres_Places_Restantes = nombresPlacesRestantes;
     }
     public boolean isAllowGuests() {
         return Allow_Guests;

@@ -191,11 +191,6 @@
                 eventsContainer.innerHTML = '';
                 events.forEach(function(event) {
                   var eventButton = document.createElement('button');
-                  eventButton.addEventListener('click', function() {
-                    // Code à exécuter lorsque le bouton est cliqué
-                    //alert('Événement ID: ' + event.evenementID);
-                    localStorage.setItem('EvenementID', event.EvenementID);
-                  });
                   eventButton.innerHTML =
                           `<div class="flex-container">
                              <div>
@@ -203,8 +198,9 @@
                                 <p>Date: ${event.Evenement_Date}</p>
                                 <p>Début: ${event.Evenement_Debut}</p>
                                 <p>Fin: ${event.Evenement_Fin}</p>
-                                <p>Association ID: ${event.Asso_EtudianteID}</p>
+                                <p>Association étudiante: ${event.Asso_Etudiante_Nom}</p>
                                 <p>Nombre de places: ${event.Nombre_Places}</p>
+                                <p>Nombre de places restantes: ${event.Nombres_Places_Restantes}</p>
                                 <p>Droit aux invités ? ${event.Allow_Guests ? 'Oui' : 'Non'} </p>
                                 <p>Description: ${event.Description}</p>
                              </div>

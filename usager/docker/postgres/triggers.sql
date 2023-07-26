@@ -46,7 +46,41 @@ CREATE TRIGGER check_prevent_nb_place
     BEFORE INSERT ON base_de_donne.RESERVATION
     FOR EACH ROW
     EXECUTE FUNCTION prevent_nb_place();
+-----------------------Creation de la fonction qui regarde le nombre de places restantes--------------------------------------------
+CREATE OR REPLACE FUNCTION placesLeft()
+    RETURNS TRIGGER
+AS $$
+BEGIN
+    UPDATE BASE_DE_DONNE.evenement
+    SET Nombres_Places_Restantes = nombre_places - (SELECT COUNT(usagerid) FROM BASE_DE_DONNE.RESERVATION WHERE evenementid=NEW.evenementid)
+    WHERE evenementid=new.evenementid;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
 
+DROP TRIGGER IF EXISTS check_places_left ON BASE_DE_DONNE.reservation;
+CREATE TRIGGER check_places_left
+    AFTER INSERT OR DELETE OR UPDATE ON base_de_donne.reservation
+    FOR EACH ROW
+EXECUTE FUNCTION placesLeft();
+
+-----------------------Creation de la fonction qui set le nombre de places restantes--------------------------------------------
+CREATE OR REPLACE FUNCTION setplacesLeft()
+    RETURNS TRIGGER
+AS $$
+BEGIN
+    UPDATE BASE_DE_DONNE.evenement
+    SET Nombres_Places_Restantes = nombre_places
+    WHERE evenementid=new.evenementid;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+DROP TRIGGER IF EXISTS set_places_left ON BASE_DE_DONNE.evenement;
+CREATE TRIGGER set_places_left
+    AFTER INSERT ON base_de_donne.evenement
+    FOR EACH ROW
+EXECUTE FUNCTION setplacesLeft();
 ----------------------Creation de la fonction qui verifie si les invités sont acceptés---------------------------------
 CREATE OR REPLACE FUNCTION accept_guests()
     RETURNS TRIGGER
@@ -80,7 +114,6 @@ FROM BASE_DE_DONNE.RESERVATION
 WHERE Telephone_Invite = NEW.Telephone_Invite AND EvenementID = NEW.EvenementID;
 
     IF invite_count = 2 THEN
-        --RAISE EXCEPTION ':)' ;
         UPDATE BASE_DE_DONNE.RESERVATION
         SET Enregistration_Invite = true
         WHERE Telephone_Invite = NEW.Telephone_Invite AND EvenementID = NEW.EvenementID;
@@ -95,7 +128,7 @@ CREATE TRIGGER check_duplicate_invite
     AFTER INSERT ON BASE_DE_DONNE.RESERVATION
     FOR EACH ROW
     EXECUTE FUNCTION prevent_invitation();
------------------------- Creation de la fonction qui regarde si l'invite apparait 2x ------------------------------------
+------------------------ Creation de la fonction qui regarde si le CIP transfert existe ------------------------------------
 CREATE OR REPLACE FUNCTION prevent_transfer()
     RETURNS TRIGGER
 AS $$
@@ -109,9 +142,7 @@ BEGIN
     WHERE usagerid = NEW.usagerid ;
 
     IF user_existence > 0 THEN
-        UPDATE BASE_DE_DONNE.RESERVATION
-        SET usagerid = NEW.usagerid
-        WHERE usagerid = NEW.usagerid AND EvenementID = NEW.EvenementID;
+        RETURN NEW;
     ELSIF user_existence <= 0 THEN
         RAISE EXCEPTION 'Cette personne est inexistante :(' ;
     END IF;
