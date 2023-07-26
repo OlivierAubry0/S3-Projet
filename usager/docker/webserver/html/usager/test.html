@@ -7,73 +7,115 @@
 
   <style>
     /* CSS styles */
-    #feedback-form {
-      width: 280px;
-      margin: 0 auto;
-      background-color: #fcfcfc;
-      padding: 20px 50px 40px;
-      box-shadow: 1px 4px 10px 1px #aaa;
-      font-family: sans-serif;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-    }
 
-    #feedback-form * {
+    body {
+      background-color: #268018 ;
+      font-family: "Lato", sans-serif;
+      align-items: center;
+      justify-content: flex-end;
+      color: white;
+
+    }
+    .event-form {
+      position: absolute;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+      top: 19%;
+      width: 90%;
+      margin: 1%;
+    }
+    .event-form select, .event-form button[type=button] {
+      width: 100%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      border-radius: 4px;
       box-sizing: border-box;
     }
-
-    #feedback-form h2{
-      text-align: center;
-      margin-bottom: 30px;
+    .event-form button[type=button] {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    .event-form button[type=button]:hover {
+      background-color: #45a049;
     }
 
-    #feedback-form input {
-      margin-bottom: 15px;
+    .sidenav {
+      height: 100%;
+      width: 0;
+      position: fixed;
+      z-index: 3;
+      top: 0;
+      left: 0;
+      background-color: #0B4F00;
+      overflow-x: hidden;
+      transition: 0.5s;
+      padding-top: 60px;
     }
 
-    #feedback-form input[type=text] {
+    .sidenav a {
+      padding: 8px 8px 8px 32px;
+      text-decoration: none;
+      font-size: 25px;
+      color: #5BFF5E;
       display: block;
-      height: 32px;
-      padding: 6px 16px;
+      transition: 0.3s;
+      z-index: 3;
+    }
+
+    .sidenav a:hover {
+      color: #f1f1f1;
+      z-index: 3;
+    }
+
+    .sidenav .closebtn {
+      position: absolute;
+      top: 0;
+      right: 25px;
+      font-size: 36px;
+      margin-left: 50px;
+      z-index: 3;
+    }
+
+    @media screen and (max-height: 450px) {
+      .sidenav {padding-top: 15px;}
+      .sidenav a {font-size: 18px;}
+    }
+
+
+    body {
+      font-family: "Lato", sans-serif;
+    }
+    .asso-form {
+      width: 500px;
+      margin: 0 auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+    .asso-form select, .asso-form button[type=button] {
       width: 100%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+    .asso-form button[type=button] {
+      background-color: #4CAF50;
+      color: white;
       border: none;
-      background-color: #f3f3f3;
+      cursor: pointer;
     }
-
-    #feedback-form label {
-      color: #777;
-      font-size: 0.8em;
-    }
-
-    #feedback-form input[type=checkbox] {
-      float: left;
-    }
-
-    #feedback-form input:not(:checked) + #feedback-phone {
-      height: 0;
-      padding-top: 0;
-      padding-bottom: 0;
-    }
-
-    #feedback-form #feedback-phone {
-      transition: .3s;
-    }
-
-    #feedback-form button[type=submit] {
-      display: block;
-      margin: 20px auto 0;
-      width: 150px;
-      height: 40px;
-      border-radius: 25px;
-      border: none;
-      color: #eee;
-      font-weight: 700;
-      box-shadow: 1px 4px 10px 1px #aaa;
-
-      background: green; /* Old browsers */
-      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#207cca', endColorstr='#9f58a3',GradientType=1 ); /* IE6-9 */
+    .asso-form button[type=button]:hover {
+      background-color: #45a049;
     }
     .header {
       position: fixed;
@@ -269,17 +311,6 @@
   </style>
   <script>
     // JavaScript code
-    function toggleSubMenuGuests() {
-      var checkbox = document.getElementById("feedback-form");
-      var sousMenu = document.getElementById("sous-menu");
-
-      if (checkbox.checked) {
-        sousMenu.style.display = "block";
-      } else {
-        sousMenu.style.display = "none";
-      }
-    }
-
     var prevScrollpos = window.pageYOffset;
 
     window.onscroll = function() {
@@ -318,25 +349,179 @@
   left: 0.5%; color: #FFFFFF;" onclick="openNav()">&#9776; UNIVENT</span>
   </div>
 </header>
-<h2 style="position: absolute; left: 36%; top: 10%; font-size: xxx-large; color: green">Obtenir un billet</h2>
-<div id="feedback-form">
 
-    <form>
-      <label for="feedback-notify">J'invite quelqu'un (optionnel)</label>
-      <input type="checkbox" id="feedback-notify" name="notify" onclick="toggleSubMenuGuests()">
-      <div id ="sous-menu">
-      <input type="text" id="Nom_Invite" placeholder="Nom de l'invité">
-      <input type="text" id="Telephone_Invite" placeholder="Numéro de téléphone">
-      <input type="text" id="feedback-phone" name="phone" placeholder="Phone number"></input>
-      </div>
-      <button type="submit" onclick="submitReservation()">Réserver</button>
-    </form>
+
+
+
+<h2 style="position: absolute; left: 31%; top: 5%; font-size: xxx-large; color: green">Créer une association</h2>
+<div class="asso-form" style="top: 20%; position: absolute;">
+  <form>
+    <label for="Asso_EtudianteID">AssoEtudiante Id:</label><br>
+    <select id="Asso_EtudianteID" name="Asso_EtudianteID">
+      <option value="1001">1001</option>
+      <option value="1002">1002</option>
+      <option value="1003">1003</option>
+    </select><br>
+
+    <label for="Asso_Etudiante_Nom">AssoEtudiante Name:</label><br>
+    <select id="Asso_Etudiante_Nom" name="Asso_Etudiante_Nom">
+      <option value="Ageg">Ageg</option>
+      <option value="Amus">Amus</option>
+      <option value="Flsh">Flsh</option>
+    </select><br>
+
+    <label for="FaculteID">AssoEtudiante Fac:</label><br>
+    <select id="FaculteID" name="FaculteID">
+      <option value="4028">Faculte de Genie</option>
+      <option value="4038">Ecole de gestion</option>
+      <option value="4039">Faculte de musique</option>
+    </select><br>
+
+    <label for="UsagerID">AssoEtudiante admin:</label><br>
+    <select id="UsagerID" name="UsagerID">
+      <option value="admin1">admin1</option>
+      <option value="admin2">admin2</option>
+      <option value="admin3">admin3</option>
+    </select><br>
+
+    <button type="button" onclick="submitAsso()">Submit</button>
+
+    <input type="file" id="imageInput" accept="image/*">
+    <button type="button" onclick="submitImage()">Submit Image</button>
+  </form>
 </div>
-
-
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="http://localhost:8180/js/keycloak.js"></script>
 <script>
+
+
+  var keycloak;
+
+  function initKeycloak() {
+    keycloak = new Keycloak({
+      "realm": "usager",
+      "auth-server-url": "http://localhost:8180/",
+      "ssl-required": "external",
+      "clientId": "frontend",
+      "public-client": true,
+      "confidential-port": 0
+    });
+    keycloak.init({onLoad: 'login-required'}).then(function(authenticated) {
+      if (authenticated) {
+        console.log('Authenticated');
+      } else {
+        console.log('Not authenticated');
+      }
+    }).catch(function() {
+      console.log('Failed to initialize');
+    }).finally(function() {
+      displayUserInfo(); // Call the function to display user info
+    });
+  }
+
+  function submitEvent() {
+    var evenementNom = document.getElementById('name').value;
+    var evenementDate = document.getElementById('date').value;
+    var evenementDebut = document.getElementById('start').value;
+    var evenementFin = document.getElementById('end').value;
+    var assoEtudianteID = localStorage.getItem('Asso_EtudianteID');
+    var nombrePlaces = document.getElementById('places').value;
+    var allowGuests = document.getElementById('allow-guests').checked;
+    var description = document.getElementById('description').value;
+
+    var event = {
+      evenementNom: evenementNom,
+      evenementDate: evenementDate,
+      evenementDebut: evenementDebut,
+      evenementFin: evenementFin,
+      assoEtudianteID: assoEtudianteID,
+      nombrePlaces: nombrePlaces,
+      allowGuests: allowGuests,
+      description: description,
+      filename: '',
+    };
+
+    const fileInput = document.getElementById('imageInput');
+    const file = fileInput.files[0];
+    const imageName = file.name;
+
+    event.filename = imageName;
+
+    const formData = new FormData();
+    formData.append('eventData', JSON.stringify(event)); // Convert event object to JSON and append it to the form data
+    formData.append('image', file, imageName); // Append the image file with the given name
+
+    axios
+            .post('http://localhost:8888/api/events', formData, {
+              headers: {
+                'Content-Type': 'multipart/form-data',
+                Authorization: 'Bearer ' + keycloak.token // Replace keycloak.token with your actual bearer token
+              }
+            })
+            .then(function(response) {
+              if (response.status === 201) {
+                alert('Event created!');
+                window.location.href = 'admin_event_creator.html'; // Replace with the path to your main menu HTML file
+              } else {
+                alert(response.status);
+              }
+            })
+            .catch(function(error) {
+              console.error(error);
+            });
+  }
+
+  function logout() {
+    let logoutURL = "http://localhost:8180//realms/usager/protocol/openid-connect/logout"
+    window.location.href = logoutURL;
+  }
+
+  function openNav() {
+    document.getElementById("mySidenav").style.width = "250px";
+    document.getElementById("user-info").classList.add("fade-in");
+  }
+
+  function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+    document.getElementById("user-info").classList.remove("fade-in");
+  }
+
+  function updateEventPreview() {
+    var evenementNom = document.getElementById('name').value;
+    var evenementDate = document.getElementById('date').value;
+    var evenementDebut = document.getElementById('start').value;
+    var evenementFin = document.getElementById('end').value;
+    var nombrePlaces = document.getElementById('places').value;
+    var allowGuests = document.getElementById('allow-guests').checked;
+    var description = document.getElementById('description').value;
+
+    var eventPreview = document.getElementById('event-preview');
+    eventPreview.innerHTML = `
+    <form style="max-width: 600px; word-break: break-word; overflow: auto; max-height: 100%">
+        <p><strong>Event Name:</strong>${evenementNom}</span></p>
+        <p><strong>Date:</strong> <span${evenementDate}</p>
+        <p><strong>Start Time: </strong>${evenementDebut}</p>
+        <p><strong>End Time: </strong>${evenementFin}</p>
+        <p><strong>Number of Places: </strong>${nombrePlaces}</p>
+        <p><strong>Allow Guests: </strong>${allowGuests ? 'Yes' : 'No'}</p>
+        <pre style="font-family: Arial"><strong>Description: </strong>${description}</pre>
+    </form>
+    <img id="preview-image" src="shadow_image.png" alt="Ajoute un image!"
+    style="width: 50%; height: 95%; position: absolute; right: 1%">
+  `;
+
+    var fileInput = document.getElementById('imageInput');
+    var previewImage = document.getElementById('preview-image');
+    if (fileInput.files && fileInput.files[0]) {
+      var reader = new FileReader();
+      reader.onload = function (e) {
+        previewImage.src = e.target.result;
+      };
+      reader.readAsDataURL(fileInput.files[0]);
+    }
+  }
+
+
 
   function redirectToEventsTablePerFac(value) {
     var url = 'eventsTablePerFac.html?FaculteID=' + encodeURIComponent(value);
@@ -433,6 +618,110 @@
     var userInfoDiv = document.getElementById('user-info');
     userInfoDiv.innerHTML = '';
     userInfoDiv.appendChild(userInfoList);
+  }
+  function displayUserInfo() {
+    var token = keycloak.tokenParsed;
+    var name = token.name;
+
+    var userInfoList = document.createElement('ul');
+    var nameItem = document.createElement('li');
+    var rolesItem = document.createElement('li');
+
+    nameItem.textContent = 'Nom : \n' + name;
+    rolesItem.textContent = 'Role: master';
+
+    userInfoList.appendChild(nameItem);
+    userInfoList.appendChild(rolesItem);
+
+    var userInfoDiv = document.getElementById('user-info');
+    userInfoDiv.innerHTML = ''; // Remove any existing content
+    userInfoDiv.appendChild(userInfoList);
+  }
+
+
+  var keycloak;
+
+  function initKeycloak() {
+    keycloak = new Keycloak({
+      "realm": "usager",
+      "auth-server-url": "http://localhost:8180/",
+      "ssl-required": "external",
+      "clientId": "frontend",
+      "public-client": true,
+      "confidential-port": 0
+    });
+    keycloak.init({ onLoad: 'login-required' })
+            .success(function (authenticated) {
+              if (authenticated) {
+                alert('authenticated');
+                displayUserInfo();
+              } else {
+                alert('not authenticated');
+              }
+            })
+            .error(function () {
+              alert('failed to initialize');
+            });
+
+  }
+
+  function submitAsso() {
+    var Asso_EtudianteID = document.getElementById('Asso_EtudianteID').value;
+    var Asso_Etudiante_Nom = document.getElementById('Asso_Etudiante_Nom').value;
+    var FaculteID = document.getElementById('FaculteID').value;
+    var UsagerID = document.getElementById('UsagerID').value;
+
+    var asso = {
+      Asso_EtudianteID: Asso_EtudianteID,
+      Asso_Etudiante_Nom: Asso_Etudiante_Nom,
+      FaculteID: FaculteID,
+      UsagerID: UsagerID
+    };
+
+    axios.post('http://localhost:8888/api/Asso', asso, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + keycloak.token // Replace keycloak.token with your actual bearer token
+      }
+    })
+            .then(function(response) {
+              if (response.status === 201) {
+                alert("Association created!");
+                window.location.href = 'master_manager.html'; // Replace with the path to your main menu HTML file
+              }else {
+                alert(response.status);
+              }
+            })
+            .catch(function(error) {
+              console.error(error);
+              alert("Assurez vous que l'admin existe et que l'id n'est pas encore utilisé ");
+            });
+  }
+
+  function submitImage() {
+    var imageInput = document.getElementById('imageInput');
+    var file = imageInput.files[0];
+
+    var reader = new FileReader();
+
+    reader.onload = function(asso) {
+      var arrayBuffer = asso.target.result;
+
+      var blob = new Blob([arrayBuffer], { type: file.type });
+
+      var formData = new FormData();
+      formData.append('image', blob);
+
+      axios.post('http://localhost:8888/api/Asso/uploadImage', formData)
+              .then(function(response) {
+                console.log('Image uploaded successfully.');
+              })
+              .catch(function(error) {
+                console.error('Error uploading image:', error);
+              });
+    };
+
+    reader.readAsArrayBuffer(file);
   }
 </script>
 

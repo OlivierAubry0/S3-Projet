@@ -5,10 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="72deba85-9ca0-4a47-be77-f89dff0e225c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/usager/docker/webserver/html/usager/test.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/docker/webserver/html/usager/Assotables.html" beforeDir="false" afterPath="$PROJECT_DIR$/usager/docker/webserver/html/usager/Assotables.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/usager/docker/webserver/html/usager/admin_event_creator.html" beforeDir="false" afterPath="$PROJECT_DIR$/usager/docker/webserver/html/usager/admin_event_creator.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/docker/webserver/html/usager/createAsso.html" beforeDir="false" afterPath="$PROJECT_DIR$/usager/docker/webserver/html/usager/createAsso.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/usager/docker/webserver/html/usager/getTicket.html" beforeDir="false" afterPath="$PROJECT_DIR$/usager/docker/webserver/html/usager/getTicket.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/docker/webserver/html/usager/test.html" beforeDir="false" afterPath="$PROJECT_DIR$/usager/docker/webserver/html/usager/test.html" afterDir="false" />
     </list>
     <list id="369c521e-6498-4c34-9420-4a88351b04df" name="Changes by newto" comment="" />
     <list id="132ce79e-c3a8-42e5-aa9e-005f3e61ba33" name="Changes by ycast" comment="" />
@@ -278,6 +280,7 @@
       <workItem from="1689860110096" duration="1281000" />
       <workItem from="1690088302300" duration="4180000" />
       <workItem from="1690313218644" duration="4226000" />
+      <workItem from="1690390839928" duration="1926000" />
     </task>
     <servers />
   </component>

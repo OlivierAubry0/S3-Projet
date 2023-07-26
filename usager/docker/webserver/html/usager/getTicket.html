@@ -274,9 +274,9 @@
       var sousMenu = document.getElementById("sous-menu");
 
       if (checkbox.checked) {
-        sousMenu.style.display = "block";
-      } else {
         sousMenu.style.display = "none";
+      } else {
+        sousMenu.style.display = "block";
       }
     }
 
@@ -323,13 +323,13 @@
 
   <form>
     <label for="feedback-notify">J'invite quelqu'un (optionnel)</label>
-    <input type="checkbox" id="feedback-notify" name="notify" onclick="toggleSubMenuGuests()">
+    <input type="checkbox" id="feedback-notify" name="notify">
     <div id ="sous-menu">
       <input type="text" id="Nom_Invite" placeholder="Nom de l'invité">
       <input type="text" id="Telephone_Invite" placeholder="Numéro de téléphone">
       <input type="text" id="feedback-phone" name="phone" placeholder="Phone number"></input>
     </div>
-    <button type="submit" onclick="submitReservation()">Réserver</button>
+    <button class="button-24" onclick="submitReservation()" style="top: 82%">Réserver</button>
   </form>
 </div>
 
