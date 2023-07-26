@@ -139,6 +139,7 @@
         "public-client": true,
         "confidential-port": 0
       });
+
       keycloak.init({ onLoad: 'login-required' })
               .success(function (authenticated) {
                 if (authenticated) {
@@ -152,6 +153,7 @@
                 alert('failed to initialize');
               });
     }
+
     function openNav() {
       document.getElementById("mySidenav").style.width = "250px";
       document.getElementById("user-info").classList.add("fade-in");
@@ -160,6 +162,10 @@
     function closeNav() {
       document.getElementById("mySidenav").style.width = "0";
       document.getElementById("user-info").classList.remove("fade-in");
+    }
+
+    function logout() {
+      keycloak.logout({ redirectUri: 'http://localhost/usager' });
     }
 
     function CheckMyEvents() {
@@ -208,7 +214,15 @@
                       }
                     });
                   } else {
-                    alert("Aucun réservation trouvée !");
+                    var messageContainer = document.createElement('div');
+                    messageContainer.style.position = 'fixed';
+                    messageContainer.style.top = '50%';
+                    messageContainer.style.left = '50%';
+                    messageContainer.style.transform = 'translate(-50%, -50%)';
+                    messageContainer.style.textAlign = 'center';
+                    messageContainer.style.fontSize = '2em';
+                    messageContainer.innerText = 'Aucune réservation trouvée !';
+                    document.body.appendChild(messageContainer);
                   }
                 } else {
                   alert(response.status);

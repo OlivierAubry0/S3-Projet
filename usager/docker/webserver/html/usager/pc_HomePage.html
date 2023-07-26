@@ -11,7 +11,7 @@
       height: 100%;
       width: 0;
       position: fixed;
-      z-index: 3;
+      z-index: 1000;
       top: 0;
       left: 0;
       background-color: #0B4F00;
@@ -259,8 +259,7 @@
 
 
     function logout() {
-      let logoutURL = "http://localhost:8180/realms/usager/protocol/openid-connect/logout";
-      window.location.href = logoutURL;
+      keycloak.logout({ redirectUri: 'http://localhost/usager' });
     }
 
     function scrollToHeight() {
