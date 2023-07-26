@@ -6,14 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="72deba85-9ca0-4a47-be77-f89dff0e225c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usager/docker/postgres/Vue.sql" beforeDir="false" afterPath="$PROJECT_DIR$/usager/docker/postgres/Vue.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usager/docker/postgres/database.sql" beforeDir="false" afterPath="$PROJECT_DIR$/usager/docker/postgres/database.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usager/docker/postgres/triggers.sql" beforeDir="false" afterPath="$PROJECT_DIR$/usager/docker/postgres/triggers.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usager/docker/webserver/html/usager/MyEvents.html" beforeDir="false" afterPath="$PROJECT_DIR$/usager/docker/webserver/html/usager/MyEvents.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usager/docker/webserver/html/usager/eventsTablePerFac.html" beforeDir="false" afterPath="$PROJECT_DIR$/usager/docker/webserver/html/usager/eventsTablePerFac.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/usager/docker/webserver/html/usager/getTicket.html" beforeDir="false" afterPath="$PROJECT_DIR$/usager/docker/webserver/html/usager/getTicket.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usager/service/src/main/java/ca/usherbrooke/gegi/server/admin/Event.java" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/src/main/java/ca/usherbrooke/gegi/server/admin/Event.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usager/service/src/main/java/ca/usherbrooke/gegi/server/admin/EventShowedToStudents.java" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/src/main/java/ca/usherbrooke/gegi/server/admin/EventShowedToStudents.java" afterDir="false" />
     </list>
     <list id="369c521e-6498-4c34-9420-4a88351b04df" name="Changes by newto" comment="" />
     <list id="132ce79e-c3a8-42e5-aa9e-005f3e61ba33" name="Changes by ycast" comment="" />
@@ -279,7 +272,7 @@
       <workItem from="1687979399380" duration="31691000" />
       <workItem from="1689783985135" duration="18343000" />
       <workItem from="1689860110096" duration="1281000" />
-      <workItem from="1690350083972" duration="12408000" />
+      <workItem from="1690350083972" duration="13674000" />
     </task>
     <servers />
   </component>

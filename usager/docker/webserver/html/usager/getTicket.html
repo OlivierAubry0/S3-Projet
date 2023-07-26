@@ -10,7 +10,22 @@
       background-color: #268018;
       font-family: "Lato", sans-serif;
     }
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+    }
+
+    /* Add a new class for the events div to control its width */
+    .events-container {
+      width: 500px; /* Adjust this width as needed */
+    }
     .event-form {
+      position: relative;
+      justify-content: space-evenly;
+      padding: 24px;
+      display: flex;
       width: 500px;
       margin: 0 auto;
       padding: 20px;
@@ -81,7 +96,13 @@
       background-color: #f2f2f2;
       padding: 24px;
     }
-
+    h2 {
+      position: absolute;
+      left: 36%;
+      top: 10%;
+      font-size: xxx-large;
+      margin-bottom: 10px;
+    }
     .event-img {
       position: relative;
 
@@ -100,6 +121,17 @@
     }
 
     .event-button {
+
+      position: relative;
+      justify-content: space-evenly;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex: 1;
+    }
+
+    .event-display {
 
       position: relative;
       justify-content: space-evenly;
@@ -323,10 +355,13 @@
   <img src="assets/UdeS.png" alt="logo_UdS" style="width: 100%; height: 100%;">
 </div>
 
-<h2 style="position: absolute; left: 36%; top: 10%; font-size: xxx-large">Obtenir un billet</h2>
-<div class="event-button" id="events">
-</div>
-<div class="event-form" style="position: absolute; left: 32%; top: 30%">
+
+<div class="container">
+  <h2 style="position: absolute; left: 36%; top: 10%; font-size: xxx-large">Obtenir un billet</h2>
+  <div class="event-display events-container" id="events">
+    <!-- Events will be displayed here -->
+  </div>
+  <div class="event-form">
   <form>
     <input type="checkbox" id="checkbox" onclick="toggleSubMenuGuests()">
     <label for="checkbox">J'invite quelqu'un!            (Optionnel)</label>
@@ -337,6 +372,7 @@
     <button type="button" onclick="submitReservation()">Reserver</button>
 
   </form>
+</div>
 </div>
 </body>
 </html>
