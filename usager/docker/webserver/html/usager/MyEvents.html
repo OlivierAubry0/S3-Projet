@@ -83,160 +83,151 @@
 
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script src="http://localhost:8180/js/keycloak.js"></script>
-</head>
+  <script>
 
+    var userID;
+    function getUserInfo() {
+      var token = keycloak.tokenParsed;
 
+      var userInfoList = document.createElement('ul');
 
-<h1>...</h1>
-
-<div id="qr-reader" style="width: 600px"></div>
-
-<script src="https://unpkg.com/html5-qrcode"></script>
-<script>
-
-  var userID;
-  function getUserInfo() {
-    var token = keycloak.tokenParsed;
-
-    var userInfoList = document.createElement('ul');
-
-    for (var prop in token) {
-      if (token.hasOwnProperty(prop)) {
-        var infoItem = document.createElement('li');
-        infoItem.textContent = prop + ': ' + token[prop];
-        userInfoList.appendChild(infoItem);
-        if(prop==='preferred_username'){
-          userID=token[prop];CheckMyEvents();
+      for (var prop in token) {
+        if (token.hasOwnProperty(prop)) {
+          var infoItem = document.createElement('li');
+          infoItem.textContent = prop + ': ' + token[prop];
+          userInfoList.appendChild(infoItem);
+          if(prop==='preferred_username'){
+            userID=token[prop];CheckMyEvents();
+          }
         }
       }
+
+      var userInfoDiv = document.getElementById('user-info');
+      userInfoDiv.innerHTML = ''; // Supprime tout contenu existant
+      userInfoDiv.appendChild(userInfoList);
+      console.log(userID);
+
+    }
+    function displayUserInfo() {
+      var token = keycloak.tokenParsed;
+      var name = token.name;
+
+      var userInfoList = document.createElement('ul');
+      var nameItem = document.createElement('li');
+      var rolesItem = document.createElement('li');
+
+      nameItem.textContent = 'Nom : \n' + name;
+      rolesItem.textContent =  'Role: Etudiant';
+
+      userInfoList.appendChild(nameItem);
+      userInfoList.appendChild(rolesItem);
+
+      var userInfoDiv = document.getElementById('user-info');
+      userInfoDiv.innerHTML = ''; // Supprime tout contenu existant
+      userInfoDiv.appendChild(userInfoList);
     }
 
-    var userInfoDiv = document.getElementById('user-info');
-    userInfoDiv.innerHTML = ''; // Supprime tout contenu existant
-    userInfoDiv.appendChild(userInfoList);
-    console.log(userID);
+    var keycloak;
 
-  }
-  function displayUserInfo() {
-    var token = keycloak.tokenParsed;
-    var name = token.name;
+    function initKeycloak() {
 
-    var userInfoList = document.createElement('ul');
-    var nameItem = document.createElement('li');
-    var rolesItem = document.createElement('li');
+      keycloak = new Keycloak({
+        "realm": "usager",
+        "auth-server-url": "http://localhost:8180/",
+        "ssl-required": "external",
+        "clientId": "frontend",
+        "public-client": true,
+        "confidential-port": 0
+      });
+      keycloak.init({ onLoad: 'login-required' })
+              .success(function (authenticated) {
+                if (authenticated) {
+                  getUserInfo();
+                  displayUserInfo();
+                } else {
+                  alert('not authenticated');
+                }
+              })
+              .error(function () {
+                alert('failed to initialize');
+              });
+    }
+    function openNav() {
+      document.getElementById("mySidenav").style.width = "250px";
+      document.getElementById("user-info").classList.add("fade-in");
+    }
 
-    nameItem.textContent = 'Nom : \n' + name;
-    rolesItem.textContent =  'Role: Etudiant';
+    function closeNav() {
+      document.getElementById("mySidenav").style.width = "0";
+      document.getElementById("user-info").classList.remove("fade-in");
+    }
 
-    userInfoList.appendChild(nameItem);
-    userInfoList.appendChild(rolesItem);
-
-    var userInfoDiv = document.getElementById('user-info');
-    userInfoDiv.innerHTML = ''; // Supprime tout contenu existant
-    userInfoDiv.appendChild(userInfoList);
-  }
-
-  var keycloak;
-
-  function initKeycloak() {
-
-    keycloak = new Keycloak({
-      "realm": "usager",
-      "auth-server-url": "http://localhost:8180/",
-      "ssl-required": "external",
-      "clientId": "frontend",
-      "public-client": true,
-      "confidential-port": 0
-    });
-    keycloak.init({ onLoad: 'login-required' })
-            .success(function (authenticated) {
-              if (authenticated) {
-                getUserInfo();
-                displayUserInfo();
-              } else {
-                alert('not authenticated');
-              }
-            })
-            .error(function () {
-              alert('failed to initialize');
-            });
-  }
-  function openNav() {
-    document.getElementById("mySidenav").style.width = "250px";
-    document.getElementById("user-info").classList.add("fade-in");
-  }
-
-  function closeNav() {
-    document.getElementById("mySidenav").style.width = "0";
-    document.getElementById("user-info").classList.remove("fade-in");
-  }
-
-  function CheckMyEvents() {
-    var UsagerID = userID;
-    var url = 'http://localhost:8888/api/events/MyEvents?UsagerID=' + encodeURIComponent(UsagerID);
-    axios.post(url, {}, {
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-            .then(function (response) {
-              if (response.status === 201) {
-                var MyEvents = response.data;
-                if (MyEvents.length > 0) {
-                  var usersContainer = document.getElementById('users');
-                  usersContainer.innerHTML = ''; // Remove any existing content
-                  var leftPosition = 205, topPosition=100; // Initial top position
-                  var count = 0; // Initialize count
-                  MyEvents.forEach(function (MyEvents, index) {
-                    var userButton = document.createElement('button');
-                    userButton.className = 'event';
-                    userButton.style.position = 'absolute';
-                    userButton.style.top = topPosition + 'px';// Set the top position dynamically
-                    userButton.style.left = leftPosition + 'px'; // Set the left position dynamically
-                    userButton.style.size = 'absolute';
-                    userButton.style.width = 200 + 'px';
-                    userButton.style.height = 200 + 'px';
-                    userButton.addEventListener('click', function () {
-                      localStorage.setItem('EvenementID', MyEvents.EvenementID);
-                      localStorage.setItem('UsagerID', userID);
-                      window.location.href = 'MyEventsActions.html';
-                    });
-                    userButton.innerHTML =
-                            `
+    function CheckMyEvents() {
+      var UsagerID = userID;
+      var url = 'http://localhost:8888/api/events/MyEvents?UsagerID=' + encodeURIComponent(UsagerID);
+      axios.post(url, {}, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+              .then(function (response) {
+                if (response.status === 201) {
+                  var MyEvents = response.data;
+                  if (MyEvents.length > 0) {
+                    var usersContainer = document.getElementById('users');
+                    usersContainer.innerHTML = ''; // Remove any existing content
+                    var leftPosition = 205, topPosition=100; // Initial top position
+                    var count = 0; // Initialize count
+                    MyEvents.forEach(function (MyEvents, index) {
+                      var userButton = document.createElement('button');
+                      userButton.className = 'event';
+                      userButton.style.position = 'absolute';
+                      userButton.style.top = topPosition + 'px';// Set the top position dynamically
+                      userButton.style.left = leftPosition + 'px'; // Set the left position dynamically
+                      userButton.style.size = 'absolute';
+                      userButton.style.width = 200 + 'px';
+                      userButton.style.height = 200 + 'px';
+                      userButton.addEventListener('click', function () {
+                        localStorage.setItem('EvenementID', MyEvents.EvenementID);
+                        localStorage.setItem('UsagerID', userID);
+                        window.location.href = 'MyEventsActions.html';
+                      });
+                      userButton.innerHTML =
+                              `
               <p>Nom evenement : ${MyEvents.Evenement_Nom}</p>
               <p>Date: ${MyEvents.Evenement_Date}</p>
               <p>Nom de l'invité: ${MyEvents.Nom_Invite}</p>
               <p>Invité est-il validé? : ${MyEvents.Enregistration_Invite}</p>`;
-                    usersContainer.appendChild(userButton);
-                    leftPosition += 300; // Increment the top position by 300px for the next button
-                    count++; // Increment count
-                    if (count >= 3) {
-                      leftPosition = 205; // Reset the top position to 205 pixels
-                      topPosition+=300;
-                      count = 0; // Reset count to zero
-                    }
-                  });
+                      usersContainer.appendChild(userButton);
+                      leftPosition += 300; // Increment the top position by 300px for the next button
+                      count++; // Increment count
+                      if (count >= 3) {
+                        leftPosition = 205; // Reset the top position to 205 pixels
+                        topPosition+=300;
+                        count = 0; // Reset count to zero
+                      }
+                    });
+                  } else {
+                    alert("Aucun réservation trouvée !");
+                  }
                 } else {
-                  alert("Aucun réservation trouvée !");
+                  alert(response.status);
                 }
-              } else {
-                alert(response.status);
-              }
-            })
-            .catch(function (error) {
-              console.error(error);
-            });
-  }
-  var val_x=205, hauteur=840,count=3;
- function position(){
-    val_x+=300;
-    if (count>=3){
-      hauteur+=300;
-      val_x=205;
-      count=0;
+              })
+              .catch(function (error) {
+                console.error(error);
+              });
     }
- }
-</script>
+    var val_x=205, hauteur=840,count=3;
+    function position(){
+      val_x+=300;
+      if (count>=3){
+        hauteur+=300;
+        val_x=205;
+        count=0;
+      }
+    }
+  </script>
 </head>
 <body onload="initKeycloak()" >
 <h2>View All My Events </h2>

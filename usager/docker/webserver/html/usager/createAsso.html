@@ -8,7 +8,9 @@
   <style>
     /* CSS styles */
     body {
+      background-color: white;
       font-family: "Lato", sans-serif;
+      color: grey;
     }
     .asso-form {
       width: 500px;
@@ -18,7 +20,9 @@
       border-radius: 4px;
       box-sizing: border-box;
     }
-    .asso-form select, .asso-form button[type=button] {
+    .asso-form select,
+    .asso-form input[type="text"],
+    .asso-form button[type=button] {
       width: 100%;
       padding: 12px 20px;
       margin: 8px 0;
@@ -254,6 +258,12 @@
 
   </script>
 </head>
+<body>
+<div id="mySidenav" class="sidenav">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  <a href="master_manager.html">Accueil</a>
+  <a href="#" onclick="logout()">Déconnexion</a>
+</div>
 
 
 <body onload="initKeycloak()">
@@ -280,12 +290,6 @@
 <h2 style="position: absolute; left: 31%; top: 5%; font-size: xxx-large; color: green">Créer une association</h2>
 <div class="asso-form" style="top: 20%; position: absolute;">
   <form>
-    <label for="Asso_EtudianteID">AssoEtudiante Id:</label><br>
-    <select id="Asso_EtudianteID" name="Asso_EtudianteID">
-      <option value="1001">1001</option>
-      <option value="1002">1002</option>
-      <option value="1003">1003</option>
-    </select><br>
 
     <label for="Asso_Etudiante_Nom" style="color: black;">AssoEtudiante Name:</label><br>
     <select id="Asso_Etudiante_Nom" name="Asso_Etudiante_Nom">
@@ -310,8 +314,62 @@
 
     <button type="button" onclick="submitAsso()">Submit</button>
 
-    <input type="file" id="imageInput" accept="image/*">
-    <button type="button" onclick="submitImage()">Submit Image</button>
+    <script>
+
+      function populateFaculteOptions() {
+        axios.get('http://localhost:8888/api/Asso/getAllFaculteData', {
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        })
+                .then(function(response) {
+                  var faculteData = response.data; // La réponse doit être un objet avec noms et ID de facultés
+                  var select = document.getElementById('FaculteID');
+
+                  faculteData.forEach(function(faculte) {
+                    var option = document.createElement('option');
+                    option.value = faculte.id;
+                    option.textContent = faculte.name;
+                    select.appendChild(option);
+                  });
+                })
+                .catch(function(error) {
+                  console.error(error);
+                  alert("Erreur lors de la récupération des facultés.");
+                });
+      }
+
+      function populateUsagerOptions() {
+        axios.get('http://localhost:8888/api/Asso/getUsagerID', {
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        })
+                .then(function(response) {
+                  var usagerIDs = response.data; // La réponse doit être une liste de chaînes de caractères (identifiants d'utilisateurs)
+                  var select = document.getElementById('UsagerID');
+
+                  usagerIDs.forEach(function(usagerID) {
+                    var option = document.createElement('option');
+                    option.value = usagerID;
+                    option.textContent = usagerID;
+                    select.appendChild(option);
+                  });
+                })
+                .catch(function(error) {
+                  console.error(error);
+                  alert("Erreur lors de la récupération des administrateurs.");
+                });
+      }
+
+      // Appelez les fonctions pour charger les options lors du chargement de la page
+      window.onload = function() {
+        populateUsagerOptions();
+        populateFaculteOptions();
+      };
+
+    </script>
+
   </form>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>

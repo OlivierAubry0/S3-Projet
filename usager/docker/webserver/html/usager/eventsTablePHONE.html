@@ -3,6 +3,55 @@
 <head>
   <title>Events</title>
 
+  <script src="includes/ipaddress.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script>
+
+    function openNav() {
+      document.getElementById("mySidenav").style.width = "100%";
+      document.getElementById("user-info").classList.add("fade-in");
+    }
+
+    function closeNav() {
+      document.getElementById("mySidenav").style.width = "0";
+      document.getElementById("user-info").classList.remove("fade-in");
+    }
+
+    function getEvents() {
+      axios.get('http://'+ ipAddress +':8888/api/events', {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+              .then(function (response) {
+                var events = response.data;
+                var eventsContainer = document.getElementById('events');
+
+                events.forEach(function (event) {
+                  var eventCard = document.createElement('div');
+                  eventCard.className = 'event-card';
+                  eventCard.innerHTML = `
+            <img src="http://${ipAddress}:8080/${event.filename}" alt="Event Image" onclick="window.location.href = 'getTicket.html'">
+            <h3>${event.evenementNom}</h3>
+            <p><strong>Date:</strong> ${event.evenementDate}</p>
+            <p><strong>Start Time:</strong> ${event.evenementDebut}</p>
+            <p><strong>End Time:</strong> ${event.evenementFin}</p>
+            <p><strong>Number of Places:</strong> ${event.nombrePlaces}</p>
+            <p><strong>Allow Guests:</strong> ${event.allowGuests ? 'Yes' : 'No'}</p>
+            <p><strong>Description:</strong></p>
+            <pre>${event.description}</pre>
+          `;
+                  eventsContainer.appendChild(eventCard);
+                  localStorage.setItem('EvenementID', event.evenementID);
+                });
+              })
+              .catch(function (error) {
+                console.error(error);
+              });
+    }
+    getEvents();
+  </script>
+
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -101,54 +150,5 @@
 
 <div style="top: 8%" id="blackLine1">
 </div>
-
-<script src="includes/ipaddress.js"></script>
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-<script>
-
-  function openNav() {
-    document.getElementById("mySidenav").style.width = "100%";
-    document.getElementById("user-info").classList.add("fade-in");
-  }
-
-  function closeNav() {
-    document.getElementById("mySidenav").style.width = "0";
-    document.getElementById("user-info").classList.remove("fade-in");
-  }
-
-  function getEvents() {
-    axios.get('http://'+ ipAddress +':8888/api/events', {
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-            .then(function (response) {
-              var events = response.data;
-              var eventsContainer = document.getElementById('events');
-
-              events.forEach(function (event) {
-                var eventCard = document.createElement('div');
-                eventCard.className = 'event-card';
-                eventCard.innerHTML = `
-            <img src="http://${ipAddress}:8080/${event.filename}" alt="Event Image" onclick="window.location.href = 'getTicket.html'">
-            <h3>${event.evenementNom}</h3>
-            <p><strong>Date:</strong> ${event.evenementDate}</p>
-            <p><strong>Start Time:</strong> ${event.evenementDebut}</p>
-            <p><strong>End Time:</strong> ${event.evenementFin}</p>
-            <p><strong>Number of Places:</strong> ${event.nombrePlaces}</p>
-            <p><strong>Allow Guests:</strong> ${event.allowGuests ? 'Yes' : 'No'}</p>
-            <p><strong>Description:</strong></p>
-            <pre>${event.description}</pre>
-          `;
-                eventsContainer.appendChild(eventCard);
-                localStorage.setItem('EvenementID', event.evenementID);
-              });
-            })
-            .catch(function (error) {
-              console.error(error);
-            });
-  }
-  getEvents();
-</script>
 </body>
 </html>

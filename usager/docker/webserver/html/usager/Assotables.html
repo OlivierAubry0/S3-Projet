@@ -56,10 +56,6 @@
       transition: transform 0.3s ease;
     }
 
-    .pop-up-content.show {
-      transform: translate(-50%, -50%) scale(1);
-    }
-
     .pop-up-content p {
       margin: 10px 0;
       font-size: 18px;
@@ -76,15 +72,18 @@
     }
 
     .filter-container {
-      margin-bottom: 10px;
+      text-align: center;
+      margin-top: 20px; /* Add some space between the heading and filtering elements */
+      margin-bottom: 20px; /* Add some space between filtering elements and associations */
     }
 
     .filter-container input[type="text"] {
-      padding: 15px;
+      padding: 10px;
+      margin-right: 10px; /* Add some space between input and button */
     }
 
     .filter-container button[type="button"] {
-      padding: 5px 10px;
+      padding: 8px 16px;
       background-color: #4CAF50;
       color: white;
       border: none;
@@ -95,9 +94,31 @@
       background-color: #45a049;
     }
 
-    .edit-input {
+    h2 {
+      text-align: center;
+    }
+
+    .sidenav {
+      height: 100%;
+      width: 0;
+      position: fixed;
+      z-index: 3;
+      top: 0;
+      left: 0;
+      background-color: #0B4F00;
+      overflow-x: hidden;
+      transition: 0.5s;
+      padding-top: 60px;
+    }
+
+    .sidenav a {
+      padding: 8px 8px 8px 32px;
+      text-decoration: none;
+      font-size: 25px;
+      color: #5BFF5E;
       display: block;
-      margin-bottom: 10px;
+      transition: 0.3s;
+      z-index: 3;
     }
     .header {
       position: fixed;
@@ -320,14 +341,13 @@
       });
 
       popUpContent.innerHTML =
-              `<p><strong>ID:</strong> ${asso.Asso_EtudianteID}</p>
+              `
          <p><strong>Nom:</strong> ${asso.Asso_Etudiante_Nom}</p>
          <p><strong>Faculte:</strong> ${asso.Faculte_Nom}</p>
          <p><strong>Administrateur:</strong> ${asso.UsagerID}</p>`;
 
       // Stocker les valeurs des champs dans la variable globale currentAsso
       currentAsso = {
-        Asso_EtudianteID: asso.Asso_EtudianteID,
         Asso_Etudiante_Nom: asso.Asso_Etudiante_Nom,
         FaculteID: asso.FaculteID,
         UsagerID: asso.UsagerID
@@ -337,6 +357,8 @@
       editButton.textContent = 'Modifier';
       editButton.addEventListener('click', function() {
         editAsso(asso);
+        populateUsagerOptions();
+        populateFaculteOptions();
       });
 
       var deleteButton = document.createElement('button');
@@ -367,10 +389,10 @@
                   var assoButton = document.createElement('button');
                   assoButton.className = 'large-button';
                   assoButton.innerHTML =
-                          `<p><strong>ID:</strong> ${asso.Asso_EtudianteID}</p>
-               <p><strong>Nom:</strong> ${asso.Asso_Etudiante_Nom}</p>
-               <p><strong>Faculte:</strong> ${asso.Faculte_Nom}</p>
-               <p><strong>Administrateur:</strong> ${asso.UsagerID}</p>`;
+                          `
+          <p><strong>Nom:</strong> ${asso.Asso_Etudiante_Nom}</p>
+          <p><strong>Faculte:</strong> ${asso.Faculte_Nom}</p>
+          <p><strong>Administrateur:</strong> ${asso.UsagerID}</p>`;
 
                   assoButton.addEventListener('click', function() {
                     showAssoDetails(asso);
@@ -388,7 +410,7 @@
       var input = document.getElementById('assoFilter').value.toLowerCase();
       var assos = document.getElementsByClassName('large-button');
       for (var i = 0; i < assos.length; i++) {
-        var assoName = assos[i].getElementsByTagName('p')[1].textContent.toLowerCase();
+        var assoName = assos[i].getElementsByTagName('p')[0].textContent.toLowerCase();
         if (input === "") {
           // Si le champ de filtre est vide, rétablir la disposition horizontale
           assos[i].style.display = 'inline-block';
@@ -451,7 +473,7 @@
       asso.FaculteID = editFaculte;
       asso.UsagerID = editAdmin;
       var url = 'http://localhost:8888/api/Asso/Asso_EtudianteID?Asso_EtudianteID=' + encodeURIComponent(assId) + '&FaculteID=' + encodeURI(editFaculte) + '&Asso_Etudiante_Nom=' + encodeURI(editNom) + '&UsagerID=' + encodeURI(editAdmin);
-      // Effectuer la requête PUT pour mettre à jour l'association
+      // Effectuer la requête POST pour mettre à jour l'association
       axios.post(url, {
         headers: {
           'Content-Type': 'application/json'
@@ -509,29 +531,11 @@
       editFaculte.required = true;
       editFaculte.classList.add('edit-input'); // Ajout de la classe CSS
 
-      var faculteOption1 = document.createElement('option');
-      faculteOption1.value = '4028';
-      faculteOption1.textContent = 'Faculte de Genie';
-
-      var faculteOption2 = document.createElement('option');
-      faculteOption2.value = '4038';
-      faculteOption2.textContent = 'Ecole de gestion';
-
-      var faculteOption3 = document.createElement('option');
-      faculteOption3.value = '4039';
-      faculteOption3.textContent = 'Faculte de musique';
-
-// Ajouter les options au menu déroulant
-      editFaculte.appendChild(faculteOption1);
-      editFaculte.appendChild(faculteOption2);
-      editFaculte.appendChild(faculteOption3);
-
       var adminLabel = document.createElement('label');
       adminLabel.textContent = 'Administrateur:';
-      var editAdmin = document.createElement('input');
-      editAdmin.type = 'text';
+      var editAdmin = document.createElement('select');
       editAdmin.id = 'editAdmin';
-      editAdmin.value = asso.UsagerID;
+      //editAdmin.value = asso.UsagerID;
       editAdmin.required = true;
       editAdmin.classList.add('edit-input'); // Ajout de la classe CSS
 
@@ -574,11 +578,9 @@
     }
 
 
-
-
     function deleteAsso(currentAsso) {
       if (currentAsso) {
-        axios.delete('http://localhost:8888/api/Asso?Asso_EtudianteID=' + encodeURIComponent(currentAsso.Asso_EtudianteID), {
+        axios.delete('http://localhost:8888/api/Asso?Asso_Etudiante_Nom=' + encodeURIComponent(currentAsso.Asso_Etudiante_Nom), {
           headers: {
             'Content-Type': 'application/json'
           }
@@ -587,7 +589,6 @@
                   if (response.status === 200) {
                     alert("L'association a été supprimée avec succès.");
                     window.location.href = 'Assotables.html';
-                    // Effectuer les actions supplémentaires nécessaires après la suppression de l'association
                   } else {
                     console.log("Une erreur s'est produite lors de la suppression de l'association." + response.status);
                   }
@@ -599,6 +600,20 @@
       } else {
         console.log("Aucune association sélectionnée");
       }
+    }
+
+    function logout() {
+      window.location.href = "http://localhost:8180//realms/usager/protocol/openid-connect/logout"
+    }
+
+    function openNav() {
+      document.getElementById("mySidenav").style.width = "250px";
+      document.getElementById("user-info").classList.add("fade-in");
+    }
+
+    function closeNav() {
+      document.getElementById("mySidenav").style.width = "0";
+      document.getElementById("user-info").classList.remove("fade-in");
     }
 
   </script>
@@ -630,7 +645,8 @@
 
 <h2 style="position: absolute; left: 36%; top: 70%; font-size: xxx-large; color: green">Associations</h2>
 <div class="filter-container">
-  <input type="text" id="assoFilter" placeholder="Filter by name">
+  <label for="assoFilter"></label>
+  <input type="text" id="assoFilter" placeholder="Enter name to filter">
   <button type="button" onclick="filterAsso()">Filter</button>
 </div>
 <div id="associations" style="top: 100%;">
@@ -638,8 +654,57 @@
 </div>
 <div id="popUpContainer" class="pop-up-container">
   <div id="popUpContent" class="pop-up-content">
-    <!-- Association details will be displayed here -->
+    <-- formulaire de modif -->
   </div>
+      <script>
+
+        function populateFaculteOptions() {
+          axios.get('http://localhost:8888/api/Asso/getAllFaculteData', {
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          })
+                  .then(function(response) {
+                    var faculteData = response.data; // La réponse doit être un objet avec noms et ID de facultés
+                    var select = document.getElementById('editFaculte');
+
+                    faculteData.forEach(function(faculte) {
+                      var option = document.createElement('option');
+                      option.value = faculte.id;
+                      option.textContent = faculte.name;
+                      select.appendChild(option);
+                    });
+                  })
+                  .catch(function(error) {
+                    console.error(error);
+                    alert("Erreur lors de la récupération des facultés.");
+                  });
+        }
+
+        function populateUsagerOptions() {
+          axios.get('http://localhost:8888/api/Asso/getUsagerID', {
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          })
+                  .then(function(response) {
+                    var usagerIDs = response.data; // La réponse doit être une liste de chaînes de caractères (identifiants d'utilisateurs)
+                    var select = document.getElementById('editAdmin');
+
+                    usagerIDs.forEach(function(usagerID) {
+                      var option = document.createElement('option');
+                      option.value = usagerID;
+                      option.textContent = usagerID;
+                      select.appendChild(option);
+                    });
+                  })
+                  .catch(function(error) {
+                    console.error(error);
+                    alert("Erreur lors de la récupération des administrateurs.");
+                  });
+        }
+
+      </script>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="http://localhost:8180/js/keycloak.js"></script>
