@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="">
 <head>
   <title>Create New Asso</title>
   <style>
@@ -86,7 +86,7 @@
 
     /* Change the color of the hamburger icon and 'UNIVENT' text to green */
     #openNavSpan {
-      color: #0B4F00;
+      color: #45a049;
     }
   </style>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
@@ -106,13 +106,12 @@
       axios.post('http://localhost:8888/api/Asso', asso, {
         headers: {
           'Content-Type': 'application/json',
-          //'Authorization': 'Bearer ' + keycloak.token // Replace keycloak.token with your actual bearer token
         }
       })
               .then(function(response) {
                 if (response.status === 201) {
                   alert("Association created!");
-                  window.location.href = 'master_manager.html'; // Replace with the path to your main menu HTML file
+                  window.location.href = 'master_manager.html';
                 }else {
                   alert(response.status);
                 }
@@ -124,8 +123,7 @@
     }
 
     function logout() {
-      let logoutURL = "http://localhost:8180//realms/usager/protocol/openid-connect/logout"
-      window.location.href = logoutURL;
+      window.location.href = "http://localhost:8180//realms/usager/protocol/openid-connect/logout"
     }
 
     function openNav() {
@@ -147,7 +145,6 @@
   <a href="#" onclick="logout()">Déconnexion</a>
 </div>
 
-<!-- Update the ID of the span element to target it in the CSS -->
 <span id="openNavSpan" style="font-size: 40px; font-weight: bold; cursor: pointer; position: absolute; top: 0; left: 0.5%;" onclick="openNav()">&#9776; UNIVENT</span>
 
 <h2>Create New Asso</h2>
@@ -180,8 +177,8 @@
 
                   faculteData.forEach(function(faculte) {
                     var option = document.createElement('option');
-                    option.value = faculte.id; // ID de la faculté
-                    option.textContent = faculte.name; // Nom de la faculté
+                    option.value = faculte.id;
+                    option.textContent = faculte.name;
                     select.appendChild(option);
                   });
                 })
@@ -192,7 +189,6 @@
       }
 
       function populateUsagerOptions() {
-        // Récupérer les identifiants d'utilisateurs à partir du service en utilisant Axios
         axios.get('http://localhost:8888/api/Asso/getUsagerID', {
           headers: {
             'Content-Type': 'application/json'
@@ -221,8 +217,6 @@
         populateFaculteOptions();
       };
 
-
-      // ... Autres parties du code ...
     </script>
 
   </form>
