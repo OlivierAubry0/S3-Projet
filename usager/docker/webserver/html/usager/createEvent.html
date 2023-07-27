@@ -147,6 +147,27 @@
         description: description,
         filename: '',
       };
+      if (evenementDate === '' ) {
+        alert("Veuillez la date de votre événement.");
+        return;
+      }
+      if (evenementNom === '' ) {
+        alert("Attribuez un nom à votre événement.");
+        return;
+      }
+      if (evenementDebut === '' ) {
+        alert("Veuillez indidiquer une heure de début.");
+        return;
+      }
+      if (evenementFin === '' ) {
+        alert("Veuillez indidiquer une heure de fin.");
+        return;
+      }
+      if (nombrePlaces === '' ) {
+        alert("Veuillez indidiquer un nombre de places.");
+        return;
+      }
+
 
       const fileInput = document.getElementById('imageInput');
       const file = fileInput.files[0];
