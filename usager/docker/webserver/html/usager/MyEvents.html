@@ -162,6 +162,10 @@
       document.getElementById("user-info").classList.remove("fade-in");
     }
 
+    function logout() {
+      keycloak.logout({ redirectUri: 'http://localhost/usager' });
+    }
+
     function CheckMyEvents() {
       var UsagerID = userID;
       var url = 'http://localhost:8888/api/events/MyEvents?UsagerID=' + encodeURIComponent(UsagerID);

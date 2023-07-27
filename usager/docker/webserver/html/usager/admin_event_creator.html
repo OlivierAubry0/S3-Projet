@@ -291,18 +291,15 @@
 
 
   function logout() {
-    let logoutURL = "http://localhost:8180/realms/usager/protocol/openid-connect/logout";
-    window.location.href = logoutURL;
+    keycloak.logout({ redirectUri: 'http://localhost/usager' });
   }
 
   function openNav() {
     document.getElementById("mySidenav").style.width = "250px";
-    document.getElementById("user-info").classList.add("fade-in");
   }
 
   function closeNav() {
     document.getElementById("mySidenav").style.width = "0";
-    document.getElementById("user-info").classList.remove("fade-in");
   }
 
   function scrollToHeight() {
@@ -342,11 +339,12 @@
 
     nameItem.textContent = 'Connecté: \n' + name;
 
-    userInfoList.appendChild(nameItem);;
+    userInfoList.appendChild(nameItem);
 
     var userInfoDiv = document.getElementById('user-info');
     userInfoDiv.innerHTML = '';
     userInfoDiv.appendChild(userInfoList);
+
   }
 </script>
 
@@ -357,9 +355,4 @@
 
 </body>
 
-</html>
-
-
-
-</body>
 </html>

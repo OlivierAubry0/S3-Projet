@@ -306,6 +306,9 @@
       userInfoDiv.innerHTML = '';
       userInfoDiv.appendChild(userInfoList);
     }
+    function logout() {
+      keycloak.logout({ redirectUri: 'http://localhost/usager' });
+    }
 
     function openNav() {
       document.getElementById("mySidenav").style.width = "250px";

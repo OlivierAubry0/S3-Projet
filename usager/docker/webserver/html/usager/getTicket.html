@@ -184,7 +184,17 @@
       border-radius: 10%;
       box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     }
-
+    .notification {
+      position: fixed;
+      right: 20px;
+      top: 20px;
+      background-color: #4CAF50;
+      color: white;
+      padding: 15px;
+      border-radius: 4px;
+      transition: opacity 0.6s, top 0.5s;
+      opacity: 0;
+    }
     .large-button span {
       position: absolute;
       top: 50%;
@@ -407,11 +417,6 @@
 <script src="http://localhost:8180/js/keycloak.js"></script>
 <script>
 
-    function closeNav() {
-      document.getElementById("mySidenav").style.width = "0";
-      document.getElementById("user-info").classList.remove("fade-in");
-    }
-
     function redirectToEventsTablePerFac(value) {
       var url = 'eventsTablePerFac.html?FaculteID=' + encodeURIComponent(value);
       window.location.href = url;
@@ -444,51 +449,30 @@
               });
     }
 
-    function toggleSubMenuGuests() {
-      var checkbox = document.getElementById("checkbox");
-      var sousMenu = document.getElementById("sous-menu");
+    function showNotification(message) {
+      var notification = document.createElement('div');
+      notification.className = 'notification';
+      notification.textContent = message;
 
-      if (checkbox.checked) {
-        sousMenu.style.display = "block";
-      } else {
-        sousMenu.style.display = "none";
-      }
+      document.body.appendChild(notification);
+
+      // After adding to the DOM, change the style to trigger the CSS transition
+      setTimeout(function() {
+        notification.style.opacity = 1;
+        notification.style.top = '50px';
+      }, 20);
+
+      // Remove the notification after 3 seconds
+      setTimeout(function() {
+        notification.style.opacity = 0;
+        notification.style.top = '20px';
+
+        setTimeout(function() {
+          document.body.removeChild(notification);
+        }, 600);
+      }, 3000);
     }
-    function ShowEventUrReserving() {
-      var EvenementID = localStorage.getItem('EvenementID');
-      axios.post('http://localhost:8888/api/events/eventsReservation?EvenementID=' + encodeURIComponent(EvenementID), {
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      })
-              .then(function(response) {
-                var events = response.data;
-                var eventsContainer = document.getElementById('events');
-                eventsContainer.innerHTML = '';
-                events.forEach(function(event) {
-                  var eventButton = document.createElement('button');
-                  eventButton.innerHTML =
-                          `<div class="flex-container">
-                             <div>
-                                <p>Nom: ${event.Evenement_Nom}</p>
-                                <p>Date: ${event.Evenement_Date}</p>
-                                <p>Début: ${event.Evenement_Debut}</p>
-                                <p>Fin: ${event.Evenement_Fin}</p>
-                                <p>Association étudiante: ${event.Asso_Etudiante_Nom}</p>
-                                <p>Nombre de places: ${event.Nombre_Places}</p>
-                                <p>Nombre de places restantes: ${event.Nombres_Places_Restantes}</p>
-                                <p>Droit aux invités ? ${event.Allow_Guests ? 'Oui' : 'Non'} </p>
-                                <p>Description: ${event.Description}</p>
-                             </div>
-                             <img src="http://localhost:8080/${event.filename}" alt="Event Image" class="event-img" onclick="window.location.href = 'getTicket.html'">
-                             </div>`;
-                  eventsContainer.appendChild(eventButton);
-                });
-              })
-              .catch(function(error) {
-                console.error(error);
-              });
-    }
+
     function validateTelephoneInvite(telephoneInvite) {
       const regex = /^([0-9]{10}|\s{10})$/;
       if (regex.test(telephoneInvite) || telephoneInvite === null) {
@@ -515,7 +499,7 @@
       };
 
       if (Checkbox.checked && (Telephone_Invite === '' || Nom_Invite === '' || !validateTelephoneInvite(Telephone_Invite))) {
-        alert("Veuillez vérifier les champs suivants : \n -Le nom. \n -Le numéro de téléphone.");
+        showNotification("Veuillez vérifier les champs suivants : \n -Le nom. \n -Le numéro de téléphone.");
         return;
       }
 
@@ -531,7 +515,7 @@
                   alert("Reservation faite !");
                   window.location.href = 'pc_HomePage.html'; // Replace with the path to your main menu HTML file
                 } else {
-                  alert(response.status);
+                  showNotification(response.status);
                 }
               })
               .catch(function(error) {
@@ -539,10 +523,9 @@
               });
     }
 
-  function logout() {
-    let logoutURL = "http://localhost:8180/realms/usager/protocol/openid-connect/logout";
-    window.location.href = logoutURL;
-  }
+    function logout() {
+      keycloak.logout({ redirectUri: 'http://localhost/usager' });
+    }
 
   function openNav() {
     document.getElementById("mySidenav").style.width = "250px";
@@ -599,17 +582,9 @@
   }
 </script>
 
-<body onload="initKeycloak();ShowEventUrReserving()">
+
 <footer class="footer">
   <p class="footer-text">Après une soirée bien arrosée, Bob ne prend pas le volant. Fais comme Bob!</p>
 </footer>
-
-
-</body>
-
-</html>
-
-
-
 </body>
 </html>

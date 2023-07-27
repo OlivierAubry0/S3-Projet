@@ -174,7 +174,9 @@
                 console.error(error);
               });
     }
-
+    function logout() {
+      keycloak.logout({ redirectUri: 'http://localhost/usager' });
+    }
     function transferReservation() {
       var EvenementID = localStorage.getItem('EvenementID');
       var UsagerID = localStorage.getItem('UsagerID');

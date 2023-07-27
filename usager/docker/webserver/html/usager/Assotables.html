@@ -603,7 +603,7 @@
     }
 
     function logout() {
-      window.location.href = "http://localhost:8180//realms/usager/protocol/openid-connect/logout"
+      keycloak.logout({ redirectUri: 'http://localhost/usager' });
     }
 
     function openNav() {
