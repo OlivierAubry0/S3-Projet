@@ -46,7 +46,7 @@ FROM base_de_donne.ASSO_ETUDIANTE;
 CREATE VIEW les_associations AS
 SELECT ae.Asso_EtudianteID, ae.Asso_Etudiante_Nom, f.Faculte_Nom, UsagerID
 FROM base_de_donne.ASSO_ETUDIANTE ae
-         JOIN base_de_donne.Faculte f ON ae.FaculteID = f.FaculteID;
+JOIN base_de_donne.Faculte f ON ae.FaculteID = f.FaculteID;
 
 CREATE VIEW MyEvents AS
 SELECT UsagerID, reservation.EvenementID, Evenement_Nom,Evenement_Date, Nom_Invite, Enregistration_Invite

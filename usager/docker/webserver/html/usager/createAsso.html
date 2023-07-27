@@ -1,122 +1,16 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-  <title>Create New Asso</title>
-
-  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-  <script src="http://localhost:8180/js/keycloak.js"></script>
-  <script>
-
-    function displayUserInfo() {
-      var token = keycloak.tokenParsed;
-      var name = token.name;
-
-      var userInfoList = document.createElement('ul');
-      var nameItem = document.createElement('li');
-      var rolesItem = document.createElement('li');
-
-      nameItem.textContent = 'Nom : \n' + name;
-      rolesItem.textContent = 'Role: master';
-
-      userInfoList.appendChild(nameItem);
-      userInfoList.appendChild(rolesItem);
-
-      var userInfoDiv = document.getElementById('user-info');
-      userInfoDiv.innerHTML = ''; // Remove any existing content
-      userInfoDiv.appendChild(userInfoList);
-    }
-
-
-    var keycloak;
-
-    function initKeycloak() {
-      keycloak = new Keycloak({
-        "realm": "usager",
-        "auth-server-url": "http://localhost:8180/",
-        "ssl-required": "external",
-        "clientId": "frontend",
-        "public-client": true,
-        "confidential-port": 0
-      });
-      keycloak.init({ onLoad: 'login-required' })
-              .success(function (authenticated) {
-                if (authenticated) {
-                  alert('authenticated');
-                  displayUserInfo();
-                } else {
-                  alert('not authenticated');
-                }
-              })
-              .error(function () {
-                alert('failed to initialize');
-              });
-
-    }
-
-    function submitAsso() {
-      var Asso_EtudianteID = document.getElementById('Asso_EtudianteID').value;
-      var Asso_Etudiante_Nom = document.getElementById('Asso_Etudiante_Nom').value;
-      var FaculteID = document.getElementById('FaculteID').value;
-      var UsagerID = document.getElementById('UsagerID').value;
-
-      var asso = {
-        Asso_EtudianteID: Asso_EtudianteID,
-        Asso_Etudiante_Nom: Asso_Etudiante_Nom,
-        FaculteID: FaculteID,
-        UsagerID: UsagerID
-      };
-
-      axios.post('http://localhost:8888/api/Asso', asso, {
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer ' + keycloak.token // Replace keycloak.token with your actual bearer token
-        }
-      })
-              .then(function(response) {
-                if (response.status === 201) {
-                  alert("Association created!");
-                  window.location.href = 'master_manager.html'; // Replace with the path to your main menu HTML file
-                }else {
-                  alert(response.status);
-                }
-              })
-              .catch(function(error) {
-                console.error(error);
-                alert("Assurez vous que l'admin existe et que l'id n'est pas encore utilisé ");
-              });
-    }
-
-    function submitImage() {
-      var imageInput = document.getElementById('imageInput');
-      var file = imageInput.files[0];
-
-      var reader = new FileReader();
-
-      reader.onload = function(asso) {
-        var arrayBuffer = asso.target.result;
-
-        var blob = new Blob([arrayBuffer], { type: file.type });
-
-        var formData = new FormData();
-        formData.append('image', blob);
-
-        axios.post('http://localhost:8888/api/Asso/uploadImage', formData)
-                .then(function(response) {
-                  console.log('Image uploaded successfully.');
-                })
-                .catch(function(error) {
-                  console.error('Error uploading image:', error);
-                });
-      };
-
-      reader.readAsArrayBuffer(file);
-    }
-
-  </script>
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-type" content="text/html; charset=UTF-8">
 
   <style>
+    /* CSS styles */
     body {
+      background-color: white;
       font-family: "Lato", sans-serif;
+      color: grey;
     }
     .asso-form {
       width: 500px;
@@ -126,7 +20,9 @@
       border-radius: 4px;
       box-sizing: border-box;
     }
-    .asso-form select, .asso-form button[type=button] {
+    .asso-form select,
+    .asso-form input[type="text"],
+    .asso-form button[type=button] {
       width: 100%;
       padding: 12px 20px;
       margin: 8px 0;
@@ -144,36 +40,267 @@
     .asso-form button[type=button]:hover {
       background-color: #45a049;
     }
-  </style>
+    .asso-form label,
+    .asso-form select,
+    .asso-form option {
+      color: black;
+    }
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 10%;
+      background-color: #268018;
+      color: white;
+      transition: top 0.3s;
+      z-index: 999; /* Set a high z-index value */
+    }
 
+    .header.hidden {
+      top: -100px; /* Move the header offscreen */
+    }
+    body {
+      background-color: white;
+      font-family: "Lato", sans-serif;
+      color: #f1f1f1;
+      display: flex;
+      flex-direction: column; /* Add this line */
+      justify-content: space-between; /* Add this line */
+      align-items: center;
+      min-height: 100vh;
+      margin: 0; /* Add this line */
+      padding: 0; /* Add this line */
+    }
+
+    .sidenav {
+      height: 100%;
+      width: 0;
+      position: fixed;
+      z-index: 100000;
+      top: 0;
+      left: 0;
+      background-color: #0B4F00;
+      overflow-x: hidden;
+      transition: 0.5s;
+      padding-top: 60px;
+    }
+
+    .sidenav a {
+      padding: 8px 8px 8px 32px;
+      text-decoration: none;
+      font-size: 25px;
+      color: #5BFF5E;
+      display: block;
+      transition: 0.3s;
+      z-index: 3;
+    }
+
+    .sidenav a:hover {
+      color: #f1f1f1;
+      z-index: 3;
+    }
+
+    .sidenav .closebtn {
+      position: absolute;
+      top: 0;
+      right: 25px;
+      font-size: 36px;
+      margin-left: 50px;
+      z-index: 3;
+    }
+
+
+
+    #Facultes {
+      position: absolute;
+      top: 105%;
+      left: 43%;
+      font-size: 30px;
+      height: 10%;
+      font-weight: bolder;
+    }
+
+    #univent-title {
+      font-size: 40px;
+      font-weight: bold;
+      cursor: pointer;
+      color: #FFFFFF;
+      animation: fade-in 1s ease-in;
+      position: absolute;
+      top: 10%;
+      width: 100%;
+      height: 90%;
+      left: 0;
+      right: 0;
+      background-color: white;
+      text-align: center;
+      z-index: 0;
+    }
+
+    .large-button {
+      display: inline-block;
+      padding: 100px 100px;
+      max-height: 100px;
+      max-width: 100px;
+      background-color: #f1f1f1;
+      color: #268018;
+      border: none;
+      text-align: center;
+      text-decoration: none;
+      cursor: pointer;
+      position: absolute;
+      z-index: 4;
+      border-radius: 10%;
+      box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    }
+
+    .large-button span {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 25px;
+      font-weight: bold;
+    }
+
+    .large-button:hover span {
+      transform: translate(-50%, -50%) scale(1.2);
+    }
+
+    .button-24 {
+      background: #268018;
+      border: 1px solid #268018;
+      border-radius: 6px;
+      box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+      box-sizing: border-box;
+      color: white;
+      cursor: pointer;
+      display: inline-block;
+      font-family: nunito, roboto, proxima-nova, "proxima nova", sans-serif;
+      font-size: 16px;
+      font-weight: 800;
+      line-height: 16px;
+      min-height: 40px;
+      outline: 0;
+      padding: 12px 14px;
+      text-align: center;
+      text-rendering: geometricprecision;
+      text-transform: none;
+      user-select: none;
+      -webkit-user-select: none;
+      touch-action: manipulation;
+      vertical-align: middle;
+      position: absolute;
+      top: 60%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .button-24:hover,
+    .button-24:active {
+      background-color: initial;
+      background-position: 0 0;
+      color: #268018;
+    }
+
+    .button-24:active {
+      opacity: .5;
+    }
+
+    @keyframes fade-in {
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity:1;
+      }
+    }
+
+    .footer {
+      position: absolute;
+      top: 100%;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 5%;
+      background-color: #268018;
+      color: white;
+      padding: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+    .footer-text {
+      font-size: 16px;
+      font-weight: bold;
+    }
+  </style>
+  <script>
+    // JavaScript code
+    var prevScrollpos = window.pageYOffset;
+
+    window.onscroll = function() {
+      var currentScrollPos = window.pageYOffset;
+
+      if (prevScrollpos > currentScrollPos) {
+        // Scrolling up, show the header
+        document.getElementById("header").classList.remove("hidden");
+      } else {
+        // Scrolling down, hide the header
+        document.getElementById("header").classList.add("hidden");
+      }
+
+      prevScrollpos = currentScrollPos;
+    };
+
+
+  </script>
 </head>
 
-<body onload="initKeycloak()">
-<h2>Create New Asso</h2>
-<div class="asso-form">
-  <form>
-    <label for="Asso_EtudianteID">AssoEtudiante Id:</label><br>
-    <select id="Asso_EtudianteID" name="Asso_EtudianteID">
-      <option value="1001">1001</option>
-      <option value="1002">1002</option>
-      <option value="1003">1003</option>
-    </select><br>
 
-    <label for="Asso_Etudiante_Nom">AssoEtudiante Name:</label><br>
+
+<body onload="initKeycloak()">
+
+<div id="mySidenav" class="sidenav">
+  <b id="user-info"></b>
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  <a href="#" onclick="window.location.href='eventID_before_scanning.html'">Scanner</a>
+  <a href="#" onclick="window.location.href='MyEvents.html'">Mes Évenements</a>
+  <a href="#" onclick="window.location.href='pc_HomePage.html'">Acceuil</a>
+  <a href="#" onclick="logout()">Déconnexion</a>
+</div>
+
+<header id="header" class="header">
+  <div style="position: absolute; width: 18%; height: 8%;">
+  <span style="font-size: 40px; top: 0%; font-weight: bold; cursor: pointer; position: absolute; top: 0;
+  left: 0.5%; color: #FFFFFF;" onclick="openNav()">&#9776; UNIVENT</span>
+  </div>
+</header>
+
+
+
+
+<h2 style="position: absolute; left: 31%; top: 5%; font-size: xxx-large; color: green">Créer une association</h2>
+<div class="asso-form" style="top: 20%; position: absolute;">
+  <form>
+
+    <label for="Asso_Etudiante_Nom" style="color: black;">AssoEtudiante Name:</label><br>
     <select id="Asso_Etudiante_Nom" name="Asso_Etudiante_Nom">
       <option value="Ageg">Ageg</option>
       <option value="Amus">Amus</option>
       <option value="Flsh">Flsh</option>
     </select><br>
 
-    <label for="FaculteID">AssoEtudiante Fac:</label><br>
+    <label for="FaculteID">Faculté::</label><br>
     <select id="FaculteID" name="FaculteID">
       <option value="4028">Faculte de Genie</option>
       <option value="4038">Ecole de gestion</option>
       <option value="4039">Faculte de musique</option>
     </select><br>
 
-    <label for="UsagerID">AssoEtudiante admin:</label><br>
+    <label for="UsagerID">Définir administrateur:</label><br>
     <select id="UsagerID" name="UsagerID">
       <option value="admin1">admin1</option>
       <option value="admin2">admin2</option>
@@ -182,9 +309,280 @@
 
     <button type="button" onclick="submitAsso()">Submit</button>
 
-    <input type="file" id="imageInput" accept="image/*">
-    <button type="button" onclick="submitImage()">Submit Image</button>
+    <script>
+
+      function populateFaculteOptions() {
+        axios.get('http://localhost:8888/api/Asso/getAllFaculteData', {
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        })
+                .then(function(response) {
+                  var faculteData = response.data; // La réponse doit être un objet avec noms et ID de facultés
+                  var select = document.getElementById('FaculteID');
+
+                  faculteData.forEach(function(faculte) {
+                    var option = document.createElement('option');
+                    option.value = faculte.id;
+                    option.textContent = faculte.name;
+                    select.appendChild(option);
+                  });
+                })
+                .catch(function(error) {
+                  console.error(error);
+                  alert("Erreur lors de la récupération des facultés.");
+                });
+      }
+
+      function populateUsagerOptions() {
+        axios.get('http://localhost:8888/api/Asso/getUsagerID', {
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        })
+                .then(function(response) {
+                  var usagerIDs = response.data; // La réponse doit être une liste de chaînes de caractères (identifiants d'utilisateurs)
+                  var select = document.getElementById('UsagerID');
+
+                  usagerIDs.forEach(function(usagerID) {
+                    var option = document.createElement('option');
+                    option.value = usagerID;
+                    option.textContent = usagerID;
+                    select.appendChild(option);
+                  });
+                })
+                .catch(function(error) {
+                  console.error(error);
+                  alert("Erreur lors de la récupération des administrateurs.");
+                });
+      }
+
+      // Appelez les fonctions pour charger les options lors du chargement de la page
+      window.onload = function() {
+        populateUsagerOptions();
+        populateFaculteOptions();
+      };
+
+    </script>
+
   </form>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="http://localhost:8180/js/keycloak.js"></script>
+<script>
+
+  function redirectToEventsTablePerFac(value) {
+    var url = 'eventsTablePerFac.html?FaculteID=' + encodeURIComponent(value);
+    window.location.href = url;
+  }
+
+  var keycloak;
+
+  function initKeycloak() {
+    keycloak = new Keycloak({
+      "realm": "usager",
+      "auth-server-url": "http://localhost:8180/",
+      "ssl-required": "external",
+      "clientId": "frontend",
+      "public-client": true,
+      "confidential-port": 0
+    });
+
+    keycloak.init({ onLoad: 'login-required' }).then(function (authenticated) {
+      if (authenticated) {
+        var roles = keycloak.tokenParsed.realm_access.roles;
+        if (roles.includes('enseignant')) {
+          window.location.href = 'admin_event_creator.html';
+          return;
+        } else if (roles.includes('coordonnateur-pédagogique')) {
+          window.location.href = 'master_manager.html';
+          return;
+        }
+      } else {
+        alert('Not authenticated');
+      }
+    }).catch(function () {
+      alert('Failed to initialize');
+    }).finally(function () {
+      displayUserInfo();
+    });
+  }
+
+
+  function logout() {
+    let logoutURL = "http://localhost:8180/realms/usager/protocol/openid-connect/logout";
+    window.location.href = logoutURL;
+  }
+
+  function openNav() {
+    document.getElementById("mySidenav").style.width = "250px";
+    document.getElementById("user-info").classList.add("fade-in");
+  }
+
+  function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+    document.getElementById("user-info").classList.remove("fade-in");
+  }
+
+  function scrollToHeight() {
+    var scrollHeight = 1380; // Adjust the desired scroll height here
+    var duration = 1000; // Adjust the duration of the glide animation (in milliseconds)
+
+    var start = null;
+    var initialY = window.pageYOffset;
+
+    function step(timestamp) {
+      if (!start) start = timestamp;
+      var progress = timestamp - start;
+      var scrollY = initialY + easeInOutQuad(progress, 0, scrollHeight - initialY, duration);
+      window.scrollTo(0, scrollY);
+      if (progress < duration) {
+        window.requestAnimationFrame(step);
+      }
+    }
+
+    function easeInOutQuad(t, b, c, d) {
+      t /= d / 2;
+      if (t < 1) return c / 2 * t * t + b;
+      t--;
+      return -c / 2 * (t * (t - 2) - 1) + b;
+    }
+
+    window.requestAnimationFrame(step);
+  }
+
+  function displayUserInfo() {
+    var token = keycloak.tokenParsed;
+    var name = token.name;
+
+    var userInfoList = document.createElement('ul');
+    var nameItem = document.createElement('li');
+    var rolesItem = document.createElement('li');
+
+    nameItem.textContent = 'Connecté: \n' + name;
+
+    userInfoList.appendChild(nameItem);;
+
+    var userInfoDiv = document.getElementById('user-info');
+    userInfoDiv.innerHTML = '';
+    userInfoDiv.appendChild(userInfoList);
+  }
+  function displayUserInfo() {
+    var token = keycloak.tokenParsed;
+    var name = token.name;
+
+    var userInfoList = document.createElement('ul');
+    var nameItem = document.createElement('li');
+    var rolesItem = document.createElement('li');
+
+    nameItem.textContent = 'Nom : \n' + name;
+    rolesItem.textContent = 'Role: master';
+
+    userInfoList.appendChild(nameItem);
+    userInfoList.appendChild(rolesItem);
+
+    var userInfoDiv = document.getElementById('user-info');
+    userInfoDiv.innerHTML = ''; // Remove any existing content
+    userInfoDiv.appendChild(userInfoList);
+  }
+
+
+  var keycloak;
+
+  function initKeycloak() {
+    keycloak = new Keycloak({
+      "realm": "usager",
+      "auth-server-url": "http://localhost:8180/",
+      "ssl-required": "external",
+      "clientId": "frontend",
+      "public-client": true,
+      "confidential-port": 0
+    });
+    keycloak.init({ onLoad: 'login-required' })
+            .success(function (authenticated) {
+              if (authenticated) {
+                alert('authenticated');
+                displayUserInfo();
+              } else {
+                alert('not authenticated');
+              }
+            })
+            .error(function () {
+              alert('failed to initialize');
+            });
+
+  }
+
+  function submitAsso() {
+    var Asso_EtudianteID = document.getElementById('Asso_EtudianteID').value;
+    var Asso_Etudiante_Nom = document.getElementById('Asso_Etudiante_Nom').value;
+    var FaculteID = document.getElementById('FaculteID').value;
+    var UsagerID = document.getElementById('UsagerID').value;
+
+    var asso = {
+      Asso_EtudianteID: Asso_EtudianteID,
+      Asso_Etudiante_Nom: Asso_Etudiante_Nom,
+      FaculteID: FaculteID,
+      UsagerID: UsagerID
+    };
+
+    axios.post('http://localhost:8888/api/Asso', asso, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + keycloak.token // Replace keycloak.token with your actual bearer token
+      }
+    })
+            .then(function(response) {
+              if (response.status === 201) {
+                alert("Association created!");
+                window.location.href = 'master_manager.html'; // Replace with the path to your main menu HTML file
+              }else {
+                alert(response.status);
+              }
+            })
+            .catch(function(error) {
+              console.error(error);
+              alert("Assurez vous que l'admin existe et que l'id n'est pas encore utilisé ");
+            });
+  }
+
+  function submitImage() {
+    var imageInput = document.getElementById('imageInput');
+    var file = imageInput.files[0];
+
+    var reader = new FileReader();
+
+    reader.onload = function(asso) {
+      var arrayBuffer = asso.target.result;
+
+      var blob = new Blob([arrayBuffer], { type: file.type });
+
+      var formData = new FormData();
+      formData.append('image', blob);
+
+      axios.post('http://localhost:8888/api/Asso/uploadImage', formData)
+              .then(function(response) {
+                console.log('Image uploaded successfully.');
+              })
+              .catch(function(error) {
+                console.error('Error uploading image:', error);
+              });
+    };
+
+    reader.readAsArrayBuffer(file);
+  }
+</script>
+
+<footer class="footer">
+  <p class="footer-text">Après une soirée bien arrosée, Bob ne prend pas le volant. Fais comme Bob!</p>
+</footer>
+
+
+</body>
+
+</html>
+
+
+
 </body>
 </html>
