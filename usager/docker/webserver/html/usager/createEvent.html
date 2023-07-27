@@ -129,8 +129,8 @@
     function submitEvent() {
       var evenementNom = document.getElementById('name').value;
       var evenementDate = document.getElementById('date').value;
-      var evenementDebut = document.getElementById('start').value;
-      var evenementFin = document.getElementById('end').value;
+      var evenementDebut = document.getElementById('start').time;
+      var evenementFin = document.getElementById('end').time;
       var assoEtudianteID = localStorage.getItem('Asso_EtudianteID');
       var nombrePlaces = document.getElementById('places').value;
       var allowGuests = document.getElementById('allow-guests').checked;

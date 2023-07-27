@@ -5,28 +5,65 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="72deba85-9ca0-4a47-be77-f89dff0e225c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/usager/docker/webserver/html/usager/assets/Eventimages/36a794f9-e19b-476f-b568-0496baa743c6.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/usager/docker/webserver/html/usager/assets/Eventimages/487fb9f2-72b2-42fa-a733-690d7db6b748.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/usager/docker/webserver/html/usager/assets/Eventimages/4c68c8f8-9dbf-4204-b38d-d1564c53da18.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/usager/docker/webserver/html/usager/assets/Eventimages/a0acfcaf-7166-4a9f-a1ab-32c4ad6a0eeb.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/usager/docker/webserver/html/usager/assets/Eventimages/a5c61289-dc1f-4bfa-8066-e45d87432b78.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/usager/docker/webserver/html/usager/assets/Eventimages/be114a4a-e562-4ec6-bdf2-d8fc0c57e5bb.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/usager/docker/webserver/html/usager/assets/Eventimages/e97ce45e-a589-4a92-bba4-5699a3032d28.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/usager/docker/webserver/html/usager/assets/Eventimages/6c89d97e-3f9c-4e2b-a438-b177183d802e.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/usager/docker/webserver/html/usager/assets/Eventimages/6e19dad2-c3e6-46d7-90b7-c9a79b7f67dc.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/usager/docker/webserver/html/usager/assets/Eventimages/9824a69b-a6d2-4fb4-9b2a-b58da9334803.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/usager/docker/webserver/html/usager/assets/Eventimages/eb0da2de-80ef-480d-8558-7d88dac48e71.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/docker/keycloak/startup-scripts/init.sh" beforeDir="false" afterPath="$PROJECT_DIR$/usager/docker/keycloak/startup-scripts/init.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/docker/postgres/Vue.sql" beforeDir="false" afterPath="$PROJECT_DIR$/usager/docker/postgres/Vue.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/usager/docker/postgres/database.sql" beforeDir="false" afterPath="$PROJECT_DIR$/usager/docker/postgres/database.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/usager/docker/postgres/triggers.sql" beforeDir="false" afterPath="$PROJECT_DIR$/usager/docker/postgres/triggers.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/docker/webserver/html/dist/quagga.js" beforeDir="false" afterPath="$PROJECT_DIR$/usager/docker/webserver/html/dist/quagga.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/docker/webserver/html/usager/Assotables.html" beforeDir="false" afterPath="$PROJECT_DIR$/usager/docker/webserver/html/usager/Assotables.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/docker/webserver/html/usager/EventAssoAssignation.html" beforeDir="false" afterPath="$PROJECT_DIR$/usager/docker/webserver/html/usager/EventAssoAssignation.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/docker/webserver/html/usager/EventID_scanner_PHONE.html" beforeDir="false" afterPath="$PROJECT_DIR$/usager/docker/webserver/html/usager/EventID_scanner_PHONE.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/usager/docker/webserver/html/usager/MyEvents.html" beforeDir="false" afterPath="$PROJECT_DIR$/usager/docker/webserver/html/usager/MyEvents.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/docker/webserver/html/usager/MyEventsActions.html" beforeDir="false" afterPath="$PROJECT_DIR$/usager/docker/webserver/html/usager/MyEventsActions.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/docker/webserver/html/usager/admin_event_creator.html" beforeDir="false" afterPath="$PROJECT_DIR$/usager/docker/webserver/html/usager/admin_event_creator.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/docker/webserver/html/usager/camera.html" beforeDir="false" afterPath="$PROJECT_DIR$/usager/docker/webserver/html/usager/camera.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/docker/webserver/html/usager/createAsso.html" beforeDir="false" afterPath="$PROJECT_DIR$/usager/docker/webserver/html/usager/createAsso.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/usager/docker/webserver/html/usager/createEvent.html" beforeDir="false" afterPath="$PROJECT_DIR$/usager/docker/webserver/html/usager/createEvent.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/usager/docker/webserver/html/usager/eventsTable.html" beforeDir="false" afterPath="$PROJECT_DIR$/usager/docker/webserver/html/usager/eventsTable.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/docker/webserver/html/usager/eventsTablePerFac.html" beforeDir="false" afterPath="$PROJECT_DIR$/usager/docker/webserver/html/usager/eventsTablePerFac.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/docker/webserver/html/usager/getTicket.html" beforeDir="false" afterPath="$PROJECT_DIR$/usager/docker/webserver/html/usager/getTicket.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/docker/webserver/html/usager/master_manager.html" beforeDir="false" afterPath="$PROJECT_DIR$/usager/docker/webserver/html/usager/master_manager.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/docker/webserver/html/usager/pc_HomePage.html" beforeDir="false" afterPath="$PROJECT_DIR$/usager/docker/webserver/html/usager/pc_HomePage.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/docker/webserver/html/usager/test.html" beforeDir="false" afterPath="$PROJECT_DIR$/usager/docker/webserver/html/usager/test.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/docker/webserver/html/usager/vendor/live_w_locator.js" beforeDir="false" afterPath="$PROJECT_DIR$/usager/docker/webserver/html/usager/vendor/live_w_locator.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/usager/service/.gradle/7.6/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/.gradle/7.6/checksums/checksums.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usager/service/.gradle/7.6/dependencies-accessors/dependencies-accessors.lock" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/.gradle/7.6/dependencies-accessors/dependencies-accessors.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/service/.gradle/7.6/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/.gradle/7.6/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/usager/service/.gradle/7.6/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/.gradle/7.6/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/usager/service/.gradle/7.6/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/.gradle/7.6/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/usager/service/.gradle/7.6/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/.gradle/7.6/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/usager/service/.gradle/7.6/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/.gradle/7.6/fileHashes/resourceHashesCache.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/usager/service/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/usager/service/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/.gradle/file-system.probe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usager/service/build/service-dev.jar" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/build/service-dev.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/service/build/classes/java/main/ca/usherbrooke/gegi/server/persistence/EventMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/build/classes/java/main/ca/usherbrooke/gegi/server/persistence/EventMapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/service/build/classes/java/main/ca/usherbrooke/gegi/server/service/EventService.class" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/build/classes/java/main/ca/usherbrooke/gegi/server/service/EventService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/service/build/quarkus-app/quarkus-app-dependencies.txt" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/build/quarkus-app/quarkus-app-dependencies.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/service/build/quarkus-artifact.properties" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/build/quarkus-artifact.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/service/build/resources/main/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/build/resources/main/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/service/build/resources/main/ca/usherbrooke/fgen/api/persistence/AssoMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/build/resources/main/ca/usherbrooke/fgen/api/persistence/AssoMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/service/build/service-dev.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/service/build/tmp/compileJava/compileTransaction/stash-dir/AssoMapper.class.uniqueId1" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/service/build/tmp/compileJava/compileTransaction/stash-dir/AssoService.class.uniqueId0" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/service/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/service/build/tmp/jar/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/build/tmp/jar/MANIFEST.MF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/service/build/tmp/quarkusDev/quarkus-app-model.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/service/build/tmp/quarkusDev/quarkus-app-test-model.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/service/out/production/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/out/production/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/service/out/production/resources/ca/usherbrooke/fgen/api/persistence/AssoMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/out/production/resources/ca/usherbrooke/fgen/api/persistence/AssoMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/service/src/main/java/ca/usherbrooke/gegi/server/admin/CheckMyEvents.java" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/src/main/java/ca/usherbrooke/gegi/server/admin/CheckMyEvents.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/service/src/main/java/ca/usherbrooke/gegi/server/admin/FaculteData.java" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/src/main/java/ca/usherbrooke/gegi/server/admin/FaculteData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/service/src/main/java/ca/usherbrooke/gegi/server/persistence/AssoMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/src/main/java/ca/usherbrooke/gegi/server/persistence/AssoMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/service/src/main/java/ca/usherbrooke/gegi/server/persistence/EventMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/src/main/java/ca/usherbrooke/gegi/server/persistence/EventMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/service/src/main/java/ca/usherbrooke/gegi/server/service/AssoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/src/main/java/ca/usherbrooke/gegi/server/service/AssoService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/service/src/main/java/ca/usherbrooke/gegi/server/service/EventService.java" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/src/main/java/ca/usherbrooke/gegi/server/service/EventService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usager/service/src/main/resources/ca/usherbrooke/fgen/api/persistence/AssoMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/usager/service/src/main/resources/ca/usherbrooke/fgen/api/persistence/AssoMapper.xml" afterDir="false" />
     </list>
     <list id="369c521e-6498-4c34-9420-4a88351b04df" name="Changes by newto" comment="" />
     <list id="132ce79e-c3a8-42e5-aa9e-005f3e61ba33" name="Changes by ycast" comment="" />
@@ -292,7 +329,9 @@
       <workItem from="1687979399380" duration="31691000" />
       <workItem from="1689783985135" duration="18343000" />
       <workItem from="1689860110096" duration="1281000" />
-      <workItem from="1690350083972" duration="28872000" />
+      <workItem from="1690350083972" duration="51461000" />
+      <workItem from="1690472796067" duration="598000" />
+      <workItem from="1690490602167" duration="19000" />
     </task>
     <servers />
   </component>

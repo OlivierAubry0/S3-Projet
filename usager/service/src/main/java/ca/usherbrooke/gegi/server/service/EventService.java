@@ -98,6 +98,48 @@ public class EventService {
         return Response.status(Response.Status.CREATED).entity(Events).build();
     }
     @POST
+    @javax.ws.rs.Path("/EvenementID")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response updateAsso(@QueryParam("EvenementID") String EvenementID, @QueryParam("Evenement_Nom") String Evenement_Nom,
+                               @QueryParam("Evenement_Date") String Evenement_Date, @QueryParam("Evenement_Debut") String Evenement_Debut,
+                               @QueryParam("Evenement_Fin") String Evenement_Fin, @QueryParam("Nombre_Places") int Nombre_Places,
+                               @QueryParam("Allow_Guests") boolean Allow_Guests, @QueryParam("Description") String Description,
+                               MultipartFormDataInput input) {
+        Map<String, List<InputPart>> formDataMap = input.getFormDataMap();
+        try {
+            String eventData = formDataMap.get("eventData").get(0).getBodyAsString();
+            ObjectMapper objectMapper = new ObjectMapper();
+            Event event = objectMapper.readValue(eventData, Event.class);
+
+
+            // Generate a UUID and set it as the eventId
+            event.setEvenementID(UUID.randomUUID().toString());
+            String fileName = UUID.randomUUID().toString() + ".jpg";
+
+            Path filePath = Path.of(uploadDirectory, fileName);
+
+            List<InputPart> imageParts = formDataMap.get("image");
+            if (imageParts != null && !imageParts.isEmpty()) {
+                InputPart imagePart = imageParts.get(0);
+                // Save the image file with the given name
+                imagePart.getBody(InputStream.class, null).transferTo(Files.newOutputStream(filePath));
+
+                // Extract the filename from the filePath
+                Path filenamePath = filePath.getFileName();
+                String filename = filenamePath.toString();
+
+                // Assign the filename to the event object
+                event.setFilename(filename);
+            }
+                eventMapper.update_the_Event(EvenementID, Evenement_Nom, Evenement_Date, Evenement_Debut, Evenement_Fin, Nombre_Places, Allow_Guests, Description,fileName);
+                return Response.status(Response.Status.OK).build();
+
+        }catch(Exception e){
+                return Response.status(Response.Status.METHOD_NOT_ALLOWED).entity(EvenementID).build();
+            }
+        }
+
+    @POST
     @javax.ws.rs.Path("/eventsReservation")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getEventReservation(@QueryParam("EvenementID") String EvenementID) {
@@ -110,6 +152,13 @@ public class EventService {
     public Response CheckMyEvents(@QueryParam("UsagerID") String UsagerID) {
         List<CheckMyEvents> MyEvents = eventMapper.CheckMyEvents(UsagerID);
         return Response.status(Response.Status.CREATED).entity(MyEvents).build();
+    }
+
+    @DELETE
+    @javax.ws.rs.Path("/deleteEvent")
+    public Response deleteEvent(@QueryParam("EvenementID") String EvenementID) {
+        eventMapper.deleteEvent(EvenementID);
+        return Response.status(Response.Status.OK).build();
     }
 }
 

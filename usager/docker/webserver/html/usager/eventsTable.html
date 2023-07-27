@@ -21,8 +21,8 @@
             keycloak.init({ onLoad: 'login-required' }).then(function (authenticated) {
                 if (authenticated) {
                     var roles = keycloak.tokenParsed.realm_access.roles;
-                    if (roles.includes('enseignant')) {
-                        window.location.href = 'admin_event_creator.html';
+                    if (roles.includes('etudiant')) {
+                        window.location.href = 'pc_HomePage.html';
                         return;
                     } else if (roles.includes('coordonnateur-pédagogique')) {
                         window.location.href = 'master_manager.html';
@@ -53,7 +53,263 @@
             document.getElementById("mySidenav").style.width = "0";
             document.getElementById("user-info").classList.remove("fade-in");
         }
+/////////////////////////////////////////////////
+        currentEvent = null;
+        function showEventDetails(event) {
+            var popUpContainer = document.getElementById('popUpContainer');
+            var popUpContent = document.getElementById('popUpContent');
+            var closeButton = document.createElement('button');
+            closeButton.textContent = 'Retour';
+            closeButton.addEventListener('click', function() {
+                popUpContainer.style.display = 'none';
+            });
 
+            popUpContent.innerHTML = `
+            <h3>${event.evenementNom}</h3>
+            <p><strong>ID:</strong> ${event.evenementID}</p>
+            <p><strong>Date:</strong> ${event.evenementDate}</p>
+            <p><strong>Start Time:</strong> ${event.evenementDebut}</p>
+            <p><strong>End Time:</strong> ${event.evenementFin}</p>
+            <p><strong>Number of Places:</strong> ${event.nombrePlaces}</p>
+            <p><strong>Allow Guests:</strong> ${event.allowGuests ? 'Yes' : 'No'}</p>
+            <p><strong>Description:</strong></p>
+            <pre>${event.description}</pre>
+          `;
+
+            // Stocker les valeurs des champs dans la variable globale currentAsso
+            currentEvent = {
+                EvenementID:event.evenementID,
+                filename: event.filename,
+                evenementNom:event.evenementNom,
+                evenementDate: event.evenementDate,
+                evenementDebut: event.evenementDebut,
+                evenementFin: event.evenementFin,
+                nombrePlaces: event.nombrePlaces,
+                allowGuests: event.allowGuests,
+                Description: event.description
+            };
+
+            var editButton = document.createElement('button');
+            editButton.textContent = 'Modifier';
+            editButton.addEventListener('click', function() {
+                editEvent(event);
+            });
+
+            var deleteButton = document.createElement('button');
+            deleteButton.textContent = 'Supprimer';
+            deleteButton.addEventListener('click', function() {
+                deleteEvent(currentEvent);
+            });
+
+            //popUpContent.appendChild(editButton);
+            popUpContent.appendChild(deleteButton);
+            popUpContent.appendChild(closeButton);
+            popUpContainer.style.display = 'flex';
+            setTimeout(function() {
+                popUpContent.classList.add('show');
+            }, 100);
+        }
+/////////////////////////////////////////////////////////////////
+        function saveEvent(event) {
+            var editFilename = document.getElementById('editFilename').value;
+            var editNom = document.getElementById('editNom').value;
+            var editDate = document.getElementById('editDate').value;
+            var editDebut = document.getElementById('editDebut').value;
+            var editFin = document.getElementById('editFin').value;
+            var editPlaces = document.getElementById('editPlaces').value;
+            var editGuests = document.getElementById('editGuests').checked;
+            var editDescription = document.getElementById('editDescription').value;
+            var EventId = currentEvent.EvenementID;//event.evenementID;
+            // Mettre à jour les propriétés de l'association
+            filename= event.filename;
+            evenementNom=event.evenementNom;
+            evenementDate= event.evenementDate;
+            evenementDebut= event.evenementDebut;
+            evenementFin= event.evenementFin;
+            nombrePlaces= event.nombrePlaces;
+            allowGuests= event.allowGuests;
+            Description= event.description;
+
+            var url = 'http://localhost:8888/api/events/EvenementID?EvenementID='
+                + encodeURIComponent(EventId) + '&Evenement_Nom=' + encodeURI(editNom)
+                + '&Evenement_Date=' + encodeURI(editDate) + '&Evenement_Debut=' + encodeURI(editDebut)+
+                 + '&Evenement_Fin=' + encodeURI(editFin) + '&Nombre_Places=' + encodeURI(editPlaces)
+                + '&Allow_Guests=' + encodeURI(editGuests) + '&Description=' + encodeURI(editDescription)
+            + '&filename=' + encodeURI(editFilename);
+            // Effectuer la requête POST pour mettre à jour l'association
+            axios.post(url, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+
+                .then(function(response) {
+                    if (response.status === 200) {
+                        alert("L'evenement a été modifié avec succès.");
+
+                        // Fermer la fenêtre de modification
+                        var popUpContainer = document.getElementById('popUpContainer');
+                        popUpContainer.style.display = 'none';
+                        window.location.href = 'eventsTable.html';
+
+                    } else {
+                        console.log("Une erreur s'est produite lors de la modification de l'evenement." + response.status);
+                    }
+                })
+                .catch(function(error) {
+                    console.error(error);
+                    console.log("Une erreur s'est produite lors de la modification de l'evenement. catch");
+                });
+
+        }
+///////////////////////////////////////////////////////////////
+        function cancelEdit() {
+            var popUpContainer = document.getElementById('popUpContainer');
+            popUpContainer.style.display = 'none';
+        }
+
+/////////////////////////////////////////////////////////////////
+        function editEvent(event) {
+            var popUpContent = document.getElementById('popUpContent');
+
+            // Supprimer le contenu existant de la fenêtre contextuelle
+            popUpContent.innerHTML = '';
+
+            // Créer les champs de modification
+            var editForm = document.createElement('form');
+            editForm.id = 'editForm';
+            //////////////////////////////////////////////////////////
+
+            var nomLabel = document.createElement('label');
+            nomLabel.textContent = 'Nom:';
+            var editNom = document.createElement('input');
+            editNom.type = 'text';
+            editNom.id = 'editNom';
+            editNom.value =event.evenementNom;
+            editNom.required = true;
+            editNom.classList.add('edit-input'); // Ajout de la classe CSS
+
+            var dateLabel = document.createElement('label');
+            dateLabel.textContent = 'Date:';
+            var editDate = document.createElement('input');
+            editDate.type = 'date';
+            editDate.id = 'editDate';
+            editDate.value =event.evenementDate;
+            editDate.required = true;
+            editDate.classList.add('edit-input'); // Ajout de la classe CSS
+
+            var debutLabel = document.createElement('label');
+            debutLabel.textContent = 'Debut:';
+            var editDebut = document.createElement('input');
+            editDebut.type = 'time';
+            editDebut.id = 'editDebut';
+            editDebut.value =event.evenementDebut;
+            editDebut.required = true;
+            editDebut.classList.add('edit-input'); // Ajout de la classe CSS
+
+            var finLabel = document.createElement('label');
+            finLabel.textContent = 'Fin:';
+            var editFin = document.createElement('input');
+            editFin.type = 'time';
+            editFin.id = 'editFin';
+            editFin.value =event.evenementFin;
+            editFin.required = true;
+            editFin.classList.add('edit-input'); // Ajout de la classe CSS
+
+            var placesLabel = document.createElement('label');
+            placesLabel.textContent = 'Places:';
+            var editPlaces = document.createElement('input');
+            editPlaces.type = 'text';
+            editPlaces.id = 'editPlaces';
+            editPlaces.value =event.nombrePlaces;
+            editPlaces.required = true;
+            editPlaces.classList.add('edit-input'); // Ajout de la classe CSS
+
+            var guestsLabel = document.createElement('label');
+            guestsLabel.textContent = 'Invite:';
+            var editGuests = document.createElement('input');
+            editGuests.type = 'checkbox';
+            editGuests.id = 'editGuests';
+            editGuests.value =event.allowGuests;
+            editGuests.required = false;
+            editGuests.classList.add('edit-input'); // Ajout de la classe CSS
+
+            var descriptionLabel = document.createElement('label');
+            descriptionLabel.textContent = 'Description:';
+            var editDescription = document.createElement('input');
+            editDescription.type = 'text';
+            editDescription.id = 'editDescription';
+            editDescription.value =event.description;
+            editDescription.required = false;
+            editDescription.classList.add('edit-input'); // Ajout de la classe CSS
+
+            var filenameLabel = document.createElement('label');
+            filenameLabel.textContent = 'Image:';
+            var editFilename = document.createElement('input');
+            editFilename.type = 'file';
+            editFilename.id = 'editFilename';
+            editFilename.value ='';
+            editFilename.required = true;
+            editFilename.classList.add('edit-input'); // Ajout de la classe CSS
+/**/
+            /////////////////////////////////////////////////////////
+
+            var saveButton = document.createElement('button');
+            saveButton.type = 'submit';
+            saveButton.textContent = 'Enregistrer';
+
+            var cancelButton = document.createElement('button');
+            cancelButton.type = 'button';
+            cancelButton.textContent = 'Annuler';
+            cancelButton.addEventListener('click', function() {
+                cancelEdit();
+            });
+
+            // Ajouter un gestionnaire d'événements pour soumettre le formulaire de modification
+            editForm.addEventListener('submit', function(event) {
+                event.preventDefault(); // Empêcher le rechargement de la page par défaut
+                saveEvent(event);
+            });
+
+            // Ajouter les éléments au formulaire de modification
+            editForm.appendChild(nomLabel);
+            editForm.appendChild(editNom);
+            editForm.appendChild(debutLabel);
+            editForm.appendChild(editDebut);
+            editForm.appendChild(dateLabel);
+            editForm.appendChild(editDate);
+
+
+
+            editForm.appendChild(finLabel);
+            editForm.appendChild(editFin);
+
+            editForm.appendChild(placesLabel);
+            editForm.appendChild(editPlaces);
+
+            editForm.appendChild(guestsLabel);
+            editForm.appendChild(editGuests);
+/**/
+            editForm.appendChild(descriptionLabel);
+            editForm.appendChild(editDescription);
+
+            editForm.appendChild(filenameLabel);
+            editForm.appendChild(editFilename);
+
+            editForm.appendChild(saveButton);
+            editForm.appendChild(cancelButton);
+
+            // Ajouter le formulaire de modification à la fenêtre contextuelle
+            popUpContent.appendChild(editForm);
+
+            // Afficher la fenêtre contextuelle
+            var popUpContainer = document.getElementById('popUpContainer');
+            popUpContainer.style.display = 'flex';
+            setTimeout(function() {
+                popUpContent.classList.add('show');
+            }, 100);
+        }
+//////////////////////////////////////////////////////////////////
         function getEvents() {
             axios.get('http://localhost:8888/api/events', {
                 headers: {
@@ -65,20 +321,23 @@
                     var eventsContainer = document.getElementById('events');
 
                     events.forEach(function (event) {
-                        var eventCard = document.createElement('div');
+                        var eventCard =  document.createElement('event-button');
                         eventCard.className = 'event-card';
                         eventCard.innerHTML = `
-            <img src="http://localhost:8080/${event.filename}" alt="Event Image" ">
-            <h3>${event.evenementNom}</h3>
-            <p><strong>ID:</strong>${event.evenementID}</p>
-            <p><strong>Date:</strong> ${event.evenementDate}</p>
-            <p><strong>Start Time:</strong> ${event.evenementDebut}</p>
-            <p><strong>End Time:</strong> ${event.evenementFin}</p>
-            <p><strong>Number of Places:</strong> ${event.nombrePlaces}</p>
-            <p><strong>Allow Guests:</strong> ${event.allowGuests ? 'Yes' : 'No'}</p>
-            <p><strong>Description:</strong></p>
-            <pre>${event.description}</pre>
-          `;
+                        <img src="http://localhost:8080/${event.filename}" alt="Event Image" ">
+                        <h3>${event.evenementNom}</h3>
+                        <p><strong>ID:</strong>${event.evenementID}</p>
+                        <p><strong>Date:</strong> ${event.evenementDate}</p>
+                        <p><strong>Start Time:</strong> ${event.evenementDebut}</p>
+                        <p><strong>End Time:</strong> ${event.evenementFin}</p>
+                        <p><strong>Number of Places:</strong> ${event.nombrePlaces}</p>
+                        <p><strong>Allow Guests:</strong> ${event.allowGuests ? 'Yes' : 'No'}</p>
+                        <p><strong>Description:</strong></p>
+                        <pre>${event.description}</pre>
+                      `;
+                        eventCard.addEventListener('click', function() {
+                            showEventDetails(event);
+                        });
                         eventsContainer.appendChild(eventCard);
                         localStorage.setItem('EvenementID', event.evenementID);
                     });
@@ -87,24 +346,31 @@
                     console.error(error);
                 });
         }
-
-        function filterEvents() {
-            var input, filter, events, eventName, i;
-            input = document.getElementById('filterInput');
-            filter = input.value.toUpperCase();
-            events = document.getElementsByClassName('event');
-
-            for (i = 0; i < events.length; i++) {
-                eventName = events[i].getElementsByTagName('p')[0]; // Recherche dans le premier paragraphe <p>
-                if (eventName) {
-                    if (eventName.innerText.toUpperCase().indexOf(filter) > -1) {
-                        events[i].style.display = ''; // Afficher l'événement si le filtre correspond
-                    } else {
-                        events[i].style.display = 'none'; // Masquer l'événement si le filtre ne correspond pas
+///////////////////////////////////////////////////////////
+        function deleteEvent(event) {
+            if (currentEvent) {
+                axios.delete('http://localhost:8888/api/events/deleteEvent?EvenementID=' + encodeURIComponent(currentEvent.EvenementID), {
+                    headers: {
+                        'Content-Type': 'application/json'
                     }
-                }
+                })
+                    .then(function(response) {
+                        if (response.status === 200) {
+                            alert("L'evenement a été supprimée avec succès.");
+                            window.location.href = 'eventsTable.html';
+                        } else {
+                            console.log("Une erreur s'est produite lors de la suppression de l'evenement." + response.status);
+                        }
+                    })
+                    .catch(function(error) {
+                        console.error(error);
+                        console.log("Une erreur s'est produite lors de la suppression de l'evenement. catch");
+                    });
+            } else {
+                console.log("Aucun evenement sélectionné");
             }
         }
+///////////////////////////////////////////////////////////////////////////////
 
         getEvents();
     </script>
@@ -166,7 +432,7 @@
             justify-content: center;
             gap: 20px;
             padding: 20px;
-            background-color: #E8F5E9; /* Vert clair pour le fond */
+
         }
 
         #filterBar {
@@ -281,12 +547,52 @@
             text-align: center;
             z-index: 0;
         }
+        .pop-up-container {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 9999;
+        }
+
+        .pop-up-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.8);
+            background-color: #f1f1f1;
+            color: #268018;
+            padding: 100px;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .pop-up-content p {
+            margin: 10px 0;
+            font-size: 18px;
+        }
+
+        .pop-up-content button {
+            margin-top: 20px;
+            padding: 8px 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
 
     </style>
 </head>
 <body onload="initKeycloak()">
 
-<div id="events"></div>
 
 <div id="mySidenav" class="sidenav">
     <b id="user-info"></b>
@@ -304,5 +610,10 @@
 
 <div class="page-title">Evenements Programmes</div>
 <div class="events-container" id="events"></div>
+<div id="popUpContainer" class="pop-up-container">
+    <div id="popUpContent" class="pop-up-content">
+        <-- formulaire de modif -->
+    </div>
+</div>
 </body>
 </html>

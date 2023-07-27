@@ -37,6 +37,18 @@ public interface EventMapper {
     List<EventShowedToStudents> getEventUrReserving4(@Param("EvenementID") String EvenementID);
     @Select("SELECT EvenementID, Evenement_Nom, Evenement_Date, Nom_Invite, Enregistration_Invite FROM BASE_DE_DONNE.MyEvents WHERE UsagerID = #{UsagerID}")
     List<CheckMyEvents> CheckMyEvents(@Param("UsagerID") String UsagerID);
+    @Update("UPDATE BASE_DE_DONNE.EVENEMENT SET " +
+            "Evenement_Nom = #{Evenement_Nom}, Evenement_Date = #{Evenement_Date}, Evenement_Debut = #{Evenement_Debut}," +
+            " Evenement_Fin = #{Evenement_Fin}, Nombre_Places = #{Nombre_Places}, Allow_Guests = #{Allow_Guests}," +
+            "Description = #{Description}, filename = #{filename} " +
+            " WHERE EvenementID = #{EvenementID}")
+    void update_the_Event(@Param("EvenementID") String EvenementID, @Param("Evenement_Nom") String Evenement_Nom,
+                         @Param("Evenement_Date") String Evenement_Date, @Param("Evenement_Debut") String Evenement_Debut,
+                         @Param("Evenement_Fin") String Evenement_Fin, @Param("Nombre_Places") int Nombre_Places,
+                         @Param("Allow_Guests") boolean Allow_Guests, @Param("Description") String Description,
+                         @Param("filename") String filename);
+    @Delete("DELETE FROM BASE_DE_DONNE.EVENEMENT WHERE EvenementID = #{EvenementID}")
+    void deleteEvent(@Param("EvenementID") String EvenementID);
 
 }
 
