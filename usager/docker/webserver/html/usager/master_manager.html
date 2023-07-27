@@ -20,10 +20,10 @@
         "confidential-port": 0
       });
       keycloak.init({onLoad: 'login-required'}).then(function (authenticated) {
-        alert(authenticated ? 'authenticated' : 'not authenticated');
+        showNotification(authenticated ? 'authenticated' : 'not authenticated');
 
       }).catch(function () {
-        alert('failed to initialize');
+        showNotification('failed to initialize');
       }).finally(function () {
         displayUserInfo(); // Call the function to display user info
       });
