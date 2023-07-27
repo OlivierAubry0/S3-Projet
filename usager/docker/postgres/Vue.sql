@@ -21,6 +21,7 @@ SELECT
     a.Asso_Etudiante_Nom,
     a.FaculteID,
     e.Nombre_Places,
+    e.Nombres_Places_Restantes,
     e.Allow_Guests,
     e.Description,
     e.filename

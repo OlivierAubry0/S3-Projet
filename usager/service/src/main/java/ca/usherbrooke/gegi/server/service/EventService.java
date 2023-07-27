@@ -98,6 +98,13 @@ public class EventService {
         return Response.status(Response.Status.CREATED).entity(Events).build();
     }
     @POST
+    @javax.ws.rs.Path("/eventsReservation")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getEventReservation(@QueryParam("EvenementID") String EvenementID) {
+        List<EventShowedToStudents> Events = eventMapper.getEventUrReserving4(EvenementID);
+        return Response.status(Response.Status.CREATED).entity(Events).build();
+    }
+    @POST
     @javax.ws.rs.Path("/MyEvents")
     @Produces(MediaType.APPLICATION_JSON)
     public Response CheckMyEvents(@QueryParam("UsagerID") String UsagerID) {

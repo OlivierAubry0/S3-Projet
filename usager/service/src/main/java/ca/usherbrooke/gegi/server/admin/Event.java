@@ -17,14 +17,14 @@ public class Event {
         // Default constructor
     }
 
-    public Event(String eventId, String eventName, String eventDate, String eventStart, String eventEnd, String studentAssociationId, String nombrePlaces, boolean allowGuests, String description, String filename) {
+    public Event(String eventId, String eventName, String eventDate, String eventStart, String eventEnd, String studentAssociationId, int nombrePlaces, boolean allowGuests, String description, String filename) {
         this.evenementID = eventId;
         this.evenementNom = eventName;
         this.evenementDate = eventDate;
         this.evenementDebut = eventStart;
         this.evenementFin = eventEnd;
         this.assoEtudianteID = studentAssociationId;
-        this.nombrePlaces = Integer.parseInt(nombrePlaces);
+        this.nombrePlaces = nombrePlaces;
         this.Allow_Guests = Allow_Guests;
         this.description = description;
         this.filename = filename;

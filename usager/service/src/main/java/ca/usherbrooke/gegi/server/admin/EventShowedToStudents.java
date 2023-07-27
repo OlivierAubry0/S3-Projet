@@ -1,16 +1,17 @@
 package ca.usherbrooke.gegi.server.admin;
 
 public class EventShowedToStudents {
-    public String evenementID;
-    public String evenementNom;
-    public String evenementDate;
-    public String evenementDebut;
-    public String evenementFin;
-    public String assoEtudianteID;
-    public int nombrePlaces;
+    public String EvenementID;
+    public String Evenement_Nom;
+    public String Evenement_Date;
+    public String Evenement_Debut;
+    public String Evenement_Fin;
+    public String Asso_EtudianteID;
+    public int Nombre_Places;
+    public int Nombres_Places_Restantes;
     //private String nombrePlaces;
     public boolean Allow_Guests;
-    public String description;
+    public String Description;
     public String filename;
     public String Asso_Etudiante_Nom;
     public String FaculteID;
@@ -18,67 +19,68 @@ public class EventShowedToStudents {
         // Default constructor
     }
 
-    public EventShowedToStudents(String eventId, String eventName, String eventDate, String eventStart, String eventEnd, String studentAssociationId, String AssoName, String FacID, String nombrePlaces, boolean allowGuests, String description, String filename) {
-        this.evenementID = eventId;
-        this.evenementNom = eventName;
-        this.evenementDate = eventDate;
-        this.evenementDebut = eventStart;
-        this.evenementFin = eventEnd;
-        this.assoEtudianteID = studentAssociationId;
+    public EventShowedToStudents(String eventId, String eventName, String eventDate, String eventStart, String eventEnd, String studentAssociationId, String AssoName, String FacID, int nombrePlaces,int nombrePlacesRestantes, boolean allowGuests, String description, String filename) {
+        this.EvenementID = eventId;
+        this.Evenement_Nom = eventName;
+        this.Evenement_Date = eventDate;
+        this.Evenement_Debut = eventStart;
+        this.Evenement_Fin = eventEnd;
+        this.Asso_EtudianteID = studentAssociationId;
         this.Asso_Etudiante_Nom = AssoName;
         this.FaculteID = FacID;
-        this.nombrePlaces = Integer.parseInt(nombrePlaces);
+        this.Nombre_Places = nombrePlaces;
+        this.Nombres_Places_Restantes=nombrePlacesRestantes;
         this.Allow_Guests = allowGuests;
-        this.description = description;
+        this.Description = description;
         this.filename = filename;
     }
 
     public String getEvenementID() {
-        return evenementID;
+        return EvenementID;
     }
 
     public void setEvenementID(String evenementID) {
-        this.evenementID = evenementID;
+        this.EvenementID = evenementID;
     }
 
     public String getEvenementNom() {
-        return evenementNom;
+        return Evenement_Nom;
     }
 
     public void setEvenementNom(String evenementNom) {
-        this.evenementNom = evenementNom;
+        this.Evenement_Nom = evenementNom;
     }
 
     public String getEvenementDate() {
-        return evenementDate;
+        return Evenement_Date;
     }
 
     public void setEvenementDate(String evenementDate) {
-        this.evenementDate = evenementDate;
+        this.Evenement_Date = evenementDate;
     }
 
     public String getEvenementDebut() {
-        return evenementDebut;
+        return Evenement_Debut;
     }
 
     public void setEvenementDebut(String evenementDebut) {
-        this.evenementDebut = evenementDebut;
+        this.Evenement_Debut = evenementDebut;
     }
 
     public String getEvenementFin() {
-        return evenementFin;
+        return Evenement_Fin;
     }
 
     public void setEvenementFin(String evenementFin) {
-        this.evenementFin = evenementFin;
+        this.Evenement_Fin = evenementFin;
     }
 
     public String getAssoEtudianteID() {
-        return assoEtudianteID;
+        return Asso_EtudianteID;
     }
 
     public void setAssoEtudianteID(String assoEtudianteID) {
-        this.assoEtudianteID = assoEtudianteID;
+        this.Asso_EtudianteID = assoEtudianteID;
     }
     /*
         public String getNombrePlaces() {
@@ -89,11 +91,18 @@ public class EventShowedToStudents {
             this.nombrePlaces = nombrePlaces;
         }*/
     public int getNombrePlaces() {
-        return nombrePlaces;
+        return Nombre_Places;
     }
 
     public void setNombrePlaces(int nombrePlaces) {
-        this.nombrePlaces = nombrePlaces;
+        this.Nombre_Places = nombrePlaces;
+    }
+    public int getNombres_Places_Restantes() {
+        return Nombres_Places_Restantes;
+    }
+
+    public void setNombres_Places_Restantes(int nombresPlacesRestantes) {
+        this.Nombres_Places_Restantes = nombresPlacesRestantes;
     }
     public boolean isAllowGuests() {
         return Allow_Guests;
@@ -104,11 +113,11 @@ public class EventShowedToStudents {
     }
 
     public String getDescription() {
-        return description;
+        return Description;
     }
 
     public void setDescription(String description) {
-        this.description = description;
+        this.Description = description;
     }
 
     public String getFilename() {
