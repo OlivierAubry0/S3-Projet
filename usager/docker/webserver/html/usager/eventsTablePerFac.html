@@ -7,6 +7,7 @@
     <title>View Events</title>
 
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="http://localhost:8180/js/keycloak.js"></script>
     <script>
 
         function displayUserInfo() {
@@ -115,6 +116,66 @@
                     console.error(error);
                 });
         }
+
+        function redirectToEventsTablePerFac(value) {
+            var url = 'eventsTablePerFac.html?FaculteID=' + encodeURIComponent(value);
+            window.location.href = url;
+        }
+
+        function scrollToHeight() {
+            var scrollHeight = 1380; // Adjust the desired scroll height here
+            var duration = 1000; // Adjust the duration of the glide animation (in milliseconds)
+
+            var start = null;
+            var initialY = window.pageYOffset;
+
+            function step(timestamp) {
+                if (!start) start = timestamp;
+                var progress = timestamp - start;
+                var scrollY = initialY + easeInOutQuad(progress, 0, scrollHeight - initialY, duration);
+                window.scrollTo(0, scrollY);
+                if (progress < duration) {
+                    window.requestAnimationFrame(step);
+                }
+            }
+
+            function easeInOutQuad(t, b, c, d) {
+                t /= d / 2;
+                if (t < 1) return c / 2 * t * t + b;
+                t--;
+                return -c / 2 * (t * (t - 2) - 1) + b;
+            }
+
+            window.requestAnimationFrame(step);
+        }
+
+        // JavaScript code
+        function toggleSubMenuGuests() {
+            var checkbox = document.getElementById("feedback-form");
+            var sousMenu = document.getElementById("sous-menu");
+
+            if (checkbox.checked) {
+                sousMenu.style.display = "block";
+            } else {
+                sousMenu.style.display = "none";
+            }
+        }
+
+        var prevScrollpos = window.pageYOffset;
+
+        window.onscroll = function() {
+            var currentScrollPos = window.pageYOffset;
+
+            if (prevScrollpos > currentScrollPos) {
+                // Scrolling up, show the header
+                document.getElementById("header").classList.remove("hidden");
+            } else {
+                // Scrolling down, hide the header
+                document.getElementById("header").classList.add("hidden");
+            }
+
+            prevScrollpos = currentScrollPos;
+        };
     </script>
 
     <style>
@@ -355,6 +416,7 @@
 
         .button-24:active {
             opacity: .5;
+        }
         .event-img {
             position: relative;
 
@@ -391,6 +453,8 @@
             background-color: #268018;
             color: white;
             padding: 10px;
+        }
+
         .event-button {
 
             position: relative;
@@ -412,7 +476,7 @@
         .footer-text {
             font-size: 16px;
             font-weight: bold;
-
+        }
         .event-button p {
             position: relative;
             display: flex;
@@ -429,37 +493,7 @@
             }
         }
     </style>
-    <script>
-        // JavaScript code
-        function toggleSubMenuGuests() {
-            var checkbox = document.getElementById("feedback-form");
-            var sousMenu = document.getElementById("sous-menu");
 
-            if (checkbox.checked) {
-                sousMenu.style.display = "block";
-            } else {
-                sousMenu.style.display = "none";
-            }
-        }
-
-        var prevScrollpos = window.pageYOffset;
-
-        window.onscroll = function() {
-            var currentScrollPos = window.pageYOffset;
-
-            if (prevScrollpos > currentScrollPos) {
-                // Scrolling up, show the header
-                document.getElementById("header").classList.remove("hidden");
-            } else {
-                // Scrolling down, hide the header
-                document.getElementById("header").classList.add("hidden");
-            }
-
-            prevScrollpos = currentScrollPos;
-        };
-
-
-    </script>
 </head>
 <body onload="getEventsGenie();initKeycloak()">
 <div  class="event-button" id="events">
@@ -485,108 +519,6 @@
 <h2 style="position: absolute; left: 32%; top: 10%; font-size: xxx-large; color: green">Évènements en génie</h2>
 
 
-
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<script src="http://localhost:8180/js/keycloak.js"></script>
-<script>
-
-    function redirectToEventsTablePerFac(value) {
-        var url = 'eventsTablePerFac.html?FaculteID=' + encodeURIComponent(value);
-        window.location.href = url;
-    }
-
-    var keycloak;
-
-    function initKeycloak() {
-        keycloak = new Keycloak({
-            "realm": "usager",
-            "auth-server-url": "http://localhost:8180/",
-            "ssl-required": "external",
-            "clientId": "frontend",
-            "public-client": true,
-            "confidential-port": 0
-        });
-
-        keycloak.init({ onLoad: 'login-required' }).then(function (authenticated) {
-            if (authenticated) {
-                var roles = keycloak.tokenParsed.realm_access.roles;
-                if (roles.includes('enseignant')) {
-                    window.location.href = 'admin_event_creator.html';
-                    return;
-                } else if (roles.includes('coordonnateur-pédagogique')) {
-                    window.location.href = 'master_manager.html';
-                    return;
-                }
-            } else {
-                alert('Not authenticated');
-            }
-        }).catch(function () {
-            alert('Failed to initialize');
-        }).finally(function () {
-            displayUserInfo();
-        });
-    }
-
-
-    function logout() {
-        let logoutURL = "http://localhost:8180/realms/usager/protocol/openid-connect/logout";
-        window.location.href = logoutURL;
-    }
-
-    function openNav() {
-        document.getElementById("mySidenav").style.width = "250px";
-        document.getElementById("user-info").classList.add("fade-in");
-    }
-
-    function closeNav() {
-        document.getElementById("mySidenav").style.width = "0";
-        document.getElementById("user-info").classList.remove("fade-in");
-    }
-
-    function scrollToHeight() {
-        var scrollHeight = 1380; // Adjust the desired scroll height here
-        var duration = 1000; // Adjust the duration of the glide animation (in milliseconds)
-
-        var start = null;
-        var initialY = window.pageYOffset;
-
-        function step(timestamp) {
-            if (!start) start = timestamp;
-            var progress = timestamp - start;
-            var scrollY = initialY + easeInOutQuad(progress, 0, scrollHeight - initialY, duration);
-            window.scrollTo(0, scrollY);
-            if (progress < duration) {
-                window.requestAnimationFrame(step);
-            }
-        }
-
-        function easeInOutQuad(t, b, c, d) {
-            t /= d / 2;
-            if (t < 1) return c / 2 * t * t + b;
-            t--;
-            return -c / 2 * (t * (t - 2) - 1) + b;
-        }
-
-        window.requestAnimationFrame(step);
-    }
-
-    function displayUserInfo() {
-        var token = keycloak.tokenParsed;
-        var name = token.name;
-
-        var userInfoList = document.createElement('ul');
-        var nameItem = document.createElement('li');
-        var rolesItem = document.createElement('li');
-
-        nameItem.textContent = 'Connecté: \n' + name;
-
-        userInfoList.appendChild(nameItem);;
-
-        var userInfoDiv = document.getElementById('user-info');
-        userInfoDiv.innerHTML = '';
-        userInfoDiv.appendChild(userInfoList);
-    }
-</script>
 
 <footer class="footer">
     <p class="footer-text">Après une soirée bien arrosée, Bob ne prend pas le volant. Fais comme Bob!</p>
