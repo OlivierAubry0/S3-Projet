@@ -269,7 +269,7 @@
       "confidential-port": 0
     });
 
-    keycloak.init({ onLoad: 'login-required' }).then(function (authenticated) {
+    keycloak.init({ onLoad: 'login-required' }).then(function(authenticated) {
       if (authenticated) {
         var roles = keycloak.tokenParsed.realm_access.roles;
         if (roles.includes('enseignant')) {
@@ -280,11 +280,14 @@
           return;
         }
       } else {
+        // If not authenticated, show the login screen or perform other actions
         alert('Not authenticated');
       }
     }).catch(function () {
+      // Handle initialization errors
       alert('Failed to initialize');
-    }).finally(function () {
+    }).finally(function() {
+      // After initialization, display the user info if authenticated
       displayUserInfo();
     });
   }

@@ -187,14 +187,16 @@
     .notification {
       position: fixed;
       right: 20px;
-      top: 20px;
+      top: 50px;
       background-color: #4CAF50;
       color: white;
       padding: 15px;
       border-radius: 4px;
       transition: opacity 0.6s, top 0.5s;
       opacity: 0;
+      z-index: 1000000;
     }
+
     .large-button span {
       position: absolute;
       top: 50%;
@@ -399,7 +401,6 @@
 </header>
 <h2 style="position: absolute; left: 36%; top: 10%; font-size: xxx-large; color: green">Obtenir un billet</h2>
 <div id="feedback-form">
-
   <form>
     <label for="feedback-notify">J'invite quelqu'un (optionnel)</label>
     <input type="checkbox" id="feedback-notify" name="notify">
@@ -408,7 +409,7 @@
       <input type="text" id="Telephone_Invite" placeholder="Numéro de téléphone">
       <input type="text" id="feedback-phone" name="phone" placeholder="Phone number"></input>
     </div>
-    <button class="button-24" onclick="submitReservation()" style="top: 82%">Réserver</button>
+    <button class="button-24" onclick="submitReservation(event)" style="top: 82%">Réserver</button>
   </form>
 </div>
 
@@ -482,8 +483,9 @@
       }
     }
     function submitReservation() {
+      event.preventDefault();
       var tokenData = keycloak.tokenParsed;
-      var Checkbox = document.getElementById('checkbox');
+      var Checkbox = document.getElementById('feedback-notify');
       var EvenementID = localStorage.getItem('EvenementID');
       var UsagerID = tokenData.preferred_username;
       var Telephone_Invite = document.getElementById('Telephone_Invite').value;
@@ -520,6 +522,7 @@
               })
               .catch(function(error) {
                 console.error(error);
+                showNotification("Vous avez déja réserver pour cet évenement");
               });
     }
 
