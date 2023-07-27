@@ -68,7 +68,7 @@
                         var eventCard = document.createElement('div');
                         eventCard.className = 'event-card';
                         eventCard.innerHTML = `
-            <img src="http://localhost:8080/${event.filename}" alt="Event Image" onclick="window.location.href = 'getTicket.html'">
+            <img src="http://localhost:8080/${event.filename}" alt="Event Image" ">
             <h3>${event.evenementNom}</h3>
             <p><strong>ID:</strong>${event.evenementID}</p>
             <p><strong>Date:</strong> ${event.evenementDate}</p>
@@ -291,9 +291,7 @@
 <div id="mySidenav" class="sidenav">
     <b id="user-info"></b>
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-    <a href="#" onclick="window.location.href='eventID_before_scanning.html'">Scanner</a>
-    <a href="#" onclick="window.location.href='MyEvents.html'">Mes Évenements</a>
-    <a href="#" onclick="window.location.href='pc_HomePage.html'">Acceuil</a>
+    <a href="#" onclick="window.location.href='admin_event_creator.html'">Acceuil</a>
     <a href="#" onclick="logout()">Déconnexion</a>
 </div>
 

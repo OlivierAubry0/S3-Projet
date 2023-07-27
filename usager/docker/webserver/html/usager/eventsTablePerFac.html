@@ -66,6 +66,10 @@
             FacID = urlParams.get('FaculteID');
         }
 
+        function logout() {
+            let logoutURL = "http://localhost:8180/realms/usager/protocol/openid-connect/logout";
+            window.location.href = logoutURL;
+        }
 
         function getEventsGenie() {
             getValueFromURL();
