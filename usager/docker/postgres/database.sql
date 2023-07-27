@@ -31,7 +31,7 @@ CREATE TABLE EVENEMENT
 (
     EvenementID      VARCHAR(50) NOT NULL,
     Evenement_Nom    VARCHAR(50),
-    Evenement_Date   VARCHAR(50),
+    Evenement_Date   VARCHAR(50) NOT NULL,
     Evenement_Debut  VARCHAR(50),
     Evenement_Fin    VARCHAR(50),
     Asso_EtudianteID VARCHAR(50),

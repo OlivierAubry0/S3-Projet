@@ -119,13 +119,17 @@ WHERE Telephone_Invite = NEW.Telephone_Invite AND EvenementID = NEW.EvenementID;
         WHERE Telephone_Invite = NEW.Telephone_Invite AND EvenementID = NEW.EvenementID;
     ELSIF invite_count > 2 THEN
         RAISE EXCEPTION 'Cette personne a deje ete invitee ! :)' ;
+    ELSIF invite_count < 2 THEN
+        UPDATE BASE_DE_DONNE.RESERVATION
+        SET Enregistration_Invite = false
+        WHERE Telephone_Invite = OLD.Telephone_Invite AND EvenementID = OLD.EvenementID;
     END IF;
     RETURN NEW;
 END;
 $$ LANGUAGE plpgsql;
 DROP TRIGGER IF EXISTS check_duplicate_invite ON BASE_DE_DONNE.RESERVATION;
 CREATE TRIGGER check_duplicate_invite
-    AFTER INSERT ON BASE_DE_DONNE.RESERVATION
+    AFTER INSERT OR DELETE ON BASE_DE_DONNE.RESERVATION
     FOR EACH ROW
     EXECUTE FUNCTION prevent_invitation();
 ------------------------ Creation de la fonction qui regarde si le CIP transfert existe ------------------------------------
