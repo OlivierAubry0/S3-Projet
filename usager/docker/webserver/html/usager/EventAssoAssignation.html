@@ -38,6 +38,7 @@
     }
 
     .pop-up-content {
+      width: 300px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -53,9 +54,6 @@
       transition: transform 0.3s ease;
     }
 
-    .pop-up-content.show {
-      transform: translate(-50%, -50%) scale(1);
-    }
 
     .pop-up-content p {
       margin: 10px 0;
@@ -72,9 +70,6 @@
       font-size: 16px;
     }
 
-    .filter-container {
-      margin-bottom: 10px;
-    }
 
     .filter-container input[type="text"] {
       padding: 15px;
@@ -92,10 +87,13 @@
       background-color: #45a049;
     }
 
-    .edit-input {
+    .edit-input,
+    .edit-buttons {
       display: block;
+      width: 100%;
       margin-bottom: 10px;
     }
+    
   </style>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script src="http://localhost:8180/js/keycloak.js"></script>
@@ -117,6 +115,9 @@
          <p><strong>Nom:</strong> ${asso.Asso_Etudiante_Nom}</p>
          <p><strong>Faculte:</strong> ${asso.Faculte_Nom}</p>
          `;
+
+      // Stocker la valeur de asso.Asso_EtudianteID dans le localStorage
+      localStorage.setItem('Asso_EtudianteID', asso.Asso_EtudianteID);
 
       // Stocker les valeurs des champs dans la variable globale currentAsso
       currentAsso = {
@@ -146,7 +147,7 @@
                 var assoContainer = document.getElementById('associations');
                 assos.forEach(function(asso) {
                   var assoButton = document.createElement('button');
-                  localStorage.setItem('Asso_EtudianteID', asso.Asso_EtudianteID);
+                  //localStorage.setItem('Asso_EtudianteID', asso.Asso_EtudianteID);
                   assoButton.className = 'large-button';
                   assoButton.innerHTML =
                           `
@@ -167,11 +168,97 @@
     }
 
 
+    function editAssoKey() {
+      var popUpContent = document.getElementById('popUpContent');
+
+      // Supprimer le contenu existant de la fenêtre contextuelle
+      popUpContent.innerHTML = '';
+
+      // Créer le formulaire de modification pour la clé de l'association
+      var editForm = document.createElement('form');
+      editForm.id = 'editForm';
+
+      var keyLabel = document.createElement('label');
+      keyLabel.textContent = 'Entrez la clé de l\'association:';
+      keyLabel.style.fontSize = '18px'; // Agrandir la taille du titre
+
+      var editKey = document.createElement('input');
+      editKey.type = 'text';
+      editKey.id = 'editKey';
+      editKey.value = ''; // Vous pouvez également initialiser la valeur avec la clé existante ici
+      editKey.required = true;
+      editKey.classList.add('edit-input'); // Ajout de la classe CSS pour alignement vertical
+      editKey.style.width = '300px'; // Agrandir la largeur du champ
+
+      var sendButton = document.createElement('button');
+      sendButton.type = 'submit';
+      sendButton.textContent = 'Envoyer';
+      sendButton.classList.add('edit-buttons'); // Ajout de la classe CSS pour alignement vertical
+
+      var cancelButton = document.createElement('button');
+      cancelButton.type = 'button';
+      cancelButton.textContent = 'Annuler';
+      cancelButton.addEventListener('click', function() {
+        cancelEdit();
+      });
+      cancelButton.classList.add('edit-buttons'); // Ajout de la classe CSS pour alignement vertical
+
+      // Ajouter un gestionnaire d'événements pour soumettre le formulaire de modification
+      editForm.addEventListener('submit', function(event) {
+        event.preventDefault(); // Empêcher le rechargement de la page par défaut
+
+        // Vérifier si la clé est identique à l'UsagerID de l'association sélectionnée
+        var enteredKey = editKey.value;
+        if (currentAsso && enteredKey === currentAsso.UsagerID) {
+          // Rediriger vers 'createEvent.html' si la clé est correcte
+          window.location.href = 'createEvent.html';
+        } else {
+          // Afficher un message d'erreur si la clé est incorrecte
+          alert('Clé incorrecte. Veuillez réessayer.');
+        }
+      });
+
+      // Ajouter les éléments au formulaire de modification
+      editForm.appendChild(keyLabel);
+      editForm.appendChild(editKey);
+      editForm.appendChild(sendButton);
+      editForm.appendChild(cancelButton);
+
+      // Ajouter le formulaire de modification à la fenêtre contextuelle
+      popUpContent.appendChild(editForm);
+
+      // Afficher la fenêtre contextuelle
+      var popUpContainer = document.getElementById('popUpContainer');
+      popUpContainer.style.display = 'flex';
+      setTimeout(function() {
+        popUpContent.classList.add('show');
+      }, 100);
+    }
+
+    function sendKey() {
+      var editKey = document.getElementById('editKey').value;
+      if (editKey === currentAsso.UsagerID) {
+        // Rediriger vers 'createEvent.html' si la clé est correcte
+        window.location.href = 'createEvent.html';
+      } else {
+        // Afficher un message d'erreur si la clé est incorrecte
+        alert("Clé incorrecte, veuillez réessayer.");
+      }
+    }
+
+    function cancelEdit() {
+      var popUpContainer = document.getElementById('popUpContainer');
+      popUpContainer.style.display = 'none';
+
+      // Rediriger vers 'admin_event_creator.html'
+      window.location.href = 'admin_event_creator.html';
+    }
+
   </script>
 </head>
 <body onload="getAsso();">
 <h2>View All Asso</h2>
-<div id="associations" onclick="window.location.href='createEvent.html'" >
+<div id="associations" onclick="editAssoKey();" >
   <!-- Associations will be displayed here -->
 </div>
 <div id="popUpContainer" class="pop-up-container">
