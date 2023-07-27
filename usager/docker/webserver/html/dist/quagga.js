@@ -3710,7 +3710,7 @@
                 }
 
                 function addResult(result, imageData) {
-                    alert(result);
+
                     if (!imageData || !_resultCollector) {
                         return;
                     }
