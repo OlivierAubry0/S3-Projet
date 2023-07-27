@@ -111,6 +111,11 @@
       var FaculteID = document.getElementById('FaculteID').value;
       var UsagerID = document.getElementById('UsagerID').value;
 
+      if (Asso_Etudiante_Nom.length === 0) { // Check for an empty string
+      showNotification("Mettez un nom d'association");
+      return;
+    }
+
       var asso = {
         Asso_Etudiante_Nom: Asso_Etudiante_Nom,
         FaculteID: FaculteID,

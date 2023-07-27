@@ -1,13 +1,10 @@
 package ca.usherbrooke.gegi.server.persistence;
 
-import ca.usherbrooke.gegi.server.admin.CheckIfUserReserved;
 import ca.usherbrooke.gegi.server.admin.CheckMyEvents;
 import ca.usherbrooke.gegi.server.admin.Event;
 import ca.usherbrooke.gegi.server.admin.EventShowedToStudents;
 import org.apache.ibatis.annotations.*;
 
-import javax.ws.rs.DELETE;
-import javax.ws.rs.QueryParam;
 import java.util.List;
 
 @Mapper
@@ -37,6 +34,9 @@ public interface EventMapper {
     List<EventShowedToStudents> getEventUrReserving4(@Param("EvenementID") String EvenementID);
     @Select("SELECT EvenementID, Evenement_Nom, Evenement_Date, Nom_Invite, Enregistration_Invite FROM BASE_DE_DONNE.MyEvents WHERE UsagerID = #{UsagerID}")
     List<CheckMyEvents> CheckMyEvents(@Param("UsagerID") String UsagerID);
+
+    @Delete("DELETE FROM BASE_DE_DONNE.EVENEMENT WHERE EvenementID = #{EvenementID}")
+    void deleteEvent(@Param("EvenementID") String EvenementID);
 
 }
 

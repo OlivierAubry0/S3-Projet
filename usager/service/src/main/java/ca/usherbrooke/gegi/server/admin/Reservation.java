@@ -36,4 +36,24 @@ public class Reservation {
     public void setEnregistration_Invite(boolean Enregistration_Invite) {
         this.Enregistration_Invite = Enregistration_Invite;
     }
+
+    public String getEvenementID() {
+        return EvenementID;
+    }
+
+    public String getUsagerID() {
+        return UsagerID;
+    }
+
+    public String getTelephone_Invite() {
+        return Telephone_Invite;
+    }
+
+    public String getNom_Invite() {
+        return Nom_Invite;
+    }
+
+    public boolean isEnregistration_Invite() {
+        return Enregistration_Invite;
+    }
 }

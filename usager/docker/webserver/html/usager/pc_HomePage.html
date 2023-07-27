@@ -35,6 +35,19 @@
       z-index: 3;
     }
 
+
+    .notification {
+      position: fixed;
+      right: 20px;
+      top: 50px;
+      background-color: #4CAF50;
+      color: white;
+      padding: 15px;
+      border-radius: 4px;
+      transition: opacity 0.6s, top 0.5s;
+      opacity: 0;
+      z-index: 1000000;
+    }
     .sidenav .closebtn {
       position: absolute;
       top: 0;
@@ -248,10 +261,10 @@
             return;
           }
         } else {
-          alert('Not authenticated');
+          showNotification('Not authenticated');
         }
       }).catch(function () {
-        alert('Failed to initialize');
+        showNotification('Failed to initialize');
       }).finally(function () {
         displayUserInfo();
       });
@@ -261,6 +274,30 @@
     function logout() {
       let logoutURL = "http://localhost:8180/realms/usager/protocol/openid-connect/logout";
       window.location.href = logoutURL;
+    }
+
+    function showNotification(message) {
+      var notification = document.createElement('div');
+      notification.className = 'notification';
+      notification.textContent = message;
+
+      document.body.appendChild(notification);
+
+      // After adding to the DOM, change the style to trigger the CSS transition
+      setTimeout(function() {
+        notification.style.opacity = 1;
+        notification.style.top = '50px';
+      }, 20);
+
+      // Remove the notification after 3 seconds
+      setTimeout(function() {
+        notification.style.opacity = 0;
+        notification.style.top = '20px';
+
+        setTimeout(function() {
+          document.body.removeChild(notification);
+        }, 600);
+      }, 3000);
     }
 
     function scrollToHeight() {

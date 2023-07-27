@@ -49,6 +49,18 @@
       border-radius: 10%;
       box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
     }
+    .notification {
+      position: fixed;
+      right: 20px;
+      top: 50px;
+      background-color: #4CAF50;
+      color: white;
+      padding: 15px;
+      border-radius: 4px;
+      transition: opacity 0.6s, top 0.5s;
+      opacity: 0;
+      z-index: 1000000;
+    }
     .sidenav {
       height: 100%;
       width: 0;
@@ -138,6 +150,30 @@
       userInfoDiv.appendChild(userInfoList);
     }
 
+    function showNotification(message) {
+      var notification = document.createElement('div');
+      notification.className = 'notification';
+      notification.textContent = message;
+
+      document.body.appendChild(notification);
+
+      // After adding to the DOM, change the style to trigger the CSS transition
+      setTimeout(function() {
+        notification.style.opacity = 1;
+        notification.style.top = '50px';
+      }, 20);
+
+      // Remove the notification after 3 seconds
+      setTimeout(function() {
+        notification.style.opacity = 0;
+        notification.style.top = '20px';
+
+        setTimeout(function() {
+          document.body.removeChild(notification);
+        }, 600);
+      }, 3000);
+    }
+
     var keycloak;
 
     function initKeycloak() {
@@ -156,18 +192,35 @@
                   getUserInfo();
                   displayUserInfo();
                 } else {
-                  alert('not authenticated');
+                  showNotification('not authenticated');
                 }
               })
               .error(function () {
-                alert('failed to initialize');
+                showNotification('failed to initialize');
               });
     }
     function openNav() {
       document.getElementById("mySidenav").style.width = "250px";
       document.getElementById("user-info").classList.add("fade-in");
     }
+    function displayUserInfo() {
+      var token = keycloak.tokenParsed;
+      var name = token.name;
 
+      var userInfoList = document.createElement('ul');
+      var nameItem = document.createElement('li');
+      var rolesItem = document.createElement('li');
+
+      nameItem.textContent = 'Nom : \n' + name;
+      rolesItem.textContent =  'Role: master';
+
+      userInfoList.appendChild(nameItem);
+      userInfoList.appendChild(rolesItem);
+
+      var userInfoDiv = document.getElementById('user-info');
+      userInfoDiv.innerHTML = ''; // Supprime tout contenu existant
+      userInfoDiv.appendChild(userInfoList);
+    }
     function closeNav() {
       document.getElementById("mySidenav").style.width = "0";
       document.getElementById("user-info").classList.remove("fade-in");
@@ -219,10 +272,10 @@
                       }
                     });
                   } else {
-                    alert("Aucun réservation trouvée !");
+                    showNotification("Aucun réservation trouvée !");
                   }
                 } else {
-                  alert(response.status);
+                  showNotification(response.status);
                 }
               })
               .catch(function (error) {

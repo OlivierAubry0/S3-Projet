@@ -74,7 +74,18 @@
       color: #f1f1f1;
       z-index: 3;
     }
-
+    .notification {
+      position: fixed;
+      right: 20px;
+      top: 50px;
+      background-color: #4CAF50;
+      color: white;
+      padding: 15px;
+      border-radius: 4px;
+      transition: opacity 0.6s, top 0.5s;
+      opacity: 0;
+      z-index: 1000000;
+    }
     .sidenav .closebtn {
       position: absolute;
       top: 0;
@@ -148,23 +159,23 @@
         filename: '',
       };
       if (evenementDate === '' ) {
-        alert("Veuillez la date de votre événement.");
+        showNotification("Veuillez la date de votre événement.");
         return;
       }
       if (evenementNom === '' ) {
-        alert("Attribuez un nom à votre événement.");
+        showNotification("Attribuez un nom à votre événement.");
         return;
       }
       if (evenementDebut === '' ) {
-        alert("Veuillez indidiquer une heure de début.");
+        showNotification("Veuillez indidiquer une heure de début.");
         return;
       }
       if (evenementFin === '' ) {
-        alert("Veuillez indidiquer une heure de fin.");
+        showNotification("Veuillez indidiquer une heure de fin.");
         return;
       }
       if (nombrePlaces === '' ) {
-        alert("Veuillez indidiquer un nombre de places.");
+        showNotification("Veuillez indidiquer un nombre de places.");
         return;
       }
 
@@ -191,12 +202,37 @@
                   alert('Event created!');
                   window.location.href = 'admin_event_creator.html'; // Replace with the path to your main menu HTML file
                 } else {
-                  alert(response.status);
+                  showNotification(response.status);
                 }
               })
               .catch(function (error) {
                 console.error(error);
               });
+    }
+
+
+    function showNotification(message) {
+      var notification = document.createElement('div');
+      notification.className = 'notification';
+      notification.textContent = message;
+
+      document.body.appendChild(notification);
+
+      // After adding to the DOM, change the style to trigger the CSS transition
+      setTimeout(function() {
+        notification.style.opacity = 1;
+        notification.style.top = '50px';
+      }, 20);
+
+      // Remove the notification after 3 seconds
+      setTimeout(function() {
+        notification.style.opacity = 0;
+        notification.style.top = '20px';
+
+        setTimeout(function() {
+          document.body.removeChild(notification);
+        }, 600);
+      }, 3000);
     }
 
     function logout() {

@@ -1,15 +1,15 @@
 //EventService
 package ca.usherbrooke.gegi.server.service;
 
-import ca.usherbrooke.gegi.server.admin.CheckIfUserReserved;
+import ca.usherbrooke.gegi.server.admin.CheckMyEvents;
 import ca.usherbrooke.gegi.server.admin.Event;
 import ca.usherbrooke.gegi.server.admin.EventShowedToStudents;
+import ca.usherbrooke.gegi.server.admin.Reservation;
 import ca.usherbrooke.gegi.server.persistence.EventMapper;
+import ca.usherbrooke.gegi.server.persistence.ReservationMapper;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.eclipse.microprofile.jwt.JsonWebToken;
-import org.jboss.logging.annotations.Param;
-import ca.usherbrooke.gegi.server.admin.CheckMyEvents;
 import org.jboss.resteasy.plugins.providers.multipart.InputPart;
 import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataInput;
 
@@ -39,6 +39,9 @@ public class EventService {
 
     @Inject
     EventMapper eventMapper;
+
+    @Inject
+    ReservationMapper reservationMapper;
 
     @POST
     @Consumes(MediaType.MULTIPART_FORM_DATA)
@@ -111,5 +114,28 @@ public class EventService {
         List<CheckMyEvents> MyEvents = eventMapper.CheckMyEvents(UsagerID);
         return Response.status(Response.Status.CREATED).entity(MyEvents).build();
     }
+
+    @DELETE
+    @javax.ws.rs.Path("/deleteEvent")
+    public Response deleteEvent(@QueryParam("EvenementID") String EvenementID) {
+        // First, delete associated reservations
+        deleteAssociatedReservations(EvenementID);
+
+        // Then, delete the event
+        eventMapper.deleteEvent(EvenementID);
+
+        return Response.status(Response.Status.OK).build();
+    }
+
+    private void deleteAssociatedReservations(String EvenementID) {
+        // Get the list of reservations associated with the event
+        List<Reservation> reservations = reservationMapper.getReservationsByEventID(EvenementID);
+
+        // Delete each reservation
+        for (Reservation reservation : reservations) {
+            reservationMapper.deleteReservationV2(reservation.getEvenementID());
+        }
+    }
+
 }
 
