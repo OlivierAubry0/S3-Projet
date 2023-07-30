@@ -138,6 +138,23 @@
     }
 
     function submitEvent() {
+
+      // Get the start and end time inputs
+      var startTimeInput = document.getElementById('start').value;
+      var endTimeInput = document.getElementById('end').value;
+
+      // Convert the time inputs to Date objects with a common date (e.g., today's date)
+      var today = new Date();
+      var startTime = new Date(today.toDateString() + ' ' + startTimeInput);
+      var endTime = new Date(today.toDateString() + ' ' + endTimeInput);
+
+      // Check if the start time is after the end time
+      if (startTime >= endTime) {
+        showNotification("L'heure de début doit être avant l'heure de fin.");
+        return;
+      }
+
+
       var evenementNom = document.getElementById('name').value;
       var evenementDate = document.getElementById('date').value;
       var evenementDebut = document.getElementById('start').value;
