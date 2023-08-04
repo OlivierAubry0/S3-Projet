@@ -26,9 +26,9 @@ SELECT
     e.Description,
     e.filename
 FROM
-    EVENEMENT e
+    base_de_donne.EVENEMENT e
         JOIN
-    ASSO_ETUDIANTE a ON e.Asso_EtudianteID = a.Asso_EtudianteID;
+    base_de_donne.ASSO_ETUDIANTE a ON e.Asso_EtudianteID = a.Asso_EtudianteID;
 
 CREATE VIEW places_reserves AS
 SELECT EvenementID, UsagerID, Telephone_Invite,Nom_Invite, Enregistration_Invite

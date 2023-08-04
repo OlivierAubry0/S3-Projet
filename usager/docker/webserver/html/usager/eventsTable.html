@@ -356,7 +356,6 @@
                 })
                     .then(function(response) {
                         if (response.status === 200) {
-                            alert("L'evenement a été supprimée avec succès.");
                             window.location.href = 'eventsTable.html';
                         } else {
                             console.log("Une erreur s'est produite lors de la suppression de l'evenement." + response.status);

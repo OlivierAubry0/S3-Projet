@@ -15,6 +15,37 @@
 
     }
 
+    /* CSS for the success modal */
+    #successModal {
+      display: none;
+      position: fixed;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    #successModal .modal-content {
+      background-color: white;
+      margin: 15% auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 80%;
+      max-width: 400px;
+    }
+
+    /* Close button for the success modal */
+    #successModal button {
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+
     .event-form {
       position: absolute;
       padding: 20px;
@@ -137,6 +168,23 @@
       });
     }
 
+    function displayUserInfo() {
+      var token = keycloak.tokenParsed;
+      var name = token.name;
+
+      var userInfoList = document.createElement('ul');
+      var nameItem = document.createElement('li');
+      var rolesItem = document.createElement('li');
+
+      nameItem.textContent = 'Connecté: \n' + name;
+
+      userInfoList.appendChild(nameItem);;
+
+      var userInfoDiv = document.getElementById('user-info');
+      userInfoDiv.innerHTML = '';
+      userInfoDiv.appendChild(userInfoList);
+    }
+
     function submitEvent() {
 
       // Get the start and end time inputs
@@ -216,8 +264,7 @@
               })
               .then(function (response) {
                 if (response.status === 201) {
-                  alert('Event created!');
-                  window.location.href = 'admin_event_creator.html'; // Replace with the path to your main menu HTML file
+                  showSuccessModal();
                 } else {
                   showNotification(response.status);
                 }
@@ -275,6 +322,18 @@
       var allowGuests = document.getElementById('allow-guests').checked;
       var description = document.getElementById('description').value;
 
+      var fileInput = document.getElementById('imageInput');
+      var previewImage = document.getElementById('preview-image');
+
+      // Check if an image is selected
+      if (fileInput.files && fileInput.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+          previewImage.src = e.target.result;
+        };
+        reader.readAsDataURL(fileInput.files[0]);
+      }
+
       var eventPreview = document.getElementById('event-preview');
       eventPreview.innerHTML = `
     <form style="max-width: 600px; word-break: break-word; overflow: auto; max-height: 100%">
@@ -301,6 +360,15 @@
       }
     }
 
+    function showSuccessModal() {
+      document.getElementById('successModal').style.display = 'block';
+    }
+
+    function closeSuccessModal() {
+      document.getElementById('successModal').style.display = 'none';
+      // Redirect to the homepage after closing the modal
+      window.location.href = 'admin_event_creator.html'; // Replace with the path to your main menu HTML file
+    }
 
   </script>
 </head>
@@ -373,6 +441,14 @@
     <img id="preview-image" src="assets/shadow_image.jpg" alt="Preview Image" style="width: 100%; height: 100%;">
   </div>
 </div>
+<!-- The custom modal for success message -->
+<div id="successModal" class="modal">
+  <div class="modal-content">
+    <p style="color: #1e1e1e">Événement créé avec succès, cliquez pour revenir à l'acceuil</p>
+    <button onclick="closeSuccessModal()">OK</button>
+  </div>
+</div>
+
 
 
 <script>

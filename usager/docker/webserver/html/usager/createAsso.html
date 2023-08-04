@@ -129,7 +129,7 @@
       })
               .then(function(response) {
                 if (response.status === 201) {
-                  alert("Association created!");
+                  showNotification("Association created!");
                   window.location.href = 'master_manager.html';
                 }else {
                   showNotification(response.status);
